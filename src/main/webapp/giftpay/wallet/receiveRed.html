@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>中石化红包领取</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app2.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+<script>
+    $(function () {
+        var phone = getUrlParam("phone");
+        $("#tel").val(phone);
+    })
+    var countdown = 10
+    function setValMsgTime(obj) {
+        if (!$('#tel').val()) {
+            TipShow('请输入手机号', 1000);
+        }
+        else if (!(/^1[34578]\d{9}$/.test($('#tel').val()))) {
+            TipShow('请输入正确的手机号', 1000);
+        }
+        else {
+            if (countdown == 10) {
+                $.ajax({
+                    url: getRootPath() + "/giftpay/third/sendMsg.htm",
+                    type: "post",
+                    data: {"phone": $('#tel').val()},
+                    dataType: "json",
+                    success: function (data) {
+
+                    }
+                });
+            }
+            setValTime(obj);
+        }
+
+        function setValTime(obj) {
+            if (countdown == 0) {
+                $(obj).show();
+                $('#timer').attr('class', 'recive_getCode1');
+                $(obj).html("获取验证码");
+                countdown = 10;
+                return;
+            } else {
+                $(obj).hide();
+                $('#timer').attr('class', 'recive_getCode2');
+                $('#timer').html("重新发送(" + countdown + ")");
+                countdown--;
+            }
+            setTimeout(function () {
+                        setValMsgTime(obj)
+                    }
+                    , 1000)
+        }
+    }
+    function activate(){
+        var valNum=$("#valNum").val();
+        if($.trim(valNum)==''){
+            alert("请输入正确的验证码!");
+            return;
+        }
+        $.ajax({
+            url: getRootPath() + "/giftpay/third/valiThirdUserInfo.htm",
+            type: "post",
+            data: {"phone": $('#tel').val(),"valNum":valNum},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if(data.code=='20000'){
+                    alert(data.mess);
+                }else{
+                   location.href=getRootPath() + "/giftpay/third/getZshOpenId.htm";
+                }
+            }
+        });
+    }
+</script>
+<body style="background-color: #ffaa24">
+<div id="fail_block" class="block_bg">
+    <div class="fail_block">
+        <img src="img/close1.png" alt="" class="close_img" onclick="clsoe_tip()">
+        <div class="fail_tittle">暂无红包</div>
+        <div class="jmt_center"><img src="img/failImg.png" alt="" class="fail_img_css"></div>
+        <div class="fail_text">
+            <div class="jmt_center">该号码下暂无红包哦~</div>
+            <div class="jmt_center">参与更多活动获取更多红包~</div>
+        </div>
+        <div>
+            <img src="img/ok.png" alt="" width="100%" onclick="clsoe_tip()">
+        </div>
+    </div>
+</div>
+<div class="zoomer" style="background-color: #ffaa24;position: fixed;">
+    <div class="content">
+        <div class="index1_bg">
+            <div class="redNew1_bg">
+                <div class="redContent">
+                </div>
+            </div>
+
+            <div class="index_contentText">
+
+                <div style="padding-top: 40px;padding-bottom: 10px;">
+                    <div style="margin-bottom: 40px;">
+                        <div class="recive_text">恭喜您有待领取红包</div>
+                        <div class="recive_text">验证手机号即可领取哦！</div>
+                    </div>
+                    <input id="tel" type="tel" value="" maxlength="11" oninput="OnInput (event)"
+                           onpropertychange="OnPropChanged (event)" disabled>
+                    <div>
+                        <input type="text" id="valNum" style="width: 50%;margin-top: 30px;">
+                        <span class="recive_getCode" onclick="setValMsgTime(this)">获取验证码</span>
+                        <span id="timer" class="recive_getCode1">获取验证码</span>
+                    </div>
+                </div>
+                <div class="tips_parent">
+                    <div>
+                        <img id="no" src="img/reciveRed_btn.png" alt="" onclick="activate()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

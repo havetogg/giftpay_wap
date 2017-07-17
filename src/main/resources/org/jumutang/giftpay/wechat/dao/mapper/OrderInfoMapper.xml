@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IOrderModelInfoDao">
+
+	<resultMap type="org.jumutang.giftpay.model.OrderInfoModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="open_id" property="openId" />
+		<result column="goods_name" property="goodsName" />
+		<result column="goods_id" property="goodsId" />
+		<result column="pay_money" property="payMoney" />
+		<result column="goods_money" property="goodsMoney" />
+		<result column="ip" property="ip" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="order_no" property="orderNo" />
+		<result column="wx_order" property="wxOrder" />
+		<result column="from_type" property="fromType" />
+		<result column="pay_status" property="payStatus" />
+		<result column="remark" property="remark" />
+		<result column="md5_sign" property="md5Sign" />
+		<result column="order_params" property="orderParams" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="id!=null">
+				and id=#{id}
+			</if>
+			<if test="openId!=null">
+				and open_id=#{openId}
+			</if>
+			<if test="status!=null">
+				and status=#{status}
+			</if>
+			<if test="fromType!=null">
+				and from_type=#{fromType}
+			</if>
+			<if test="payStatus!=null">
+				and pay_status=#{payStatus}
+			</if>
+			<if test="md5Sign!=null">
+				and md5_sign=#{md5Sign}
+			</if>
+			<if test="orderNo!=null">
+				and order_no=#{orderNo}
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="queryAllOrderInfo"  parameterType="org.jumutang.giftpay.model.OrderInfoModel" resultMap="baseResult" >
+		select id,open_id,goods_name,goods_id,pay_money,goods_money,ip,status,create_time,order_no,wx_order,from_type,pay_status,remark,md5_sign,order_params
+		from orderinfo
+		<include refid="wherecause"/>
+		order by create_time desc
+	</select>
+
+	<insert id="addOrderInfo"  parameterType="org.jumutang.giftpay.model.OrderInfoModel" >
+		insert into orderinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,open_id,goods_name,goods_id,pay_money,goods_money,ip,status,create_time,order_no,wx_order,from_type,pay_status,remark,md5_sign,order_params
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{id},#{openId},#{goodsName},#{goodsId},#{payMoney},#{goodsMoney},#{ip},#{status},#{createTime},#{orderNo},#{wxOrder},#{fromType},#{payStatus},#{remark},#{md5Sign},#{orderParams}
+		</trim>
+	</insert>
+
+</mapper>

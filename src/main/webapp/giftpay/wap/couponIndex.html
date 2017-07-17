@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        function toBuyCard(index,self) {
+            $(self).parent().find('li').attr('class','card_activeNone');
+            $(self).attr('class','card_active');
+          var name=  $(self).find('div').html();
+            localStorage.setItem('cardIndex',index);
+            localStorage.setItem('cardName',name);
+            window.location.href='./couponBuy.html';
+        }
+    </script>
+</head>
+<body style="background-color: #ededed">
+<div style="background-color: #ededed;" class="zoomer">
+    <div class="coupon_banner">
+        <img src="img/coupon_banner.png" alt="">
+    </div>
+    <div class="coupon_content">
+        <ul>
+            <li class="card_activeNone" onclick="toBuyCard(1,this)">
+                <img src="img/card1.png" alt="">
+                <div class="coupon_cardName">京东E卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(2,this)">
+                <img src="img/card2.png" alt="">
+                <div class="coupon_cardName">苏宁卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(3,this)">
+                <img src="img/card3.png" alt="">
+                <div class="coupon_cardName">唯品会礼品卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(4,this)">
+                <img src="img/card4.png" alt="">
+                <div class="coupon_cardName">当当礼品卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(5,this)">
+                <img src="img/card5.png" alt="">
+                <div class="coupon_cardName">亚马逊礼品卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(6,this)">
+                <img src="img/card6.png" alt="">
+                <div class="coupon_cardName">国美红劵</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(7,this)">
+                <img src="img/card7.png" alt="">
+                <div class="coupon_cardName">爱奇艺会员卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(8,this)">
+                <img src="img/card8.png" alt="">
+                <div class="coupon_cardName">优酷土豆会员月卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(9,this)">
+                <img src="img/card9.png" alt="">
+                <div class="coupon_cardName">GAP礼品卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(10,this)">
+                <img src="img/card10.png" alt="">
+                <div class="coupon_cardName">百胜心意美食卡</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(11,this)">
+                <img src="img/card11.png" alt="">
+                <div class="coupon_cardName">携程礼品卡(任我行)</div>
+            </li>
+            <li  class="card_activeNone" onclick="toBuyCard(12,this)">
+                <img src="img/card12.png" alt="">
+                <div class="coupon_cardName">携程礼品卡(任我游)</div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

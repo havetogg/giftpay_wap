@@ -1,0 +1,1031 @@
+﻿*{
+    margin:0;
+    padding:0;
+}
+li{
+    list-style-type: none;
+}
+/**
+  * TipShow Stylesheets
+  */
+.loading-backdrop {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.3s linear;
+    -webkit-transition: opacity 0.3s linear;
+}
+.loading-wrapper {
+    float: left;
+    position: relative;
+    left: 50%;
+    top: 36%;
+}
+.loading-content {
+    width: 275px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 26px;
+    padding: 10px;
+    text-align: center;
+    line-height: 45px;
+    position: relative;
+    left: -50%;
+}
+.loading-backdrop.visible {
+    opacity: 1;
+    display: block;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    transition: opacity 0.3s linear;
+}
+
+/*页面基础*/
+html {height: 100%;}
+body {min-height: 100%; height: auto;}
+
+/*flexbox布局*/
+.flex{
+    /* 设置弹性布局 */
+    display:-webkit-box;/* android 2.1-3.0, ios 3.2-4.3 */
+    display:-webkit-flex;/* Chrome 21+ */
+    display:-ms-flexbox;/* WP IE 10 */
+    display:flex;/* android 4.4 */
+}
+.flex-direction-column{
+    /* 设置弹性布局的方向，子元素按照在源文档中声明的顺序从上到下显示 */
+    -webkit-box-orient: vertical;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex-direction: column;/* Chrome 21+ */
+    -ms-flex-direction: column;/* WP IE 10 */
+    flex-direction: column;/* android 4.4 */
+}
+.flex-1{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:1;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:1;/* Chrome 21+ */
+    -ms-flex:1;/* WP IE 10 */
+    flex:1;/* android 4.4 */
+}
+.flex-2{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:2;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:2;/* Chrome 21+ */
+    -ms-flex:2;/* WP IE 10 */
+    flex:2;/* android 4.4 */
+}
+.flex-3{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:3;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:3;/* Chrome 21+ */
+    -ms-flex:3;/* WP IE 10 */
+    flex:3;/* android 4.4 */
+}
+.flex-4{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:4;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:4;/* Chrome 21+ */
+    -ms-flex:4;/* WP IE 10 */
+    flex:4;/* android 4.4 */
+}
+.flex-pack-center{
+    /* 水平布局下的子元素 水平居中 */
+    -webkit-box-pack: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: center;/* Chrome 21+ */
+    -ms-flex-pack: center;/* WP IE 10 */
+    justify-content: center;/* android 4.4 */
+}
+.flex-align-center{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: center;/* Chrome 21+ */
+    -ms-flex-align: center;/* WP IE 10 */
+    align-items: center;/* android 4.4 */
+}
+.flex-align-end{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: end;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: flex-end;/* Chrome 21+ */
+    -ms-flex-align: end;/* WP IE 10 */
+    align-items: flex-end;/* android 4.4 */
+}
+.flex-pack-justify{
+    /* 水平布局下的子元素 2端对齐 */
+    -webkit-box-pack: justify;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: space-between;/* Chrome 21+ */
+    -ms-flex-pack: justify;/* WP IE 10 */
+    justify-content: space-between;/* android 4.4 */
+}
+.jmt_center{
+    text-align: center;
+}
+.jmt_right{
+    text-align: right;
+}
+.jmt_left{
+    text-align: left;
+}
+/*首页*/
+.index_bg{
+    background: url("../img/bg.png");
+    background-repeat: no-repeat;
+    height: 1500px;
+    background-size: 100% 100%;
+    position: relative;
+}
+.shareBg{
+    background: url("../img/shareNumBg.png");
+    background-repeat: no-repeat;
+    height: 67px;
+    width: 220px;
+    position: fixed;
+    right: 0px;
+    top: 20px;
+    color: #fff;
+    font-size: 22px;
+    line-height: 50px;
+    text-indent: 0.4em;
+    background-size: 220px 60px;
+    text-align: center;
+}
+.index_content{
+    padding: 50px 30px 1px;
+    background-color: #fff;
+    font-family: "Microsoft YaHei";
+}
+.newArrow{
+    vertical-align: sub;
+    margin-left: 10px;
+}
+.gun_inputAmount{
+    color: #969696;
+    font-size: 24px;
+    position: absolute;
+    right: 10px;
+}
+.gun_inputAmount input{
+    font-size: 24px;
+    color: transparent;
+    position: absolute;
+    right: 0px;
+    width: 140px;
+    background-color: transparent;
+    top: 0;
+    text-align: right;
+    border: none;
+    outline: none;
+    padding-right:10px;
+}
+.gun_realAmountText{
+    font-size: 24px;
+    color: #969696;
+    margin-right: 10px;
+}
+.realAmount{
+    font-size: 36px;
+    color: #ffaa24;
+    position: absolute;
+    right: 10px;
+}
+.realAmount input{
+    font-size: 36px;
+    color: transparent;
+    position: absolute;
+    right: 10px;
+    width: 140px;
+    background-color: transparent;
+    top: 20px;
+    text-align: right;
+    border: none;
+    outline: none;
+}
+.index_tittle{
+    color: #1aad19;
+    font-size: 30px;
+}
+.index_inputName{
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}.index_inputName1{
+     color: #575757;
+     font-size: 24px;
+     width: 20%;
+     display: inline-block;
+     height: 66PX;
+     line-height: 66px;
+}
+.index_input{
+    margin: 25px 0 25px 15px;
+    position: relative;
+}
+.addOilType {
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+}
+.index_input ul{
+    border-bottom: 2px dashed #d6d6d6;
+    margin-bottom: 20px;
+}
+.index_input ul li{
+    line-height: 80px;
+    height: 80px;
+    position: relative;
+    padding-left: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.index_input ul li .price{
+    font-size: 24px;
+    color: #575757;
+    position: absolute;
+    right: 10px;
+}
+.index_input ul li .addOilType{
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+}
+.gun_addOil{
+    position: absolute;
+    right: 10px;
+}
+.index_input ul li img{
+     /*position: absolute;*/
+     /*right: 35px;*/
+     /*top: 30px;*/
+     /*width: 20px;*/
+     /*pointer-events: none;*/
+}
+.index_input ul li input{
+    margin-left: 10px;
+    width: 75%;
+    height: 65px;
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    font-size: 24px;
+    text-indent: 1em;
+    font-family: "Microsoft YaHei";
+    outline: none;
+    -webkit-appearance: none;
+    border: none;
+}
+.arrows{
+    position: relative;
+}
+.Tip_text{
+    padding: 10px 35px 20px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #888888;
+    display: inline-table;
+}
+.index_content1{
+    padding: 10px 40px 10px;
+    font-family: "Microsoft YaHei";
+    background-color: #fff;
+    border-top: 1px solid #d6d6d6;
+    /* border-bottom: 1px solid #d6d6d6; */
+}
+.bankIcon_btn{
+    display: inline-block;
+    font-size: 20px;
+    color: #f41a1a;
+    padding: 0px 0px;
+    border-radius: 5px;
+}
+.index_content2{
+    padding: 25px 40px 15px;
+    font-family: "Microsoft YaHei";
+}
+.index_content3{
+     padding: 0 40px;
+    font-family: "Microsoft YaHei";
+}
+.index_content4{
+    padding: 10px 40px 15px;
+    font-family: "Microsoft YaHei";
+}
+.index_content1 input{
+    -webkit-appearance: none;
+}
+.index_content1 ul{}
+.index_content1 ul li{
+    /*margin-top: 25px;*/
+    position: relative;
+}
+.index_content1 ul li .arrow1{
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    width: 20px;
+    pointer-events:none;
+}
+.bankIcons{
+    display: inherit;
+    vertical-align: sub;
+    position: relative;
+    left: 30px;
+}
+.index_content1 ul li span{
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+.index_content1 ul li a{
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+}.index_content1 ul li label{
+     position: absolute;
+     right: 10px;
+}
+.index_content1 ul li input{
+    /*width: 78%;*/
+    /*height: 65px;*/
+    /*border-radius: 5px;*/
+    /*border: 1px solid #d6d6d6;*/
+    /*font-size: 20px;*/
+    /*text-indent: 1em;*/
+    /*font-family: "Microsoft YaHei";*/
+    /*outline:none;*/
+    /*color: #575757;*/
+}
+.index_footer_tittle{
+    margin: 20px 40px;
+}
+.index_footer_content{
+    font-size: 20px;
+    color: #969696;
+    line-height: 30px;
+    margin-top: 20px;
+}
+.footer_tittle{
+    color: #1aad19;
+    font-size: 24px;
+}
+.bg_block{
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 500%;
+    position: fixed;
+    z-index: 9;
+    text-align: center;
+    display: none;
+}
+.bg_block1{
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 500%;
+    position: fixed;
+    z-index: 9;
+    text-align: center;
+    display: none;
+}
+.bg_block2{
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 500%;
+    position: fixed;
+    z-index: 9;
+    text-align: center;
+    display: none;
+}
+.bg_block3{
+    background-color: rgba(0,0,0,0.4);
+    width: 100%;
+    height: 500%;
+    position: fixed;
+    z-index: 9;
+    text-align: center;
+    display: none;
+}
+ .oil_type_list{
+     font-size: 30px;
+     color: #575757;
+     line-height: 80px;
+     text-align: left;
+     margin: 0 40px 0px;
+ }
+.red_content{
+    height: 100px;
+    line-height: 100px;
+    font-size: 22px;
+    color: #969696;
+}
+.index_bg{
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: auto;
+}
+.index_TipTop{
+    font-size: 30px;
+    color: #575757;
+    line-height: 80px;
+    border-bottom: 1px solid #d6d6d6;
+    background-color: #fff;
+}
+.index_TipTop .img1{
+     width: 30px;
+     float: right;
+     position: absolute;
+     right: 30px;
+     top: 40px;
+}
+.index_TipTop .img2{
+    width: 30px;
+    float: right;
+    position: relative;
+    right: 20px;
+    top: 25px;
+}
+ .bankLists{
+
+ }
+ .bankLists input{
+
+ }
+.bankLists ul{
+    height: 400px;
+    overflow-y: scroll;
+ }
+.bankLists ul li{
+    border-bottom: 1px solid #d6d6d6;
+    height: 100px;
+ }
+.lineHeight50{
+    line-height: 50px;
+}
+.lineHeight50 img{
+    width: 70px;
+    vertical-align: text-top;
+}
+.bankContent{
+    line-height: 30px;
+    margin: 26px 1px;
+}
+.bankContent div{
+    font-size: 28px;
+    color: #969696;
+}
+.bankContent nav{
+    font-size: 24px;
+    color: #969696;
+}
+.radioIcon{
+    align-items: center;
+    display: flex;
+    width: 50px;
+}
+.pay_type{
+    position: absolute;
+    top: 10px;
+    border: 1px solid #d6d6d6;
+    width: 77%;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 3;
+    display: none;
+}
+.pay_type div{
+    font-size: 24px;
+    color: #575757;
+    margin: 0px 10px;
+    border-bottom: 1px solid #d6d6d6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 70px;
+    line-height: 70px;
+}
+.pay_type div:last-child{
+    font-size: 24px;
+    color: #575757;
+    margin: 0px 10px;
+    border-bottom:none;
+}
+.pay_type div:first-child{
+    font-size: 24px;
+    color: #969696;
+    margin: 0px 10px;
+    border-bottom: 1px solid #d6d6d6;
+}
+.pay_type div span:first-child{
+    font-size: 24px;
+    color: #969696;
+}
+.arrow_dowm{
+    top: 40px;
+    width: 30px;
+}
+/*红包选择*/
+.red_type{
+    position: absolute;
+    top: 0px;
+    border: 1px solid #d6d6d6;
+    width: 78%;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 3;
+    display: none;
+    height: auto;
+}
+.red_type div{
+    font-size: 20px;
+    color: #575757;
+    margin: 0px 10px;
+    height: 80px;
+    line-height: 80px;
+    border-bottom: 1px solid #d6d6d6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.red_type div:last-child{
+    font-size: 20px;
+    color: #575757;
+    margin: 0px 10px;
+    border-bottom:none;
+}
+.red_type div:first-child{
+    font-size: 20px;
+    color: #969696;
+    margin: 0px 10px;
+    border-bottom: 1px solid #d6d6d6;
+}
+.red_type div label{
+    font-size: 20px;
+    color: #969696;
+    width: 100%;
+}
+/*积分选择*/
+.integral_type{
+    position: absolute;
+    top: 0px;
+    border: 1px solid #d6d6d6;
+    width: 78%;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 3;
+    display: none;
+    height: auto;
+}
+.integral_type div{
+    font-size: 20px;
+    color: #575757;
+    margin: 0px 10px;
+    height: 80px;
+    line-height: 80px;
+    border-bottom: 1px solid #d6d6d6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.integral_type div:last-child{
+    font-size: 24px;
+    color: #575757;
+    margin: 0px 10px;
+    border-bottom:none;
+}
+.integral_type div:first-child{
+    font-size: 24px;
+    color: #969696;
+    margin: 0px 10px;
+    border-bottom: 1px solid #d6d6d6;
+}
+.integral_type div label{
+    font-size: 20px;
+    color: #969696;
+    width: 100%;
+}
+.bankTip_select{
+    border: 1px solid #d6d6d6;
+    display: inline-block;
+    width: 78%;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #575757;
+    font-size: 20px;
+    line-height: 70px;
+    text-indent: 1em;
+    position: relative;
+    right: 4px;
+}
+.bankTip_select a{
+     border: 1px solid #f41a1a;
+     border-radius: 6px;
+     color: #f41a1a;
+     padding: 2px 5px;
+}
+ .arrow_tip{
+     top: 30px;
+     width: 30px;
+     float: right;
+     right: 30px;
+     position: relative;
+ }
+ .paySuccess_content{
+     text-align: center;
+     width: 50%;
+     margin: 30px auto 50px;
+     color: #969696;
+     font-size: 22px;
+ }
+.paySuccess_content span{
+   color: #969696;
+     font-size: 22px;
+}
+.paySuccess_content #bankRed{
+   color: red;
+     font-size: 22px;
+}
+.paySuccess_content #bankName{
+   color: red;
+     font-size: 22px;
+}
+.paySuccess_content #detail{
+   color: #969696;
+     font-size: 22px;
+}
+
+
+ .paySuccess_subContent{
+     color: #969696;
+     font-size: 22px;
+     text-align: center;
+     margin-top: 10px;
+ }
+ .noneBlock{
+     width:90%;
+     margin:10px auto;
+     height: 10px;
+     border-top:1px solid #d6d6d6;
+ }
+ .real_ammount{
+     color: #575757;
+     font-size: 24px;
+     line-height: 90px;
+     height: 90px;
+ }
+.real_ammount_{
+    color: #575757;
+    font-size: 24px;
+ }
+.real_ammount1{
+    color: #575757;
+    font-size: 24px;
+    line-height: 40px;
+    height: 40px;
+ }
+ /*支付页面*/
+.pay{
+    width: 100%;
+    background-color: #ffaa24;
+}
+.pay_bg{
+    background: url(../img/red_bg.png);
+    height: 860px;
+    width: 620px;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-size: 14px;
+    right: 10px;
+    top: 40px;
+    margin: 1px auto;
+}
+.red_bg{
+    background: url(../img/red.png);
+    height: 431px;
+    width: 592px;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-size: 14px;
+    right: 15px;
+    top: 120px;
+    text-align: center;
+}
+.redNew_bg{
+    background: url(../img/red.png);
+    height: 431px;
+    width: 592px;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-size: 14px;
+    right: 15px;
+    top: 120px;
+    text-align: center;
+}
+.yuan{
+    font-size: 60px;
+    color: #fff;
+    font-family: "Microsoft YaHei";
+}
+.yuanText{
+    color: #fff;
+    font-size: 36px;
+    margin-top: 50px;
+}
+.index_time{
+    font-size: 20px;
+    color: #fff;
+    margin-top: 40px;
+}
+.redContent{
+    margin-top: 180px;
+}
+.pay_contentText{
+    margin: 90% auto;
+}
+.pay_contentText input{
+    width: 96%;
+    height: 70px;
+    font-size: 24px;
+    color: #c1c1c1;
+    font-family: "Microsoft YaHei";
+    position: relative;
+    left: 11px;
+    border: 1px solid #d6d6d6;
+    text-indent: 1em;
+    border-radius: 5px;
+}
+.tips_text{
+    background-color: #ff5224;
+    height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 18px;
+    line-height: 30px;
+    font-family: "Microsoft YaHEi";
+}
+.tips_contents{
+    color: #ff4444;
+    font-size: 20px;
+    line-height: 40px;
+    padding: 1px 10px;
+}
+.tips_parent{
+    width: 98%;
+    position: relative;
+    left: 10px;
+    top: 20px;
+}
+.block_bg{
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    display: none;
+}
+.fail_block{
+    background-color: #fff;
+    width: 80%;
+    margin: 30% auto;
+    text-align: center;
+    border-radius: 10px;
+    padding: 30px 30px;
+    position: relative;
+}
+.fail_tittle{
+    font-size: 35px;
+    color: #000;
+    font-family: "Microsoft YaHei";
+    margin-top: 40px;
+}
+.fail_text{
+    font-size: 25px;
+    color: #888888;
+    font-family: "Microsoft YaHei";
+    margin: 20px;
+    line-height: 40px;
+}
+.fail_img_css{
+    margin-top: 60px;
+}
+.close_img{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 60px;
+}
+.specialText{
+    color: #ff4848;
+}
+/*激活红包*/
+.activate{
+    background-color: #ffaa24;
+}
+.activate_bg{
+    background-color: #ffaa24;
+    width: 100%;
+}
+.activate_style{
+    text-align: center;
+    margin-top: 40px;
+}
+.activateWhite_bg{
+    background: url(../img/red_bg.png);
+    height: 860px;
+    width: 620px;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-size: 14px;
+    right: 10px;
+    top: 40px;
+    margin: 1px auto;
+}
+.banner_bg{
+    background: url(../img/banner_BG.png);
+    height: 142px;
+    width: 576px;
+    background-repeat: no-repeat;
+    position: relative;
+    right: 10px;
+}
+.pay_bottom_tel{
+    font-size: 20px;
+    color: #969696;
+    margin: 20px 0;
+}
+.pay_bottom_tel a{
+    color: #b5b5b6;
+    text-decoration: none;
+    border: 1px solid #b5b5b6;
+    padding: 6px 4px;
+    border-radius: 4px;
+}
+.tuiguang_{
+    color: #b5b5b6;
+    font-size: 24px;
+    text-align: center;
+    margin: 10px 20px;
+}
+.tuijian_line{
+    border-bottom: 1px solid #d6d6d6;
+    height: 25px;
+}
+/*新在线支付红包页面*/
+.paySuccess_content11{
+    text-align: center;
+    width: 40%;
+    margin: 25px auto 20px;
+    color: #969696;
+    font-size: 23px;
+    height: 50px;
+    line-height: 35px;
+}
+.index_content12{
+    padding: 5px 40px 5px;
+    font-family: "Microsoft YaHei";
+}
+.banner_bg_yuan{
+    font-size: 60px;
+    color: #fff;
+    height: 142px;
+    line-height: 142px;
+    margin: 0 40px;
+}
+.banner_bg_yuan .iconY{
+    font-size: 24px;
+    color: #fff;
+}
+.banner_bg_text{
+    font-size: 24px;
+    color: #fff;
+    line-height: 40px;
+    margin: 30px 35px;
+}
+.paySuccess_forOilGun_Top{
+    background-color: #e5e5e5;
+    height: 130px;
+    position: relative;
+}
+.Top_lingxing{
+    width: 100%;
+    position: absolute;
+    bottom: -5px;
+}
+.Top_lingxing_text{
+    font-size: 28px;
+    color: #000;
+    text-align: right;
+    margin: 10px 20px;
+}.Top_lingxing_time{
+    font-size: 28px;
+     color: #888888;
+    text-align: right;
+    margin: 10px 20px;
+}
+ /*20170503新版本微信支付*/
+.redDIV_select{
+    border: 1px solid #d6d6d6;
+}
+.redDIV_select .redNew_content{
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+}
+.redDIV_select  .redNew_content_parent{
+    position: absolute;
+    right: 10px;
+}
+.redDIV_select  .input_leftIcon{
+    margin-right: 10px;
+    position: relative;
+    top: 3px;
+}
+.redListTip_subText{
+    font-size: 20px;
+    color: #888888;
+}
+.index_TipTop div{
+    height: 55px;
+    line-height: 70px;
+    position: relative;
+}
+.oilLI_dotted{
+    border-bottom: 2px dashed #d6d6d6;
+}
+/*线下支付*/
+.index_input1 ul{
+    border-bottom: 2px dashed #d6d6d6;
+    margin-bottom: 20px;
+}
+.index_input1 ul li{
+    line-height: 66px;
+    height: 66px;
+    position: relative;
+    padding-left: 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.index_input1 ul li .price{
+    font-size: 24px;
+    color: #575757;
+    position: absolute;
+    right: 10px;
+}
+.index_input1 ul li .addOilType{
+    color: #969696;
+    font-size: 24px;
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+}
+.index_input1 ul li img{
+    /*position: absolute;*/
+    /*right: 35px;*/
+    /*top: 30px;*/
+    /*width: 20px;*/
+    /*pointer-events: none;*/
+}
+.index_input1 ul li input{
+    margin-left: 10px;
+    width: 75%;
+    height: 65px;
+    border-radius: 5px;
+    border: 1px solid #d6d6d6;
+    font-size: 24px;
+    text-indent: 1em;
+    font-family: "Microsoft YaHei";
+    outline: none;
+    -webkit-appearance: none;
+    border: none;
+}
+.index_content5{
+    padding: 35px 30px 1px;
+    font-family: "Microsoft YaHei";
+}

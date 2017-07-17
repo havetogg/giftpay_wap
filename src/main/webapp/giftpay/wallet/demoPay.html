@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+<meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="telephone=no" name="format-detection">
+<title>中石化微信支付</title>
+<link rel="stylesheet" type="text/css" href="demopay/css/app.css">
+<link type="text/css" href="demopay/css/common/common.css" rel="stylesheet">
+<script type="text/javascript" src="demopay/js/common/jQuery-1.11.3.js"></script>
+<script type="text/javascript" src="demopay/js/common/jWeChat-Adaptive.js"></script>
+<script type="text/javascript" src="demopay/js/common/m.tool.juxinbox.com.js"></script>
+<script type="text/javascript" src="demopay/js/common/jWeChat-1.0.0.js"></script>
+<script type="text/javascript" src="demopay/js/common/common.js"></script>
+<script type="text/javascript" src="demopay/js/index.js"></script>
+	<style>
+		input[type="checkbox"] {
+			-webkit-appearance: none;
+			background: #fff url(demopay/img/check_off.png);
+			width: 80px;
+			height: 46px;
+			background-color: transparent;
+			background-repeat: no-repeat;
+			vertical-align: middle;
+			outline: none;
+			cursor: pointer;
+			border: none;
+		}
+		input[type="checkbox"]:checked {
+			-webkit-appearance: none;
+			background: #fff url(demopay/img/check_on.png);
+			width: 80px;
+			height: 46px;
+			background-color: transparent;
+			background-repeat: no-repeat;
+			vertical-align: middle;
+			outline: none;
+			cursor: pointer;
+			border: none;
+		}
+	</style>
+	<script>
+        var payId="";
+        var redId = 0;
+        var hasBenefit = 0;
+        var gun = 0;
+        var benefitAmount = 0;
+        var redVal='0.05';
+        function Tip_bank() {
+            $(".bg_block").show();
+        }
+        function close_tip() {
+            $(".bg_block").hide();
+            jinzhi = 100;
+        }
+        function Tip_red() {
+            $(".bg_block1").show();
+        }
+        function close_tip1() {
+            $(".bg_block1").hide();
+            jinzhi = 100;
+        }
+        function selectBank(self) {
+            $('.radioIcon').find('img').attr('src','');
+            $(".bg_block").hide();
+        }
+        function selectRed(self,val) {
+        	redVal=val;
+        	/*if(val=='0'){
+        		$(".redLi").hide();
+        	}else{
+        		$(".redLi").show();
+        	}*/
+            console.log('红包'+val+"id");
+            $('.radioIcon').find('img').attr('src','');
+            $(self).find('.radioIcon').find('img').attr('src','demopay/img/radioIcon.png');
+            $(self).find('.red_content').html();
+            console.log($(self).find('.red_content').text());
+            $('.redNew_content').html($(self).find('.red_content').text());
+            if(val=='0'){
+            	$(".readPay").html("-￥0.00");
+            }else{
+            	$(".readPay").html("-￥"+val);
+            }
+            $(".realAmount").html("-￥"+(0.06-(val*1)).toFixed(2));
+            $(".bg_block1").hide();
+        }
+        function selectOilTypeValue() {
+        }
+        $(function(){
+        	$(".payBtn").on("click",function(){
+        		var money=$(".realAmount").html();
+        		money=money.substring(money.indexOf("￥")+1,money.length);
+        		payOilByWX(getUrlParam("openId"),money);
+        	})
+        })
+        
+        function payOilByWX(openId,money) {
+			//alerw("调用微信支付");
+			loading("start")
+			$.ajax({
+				url: getRootPath() + "/giftpay/wallet/preOrder.htm",
+				type: "post",
+				data: { "openId": openId,"money":money},
+				dataType: "json",
+				success: function(data) {
+					/*if(data.code == "10000") {
+						var res=data.mess;
+						res=JSON.parse(res);
+						res.backUrl=getRootPath()+"/giftpay/wallet/paySuccessNew1.html?redAmount="+redVal+"&realAmount="+money;
+						location.href='http://tdev.juxinbox.com/wxpay_gate/information.jsp?backUrl='+res.backUrl+
+						'&fromName='+res.fromName+
+								'&goodsName='+encodeURI(encodeURI(res.goodsName))+
+								'&md5='+res.md5+
+								'&money='+res.money+
+								'&openId='+res.openId+
+								'&orderNo='+res.orderNo+
+								'&payType='+res.payType+
+								'&redirectUrl='+res.redirectUrl+
+								'&remark='+res.remark+
+								'&timestamp='+res.timestamp;
+					}*/
+					if(data.code == "10000") {
+						var payResult = JSON.parse(data.mess)
+						var payId = payResult.orderId;
+						wx.config({
+							debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+							appId: payResult.appId, // 必填，公众号的唯一标识
+							timestamp: payResult.timestamp, // 必填，生成签名的时间戳
+							nonceStr: payResult.nonceStr, // 必填，生成签名的随机串
+							signature: payResult.paySign, // 必填，签名，见附录1
+							jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+						});
+						wx.ready(function() {
+							// config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+							wx.chooseWXPay({
+								timestamp: payResult.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+								nonceStr: payResult.nonceStr, // 支付签名随机串，不长于 32 位
+								package: payResult.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+								signType: payResult.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+								paySign: payResult.paySign, // 支付签名
+								success: function(res) {
+									loading("stop");
+									console.log(JSON.stringify(res));
+									if(redVal=='0'){
+										//无红包页面
+										location.href="paySuccessOLNoRed.html";
+									}else{
+										//有抵扣页面
+										location.href="paySuccessNew1.html?redAmount="+redVal+"&realAmount="+money;
+									}
+								},
+								cancel: function(res) {//取消支付
+									alert('取消支付');
+									loading("stop");
+								},
+								fail:function(res){//支付失败
+									TipShow("充值失败 请联系客服",1000);
+									loading("stop");
+								}
+							});
+						});
+					} else if(data.code == "30000") {
+						loading("stop");
+						alerw("登录超时，请重新登录", "", function() {
+							
+						});
+					} else {
+						loading("stop");
+						alerw(data.mess);
+					}
+				}
+			});
+		}
+	</script>
+</head>
+<body style="position: fixed;">
+<!--弹框-->
+	<div class="bg_block">
+		<div class="index_bg">
+			<div class="index_TipTop">
+				银行卡支付优惠 <img src="demopay/img/close.png" alt="" onclick="close_tip()" class="img2">
+			</div>
+			<div class="bankLists">
+				<ul id="bankListHTML">
+					<li class="flex" onclick="selectBank(this)">
+						<div class="flex-1 lineHeight50">
+							<img src="demopay/img/bank_pf.png" alt="" width="50px">
+						</div>
+						<div class="flex-4 jmt_left bankContent">
+							<div>浦发银行信用卡，加油立返10元</div>
+							<nav>每天限量100单，先到先得</nav>
+						</div>
+						<div class="radioIcon">
+							<!--<img src="img/radioIcon.png" alt="">-->
+						</div>
+					</li>
+
+					<li class="flex" onclick="selectBank(this)">
+						<div class="flex-1 lineHeight50">
+							<img src="demopay/img/bank_zs.png" alt="" width="50px">
+						</div>
+						<div class="flex-4 jmt_left bankContent">
+							<div>招商银行信用卡，满200元立返30元</div>
+							<nav>每天限量100单，先到先得（今日售罄）</nav>
+						</div>
+						<div class="radioIcon">
+							<img src="" alt="">
+						</div>
+					</li>
+
+					<li class="flex" onclick="selectBank(this)">
+						<div class="flex-1 lineHeight50">
+							<img src="demopay/img/bank_gd.png" alt="" width="50px">
+						</div>
+						<div class="flex-4 jmt_left bankContent">
+							<div>光大银行信用卡，满200元立返30元</div>
+							<nav>每天限量100单，先到先得</nav>
+						</div>
+						<div class="radioIcon">
+							<img src="" alt="">
+						</div>
+					</li>
+
+					<li class="flex" onclick="selectBank(this)">
+						<div class="flex-1 lineHeight50">
+							<img src="demopay/img/bank_hx.png" alt="" width="50px">
+						</div>
+						<div class="flex-4 jmt_left bankContent">
+							<div>华夏银行信用卡，加油立返10元</div>
+							<nav>每天限量100单，先到先得</nav>
+						</div>
+						<div class="radioIcon">
+							<img src="" alt="">
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+<div class="bg_block1">
+	<div class="index_bg">
+		<div class="index_TipTop">
+			<div>选择支付红包</div>
+			<div class="redListTip_subText">TIPS：使用红包，支付金额需大于红包金额</div>
+			 <img src="demopay/img/close.png" alt="" onclick="close_tip1()" class="img1">
+		</div>
+		<div class="bankLists">
+			<ul id="redListHTML">
+				<li class="flex" onclick="selectRed(this,'0')">
+					<div class="flex-1 lineHeight50">
+						<!--<img src="demopay/img/red_img.png" alt="" width="50px">-->
+					</div>
+					<div class="flex-4 jmt_left ">
+						<div class="red_content">不使用加油红包</div>
+					</div>
+					<div class="radioIcon">
+						<img src="" alt="">
+					</div>
+				</li>
+				
+				<li class="flex" onclick="selectRed(this,'0.01')">
+					<div class="flex-1 lineHeight50">
+						<img src="demopay/img/red_img.png" alt="" width="50px">
+					</div>
+					<div class="flex-4 jmt_left ">
+						<div class="red_content">10元加油红包</div>
+					</div>
+					<div class="radioIcon">
+						<img src="" alt="">
+					</div>
+				</li>
+
+				<li class="flex" onclick="selectRed(this,'0.02')">
+					<div class="flex-1 lineHeight50">
+						<img src="demopay/img/red_img.png" alt="" width="50px">
+					</div>
+					<div class="flex-4 jmt_left red_content">
+						<div>20元加油红包</div>
+					</div>
+					<div class="radioIcon">
+						<img src="" alt="">
+					</div>
+				</li>
+
+				<li class="flex" onclick="selectRed(this,'0.03')">
+					<div class="flex-1 lineHeight50">
+						<img src="demopay/img/red_img.png" alt="" width="50px">
+					</div>
+					<div class="flex-4 jmt_left red_content">
+						<div>30元加油红包</div>
+					</div>
+					<div class="radioIcon">
+						<img src="" alt="">
+					</div>
+				</li>
+
+				<li class="flex" onclick="selectRed(this,'0.05')">
+					<div class="flex-1 lineHeight50">
+						<img src="demopay/img/red_img.png" alt="" width="50px">
+					</div>
+					<div class="flex-4 jmt_left red_content">
+						<div>50元加油红包</div>
+					</div>
+					<div class="radioIcon">
+						<img src="demopay/img/radioIcon.png" alt="">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	<div style="background-color: #f2f2f2" class="zoomer">
+		<div class="index_content">
+			<div>
+				<div class="index_tittle">欢迎使用中石化微信支付</div>
+				<div class="index_input">
+					<ul>
+						<li>
+							<span class="index_inputName1">支付金额</span>
+							<label class="price rePay">￥0.06</label>
+						</li>
+						<li class="redDIV_select" onclick="Tip_red()">
+							<img src="demopay/img/redIcons.png" alt="" class="input_leftIcon">
+							<span class="index_inputName">支付红包</span>
+							<label class="redNew_content_parent">
+								<a class="redNew_content">50元支付红包</a>
+								<img src="demopay/img/arrow1.png" alt="" class="newArrow">
+							</label>
+						</li>
+
+						<div style="height: 40px;">
+
+						</div>
+
+						<li class="redDIV_select" style="" onclick="Tip_bank()">
+							<img src="demopay/img/bandIcons.png" alt="" class="input_leftIcon">
+							<span class="index_inputName">银行活动</span>
+							<label class="redNew_content_parent">
+								<!--<div class="bankIcon_btn" style="color: gray;" onclick="Tip_bank()">兴业银行随机立返10元</div>-->
+								<div class="bankIcon_btn"  onclick="">兴业银行随机立返10元</div>
+								<img src="demopay/img/arrow1.png" alt="" class="newArrow">
+							</label>
+						</li>
+						<li class="redLi" style="height: 85px;line-height: 85px;">
+							<span class="index_inputName1">累计抵扣</span>
+							<label class="price readPay">-￥0.05</label>
+						</li>
+					</ul>
+					<div style="    position: relative;height: 70px;line-height: 90px;padding-left: 10px;">
+						<span class="real_ammount">实际支付</span>
+						<label class="realAmount">￥0.01</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="arrows">
+			<img src="demopay/img/lingxing.png" alt="" width="100%">
+		</div>
+		<div class="index_content2">
+			<img src="demopay/img/payBtn.png" class="payBtn" alt="" width="100%">
+			<ul class="flex">
+				<li class="flex-1 tuijian_line"></li>
+				<li class="tuiguang_">推广</li>
+				<li class="flex-1 tuijian_line"></li>
+			</ul>
+		</div>
+
+		<div class="index_content3">
+			<img src="demopay/img/banner2.png" alt="" width="100%">
+		</div>
+		<div class="jmt_center pay_bottom_tel">
+			<a  href="tel:4000808065">推广合作</a>
+		</div>
+
+	</div>
+</body>
+
+</html>

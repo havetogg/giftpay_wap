@@ -1,0 +1,176 @@
+
+#loading{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99999999;
+    zoom: 1;
+}
+
+#loading_div {
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    margin-left: -64px;
+    margin-top: -64px;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 16px;
+}
+
+#loading_pic {
+    margin: 32px;
+    background-image: url(../../img/common/loading.gif);
+    background-size: 64px 64px;
+    width: 64px;
+    height: 64px;
+}
+
+#loading_div span {
+    display: block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    text-shadow: 0 1px 0 #FFF;
+}
+
+#alerw {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+}
+
+#alerw_bg {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    opacity: 0.6;
+}
+
+#alerw_div {
+    width: 476px;
+    min-height: 184px;
+    position: absolute;
+    margin-left: -270px;
+    margin-top: -248px;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    z-index: 100000;
+    background: #e4e4e4;
+    border-radius: 12px;
+    padding: 32px;
+}
+
+#alerw_div .title {
+    /*font-weight: bold;*/
+    /*height: 56px;*/
+    line-height: 45px;
+    font-size: 36px;
+    color: #000;
+    width: 440px;
+    margin: 15px auto 65px;
+}
+
+
+#alerw_div .content {
+    font-size: 28px;
+    line-height: 38px;
+    color: #000;
+    min-height: 38px;
+}
+
+#alerw_div .ab {
+    padding: 24px;
+    text-align: center;
+    color: #06f;
+    height: 42px;
+    text-decoration: none;
+    line-height: 42px;
+    font-size: 32px;
+    border-top: 1px solid #b3b3b3;
+    display: block;
+    margin: -32px;
+    margin-top: 32px;
+}
+
+#alerw_div .ab.ab_one {
+}
+
+#alerw_div .ab.ab_two {
+    width: 222px;
+    float: left;
+}
+
+#alerw_div .ab.ab_ok {
+    font-weight: bold;
+}
+
+#alerw_div .ab.ab_ok.ab_two {
+    margin-left: -1px;
+    border-left: 1px solid #b3b3b3;
+}
+
+#alerw_div .ab.ab_c.ab_two {
+    margin-right: 0;
+}
+
+#alerw_div .ab:hover {
+    background-color: #d9d9d9;
+}
+
+.hide {
+    display: none;
+}
+
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+}
+
+.screenalert {
+    z-index: 9999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.screenalert .mask {
+    background-color: #3c3c3c;
+}
+
+.info {
+    text-align: center;
+    font-size: 36px;
+    color: #999;
+    text-shadow: 0 -2px 0 #000000;
+    margin-top: 100px;
+}
+
+.loading{
+    width: 100%;
+    height: 60px;
+    background: url(../img/loading.gif) no-repeat center #FFF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+/*********  some tool classes end  ***********/

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.FlowOrderDao">
+
+    <!-- flowOrderList 表 -->
+    <resultMap type="org.jumutang.giftpay.entity.FlowOrder" id="flowOrder">
+        <result column="flowOrderId" property="flowOrderId" />
+        <result column="orderTime" property="flowOrderTime" />
+        <result column="orderStatus" property="flowOrderStatus" />
+        <result column="orderMobile" property="flowOrderMobile" />
+        <result column="orderPackCode" property="flowPackCode" />
+    </resultMap>
+
+     <insert id="AddFlowOrder"  parameterType="org.jumutang.giftpay.entity.FlowOrder" >
+          INSERT  into flowOrderList values (#{flowOrderId},#{flowOrderMobile},#{flowPackCode},#{flowOrderTime},#{flowOrderStatus}})
+     </insert>
+
+    <update id="updateFlowStatus"  >
+        update flowOrderList  set flowOrderList.orderStatus = '10' where   flowOrderList.flowOrderId = #{0}
+    </update>
+
+    <select id="searchFlowOrderList" resultMap="flowOrder" >
+        select * from flowOrderList
+    </select>
+
+    <!-- t_userNumRecord 数据表 -->
+
+
+</mapper>

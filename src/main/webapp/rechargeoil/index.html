@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+	<script type="text/javascript" src="../giftpay/wap/js/wx_share.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.contents{
+    		width: 640px;
+    		min-height: 1065px;
+    		position: absolute;
+    		background: #f0f0f4;
+    	}
+    	.head{
+    		width: 640px;
+    		height: 70px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.person{
+    		position: absolute;
+    		font-size: 24px;
+    		color: #4da8ee;
+    		letter-spacing: 1px;
+    		height: 70px;
+    		line-height: 70px;
+    		margin-left: 20px;
+    	}
+    	.title{
+    		width: 340px;
+    		height: 70px;
+    		text-align: center;
+    		font-size: 24px;
+    		line-height: 70px;
+    		float: left;
+    		margin-left: 150px;
+    	}
+    	.can{
+    		width: 105px;
+    		height: 30px;
+    		font-size: 24px;
+    		float: left;
+    		line-height: 70px;
+    		color: #ffaa24;
+    		margin-left: 32px;
+    	}
+    	.con{
+    		width: 640px;
+    		height: 290px;
+    		background: url(img/12.png) no-repeat;
+    	}
+    	.con-pic{
+    		width: 120px;
+    		height: 120px;
+    		position: absolute;
+    		margin: 15px 260px;
+    	}
+    	.con-title{
+    		width: 150px;
+    		height: 30px;
+    		margin-left: 245px;
+    		text-align: center;
+    		color: white;
+    		font-size: 24px;
+    		margin-top: 150px;
+    		position: absolute;
+    	}
+    	.con-con{
+    		width: 150px;
+    		height: 30px;
+    		margin-left: 245px;
+    		text-align: center;
+    		color: white;
+    		font-size: 36px;
+    		margin-top: 190px;
+    		position: absolute;
+    	}
+    	.con-button{
+    		width: 130px;
+    		height: 35px;
+    		border: solid #ffffff 1px;
+    		position: absolute;
+    		text-align: center;
+    		font-size: 18px;
+    		color: white;
+    		margin-top: 230px;
+    		line-height: 33px;
+    		margin-left: 176px;
+    		border-radius: 3px;
+    	}
+		.con-button2{
+    		width: 130px;
+    		height: 35px;
+    		border: solid #ffffff 1px;
+    		position: absolute;
+    		text-align: center;
+    		font-size: 18px;
+    		color: white;
+    		margin-top: 230px;
+    		line-height: 33px;
+    		margin-left:326px;
+    		border-radius: 3px;
+    	}
+		.scan{
+			width: 640px;
+			height: 140px;
+			background: #fff;
+			margin: 0 auto 45px;
+		}
+		.scan-li{
+			width: 127px;
+			height: 115px;
+			margin: 30px 42px;
+			float: left;
+		}
+    	.scan-money{
+    		width: 140px;
+    		color: #ff6f31;
+    		font-size: 32px;
+    		margin-top: 26px;
+    	}
+    	.btn1{
+    		width: 600px;
+    		height: 70px;
+    		margin: 0 auto;
+    		background: url(img/btn.png);
+    		border-radius: 5px;
+    		text-align: center;
+    		color: white;
+    		font-size: 24px;
+    		line-height: 70px;
+    		letter-spacing: 4px;
+    	}
+		.btn2{
+			width: 600px;
+			height: 70px;
+			margin: 20px auto 0px;
+			border-radius: 5px;
+			text-align: center;
+			font-size: 24px;
+			line-height: 71px;
+			letter-spacing: 4px;
+			background: #fff;
+			border: solid #D9D9D9 1px;
+		}
+		.list{
+    		width: 640px;
+    		height: 80px;
+    		background: #FFFFFF;
+    		border-bottom: solid #D9D9D9 1px;
+    		border-top: solid #D9D9D9 1px;
+			margin-top:35px;
+    	}
+    	.list-pic{
+    		width: 24px;
+    		height: 28px;
+    		margin: 25px 20px;
+    		float: left;
+    	}
+    	.list-con{
+    		width: 457px;
+    		height: 30px;
+    		font-size: 24px;
+    		line-height: 80px;
+    		float: left;
+    	}
+    	.list-num{
+    		width: 50px;
+    		height: 30px;
+    		background: #e8403e;
+    		border-radius: 30px;
+    		float: left;
+    		color: white;
+    		font-size: 26px;
+    		text-align: center;
+    		line-height: 30px;
+    		margin-top: 25px;
+			display:none;
+    	}
+    	.list-jiantou{
+			font-size: 43px;
+			color: #999999;
+			margin-top: 27px;
+			text-indent: 10px;
+			position: absolute;
+			right: 20px;
+    	}
+    	.tip{
+    		width: 600px;
+    		height: 200px;
+    		margin: 36px auto;
+			text-align: center;
+    	}
+    	p{
+    		width: 600px;
+    		font-size: 20px;
+    		color: #888888;
+    		letter-spacing: 1px;
+    		line-height: 30px;
+    		margin-top: 20px;
+			text-align: left;
+    	}
+    	p span{
+    		font-size: 20px;
+    		color: #218ded;
+    	}
+		.li{
+			width: 27px;
+			height: 27px;
+			float:left;
+			padding-right: 10px;
+		}
+		.li-con{
+			width: 120px;
+			font-size: 20px;
+			color: #202020;
+		}
+		.tip-title{
+    		width: 100%;
+    		text-align: center;
+    		font-size: 30px;
+    		margin-top: 53px;
+    	}
+    	.tip-p{
+    		width: 100%;
+    		text-align: center;
+    		font-size: 24px;
+    		color: #888888;
+    		margin-top: 80px;
+    		line-height: 36px;
+    	}
+    	.tip1-button{
+    		width: 500px;
+    		height: 70px;
+    		background: #ff5224;
+    		font-size: 24px;
+    		line-height: 70px;
+    		text-align: center;
+    		color: white;
+    		letter-spacing: 3px;
+    		margin: 70px auto 0px;
+    		border-radius: 5px;
+    	}
+		.tip-pic{
+    		width: 115px;
+    		height: 87px;
+    		margin: 54px auto 30px;
+    	}
+    	.tip-p2{
+    		width: 100%;
+    		text-align: center;
+    		font-size: 22px;
+    		color: #888888;
+    		line-height: 36px;
+    	}
+    	.tip2-con{
+    		font-size: 24px;
+    		width: 100%;
+    		text-align: center;
+    		margin-top: 15px;
+    	}
+    	.tip2-con span{
+    		font-size: 48px;
+    	}
+    	.tip2-button{
+    		width: 500px;
+    		height: 70px;
+    		background: #ff5224;
+    		font-size: 24px;
+    		line-height: 70px;
+    		text-align: center;
+    		color: white;
+    		letter-spacing: 3px;
+    		margin: 48px auto 0px;
+    		border-radius: 5px;
+    	}
+		.tip2-tip{
+    		width: 500px;
+    		height: 140px;
+    		border: solid 1px #CCCCCC;
+    		margin: 30px auto 0px;
+    	}
+    	.bant{
+    		width: 134px;
+    		height: 134px;
+    		margin: 3px 11px 3px 3px;
+    		float: left;
+    	}
+    	.bant-p{
+    		font-size: 22px;
+    		margin-top: 27px;
+    	}
+    	.bant-p span{
+    		font-size: 22px;
+    		color: #FF5224;
+    	}
+    	.bant-p2{
+    		font-size: 22px;
+    		color: #969696;
+    		line-height: 34px;
+    		margin-top: 10px;
+    	}
+    	.bigbant img{
+    		width: 100%;
+    		height: 500px;
+    		position: absolute;
+    		margin-top: -170px;
+    		opacity: 0;
+    	}
+		.question{
+			color: #444444;
+			border: 1px solid #444444;
+			display: inline-block;
+			text-align: center;
+			margin: 30px auto;
+			font-size: 20px;
+			padding: 10px 20px;
+			border-radius: 5px;
+			text-decoration: none;
+		}
+	</style>
+    <script type="text/javascript">
+    	$(function(){
+            initUserInfo();
+			initRecordList();
+    		$(".con-button").click(function(){
+    			location.href="Lmoney.html";
+    		})
+    		$(".list").click(function(){
+    			location.href="jilu.html";
+    		})
+    		$(".can").click(function(){
+    			location.href="zhangdan-list.html";
+    		})
+    		$(".btn1").click(function(){
+    		    if(recordNum == -1){
+    		        alert("获取加油信息失败");
+				}else if(recordNum >= 10){
+    		        alert("每位用户限量购买十份");
+				}else{
+                    location.href="taocan.html";
+				}
+    		})
+			$(".btn2").click(function(){
+				location.href=getRootPath() +"/giftpay/recharge/fuelCard_recharge_new.html"
+			})
+			$(".tip1-button").click(function(){
+    			$(".alertTips1").css("display","none");
+    		})
+			$(".tip2-button").click(function(){
+    			$(".alertTips2").css("display","none")
+    		})
+			$(".person").click(function(){
+    			location.href="question.html"
+    		})
+    		$(".con-button2").click(function(){
+                $.ajax({
+                    url: getRootPath() + "/oil/queryUserMoney.htm",
+                    dataType: "json",
+                    type: "post",
+                    success: function (data) {
+                        if(data.success){
+                            $("#money").html(data.data);
+                            $(".alertTips2").css("display","block")
+                        }else{
+                            alert("获取用户信息失败");
+						}
+                    }
+                })
+    		})
+    	})
+		function initUserInfo() {
+			/*查询用户加油信息*/
+            $.ajax({
+                url: getRootPath() + "/oil/queryUserOilInfo.htm",
+                data: {},
+                dataType: "json",
+                type: "post",
+                success: function (data){
+                    if(data.success){
+                        $('.con-con').html('￥'+data.data.balance == null ? 0 : data.data.balance);
+                        $('#waitsendmoney').html('￥'+data.data.waitsendmoney == null ? 0 : data.data.waitsendmoney);
+                        $('#totalgetmoney').html('￥'+data.data.totalgetmoney == null ? 0 : data.data.totalgetmoney);
+                        $('#totalsavemoey').html('￥'+data.data.totalsavemoey == null ? 0 : data.data.totalsavemoey);
+                    }else{
+                        alert('获取用户信息失败');
+                    }
+                }
+            });
+        }
+        var recordNum = -1;
+		/*查询加油记录*/
+		function initRecordList(){
+			$.ajax({
+				url: getRootPath() + "/oil/queryOilRecordList.htm",
+				data: {},
+				dataType: "json",
+				type: "post",
+				success: function (data) {
+					if(data.success){
+						var data = data.data;
+						if(data==null||data==undefined||data.length==0){
+							$(".list-num").css("display","none");
+							recordNum = 0;
+						}else{
+							$(".list-num").html(data.length);
+							recordNum = data.length;
+							$(".list-num").css("display","block");
+						}
+					}else{
+						alert('获取购买记录信息失败');
+					}
+				}
+			});
+		}
+
+    </script>
+	</head>
+	<body onload="initUserInfo()">
+		<div class="zoomer">
+			<div class="contents">
+				<div class="head">
+					<div class="person">常见问题</div>
+					<div class="title">有礼付易加油</div>
+					<!----><div class="can">余额账单</div>
+				</div>
+				<div class="con">
+					<div class="con-pic"><img src="img/13.png"></div>
+					<div class="con-title">加油红包余额</div>
+					<div class="con-con">￥0</div>
+					<div class="con-button">转入零钱账户</div>
+					<div class="con-button2">查询零钱余额</div>
+				</div>
+				<div class="scan">
+					<div class="scan-li">
+						<div class="li"><img src="img/14.png"></div><div class="li-con">待发放</div>
+						<div id="waitsendmoney" class="scan-money">￥0</div>
+					</div>
+					<div style="width: 1px;height:95px ;background: #999999;float: left;margin-top: 25px;"></div>
+					<div class="scan-li">
+						<div class="li"><img src="img/15.png"></div><div class="li-con">累计获得</div>
+						<div id="totalgetmoney" class="scan-money">￥0</div>
+					</div>
+					<div style="width: 1px;height:95px ;background: #999999;float: left;margin-top: 25px;"></div>
+					<div class="scan-li">
+						<div class="li"><img src="img/16.png"></div><div class="li-con">累计优惠</div>
+						<div id="totalsavemoey" class="scan-money">￥0</div>
+					</div>
+				</div>
+				<div class="btn1">购买易加油服务</div>
+					<div class="btn2" onclick="location.href='fuelCard_recharge_new.html'">加油卡充值</div>
+					<div class="list">
+					<div class="list-pic"><img src="img/17.png"></div>
+					<div class="list-con">我的易加油服务</div>
+					<div class="list-num">10</div>
+					<div class="list-jiantou">></div>
+				</div>
+				<div class="tip">
+					<div class="tip-title"><img src="img/18.png"></div>
+					<p>成功购买易加油服务后的次月起，系统将自动按照您购买的服务协议为您到期发放加油红包，发放日期为每月20日。如对红包有任何疑问，请致电客服：<span>400-0808-065</span>咨询。</p>
+					<a class="question" href="./question.html">常见问题</a>
+				</div>
+			</div>
+		</div>
+<div class="alertTips1"style="background-color: rgba(10, 10, 10, 0.6); width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 1100;display: none;">
+    <div class="tips1" style="background: #ffffff; width:540px; height: 411px; border-radius: 10px; position: absolute; top: 50%; left: 50%; margin: -366px -270px">
+       <div class="tip-title">名额已被抢完</div>
+       <div class="tip-p">很遗憾，本期的加油优惠名额<br>已被抢完，敬请期待下期优惠</div>
+       <div class="tip1-button">确定</div>
+    </div>
+</div>
+<div class="alertTips2"style="background-color: rgba(10, 10, 10, 0.6); width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 1100;display: none;">
+    <div class="tips1" style="background: #ffffff; width:540px; height:560px; border-radius: 10px; position: absolute; top: 50%; left: 50%; margin: -366px -270px">
+       <div class="tip-pic"><img src="img/bag.png"></div>
+       <div class="tip-p2">零钱余额</div>
+       <div class="tip2-con">￥<span id="money">0</span></div>
+       <div class="tip2-button">确定</div>
+	   <div class="tip2-tip">
+       		<div class="bant"><img src="img/22.png"></div>
+       		<div class="bant-p">长按扫码，可管理您的零钱。</div>
+       		<div class="bant-p2">同时享受更多优惠服务。</div>
+       </div>
+       <div class="bigbant"><img src="img/22.png"></div>
+    </div>
+</div>
+	</body>
+<script src="https://s4.cnzz.com/z_stat.php?id=1261897301&web_id=1261897301" language="JavaScript"></script>
+
+</html>

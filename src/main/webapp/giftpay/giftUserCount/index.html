@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="html_gray">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>平安银行</title>
+    <script src="js/layout.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/m.tool.juxinbox.com.js"></script>
+    <link rel="stylesheet" href="css/tool.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<script type="text/javascript" >
+
+    <%
+        String phone = (String) request.getParameter("phone");
+    %>
+
+    var phone = <%=phone%>;
+
+    if(phone!=""){
+        console.log("当前手机号码:"+phone)
+
+    }
+
+
+</script>
+
+    <div class="index_bg">
+        <div class="index_title">
+            <img src="img/title.png" alt="">
+        </div>
+        <div class="index_content">
+            <div class="box">
+                <img src="img/txt.png" alt="">
+            </div>
+            <ul class="inputs"  >
+                <li>
+                    <input id="tel" type="tel" placeholder="请输入手机号码" maxlength="11">
+                </li>
+                <li>
+                    <input id="code" type="tel" placeholder="请输入验证码" maxlength="6">
+                    <label class="code_btn" onclick="sendCode(this)">获取验证码</label>
+                    <label style="display: none;" id="timer" class="code_btn">获取验证码</label>
+                </li>
+            </ul>
+            <div class="bottom_btn">
+                <img id="btn_y" style="display:none " src="img/btn.png" alt="" onclick="signUp()">
+                <img id="btn_n" style="display: block"  src="img/btn_gray.png" alt="">
+            </div>
+
+            <div class="bottom_btn">tips:加油88折优惠活动仅限平安车主信用卡,进入办卡页面请选择 <a class="text_btn"><img src="img/more.png" alt=""></a>按钮,找到平安车主信用卡,点击进行在线办理</div>
+            <div class="bottom_logo">
+                <img src="img/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

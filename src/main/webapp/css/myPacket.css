@@ -1,0 +1,159 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+    padding-bottom: 200px;
+}
+.tip1{
+    width: 604px;
+    height: 67px;
+    border-radius: 12px;
+    line-height: 64px;
+    font-size: 30px;
+    border: 1px solid #999999;
+    text-align: center;
+    margin: 20px auto;
+    font-weight: bold;
+    color: #666;
+}
+.allUse h1{
+
+    font-size: 32px;
+
+    margin: 20px 12px;
+}
+.allUse p{
+    font-size: 26px;
+    margin: 32px 12px;
+}
+.allUse{
+
+}
+
+
+
+.addOil h1{
+
+    font-size: 32px;
+
+    margin: 20px 12px;
+}
+.addOil p{
+    font-size: 26px;
+    margin: 32px 12px;
+}
+.addOil{
+
+    margin: -2px auto;
+}
+.addOil1{
+    border: 2px solid #999;
+    width: 600px;
+    height: 182px;
+    margin: 29px auto;
+    box-shadow: 5px 7px 16px #888;
+}
+
+
+
+
+
+
+
+
+.flow h1{
+
+    font-size: 32px;
+
+    margin: 20px 12px;
+}
+.flow p{
+
+    font-size: 26px;
+
+    margin: 32px 12px;
+}
+.flow{
+
+    margin: -27px auto;
+}
+.flow1{
+    border: 2px solid #999;
+    width: 600px;
+    height: 182px;
+    margin: 25px auto;
+    box-shadow: 5px 7px 16px #888;
+}
+
+.stage{
+    margin: -114px 468px;
+    position: absolute;
+    width: 110px;
+    color: #008000;
+    font-size: 26px;
+    font-weight: bold;
+}
+.allUse1{
+
+    border: 2px solid #999;
+
+    width: 600px;
+
+    height: 182px;
+
+    margin: 10px auto;
+
+    box-shadow: 5px 7px 16px #888;
+}
+.title{
+    margin: 60px 230px;
+    text-align: center;
+    width: 178px;
+    z-index: 2;
+    font-weight: bold;
+    font-size: 32px;
+    color: #666666;
+}
+.xian1{
+
+    border-bottom: 2px solid #999;
+
+    position: absolute;
+
+    width: 206px;
+
+    margin: 13px 30px;
+}
+.xian2{
+
+    border-bottom: 2px solid #999;
+
+    position: absolute;
+
+    width: 206px;
+
+    margin: -74px 396px;
+}
+.tipsIm{
+    display:none;
+    width: 490px;
+    height: 248px;
+    /*border-bottom: 1px solid #ccc;*/
+    margin: 133px auto;
+}
+.picTip{
+    margin: 0px auto;
+    width: 350px;
+}
+
+.sorry{
+    font-size: 30px;
+    color: #888;
+    margin: 58px 47px;
+    position: absolute;
+}
+.payMoney1{
+    font-size: 30px;
+}
+.minTime{
+    font-size: 26px;
+}

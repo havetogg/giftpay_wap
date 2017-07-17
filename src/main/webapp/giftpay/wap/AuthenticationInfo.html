@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" id="back">
+        身份信息
+    </div>
+    <div class="authenticationInfo">
+        <ul>
+            <li>
+                <label class="authenticationInfo_name_left">姓名</label>
+                <label class="authenticationInfo_name_right" id="name">***明</label>
+            </li>
+            <li>
+                <label class="authenticationInfo_name_left">身份证号</label>
+                <label class="authenticationInfo_name_right" id="idCard">320******1234</label>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+			//获取路径参数
+			function getQueryString(name) { 
+			    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+			    var r = window.location.search.substr(1).match(reg); 
+			    if (r != null) return decodeURI(r[2]); 
+			    return null; 
+			 } 
+		var idCard = getQueryString("idCard");
+		var userName = getQueryString("userName");
+		var idCard1 = idCard.substring(0,3);
+		userName = "***"+userName.substring(userName.length-1);
+		idCard = idCard1+"******"+(idCard.substring(idCard.length-3,idCard.length));
+		$("#name").text(userName);
+		$("#idCard").text(idCard);
+		
+		$("#back").click(function(){
+			history.back();
+		});
+</script>
+</body>
+</html>

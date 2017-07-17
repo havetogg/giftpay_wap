@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>充值记录</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+</head>
+<script>
+$(function () {
+	$.ajax({
+		type : 'post',
+		url : getRootPath() + '/giftpay/FuelCardrecharge/queryFuelCardRechargeRecord.htm',
+		dataType : 'json',
+		success : function(data) {
+			if(data.code == "0") {
+				$(".rechargeRecords_Content").hide();
+				$("#noRecord").show();
+			}else {
+				var htmlString = "";
+				$("#noRecord").hide();
+				var obj = eval('(' + data + ')');
+				$(".rechargeRecords_Content").html("");
+				 $.each(obj,function(i,item){
+					 $(".rechargeRecords_Content").append("<div class='recordLists" + i + "'><div class='recordLists_time'>" 
+							 +item.month+"</div><div class='recordLists'><ul>");
+					 var payInfo = item.payInfo;
+					 $.each(payInfo,function(j,item_in) {
+						 var dealState = "";
+						 var imgUrl = "";
+						 var fontColor = "";
+						 if(item_in.dealState == 1){
+							 dealState = "已完成";
+							 fontColor = "records_status2";
+						 }else if(item_in.dealState == 0) {
+							 dealState = "充值中";
+							 fontColor = "records_status1";
+						 }else {
+							 dealState = "已退款";
+							 fontColor = "records_status3";
+						 }
+						 if(item_in.dealRemark == undefined) {
+							 item_in.dealRemark = "";
+						 }
+// 						 else {
+// 							 if(item_in.dealRemark.length == 19 && 0==item_in.dealRemark.indexOf("100011")){
+								 imgUrl = "img/zsh.png";
+// 							 }else if(item_in.dealRemark.length == 16 && 0==item_in.dealRemark.indexOf("9")) {
+// 								 imgUrl = "img/zsy.png";
+// 							 }
+							 
+// 						 }
+						 
+		     			 $(".recordLists" + i + " ul").append('<li class="flex"><div><img src=' + imgUrl + ' alt=""></div><div class="flex-1 records_content"><div class="flex"><a class="flex-1 records_money">'+"￥"+item_in.dealMoney
+								 +'</a><a class="flex-1 records_time">'+item_in.dealTime+'</a></div><div class="flex"><a class="flex-1 records_text">'
+								 +"油卡充值"+item_in.dealMoney+"元-"+item_in.dealRemark+'</a><a class=' + fontColor + '>'+dealState+'</a></div></div>');
+					 });
+			 });
+				
+			}
+		},
+        error: function(
+        ){
+        } 
+	});
+	
+})
+
+
+</script>
+<body>
+<div class="zoomer">
+    <div class="jmt_center" id="noRecord" style="margin: 20%;">
+        <img src="img/noRecords.png" alt="">
+        <div class="noRecords_text">暂无记录</div>
+    </div>
+    <div class="rechargeRecords_Content"">
+    	<!-- <!--只记录油卡充值记录-->
+         <!-- <div class="recordLists_time">本月</div>
+         <div class="recordLists">
+             <ul>
+                 <li class="flex">
+                    <div><img src="img/zsh.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥1000.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">油卡充值1000元-1234567890123456789</a><a class="records_status1">充值中</a></div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div><img src="img/zsh.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥1000.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">油卡充值1000元-1234567890123456789</a><a class="records_status2">已完成</a></div>
+                    </div>
+                </li>
+             </ul>
+         </div>
+
+        <div class="recordLists_time">10月</div>
+        <div class="recordLists">
+            <ul>
+                <li class="flex">
+                    <div><img src="img/zsh.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥1000.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">油卡充值1000元-1234567890123456789</a><a class="records_status4">退款中</a></div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div><img src="img/zsh.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥1000.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">油卡充值1000元-1234567890123456789</a><a class="records_status3">已退款</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="recordLists_time">9月</div>
+        <div class="recordLists">
+            <ul>
+                <li class="flex">
+                    <div><img src="img/yidong.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥10.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">话费充值10元-18751908878</a><a class="records_status2">已完成</a></div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div><img src="img/liantong.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥100.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">流量充值1G-18751908878</a><a class="records_status2">已完成</a></div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div><img src="img/zsh.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥1000.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">油卡充值1000元-1234567890123456789</a><a class="records_status3">已退款</a></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="recordLists_time">8月</div>
+        <div class="recordLists">
+            <ul>
+                <li class="flex">
+                    <div><img src="img/yidong.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥10.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">话费充值10元-18751908878</a><a class="records_status2">已完成</a></div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div><img src="img/liantong.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥100.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">流量充值1G-18751908878</a><a class="records_status2">已完成</a></div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div><img src="img/zsh.png" alt=""></div>
+                    <div class="flex-1 records_content">
+                        <div class="flex"><a class="flex-1 records_money">￥1000.00</a><a class="flex-1 records_time">11-23  01:06</a></div>
+                        <div class="flex"><a class="flex-1 records_text">油卡充值1000元-1234567890123456789</a><a class="records_status3">已退款</a></div>
+                    </div>
+                </li>
+            </ul> --> 
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

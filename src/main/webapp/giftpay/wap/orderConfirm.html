@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <!--<img src="img/left_arrow.png" alt="">-->
+        订单确认
+    </div>
+    <div class="binding_content">
+        <div class="orderConfirm_content">
+            <ul>
+                <li>
+                    <span class="orderConfirm_name">商品名称:</span>
+                    <span class="orderConfirm_name2">易加油服务</span>
+                </li>
+                <li>
+                    <span class="orderConfirm_name">奖励金额:</span>
+                    <span class="orderConfirm_name2" id="dj">
+                        <!--¥2700-->
+                    </span>
+                </li>
+                <li>
+                    <span class="orderConfirm_name">钱包余额:</span>
+                    <span class="orderConfirm_name" id="ye" style="margin-left: 20px;">
+                        <!--¥10-->
+                    </span>
+                </li>
+                <li>
+                    <span class="orderConfirm_name1">实付金额:</span>
+                    <span class="orderConfirm_name1" id="sf" style="margin-left: 20px;">
+                        <!--¥90-->
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="orderConfirm_btn">
+            立即支付
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var codeStatus='';
+    var mybalace=0;
+    var sjBalance=0;
+
+	//返回
+	$("#back").click(function(){
+		history.back();
+	});
+
+	//获取路径参数
+	function getQueryString(name) {
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	    var r = window.location.search.substr(1).match(reg);
+	    if (r != null) return decodeURI(r[2]);
+	    return null;
+	 }
+	//唯一Id
+	$.ajax({
+		url:"/giftpay_wap/getBalanceList.htm",
+		type:"post",
+		data:{"openId":getUrlParam("userId")},
+		dataType:"json",
+		success:function(data){
+			if(data.state==0){
+				var obj = data.data;
+                mybalace=obj.balanceNumber;
+				$("#ye").text("￥"+mybalace);
+                $("#dj").text("￥"+(getUrlParam("tm")*getUrlParam("number")));
+				$("#sf").text("￥"+(getUrlParam("pm")*1-mybalace).toFixed(2));
+                sjBalance=(getUrlParam("pm")*1-mybalace).toFixed(2);
+			}
+		}
+	});
+
+	//充值
+	$(".orderConfirm_btn").click(function(){
+		if(codeStatus=='0'){
+            alerw("登录超时，请重新访问");
+            return;
+        }else if(codeStatus=='20000'){
+            alerw("获取用户信息失败，请重新访问");
+            return;
+        }else if(codeStatus=='10001'){
+            payOilByWX();
+            return;
+        }else if(codeStatus=='10000'){
+            payOilByBalance();
+            return;
+        }
+	});
+
+    function payOilByWX(){
+        //alerw("调用微信支付");
+        loading("start");
+        $.ajax({
+            url:getRootPath()+"/giftpay/oilRecharge/preOrder.htm",
+            type:"post",
+            /*data:{"money":(getUrlParam("payamount")*1-mybalace*1)},
+//            data:{'money':'1'},*/
+            dataType:"json",
+            success:function(data){
+                if (data.code == "10000") {
+                    var payResult = JSON.parse(data.mess)
+                    var payId = payResult.orderId;
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        appId: payResult.appId, // 必填，公众号的唯一标识
+                        timestamp: payResult.timestamp, // 必填，生成签名的时间戳
+                        nonceStr: payResult.nonceStr, // 必填，生成签名的随机串
+                        signature: payResult.paySign,// 必填，签名，见附录1
+                        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                    wx.ready(function () {
+                        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                        wx.chooseWXPay({
+                            timestamp: payResult.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                            nonceStr: payResult.nonceStr, // 支付签名随机串，不长于 32 位
+                            package: payResult.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                            signType: payResult.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                            paySign: payResult.paySign, // 支付签名
+                            success: function (res) {
+                                loading("stop");
+                                //alert(getUrlParam("url"));
+                                //alert(payResult.url);
+                                location.href=getRootPath()+payResult.url+"?totalmoney="+(getUrlParam("tm")*getUrlParam("number"))+"&payamount="+sjBalance+
+                                        "&userId="+getUrlParam("userId")+"&openId="+getUrlParam("openId")+"&cycle="+getUrlParam("cycle");
+                            }, error: function (res) {
+                                loading("stop");
+                                alert('f');
+                            }, cancel:function(res){
+                                loading("stop");
+                            }
+                        });
+                    });
+//					window.location.href="./rechargeResult.html?orderId="+payId;
+                } else if (data.code == "30000") {
+                    loading("stop");
+                    alerw("登录超时，请重新登录", "", function () {
+                        window.location.href = "/giftpay_wap/giftpay/wap/wxLogin.htm";
+                    });
+                } else {
+                    loading("stop");
+                    alerw(data.mess);
+                }
+            }
+        });
+    }
+    function payOilByBalance(){
+        //alerw("调用余额支付");
+        $.ajax({
+            url:getRootPath()+"/giftpay/oilRecharge/rechargeBalance.htm",
+            type:"post",
+            dataType:"json",
+            success:function(data){
+                codeStatus=data.code;
+            }
+        });
+    }
+
+
+    $(function(){
+      /*  var oilModel=new Object();
+        oilModel.userid=getUrlParam("userId");
+        oilModel.openid=getUrlParam("openId");
+        oilModel.totalamount=getUrlParam("totalamount");
+        oilModel.cycle=getUrlParam("cycle");
+        oilModel.payamount=getUrlParam("payamount");
+        oilModel.discount=getUrlParam("discount");
+        oilModel.url=getUrlParam("url")
+        $.ajax({
+            url:getRootPath()+"/giftpay/oilRecharge/getOilInfo.htm",
+            type:"post",
+            data:oilModel,
+            dataType:"json",
+            success:function(data){
+                codeStatus=data.code;
+            }
+        });*/
+        codeStatus=getUrlParam("codeStatus");
+        console.log(codeStatus);
+    })
+</script>
+</body>
+</html>

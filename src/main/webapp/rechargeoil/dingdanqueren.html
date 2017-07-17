@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+	<script type="text/javascript" src="js/Scratch.js"></script>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.contents{
+    		width: 640px;
+    		min-height: 1065px;
+    		position: absolute;
+    		background: #f0f0f4;
+    	}
+    	.head{
+    		width: 640px;
+    		height: 70px;
+    		background: #FFFFFF;
+    		border-bottom: solid #cccccc 1px;
+    	}
+    	.funish{
+    		width: 56px;
+    		height: 28px;
+    		float: left;
+    		font-size: 24px;
+    		line-height: 74px;
+    		color: #ffaa25;
+    		margin-left: 177px;
+    	}
+    	.title{
+    		width: 140px;
+    		height: 70px;
+    		text-align: center;
+    		font-size: 24px;
+    		margin-left: 250px;
+    		float: left;
+    		line-height: 74px;
+    	}
+    	.pic{
+    		width: 600px;
+    		margin: 0px auto 0;
+    	}
+    	.gou{
+    		width: 70px;
+    		height: 70px;
+    		margin-left: 262px;
+    		margin-top: 40px;
+			margin-bottom:40px;
+    	}
+    	.cor{
+    		width: 600px;
+    		height: 30px;
+    		text-align: center;
+    		font-size: 36px;
+    		color: #575757;
+    	}
+    	.cont{
+    		width: 570px;
+			background:#ffffff;
+    		margin:44px auto 0px;
+    		border: solid #c2c2c2 1px;
+    	}
+    	.money{
+    		width: 520px;
+    		height: 65px;
+    		font-size: 24px;
+    		line-height: 65px;
+    		margin-left: 30px;
+    	}
+    	.money span{
+    		color: #999999;
+    		font-size: 24px;
+    	}
+    	#payamount{
+    		color: #ff5224;
+    	}
+    	.logo{
+    		width: 570px;
+    		height: 140px;
+    		margin: 20px auto 0px;
+    	}
+		.foot{
+    		width: 106px;
+    		height: 34px;
+    		margin: 15px auto;
+    	}
+		.max-width{
+    		position: relative;
+		    margin: 0 auto;
+		    max-width: 600px;
+    	}
+    	.scratch_container{
+    		position: relative;
+		    margin: 0 auto;
+		    max-width: 1024px;
+    	}
+    	.scratch_viewport{
+    		position: relative;
+		    max-width: 572px;
+		    max-height: 141px;
+		    margin: 20px auto;
+		    z-index: 0;
+    	}
+    	.scratch_picture-under{
+    		position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    display: block;
+		    z-index: -1;
+    	}
+    	.scratch_container canvas{
+    		position: relative;
+		    width: 100%;
+		    height: auto;
+		    z-index: 1;
+    	}
+    </style>
+    <script type="text/javascript">
+    	$(function(){
+			$("#totalmoney").html("￥"+getUrlParam('totalmoney'));
+			$("#cycle").html(getUrlParam('cycle')+"个月");
+			$("#payamount").html("￥"+getUrlParam('payamount'));
+    		$(".funish").click(function(){
+    			location.href="index.html";
+    		})
+    	})
+    </script>
+	</head>
+	<body>
+		<div class="zoomer">
+			<div class="contents">
+				<div class="head">
+					<div class="title">支付结果</div>
+					<div class="funish">完成</div>
+				</div>
+				<div class="pic">
+					<div class="gou"><img src="img/4.png"></div>
+					<div class="cor">服务购买成功</div>
+				</div>
+				<div class="cont">
+					<div class="money">奖励总额：<span id="totalmoney">￥0</span></div>
+					<div class="money">服务期限：<span id="cycle">0个月</span></div>
+					<div class="money">实付金额：<span id="payamount">￥0</span></div>
+				</div>
+				<div class="htmleaf-container">
+					<div class="max-width">
+						<div class="scratch_container">
+							<div class="scratch_viewport">
+								<a id="getRed">
+			
+								</a>
+								<canvas id="js-scratch-canvas"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script src="js/Scratch.js"></script>
+				<script type="text/javascript">
+				
+				        var scratch = new Scratch({
+				            canvasId: 'js-scratch-canvas',
+				            imageBackground: './img/ggbg_prize.png',
+				            imageBackgroundNone: './img/ggbg_none.png',
+				            pictureOver: './img/ggbg.png',
+				            cursor: {
+				//                png: './images/piece.png',
+				//                cur: './images/piece.cur',
+				                x: '20',
+				                y: '17'
+				            },
+				            radius: 30,
+				            nPoints: 100,
+				            percent: 30,
+				            callback: function () {
+				            	
+				            },
+				            pointSize: { x: 3, y: 3}
+				        });
+					</script>
+				<div style="width: 570px;height: 19px;margin: 24px auto 0;"><img src="img/21.png"></div>
+				<div class="logo"><img src="img/2.png"></div>
+				<div class="foot"><img src="img/20.png"></div>
+			</div>
+		</div>
+	</body>
+<script src="https://s22.cnzz.com/z_stat.php?id=1261960445&web_id=1261960445
+" language="JavaScript"></script>
+</html>

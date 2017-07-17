@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>有礼付数据统计分析</title>
+    <link rel="shortcut icon" href="favicon.png">
+    <!---CSS Files-->
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <!---jQuery Files-->
+    <script src="js/jQuery-1.11.3.js"></script>
+    <script src="js/jquery-ui-1.8.17.min.js"></script>
+    <script src="js/styler.js"></script>
+    <script src="js/jquery.tipTip.js"></script>
+    <script src="js/colorpicker.js"></script>
+    <script src="js/sticky.full.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/flot/jquery.flot.min.js"></script>
+    <script src="js/flot/jquery.flot.resize.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
+    <script src="js/filterUser.js"></script>
+    <script src="js/count.js"></script>
+    <script src="../../js/common/m.tool.juxinbox.com.js"></script>
+    <script src="js/addAdvert.js"></script>
+    <script src="js/recoGoods.js"></script>
+</head>
+<style>
+    .ad-stats ul h3 {
+        text-align: right;
+        width: 120px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+    }
+    #todayForm li span,#totalForm li span{
+        font-size:16px;
+    }
+    .add_ad{
+        font-size: 14px;
+        color: #fff;
+        background-color: #f34a1b;
+        border-radius: 5px;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        font-family: 'Microsoft YaHei';
+        cursor: pointer;
+        margin: 5px 0;
+        box-shadow: 0px 1px 1px #000;
+        letter-spacing: 2px;
+        border: 1px solid #f34a1b;
+    }
+    .block_nav{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.4);
+        position: fixed;
+        z-index: 13;
+        display: flex;
+        align-items: center;
+    }
+    .block_nav1{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.4);
+        position: fixed;
+        z-index: 13;
+        display: flex;
+        align-items: center;
+    }
+    .ad_content{
+        min-width: 500px;
+        background-color: #fff;
+        height: auto;
+        width: 30%;
+        margin: 0 auto;
+        padding: 20px 40px 40px;
+        border-radius: 10px;
+        animation: bounceInDown 1s;
+        -moz-animation: bounceInDown 1s;
+        -webkit-animation: bounceInDown 1s;
+        -o-animation:  bounceInDown 1s;
+        position: relative;
+    }
+    .ad_title{
+        font-size: 30px;
+        text-align: center;
+        color: #5f5b5b;
+        font-family: 'Microsoft YaHei';
+        margin: 20px 0;
+    }
+    .ad_content .uls {
+        border-bottom: 1px solid #eadfdf;
+        padding: 20px 0;
+    }
+    .ad_content .uls2 {
+        padding: 20px 0;
+        display: none;
+    }
+    .ad_content ul li{
+        height: 45px;
+        line-height: 45px;
+    }
+    .ad_content ul li a{
+        font-size: 15px;
+        color: #000;
+        margin: 0 30px;
+    }
+    .ad_content ul li input{
+        width: 50%;
+        height: 20px;
+        border-radius: 5px;
+        line-height: 20px;
+        font-size: 14px;
+        font-family: 'Microsoft YaHei';
+    }
+    .ad_content ul li button{
+        background-color: #f34a1b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        width: 80px;
+        cursor: pointer;
+        position: absolute;
+        height: 40px;
+    }
+    .ad_btn{
+        background-color: #40403f;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        border-radius: 5PX;
+        width: 30%;
+        margin: 0 auto;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .add_close{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 40px;
+    }
+    #ad_tip{
+        display: none;
+    }
+    #goods_tip{
+        display: none;
+    }
+    .add_ad2_btn{
+        text-align: center;
+        color: #fff;
+        background-color: #f34a1b;
+        height: 30px;
+        line-height: 30px;
+        width: 80px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        float: right;
+    }
+    .selectImg{
+
+    }
+  input[type="file"]{
+      border: none;
+      background-color: transparent;
+  }
+    @-webkit-keyframes bounceInUp{0%{opacity:0;-webkit-transform:translateY(2000px);transform:translateY(2000px)}60%{opacity:1;-webkit-transform:translateY(-30px);transform:translateY(-30px)}80%{-webkit-transform:translateY(10px);transform:translateY(10px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes bounceInUp{0%{opacity:0;-webkit-transform:translateY(2000px);-ms-transform:translateY(2000px);transform:translateY(2000px)}60%{opacity:1;-webkit-transform:translateY(-30px);-ms-transform:translateY(-30px);transform:translateY(-30px)}80%{-webkit-transform:translateY(10px);-ms-transform:translateY(10px);transform:translateY(10px)}100%{-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}}.bounceInUp{-webkit-animation-name:bounceInUp;animation-name:bounceInUp}
+    @-webkit-keyframes bounceInDown{0%{opacity:0;-webkit-transform:translateY(-2000px);transform:translateY(-2000px)}60%{opacity:1;-webkit-transform:translateY(30px);transform:translateY(30px)}80%{-webkit-transform:translateY(-10px);transform:translateY(-10px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes bounceInDown{0%{opacity:0;-webkit-transform:translateY(-2000px);-ms-transform:translateY(-2000px);transform:translateY(-2000px)}60%{opacity:1;-webkit-transform:translateY(30px);-ms-transform:translateY(30px);transform:translateY(30px)}80%{-webkit-transform:translateY(-10px);-ms-transform:translateY(-10px);transform:translateY(-10px)}100%{-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}}.bounceInDown{-webkit-animation-name:bounceInDown;animation-name:bounceInDown}</style>
+<body>
+<div class="top-bar">
+    <div id="ad_tip" class="block_nav">
+        <div class="ad_content">
+            <img src="img/close.png" alt="" class="add_close" onclick="closeAd('ad_tip')">
+           <div class="ad_title">底部广告位管理</div>
+            <ul class="uls">
+                <li><a>广告位1名称</a><input type="text" id="name1"></li>
+                <li><a>广告位1图片</a>
+                    <!-- <button onclick="open_dialog1()">上传图片</button> -->
+                    <label>
+                        <input type="file" name="file0" id="file0" multiple="multiple" />
+                         <input id="img1" value=""  style="display:none"/>
+                    </label>
+                     <a>570*140</a></li>
+                <li><a>广告位1链接</a><input type="text" id="link1"></li>
+                <li><a>广告位1概率</a><input id="frequency1" type="number" onkeydown="onlyNum();" value="100"> <a>%</a></li>
+            </ul>
+            <div class="add_ad2_btn" onclick="add_adBtn()">
+                增加广告位
+            </div>
+            <ul class="uls2">
+                <li><a>广告位2名称</a><input type="text" id="name2"></li>
+                <li><a>广告位2图片</a>
+                    <!-- <button onclick="open_dialog2()">上传图片</button> -->
+                    <label>
+                        <input type="file" name="file1" id="file1" multiple="multiple" />
+                        <input id="img2" value=""  style="display:none"/>
+                    </label>
+                    <a>570*140</a></li>
+                </li>
+                <li><a>广告位2链接</a><input type="text" id="link2"></li>
+                <li><a>广告位2概率</a><input id="frequency2" type="number" onkeydown="onlyNum();" value="0"><a>%</a></li>
+            </ul>
+            <div class="ad_btn" onclick="addAdvert()">确定</div>
+        </div>
+    </div>
+
+    <!--商品管理-->
+    <div id="goods_tip" class="block_nav1">
+        <div class="ad_content">
+            <img src="img/close.png" alt="" class="add_close" onclick="closeAd('goods_tip')">
+            <div class="ad_title">新增商品</div>
+            <ul class="uls">
+                <li><a>商品名称</a><input type="text" id="goodsName"></li>
+                <li><a>商品图片</a>
+                    <!-- <button onclick="open_dialog1()">上传图片</button> -->
+                    <label>
+                        <input type="file" name="file0" id="file2" multiple="multiple" />
+                        <input id="goodsImg" value=""  style="display:none"/>
+                    </label>
+                    <a>293*223</a></li>
+                <li><a>商品链接</a><input type="text" id="goodsLink"></li>
+                <li><a>商品价格</a><input type="text" id="goodsPrice"></li>
+                <li><a>商品原价</a><input type="text" id="goodsOldPrice"></li>
+               <!--  <li><a>商品折扣</a><input type="text" id="goodsSale"></li> -->
+            </ul>
+            <div class="ad_btn" onclick="addGoods()">确定</div>
+        </div>
+    </div>
+    <ul id="nav">
+        <li id="user-panel">
+            <img src="img/giftLogo.png" id="usr-avatar" alt=""/>
+            <div id="usr-info">
+                <p id="usr-name">欢迎回来, admin.</p>
+                <p><a href="javascript:void(0)" onclick="initClosePage()">退出</a>
+                    <a href="javascript:void(0)" onclick="initLogon()">注销</a></p>
+            </div>
+        </li>
+        <li>
+            <ul id="top-nav">
+                <li class="nav-item">
+                    <a href="#"><img src="img/nav/dash-active.png" alt=""/>
+                        <p>用户数据</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="oilDashboard.html"><img src="img/nav/anlt.png" alt=""/>
+                        <p>95折加油</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="zshDashboard.html"><img src="img/nav/grid.png" alt=""/>
+                        <p>支付平台</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="PAdashboard.html"><img src="img/nav/flm.png" alt=""/>
+                        <p>平安办卡</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="PaLoanDashBoard.html"><img src="img/nav/flmloan.png" alt=""/>
+                        <p>平安贷款</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/tb.png" alt=""/>
+                        <p>缴费充值</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"> <img src="img/nav/cal.png" alt=""/>
+                        <p>乐途点</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/widgets.png" alt=""/>
+                        <p>自有商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/grid.png" alt=""/>
+                        <p>三方商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/flm.png" alt=""/>
+                        <p>积分商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/icn.png" alt=""/>
+                        <p>福利中心</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/err.png" alt=""/>
+                        <p>游戏中心</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/typ.png" alt=""/>
+                        <p>活动中心</p></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content container_12">
+	<div class="box grid_2">
+        <div class="box-head"><h2>&nbsp;</h2></div>
+        <div class="box-content ad-stats">
+        	 <ul id="allCount" >
+                <li><h3>总用户</h3>
+                    <span class="allusercount">0</span></li>
+                    <li><h3>点击量(办卡)</h3>
+                    <span class="advertise1">0</span></li>
+                    <li><h3>点击量(贷款)</h3>
+                    <span class="advertise2">0</span></li>
+                 <li><h3>点击量(牛奶)</h3>
+                     <span class="advertise3">0</span></li>
+            </ul>
+        </div>
+        <div class="add_ad" onclick="showAd()">支付完成页广告配置</div>
+        <div class="add_ad" onclick="showGoods()">支付完成页商品配置</div>
+    </div>
+    <div class="box grid_2">
+        <div class="box-head"><h2>当日新增</h2></div>
+        <div class="box-content ad-stats">
+            <ul id="todayForm" >
+                <li><h3>新增用户</h3>
+                    <span class="add">0</span></li>
+                <li><h3>登记用户</h3>
+                    <span class="register">0</span></li>
+                <li><h3>中石化登记用户</h3>
+                    <span class="zsh">0</span></li>
+                <li><h3>福利中心登记用户</h3>
+                    <span class="fuli">0</span></li>
+                <li><h3>游戏中心登记用户</h3>
+                    <span class="game">0</span></li>
+                <li><h3>渠道登记用户</h3>
+                    <span class="other">0</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box grid_2">
+        <div class="box-head"><span class="fugue-24 counter"></span>
+            <h2>累计新增</h2></div>
+        <div class="box-content ad-stats">
+            <ul id="totalForm">
+                <li><h3>新增用户</h3>
+                    <span class="add">0</span></li>
+                <li><h3>登记用户</h3>
+                    <span class="register">0</span></li>
+                <li><h3>中石化登记用户</h3>
+                    <span class="zsh">0</span></li>
+                <li><h3>福利中心登记用户</h3>
+                    <span class="fuli">0</span></li>
+                <li><h3>游戏中心登记用户</h3>
+                    <span class="game">0</span></li>
+                <li><h3>渠道登记用户</h3>
+                    <span class="other">0</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box grid_6">
+        <div class="box-head"><span class=" fugue-24 system-monitor"></span>
+            <h2>折线图</h2></div>
+        <div class="box-content">
+            <div id="flot-demo"></div>
+        </div>
+    </div>
+    <div class="box grid_12">
+        <div class="box-head"><h2>用户表</h2></div>
+        <div class="box-content no-pad">
+            <table class="display" id="example">
+            <thead>
+             <tr>
+               <th>注册时间</th>
+               <th>用户编号</th>
+               <th>手机号</th>
+                 <th>归属地</th>
+               <th>零钱余额</th>
+               <th>乐途点</th>
+           </tr>
+           </thead>
+           <tbody>
+           </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>南京聚目堂数码科技有限公司©版权所有</p>
+</div>
+
+<script> /* SCRIPTS */
+function getRootPath() {
+    // 获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var curWwwPath = window.document.location.href;
+    // 获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    // 获取主机地址，如： http://localhost:8083
+    var localhostPaht = curWwwPath.substring(0, pos);
+    // 获取带"/"的项目名，如：/uimcardprj
+    var projectName = pathName
+            .substring(0, pathName.substr(1).indexOf('/') + 1);
+    return (localhostPaht + projectName);
+}
+</script>
+
+
+</body>
+</html>

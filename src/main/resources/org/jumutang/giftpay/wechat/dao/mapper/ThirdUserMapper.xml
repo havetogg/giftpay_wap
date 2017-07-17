@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IThirdUserDao">
+
+	<resultMap type="org.jumutang.giftpay.entity.ThirdUserModel" id="baseResult">
+		<result column="t_id" property="tId" />
+		<result column="phone" property="phone" />
+		<result column="status" property="status" />
+		<result column="name" property="name" />
+		<result column="create_time" property="createTime" />
+		<result column="third_name" property="thirdName" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="tId !=null">
+				and t_id = #{tId}
+			</if>
+			<if test="name !=null">
+				and name = #{name}
+			</if>
+			<if test="phone !=null">
+				and phone = #{phone}
+			</if>
+			<if test="status !=null">
+				and status = #{status}
+			</if>
+			<if test="thirdName !=null">
+				and third_name = #{thirdName}
+			</if>
+			<if test="createTime !=null">
+				and DATE_FORMAT(create_time,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d')
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryThirdUserList" parameterType="org.jumutang.giftpay.entity.ThirdUserModel" resultMap="baseResult">
+		select t_id,phone,status,name,create_time,third_name from t_third_user
+		<include refid="wherecause"/>
+	</select>
+
+
+	<!-- 创建账户 -->
+	<insert id="addThirdUserModel" parameterType="org.jumutang.giftpay.entity.ThirdUserModel">
+		insert into t_third_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			t_id,phone,status,name,create_time,third_name
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{tId},#{phone},#{status},#{name},now(),#{thirdName},
+		</trim>
+	</insert>
+	
+	<!-- 修改账户余额 -->
+	<update id="updateThirdUserModel" parameterType="org.jumutang.giftpay.entity.ThirdUserModel">
+			update t_third_user
+			<set>
+				<if test="phone !=null">
+					phone = #{phone},
+				</if>
+				<if test="status  !=null">
+					status  = #{status },
+				</if>
+				<if test="name !=null">
+					name  = #{name },
+				</if>
+				<if test="third_name  !=null">
+					third_name  = #{third_name },
+				</if>
+			</set>
+			<where>
+				t_id = #{tId}
+			</where>
+	</update>
+	
+</mapper>

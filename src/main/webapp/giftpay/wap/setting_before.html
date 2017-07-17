@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" id="back" alt="">
+        设置
+    </div>
+    <div class="authenticationInfo">
+        <ul>
+            <li>
+                <label class="authenticationInfo_name_left">绑定手机</label>
+                <label class="authenticationInfo_name_right setting_tel">
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow">
+                </label>
+            </li>
+            <li>
+                <label class="authenticationInfo_name_left">登录密码</label>
+                <label class="authenticationInfo_name_right">
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow">
+                </label>
+            </li>
+            <li id="setPwd">
+                <label class="authenticationInfo_name_left">支付密码</label>
+                <label class="authenticationInfo_name_right red_text">
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow">
+                </label>
+            </li>
+
+            <li>
+                <label class="authenticationInfo_name_left">身份信息</label>
+                <label class="authenticationInfo_name_right green_text">
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow">
+                </label>
+            </li>
+
+            <!-- <li>
+                <label class="authenticationInfo_name_left">绑定微信</label>
+                <label class="authenticationInfo_name_right setting_tel">
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow">
+                </label>
+            </li> -->
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+	$("#setPwd").click(function(){
+		var html = "./setting_before.html";
+		//检测是否设置过密码
+		var flag = false;
+		//判断用户是否设置过密码
+		$.ajax({
+			url:"/giftpay_wap/getBalanceList.htm",
+			type:"get",
+			dataType:"json",
+			async:false,
+			success:function(data){
+				var obj = data.data[0];
+				if(data.state==0){
+					if(obj.payPassword == undefined || obj.payPassword==""){
+						flag = true;
+					}else{
+						window.location.href="./editPayPassword.html?html="+html;
+					}
+				}
+			}
+		});	
+		
+		//获取用户是否绑定个人信息
+		if(flag){
+			$.ajax({
+				url:"/giftpay_wap/getArchives.htm",
+				type:"get",
+				dataType:"json",
+				success:function(data){
+					if(data.code == 10000){
+						if(data.data == undefined){
+							window.location.href="./Authentication.html?html="+html;
+						}else{
+							window.location.href="./setPayPassword.html?html="+html;
+						}
+					}
+				}
+			});
+		}
+	});
+	
+	//返回
+	$("#back").click(function(){
+		history.back();
+	});
+</script>
+</body>
+</html>

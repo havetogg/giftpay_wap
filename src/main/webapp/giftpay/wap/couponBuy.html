@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        var buy_price=$('#default').html();
+        $(function () {
+            $('#card').attr('src','img/card'+localStorage.getItem('cardIndex')+'.png');
+            $('#cardName').html(localStorage.getItem('cardName'));
+            buy_price=$('#default').html();
+            $('.couponTotalValue').html(buy_price);
+        })
+        function selectCard(self) {
+//            重置样式
+           var lis = $('.couponBuy_cards').find('li');
+            for(var i=0;i<lis.length;i++){
+                if($(lis[i]).attr('class')=='flex-1 card_bg1'){
+                    $(lis[i]).attr('class','flex-1 card_bg2');
+                    $(lis[i]).find('div').eq(1).attr('class','couponBuy_card_value2');
+                    break;
+                }
+                else if($(lis[i]).attr('class')=='flex-1 card_bg4'){
+                    $(lis[i]).attr('class','flex-1 card_bg3');
+                    $(lis[i]).find('div').eq(1).attr('class','couponBuy_card_value2');
+                    break;
+                }
+            }
+            //设置选中样式
+            if($(self).attr('class')=='flex-1 card_bg1'){
+                $(self).attr('class','flex-1 card_bg1');
+                $(self).find('div').eq(1).attr('class','couponBuy_card_value1')
+            }
+            else if($(self).attr('class')=='flex-1 card_bg2'){
+                $(self).attr('class','flex-1 card_bg1');
+                $(self).find('div').eq(1).attr('class','couponBuy_card_value1')
+            }
+            else if($(self).attr('class')=='flex-1 card_bg3'){
+                $(self).attr('class','flex-1 card_bg4');
+                $(self).find('div').eq(1).attr('class','couponBuy_card_value1')
+            }
+            // 计算总价
+            buy_price= $(self).find('a').eq(0).html();
+            culculate(buy_price);
+        };
+        function couponCut() {
+            var coupon_number=$('.coupon_number').html();
+            if(Number(coupon_number)>1){
+                coupon_number--;
+                $('.coupon_number').html(coupon_number);
+            }
+            else{
+                return 0;
+            }
+            culculate(buy_price);
+        }
+        function couponAdd() {
+            var coupon_number=$('.coupon_number').html();
+            if(Number(coupon_number)>0){
+                coupon_number++;
+                $('.coupon_number').html(coupon_number);
+            }
+            else{
+                return 0;
+            }
+            culculate(buy_price);
+        }
+        function culculate(price) {
+            var buy_nmuber=$('.coupon_number').html();
+            buy_price=price;
+            $('.couponTotalValue').html((buy_nmuber*buy_price).toFixed(0));
+        }
+    </script>
+</head>
+<body style="background-color: #ededed;height: 1150px !important;">
+<div  class="zoomer" style="background-color: #ededed;">
+    <div class="couponBuy_content">
+        <div class="couponBuy_banner">
+            <div class="couponBuy_banner_img">
+                <img id="card" src="" alt="">
+            </div>
+        </div>
+        <div class="couponName">
+            <label id="cardName"></label>
+            <label><img src="img/logo_little.png" alt=""></label>
+        </div>
+        <div class="couponBuy_tittle">
+            <label><img src="img/dollars.png" alt="" style="vertical-align: sub;"></label>
+            <label>选择面值</label>
+        </div>
+        <div class="couponBuy_cards">
+            <ul class="flex">
+                <li class="flex-1 card_bg1" onclick="selectCard(this)">
+                    <div class="couponBuy_card_value" ><label>面值:</label><a id="default">50</a></div>
+                    <div class="couponBuy_card_value1"><label>售价:</label><label>50</label></div>
+                </li>
+                <li class="flex-1 card_bg2"  onclick="selectCard(this)">
+                    <div class="couponBuy_card_value"><label>面值:</label><a>100</a></div>
+                    <div class="couponBuy_card_value2"><label>售价:</label><label>100</label></div>
+                </li>
+                <li class="flex-1 card_bg2"  onclick="selectCard(this)">
+                    <div class="couponBuy_card_value"><label>面值:</label><a>300</a></div>
+                    <div class="couponBuy_card_value2"><label>售价:</label><label>300</label></div>
+                </li>
+            </ul>
+            <ul class="flex">
+                <li class="flex-1 card_bg2"  onclick="selectCard(this)">
+                    <div class="couponBuy_card_value"><label>面值:</label><a>400</a></div>
+                    <div class="couponBuy_card_value2"><label>售价:</label><label>400</label></div>
+                </li>
+                <li class="flex-1 card_bg2"  onclick="selectCard(this)">
+                    <div class="couponBuy_card_value"><label>面值:</label><a>500</a></div>
+                    <div class="couponBuy_card_value2"><label>售价:</label><label>500</label></div>
+                </li>
+                <li class="flex-1 card_bg2"  onclick="selectCard(this)">
+                    <div class="couponBuy_card_value"><label>面值:</label><a>1000</a></div>
+                    <div class="couponBuy_card_value2"><label>售价:</label><label>1000</label></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div style="position:relative;">
+                <img src="img/cutIcon.png" alt="" style="vertical-align: text-bottom;" onclick="couponCut()">
+                <label class="coupon_number">1</label>
+                <img src="img/addIcon.png" alt="" style="vertical-align: text-bottom;" onclick="couponAdd()">
+                <label class="couponBuy_tip">(购买数量)</label>
+                <label class="couponBuy_totalValue_">
+                    <label class="couponBuy_tip1">共计:</label><label class="couponTotalValue">暂无价格</label><label class="couponBuy_tip1">元</label>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="couponBuy_line_"></div>
+    <div class="couponBuy_content">
+        <div class="couponBuy_buyBtn">
+            立即购买
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

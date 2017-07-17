@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="	http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+							http://www.springframework.org/schema/aop
+							http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+							http://www.springframework.org/schema/tx
+							http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+							http://www.springframework.org/schema/jdbc
+							http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context-4.2.xsd
+							http://www.springframework.org/schema/task
+							http://www.springframework.org/schema/task/spring-task-4.2.xsd">
+
+	<!-- 简化Spring配置 一次性向Spring容器注册4个BeanPostProcessor AutowiredAnnotationBeanPostProcessor 
+		管理 @Autowired注解 CommonAnnotationBeanPostProcessor 管理@Resource、@PostConstruct、@PreDestroy注解 
+		PersistenceAnnotationBeanPostProcessor 管理@PersistenceContext注解 RequiredAnnotationBeanPostProcessor 
+		管理@Required注解 -->
+	<!-- <context:annotation-config /> -->
+
+	<!-- 配置扫描器信息，扫描指定包下面的类文件 扫描器中Spring隐式的执行了 <context:annotation-config /> 
+		操作 -->
+	<!-- 扫描注册Service信息 -->
+	<context:component-scan base-package="org.jumutang.giftpay.service.impl" />
+	<context:component-scan base-package="org.jumutang.caranswer.service.impl" />
+	<context:component-scan base-package="org.jumutang.giftpay.dao" />
+	<!-- 注入properties配置信息 -->
+	<bean id="propertyFactoryBean"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+			<!-- 生产 -->
+<!-- 				<value>classpath*:org/jumutang/caranswer/conf/properties/produ/*.properties</value> -->
+				
+				<!-- 开发 -->
+				<value>classpath*:org/jumutang/giftpay/conf/properties/produ/*.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="properties" ref="propertyFactoryBean" />
+	</bean>
+
+	<!-- 配置数据源 -->
+	<bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${db.driverClassName}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maxActive" value="${db.maxActive}" />
+		<property name="maxIdle" value="${db.maxIdle}" />
+		<property name="maxWait" value="${db.maxWait}" />
+		<property name="minIdle" value="${db.minIdle}" />
+		<property name="defaultAutoCommit" value="${db.defaultAutoCommit}" />
+		<property name="validationQuery" value="${db.validationQuery}" />
+	</bean>
+
+	<!-- 事务管理器 -->
+	<bean id="dataSourceTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="basicDataSource" />
+	</bean>
+
+	<!-- 对@Transactional这个注解进行的驱动 -->
+	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" />
+
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="basicDataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:org/jumutang/giftpay/wechat/dao/mapper/*.xml
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.jumutang.giftpay.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean" />
+	</bean>
+	
+	<!-- 上传文件资源设置 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>524288000</value><!-- 上传文件大小限制为500M，500*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+	<import resource= "classpath*:org/jumutang/giftpay/conf/spring/spring-task.xml" />
+</beans>

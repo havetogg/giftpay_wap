@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/wx_share.js"></script>
+    <script>
+        function switchTab(type) {
+            if(type==1){
+                window.location.href='./index.html';
+            }
+            else if(type==3){
+                window.location.href='./myCenter.html';
+            }
+        }
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position:fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="find">
+    <ul>
+    	<li>
+            <img src="img/find4.png" alt="" onclick="javascript:location.href='./carValuation.jsp'">
+        </li>
+         <li>
+            <img src="img/fl.png" alt="" class="fl_href">
+        </li>
+        <li>
+            <img src="img/game.png" alt="" class="game_href">
+        </li>
+         <li>
+            <img src="img/mall.png" alt="" class="mall_href">
+        </li>
+    </ul>
+    </div>
+</div>
+<ul class="flex bottom_menu">
+    <li class="flex-1" onclick="switchTab(1)">
+        <img src="img/tab1.png" id="index" alt="" width="100%">
+    </li>
+    <li class="flex-1">
+        <img src="img/tab2_on.png" alt="" width="100%">
+    </li>
+    <li class="flex-1" onclick="switchTab(3)">
+        <img src="img/tab3.png" id="center" alt="" width="100%">
+    </li>
+</ul>
+<script type="text/javascript">
+	$("#center").click(function(){
+		window.location.href="./myCenter.html";
+	});
+	$("#index").click(function(){
+		window.location.href="./index.html";
+	});
+	$(".fl_href").click(function(){
+		window.location.href="http://prod.juxinbox.com/linkgiftSinopec/weixinMng/ManageC/userIn.htm";
+	})
+	$(".game_href").click(function(){
+		window.location.href="http://www.linkgift.cn/sinopecGameCt/weixinMng/ManageC/userIn.htm";
+	})
+	$(".mall_href").click(function(){
+		window.location.href="http://m.linkgift.cn/index.html";
+	})
+</script>
+</body>
+</html>

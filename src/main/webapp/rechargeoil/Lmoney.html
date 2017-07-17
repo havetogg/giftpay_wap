@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <!--<link type="text/css" href="css/index.css" rel="stylesheet">-->
+    <!--<script type="text/javascript" src="js/common/jquery-1.7.2.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>-->
+
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="123.js"></script>
+
+    <!--<script type="text/javascript" src="js/index.js"></script>-->
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.contents{
+    		width: 640px;
+    		min-height: 1065px;
+    		position: absolute;
+    		background: #f0f0f4;
+    	}
+    	.head{
+    		width: 640px;
+    		height: 70px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.jiantou{
+    		position: absolute;
+    		width: 16px;
+    		height: 28px;
+    		margin: 20px 20px;
+    	}
+    	.title{
+    		width: 340px;
+    		height: 70px;
+    		text-align: center;
+    		font-size: 24px;
+    		line-height: 74px;
+    		float: left;
+    		margin-left: 150px;
+    	}
+    	.con{
+    		width: 640px;
+    		height: 170px;
+    		background: url(img/12.png) no-repeat;
+    	}
+    	.con-title{
+    		width: 150px;
+    		height: 30px;
+    		margin-left: 245px;
+    		text-align: center;
+    		color: white;
+    		font-size: 24px;
+    		margin-top: 40px;
+    		position: absolute;
+    	}
+    	.con-con{
+    		width: 150px;
+    		height: 30px;
+    		margin-left: 245px;
+    		text-align: center;
+    		color: white;
+    		font-size: 48px;
+    		margin-top: 100px;
+    		position: absolute;
+    	}
+    	.cann{
+    		width: 640px;
+    		height: 270px;
+    		background: #ffffff;
+    		border: solid #D9D9D9 1px;
+    	}
+    	.cann-title{
+    		width: 150px;
+    		font-size: 24px;
+    		position: absolute;
+    		margin: 20px 30px;
+    	}
+    	.cann-money{
+    		width: 150px;
+    		font-size: 32px;
+    		position: absolute;
+    		margin-top: 80px;
+    		margin-left: 30px;
+    	}
+    	.money-txt{
+			width:400px;
+    		position: absolute;
+    		font-size: 60px;
+    		margin-top: 60px;
+    		margin-left: 80px;
+    		border: none;
+    	}
+    	p{
+    		font-size: 20px;
+    		color: #888888;
+    		width: 560px;
+    		height: 30px;
+    		margin-left: 40px;
+    		margin-top: 180px;
+    		line-height: 30px;
+    		position: absolute;
+    	}
+    	.queren-btn{
+    		width: 600px;
+    		height: 70px;
+    		margin: 30px auto;
+    		background: #FF5224;
+    		border-radius: 5px;
+    		text-align: center;
+    		color: white;
+    		font-size: 24px;
+    		line-height: 70px;
+    		letter-spacing: 4px;
+    	}
+    </style>
+    <script type="text/javascript">
+	var money;
+	var maxmoney;
+    	$(function(){
+    	    /*获取加油用户信息*/
+    		$.ajax({
+    	        url: getRootPath() + "/oil/queryUserOilInfo.htm",
+    	        data: {},
+    	        dataType: "json",
+    	        type: "post",
+    	        success: function (data) {
+    	        	if(data.success){
+    	        		$('.con-con').html('￥'+data.data.balance == null ? 0 : data.data.balance);
+    	        	}else{
+    	        		alert('获取信息失败');
+    	        	}
+    	        }
+    	    });
+			
+			$(".money-txt").keyup(function(){
+
+                var reg = /^\d+\.?(\d{1,2})?$/;
+                while (!reg.test($(this).val()) && $(this).val() != "") {
+                    $(this).val(checkStr($(this).val()));
+                }
+            });
+
+            //检查是否符合金额格式:只能输入数字且最多保留小数点后两位
+            function checkStr(str) {
+                str = str.substring(0,str.length-1);
+                return str;
+            }
+
+            /*转入零钱服务*/
+    		$(".queren-btn").click(function(){
+			    money=$(".money-txt").val();
+    			maxmoney=$("#con-txt").text();
+    			if (money<=0){
+                	alerw("转入金额必须大于0!");
+                }else if((maxmoney-money)<0){
+                	alerw("余额不足");
+               }else{
+                    $.ajax({
+                        url: getRootPath() + "/oil/getOilRandomString.htm",
+                        dataType: "json",
+                        type: "post",
+                        success: function (data) {
+							if (data.result) {
+							 var randomStr = data.data;
+                                $.ajax({
+                                    url: getRootPath() + "/oil/transferAccount.htm",
+                                    data: {"amount":$('.money-txt').val(),
+                                        "randomString":randomStr
+                                    },
+                                    dataType: "json",
+                                    type: "post",
+                                    success: function (data) {
+                                        if(data.success){
+                                            alerw("加油红包已成功转入零钱，快去钱包查看吧",'',function(){location.href="Lmoney.html"});
+                                        }else{
+                                            alert(data.errMsg);
+                                        }
+                                    }
+                                });
+							 }else{
+							    alert(data.data);
+							}
+                        }
+                    })
+			   }
+        		
+    			
+    		})
+    		$(".jiantou").click(function(){
+    			location.href="index.html"
+    		})
+    		
+    	})
+    </script>
+	</head>
+	<body>
+		<div class="zoomer">
+			<div class="contents">
+				<div class="head">
+					<div class="jiantou" style="display:none"><img src="img/1.png"></div>
+					<div class="title">转入零钱</div>
+			    </div>
+			    <div class="con">
+					<div class="con-title">加油红包余额</div>
+					<div class="con-con" id="con-txt">0</div>
+				</div>
+				<div class="cann">
+					<div class="cann-title">转入金额</div>
+					<div class="cann-money">￥</div>
+					<input class="money-txt" placeholder="">
+					<div style="width: 560px;height: 1px;background: #D9D9D9;position: absolute;margin-left: 40px;margin-top: 150px;"></div>
+					<p>加油红包余额转入零钱后，可用于油卡充值，也可用于购买有礼付的其他服务。请关注“有礼付”公众号获取更多服务。</p>
+				</div>
+				<div class="queren-btn">确认转入</div>
+			</div>
+		</div>
+	</body>
+</html>

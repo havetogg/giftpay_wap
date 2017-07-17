@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>排行榜</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script>
+    function continuePlay() {
+        TipShow('继续游戏',1000);
+    }
+    </script>
+</head>
+<body>
+<div class="zoomer">
+    <div class="gameTop_banner">
+        <img src="img/banner1.png" alt="" width="100%">
+        <div class="text1">
+            <label>最终幻想专题兑换专区</label>
+        </div>
+    </div>
+    <div class="myGames">
+        <div class="myGamesList">
+            <div class="recentText">
+                <img src="img/recentTime.png" alt="">
+            </div>
+            <ul>
+                <li class="flex">
+                    <div class="">
+                        <img src="img/game1.png" alt="" class="banners">
+                    </div>
+                    <div class="flex-1 right">
+                        <div class="name">加油达人</div>
+                        <div class="timeParent">
+                            <img src="img/timer.png" alt="">
+                            <label class="time">2017-02-04</label>
+                        </div>
+                        <div class="jmt_right">
+                            <img src="img/play.png" alt="" width="100%" onclick="continuePlay()">
+                        </div>
+                    </div>
+                </li>
+
+                <li class="flex">
+                    <div class="">
+                        <img src="img/game2.png" alt="" class="banners">
+                    </div>
+                    <div class="flex-1 right">
+                        <div class="name">加油超限赛</div>
+                        <div class="timeParent">
+                            <img src="img/timer.png" alt="">
+                            <label class="time">2017-02-04</label>
+                        </div>
+                        <div class="jmt_right">
+                            <img src="img/play.png" alt="" width="100%" onclick="continuePlay()">
+                        </div>
+                    </div>
+                </li>
+
+                <li class="flex">
+                    <div class="">
+                        <img src="img/game3.png" alt="" class="banners">
+                    </div>
+                    <div class="flex-1 right">
+                        <div class="name">寻宝加油</div>
+                        <div class="timeParent">
+                            <img src="img/timer.png" alt="">
+                            <label class="time">2017-02-04</label>
+                        </div>
+                        <div class="jmt_right">
+                            <img src="img/play.png" alt="" width="100%" onclick="continuePlay()">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

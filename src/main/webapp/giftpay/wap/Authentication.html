@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="javascript:history.go(-1)">
+        身份验证
+    </div>
+    <div class="binding_content">
+        <ul class="bindCellPhone">
+            <li>
+                <input type="text" id="name" placeholder="姓名" class="binding_input">
+            </li>
+            <li>
+                <input type="text" id="code" maxlength="18" placeholder="身份证号" class="binding_input">
+            </li>
+        </ul>
+        <div class="bindingCellPhone_text">
+            请验证身份后设置支付密码
+        </div>
+        <div class="common_btn" id="finish">完成</div>
+    </div>
+</div>
+<script type="text/javascript">
+
+	//获取路径参数
+	function getQueryString(name) { 
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	    var r = window.location.search.substr(1).match(reg); 
+	    if (r != null) return decodeURI(r[2]); 
+	    return null; 
+	 } 
+	
+	var html = getQueryString("html");
+	console.log(html);
+	$("#finish").click(function(){
+		var name = $("#name").val();
+		var code = $("#code").val();
+		if(name==""){
+			TipShow("请输入姓名",1000);
+			return ;
+		}
+		if(code==""){
+			TipShow("请输入身份证",1000);
+			return ;
+		}
+		$.ajax({
+			url:"/giftpay_wap/saveIdCard.htm",
+			type:"post",
+			data:{"userName":name,"idCard":code},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				if(data.state==0){
+					window.location.href="./setPayPassword_NoAuthentication.html?html="+html;
+				}else{
+					TipShow(data.mess,1000);
+				}
+			}
+		});
+	});
+	
+	//返回
+	$("#back").click(function(){
+		history.back();
+	});
+</script>
+</body>
+</html>

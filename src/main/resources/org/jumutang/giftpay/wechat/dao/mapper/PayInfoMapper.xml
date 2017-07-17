@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.PayInfoDaoI">
+
+	<resultMap type="org.jumutang.giftpay.model.PayInfoModel" id="baseResult">
+		<result column="deal_id" property="dealId" />
+		<result column="account_id" property="accountId" />
+		<result column="order_no" property="orderNo" />
+		<result column="business_info" property="businessInfo" />
+		<result column="deal_info" property="dealInfo" />
+		<result column="deal_money" property="dealMoney" />
+		<result column="deal_realMoney" property="dealRealMoney" />
+		<result column="deal_time" property="dealTime" />
+		<result column="deal_type" property="dealType" />
+		<result column="deal_state" property="dealState"/>
+		<result column="deal_remark" property="dealRemark"/>
+		<result column="wx_order" property="wxOrder"/>
+		<result column="phone" property="phone"/>
+		<result column="of_order" property="ofOrder"/>
+	</resultMap>
+
+	<!--OrderInfo-->
+	<resultMap type="org.jumutang.giftpay.model.OrderInfoModel" id="orderInfoModel">
+		<result column="id" property="id" />
+		<result column="open_id" property="openId" />
+		<result column="goods_name" property="goodsName" />
+		<result column="goods_id" property="goodsId" />
+		<result column="pay_money" property="payMoney" />
+		<result column="goods_money" property="goodsMoney" />
+		<result column="ip" property="ip" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="order_no" property="orderNo" />
+		<result column="wx_order" property="wxOrder" />
+		<result column="remark" property="remark" />
+		<result column="md5_sign" property="md5Sign" />
+		<result column="order_params" property="orderParams" />
+		<result column="deal_type" property="fromType" />
+		<result column="deal_state" property="dealState" />
+		<result column="of_order" property="payStatus" />
+	</resultMap>
+
+	<!-- 查询交易记录 -->
+	<select id="queryPayInfos" parameterType="org.jumutang.giftpay.model.PayInfoModel" resultMap="baseResult">
+		select	deal_id,of_order,account_id,order_no,business_info,deal_info,deal_money,deal_realMoney,deal_time,deal_type,deal_state,deal_remark,wx_order
+		from t_payInfo
+		<where>
+			<if test="accountId !=null">
+				and account_id = #{accountId}
+			</if>
+			<if test="orderNo !=null">
+				and order_no = #{orderNo}
+			</if>
+			<if test="businessInfo !=null">
+				and business_info = #{businessInfo}
+			</if>
+			<if test="ofOrder !=null">
+				and of_order = #{ofOrder}
+			</if>
+
+		</where>
+		order by deal_time desc
+	</select>
+
+	<!-- 查询易加油 -->
+	<select id="queryPayInfosForOil" parameterType="org.jumutang.giftpay.model.PayInfoModel" resultMap="baseResult">
+		select	deal_id,account_id,order_no,business_info,deal_info,deal_money,deal_realMoney,deal_time,deal_type,deal_state,deal_remark,wx_order
+		from t_payInfo
+		<where>
+			<if test="accountId !=null">
+				and account_id = #{accountId}
+			</if>
+			<if test="orderNo !=null">
+				and order_no = #{orderNo}
+			</if>
+			<if test="businessInfo !=null">
+				and business_info like concat('%',#{businessInfo},'%')
+			</if>
+		</where>
+		order by deal_time desc
+	</select>
+
+	<!-- 查询交易记录 -->
+	<select id="queryAllPayInfos" parameterType="org.jumutang.giftpay.model.PayInfoModel" resultMap="baseResult">
+		select deal_id,account_id,order_no,of_order,wx_order,business_info,deal_info,deal_money,deal_realMoney,deal_time,deal_type,deal_state,phone from t_payinfo  p
+		inner join t_user s
+		on p.account_id=s.id
+		where wx_order is not null and wx_order!='' and deal_money!='0.01' and deal_realMoney!='0.01'
+		order by deal_time desc
+	</select>
+	<!-- 生成交易记录 -->
+	<insert id="insertPayInfo" parameterType="org.jumutang.giftpay.model.PayInfoModel">
+		insert into t_payInfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			of_order,deal_id,account_id,order_no,deal_money,deal_time,deal_type,deal_state,deal_realMoney,
+			<if test="dealInfo !=null">
+				deal_info,
+			</if>
+			<if test="dealRemark !=null">
+				deal_remark,
+			</if>
+			<if test="businessInfo !=null">
+				business_info,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			'',#{dealId},#{accountId},#{orderNo},#{dealMoney},#{dealTime},#{dealType},#{dealState},#{dealRealMoney},
+			<if test="dealInfo !=null">
+				#{dealInfo},
+			</if>
+			<if test="dealRemark !=null">
+				#{dealRemark},
+			</if>
+			<if test="businessInfo !=null">
+				#{businessInfo},
+			</if>
+		</trim>
+	</insert>
+
+
+	<!-- 更新交易状态 -->
+	<update id="updatePayInfo" parameterType="org.jumutang.giftpay.model.PayInfoModel">
+		update t_payInfo
+		<set>
+			<if test="wxOrder !=null ">
+				wx_order = #{wxOrder},
+			</if>
+			<if test="ofOrder !=null ">
+				of_order = #{ofOrder},
+			</if>
+			<if test="dealState !=null">
+				deal_state = #{dealState},
+			</if>
+			<if test="dealInfo !=null">
+				deal_info = #{dealInfo},
+			</if>
+			<if test="dealRemark !=null">
+				deal_remark = #{dealRemark},
+			</if>
+		</set>
+		<where>
+			<if test="orderNo !=null">
+				and order_no = #{orderNo}
+			</if>
+
+		</where>
+	</update>
+
+	<!--流量充值 根据用户userId和bussiness_info 分组 YearMonth -->
+	<select id="historyYear" parameterType="java.lang.String"  resultType="java.lang.String">
+		select DATE_FORMAT(deal_time,'%Y%m') as time     from t_payInfo where account_id = #{accountId} and  business_info like '有礼付%充值' group by time
+	</select>
+
+	<!--流量充值 查询当前YearMonth下 用户当月充值缴费记录 -->
+	<select id="historyPayInfo" parameterType = "org.jumutang.giftpay.model.PayInfoModel" resultMap="baseResult"  >
+		select * from t_payInfo where  DATE_FORMAT(deal_time,'%Y%m')  = #{dealTime} and account_id = #{accountId} and  business_info like '有礼付%充值'
+	</select>
+
+	<!--流量充值 查询用户充值记录 更新方法，只查询一次，获取结果，替换多次查询sql语句，提高性能-->
+	<!--select * from t_payInfo  where account_id =  #{accountId}  and  business_info = #{dealRemark} order by deal_time desc 服务器版本-->
+	<!--select * from t_payInfo  where account_id =  #{accountId}  and  deal_info = #{dealRemark} order by deal_time desc -->
+	<select id="HisFlowOrderRecord" parameterType = "org.jumutang.giftpay.model.OrderInfoModel" resultMap="orderInfoModel" >
+		select goods_name , goods_money , remark , create_time, deal_state ,deal_type , of_order ,oi.open_id from orderinfo as oi inner join t_payInfo as tp on oi.order_no = tp.order_no
+		<!--<where>-->
+				<!--<if test="openId!=null and openId!='' ">-->
+					<!--and oi.open_id =  #{openId}-->
+				<!--</if>-->
+				<!--<if  test="fromType!=null and fromType!='' " >-->
+					<!--<if test=" fromType!=null and fromType=='1'.toString() ">-->
+						<!--and deal_type = 1-->
+					<!--</if>-->
+					<!--<if test=" fromType!=null and fromType=='3'.toString() ">-->
+						<!--and deal_type = 3-->
+					<!--</if>-->
+				<!--</if>-->
+		<!--</where>-->
+
+		<choose>
+			<!-- 手机话费 fromType=1,流量 fromType=2 -->
+			<when test=" fromType!=null and fromType=='1'.toString() ">
+				where oi.open_id =  #{openId} and  deal_type = 3
+			</when>
+			<otherwise>
+				where oi.open_id =  #{openId} and  deal_type = 2
+			</otherwise>
+		</choose>
+
+		order by oi.create_time desc
+	</select>
+
+	<!--流量充值 查询当前流量充值操作是否成功-->
+	<!--select * from t_payInfo where order_no = #{0} and of_order='RechargeSuccess'  旧版本-->
+	<select id="searchFlowStatus" parameterType="java.lang.String" resultMap="orderInfoModel" >
+		select tp.order_no, goods_name , goods_money , remark , create_time, deal_state ,deal_type , of_order ,oi.open_id from orderinfo as oi
+		inner join t_payInfo as tp on oi.order_no = tp.order_no
+		where
+		of_order='RechargeSuccess'
+		and tp.order_no =  #{0}
+	</select>
+
+    <!--油卡充值 根据用户userId和bussiness_info 分组 YearMont-->
+	<select id="fuelCardHistoryYear" parameterType = "org.jumutang.giftpay.model.PayInfoModel" resultType="java.lang.String"  >
+		select DATE_FORMAT(deal_time,'%Y年%m月') as time     from giftpay.t_payInfo where account_id = #{accountId} and deal_info like '%油卡充值%' group by time  order by deal_time desc
+	</select>
+	
+	<!--油卡充值 查询当前YearMonth下 用户当月充值缴费记录 -->
+	<select id="fuelCardHistoryPayInfo" parameterType = "org.jumutang.giftpay.model.PayInfoModel" resultMap="baseResult"  >
+		select deal_id,account_id,order_no,business_info,deal_info,deal_money,deal_realMoney,deal_type,deal_state,deal_remark,wx_order,DATE_FORMAT(deal_time,'%m-%d %H:%m') as deal_time 
+		from giftpay.t_payInfo 
+		where  DATE_FORMAT(deal_time,'%Y年%m月')  = #{dealTime} and account_id = #{accountId} and  deal_info like '%油卡充值%' order by deal_time desc
+	</select>
+
+	<!--根据orderNo查询当前订单的 预支付 金额-->
+	<select id="selDealmoneyByOrderNo" resultType="java.lang.Integer">
+		select deal_money from t_payInfo where order_no = #{0}
+	</select>
+
+
+	<!--更新 payInfo 订单状态和实付款-->
+	<update id="UpdatePayinfoByOrderNo"   >
+		update t_payInfo set deal_realMoney =  #{1}  , deal_state = 1   where order_no = #{0}
+	</update>
+
+
+</mapper>

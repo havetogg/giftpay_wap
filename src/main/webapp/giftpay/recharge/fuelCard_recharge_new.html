@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fuel_new.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        function eventHandle(e)
+        {
+            var e=e||window.event;
+            var obj=e.target||e.srcElement;
+            if(!obj.id){
+                $('.historyNumber2').hide();
+            }
+        }
+    </script>
+</head>
+<body onclick="eventHandle(event)">
+<div class="zoomer">
+    <div class="tab_text">
+        <div>油卡充值</div>
+        <div class="rechargeRecords" onclick="location.href='rechargeRecords2.html'">充值记录</div>
+    </div>
+    <div class="recharge_Content">
+        <div class="recharge_Content_goods">
+            <div class="serviceName">请输入加油卡号</div>
+            <div class="phone_num">
+                <input id="cardNo"  class="phoneNumber" type="tel" onprogress="showTipsss()" oninput="cardInput (event)" onpropertychange="OnPropChanged(event)">
+                    <div id="test" class="historyNumber2">
+                        <ul class="">
+                        </ul>
+                        <p>最多存在5条记录，请删除无用记录 <a class="" onclick=  'delAll()'>删除全部</a></p>
+                    </div>
+            </div>
+            <div id="companyName">
+				未知
+            </div>
+            <div class="cellPhoneNumberPrice">
+            </div>
+            <div id="dingyi" style="margin-top: 10px;">
+                <div class="oilCard_dingyi">自定义金额</div>
+                <input id="amount" class="fuelRecharge_inputMoney1" type="tel" placeholder="请输入充值金额">
+            </div>
+        </div>
+
+        <!--<div class="ticketSelect flex" id="redpkgdiv">
+            <label class="">抵用券</label>
+            <span>暂无抵用券</span>
+            &lt;!&ndash;无抵用券时 disabled/选择抵用券时,替换上面span文字&ndash;&gt;
+            <select id = "redPkg" onchange="gradeChange(this)" class="flex-1" disabled>
+                <option value="10">10元抵用券</option>
+                <option value="50">50元抵用券</option>
+                <option value="100">100元抵用券</option>
+            </select>
+        </div>-->
+
+        <div class="jmt_center">
+             <a id = "submitButt" class="toPay no" >充值</a>
+        </div>
+        <div>
+            <img src="img/oilBanner.png" id="oilBanner" alt="" style="    width: 100%;margin: 35px auto;border-radius: 5px;">
+        </div>
+        <ul class="fuelCard_ruleText">
+            <li>
+                1.支持全国中石化/中石油个人加油卡或公司卡主卡。不支持各类副卡、不记名卡、过期卡、中石油司机卡、BP卡。
+            </li>
+
+            <li>
+                2.充值后，如果超过12小时仍未到账，请您尽快与我们的客服取得联系（4000808065）。查询充值结果，请致电中石化客户服务热线（95105888）；中石油客服热线（95504），告知他们是从网上充值，查询到账金额和余款。
+            </li>
+
+            <li>
+               3.充值成功后，在您加油消费时，需要到中石化/中石油加油站圈存机上圈存后即可使用，并可看到已充值金额。有任何疑问请咨询加油站服务员或致电有礼付客服（4000808065）。
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

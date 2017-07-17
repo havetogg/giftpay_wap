@@ -1,0 +1,104 @@
+input{
+    border: 1px solid #e4e4e4;
+    width: 500px;
+    height: 64px;
+    font-size: 26px;
+}
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+div,span{
+    font-size: 30px;
+    line-height: 60px;
+    /* width: 640px; */
+}
+h1{
+    margin: 50px 28px;
+    font-weight: bold;
+    font-size: 48px;
+    color: #666666;
+    width: 500px;
+}
+h2{
+
+    font-size: 25px;
+
+    margin: -26px 32px;
+
+    color: red;
+
+    /* width: 563px; */
+}
+.selectWay{
+    margin: 70px 0px;
+    width: 640px;
+}
+.selectWay p{
+    margin: 0px 36px;
+    font-size: 30px;
+}
+.isWhich{
+    font-size: 25px;
+    margin: 25px 33px;
+}
+.tip1{
+    display: block;
+    margin: 0px 0px;
+    font-size: 20px;
+    color:red ;
+    line-height: 38px;
+    width: 594px;
+}
+.tip2{
+    display: none;
+    margin: 0px 0px;
+    font-size: 20px;
+    color:red ;
+    line-height: 38px;
+    width: 594px;
+}
+
+
+.information{
+    display: block;
+    margin: 13px 35px;
+}
+.information p{
+    font-size: 25px;
+    margin: 10px 0px;
+}
+
+.information1{
+    display: block;
+    margin: 24px 35px;
+}
+.information1 p{
+    font-size: 29px;
+    margin: 8px 0px;
+    color: #666666;
+}
+.protocol{
+    margin: 12px 38px;
+
+}
+.checkBoxBox{
+    width: 22px;
+    height: 22px;
+}
+.yes{
+    border: 1px solid #444444;
+    width: 268px;
+    height: 62px;
+    margin: 79px 303px;
+    text-align: center;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.readAgreement{
+    margin: 10px 180px;
+    font-size: 28px;
+    color: #22ac38;
+    text-decoration: underline;
+}

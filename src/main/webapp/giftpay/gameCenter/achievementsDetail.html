@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>成就详情</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script>
+        function switchTab(type) {
+            if(type==1){
+                $('#tab1').attr('class','flex-1 selected');
+                $('#tab2').attr('class','flex-1 noSelect');
+                $('#tab3').attr('class','flex-1 noSelect');
+                $('#achievementsDetails_content1').show();
+                $('#achievementsDetails_content2').hide();
+                $('#achievementsDetails_content3').hide();
+            }else if(type==2){
+                $('#tab1').attr('class','flex-1 noSelect');
+                $('#tab2').attr('class','flex-1 selected');
+                $('#tab3').attr('class','flex-1 noSelect');
+                $('#achievementsDetails_content1').hide();
+                $('#achievementsDetails_content2').show();
+                $('#achievementsDetails_content3').hide();
+            }else if(type==3){
+                $('#tab1').attr('class','flex-1 noSelect');
+                $('#tab2').attr('class','flex-1 noSelect');
+                $('#tab3').attr('class','flex-1 selected');
+                $('#achievementsDetails_content1').hide();
+                $('#achievementsDetails_content2').hide();
+                $('#achievementsDetails_content3').show();
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="zoomer" style="background-color: #0d1726;">
+    <div class="gameTop_banner">
+        <img src="img/banner1.png" alt="" width="100%">
+        <div class="text1">
+            <label>最终幻想专题兑换专区</label>
+        </div>
+    </div>
+    <div class="achievementsDetail">
+        <div class="achievementsDetails">
+            <ul class="collections_bar flex">
+                <li id="tab1" class="flex-1 selected" onclick="switchTab(1)">所有(10)</li>
+                <li class="shu"></li>
+                <li id="tab2" class="flex-1 noSelect" onclick="switchTab(2)">已获得(23)</li>
+                <li class="shu"></li>
+                <li id="tab3" class="flex-1 noSelect" onclick="switchTab(3)">未获得(3)</li>
+            </ul>
+            <ul  id="achievementsDetails_content1" class="achievementsDetails_ul">
+                <li class="flex">
+                    <img src="img/nikeGreen.png" alt="" class="nikeGreen">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称1</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <img src="img/nikeGreen.png" alt="" class="nikeGreen">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+            </ul>
+            <ul id="achievementsDetails_content2" class="achievementsDetails_ul">
+                <li class="flex">
+                    <img src="img/nikeGreen.png" alt="" class="nikeGreen">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称2</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <img src="img/nikeGreen.png" alt="" class="nikeGreen">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul  id="achievementsDetails_content3" class="achievementsDetails_ul">
+                <li class="flex">
+                    <img src="img/nikeGreen.png" alt="" class="nikeGreen">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称3</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+                <li class="flex">
+                    <img src="img/nikeGreen.png" alt="" class="nikeGreen">
+                    <div class="achievementsDetails_icon"><img src="img/icon1.png" alt=""></div>
+                    <div class="flex-1">
+                        <div class="name2">成就名称</div>
+                        <div class="content2">成就名称成就名称成就名称成就名称，成就名称成就名称成就名称成就名称，成就名称成就</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/city.js"></script>
+</head>
+
+<script>
+function editAccount() {
+    $('#edit').hide();
+    $('#cancelEdit').show();
+    $('.index_ulName_1').find('.t_hide').show();
+    $('.index_ulName_1').find('.arrowBtn').hide();
+}
+function editAccountCancel() {
+    $('#cancelEdit').hide();
+    $('#edit').show();
+    $('.index_ulName_1').find('.t_hide').hide();
+    $('.index_ulName_1').find('.arrowBtn').show();
+}
+//选择我家  房东
+
+function selectTab(index) {
+    if(index==1){
+        $('.html_top1').find('label:eq(0)').attr('class','label1');
+        $('.html_top1').find('label:eq(1)').attr('class','label2');
+    }
+    else if(index==2){
+        $('.html_top1').find('label:eq(1)').attr('class','label1');
+        $('.html_top1').find('label:eq(0)').attr('class','label2');
+    }
+}
+</script>
+
+<body style="background-color: #f0f0f4">
+<div style="background-color: #f0f0f4;position:fixed;" class="zoomer">
+     <div class="index">
+         <div class="html_top1">
+             <label class="label1" onclick="selectTab(1)">我家</label>
+             <label class="label2" onclick="selectTab(2)">房东</label>
+             <span>缴费记录</span>
+         </div>
+        <div class="common_content">
+            <div class="index_location">
+                <img src="img/location.png" alt="">
+                <span>南京市</span>
+                <a href="javascript:;">
+                	<img src="img/setting.png" alt="" class="setting_icon">
+                </a>
+                
+            </div>
+        </div>
+         <div class="common_content">
+             <div class="index_account">
+                 <span>缴费账户</span>
+                 <label id="edit" onclick="editAccount()">编辑</label>
+                 <label id="cancelEdit" style="display: none;" onclick="editAccountCancel()">取消编辑</label>
+             </div>
+             <ul class="index_ul">
+                 <li class="flex">
+                     <div class="index_ulIcon">
+                         <img src="img/water.png" alt="">
+                     </div>
+                     <div class="flex-1 index_haveAccount">
+                        <div class="index_ulName">水费</div>
+                        <span class="index_accountNo">00006241002</span>
+                     </div>
+                     <div class="index_ulName_1">
+                         <span class="t_hide">
+                               <a class="index_editAccount">修改</a>
+                             <a class="index_addBtn">删除</a>
+                         </span>
+                         <span class="arrowBtn">
+                            <a class="index_addBtn1 t_hide">添加账号</a><img src="img/right_arrow.png" alt="">
+                         </span>
+                     </div>
+                 </li>
+                 <li class="flex">
+                     <div class="index_ulIcon">
+                         <img src="img/bulb.png" alt="">
+                     </div>
+                     <div class="flex-1 index_ulName_">
+                         <div class="index_ulName">电费</div>
+                     </div>
+                     <div class="index_ulName_">
+                        <span class="t_hide">
+                            <a class="index_editAccount">修改</a>
+                             <a class="index_addBtn">删除</a>
+                         </span>
+                         <span class="arrowBtn">
+                           <a class="index_addBtn1">添加账号</a><img src="img/right_arrow.png" alt="">
+                         </span>
+                     </div>
+                 </li>
+                 <li class="flex">
+                     <div class="index_ulIcon">
+                         <img src="img/fire.png" alt="">
+                     </div>
+                     <div class="flex-1 index_ulName_">
+                         <div class="index_ulName">燃气费</div>
+                     </div>
+                     <div class="index_ulName_">
+                            <span class="t_hide">
+                            <a class="index_editAccount">修改</a>
+                            <a class="index_addBtn">删除</a>
+                         </span>
+                         <span class="arrowBtn">
+                             <a class="index_addBtn1">添加账号</a><img src="img/right_arrow.png" alt="">
+                         </span>
+                     </div>
+                 </li>
+                 <li class="flex" style="display: none;">
+                     <div class="index_ulIcon">
+                         <img src="img/oil_site.png" alt="">
+                     </div>
+                     <div class="flex-1 index_ulName_">
+                         <div class="index_ulName">加油卡</div>
+                     </div>
+                     <div class="index_ulName_">
+                         <span class="t_hide">
+                                    <a class="index_editAccount">修改</a>
+                                    <a class="index_addBtn">删除</a>
+                         </span>
+                         <span class="arrowBtn">
+                             <a class="index_addBtn1">添加账号</a><img src="img/right_arrow.png" alt="">
+                         </span>
+                     </div>
+                 </li>
+             </ul>
+         </div>
+     </div>
+</div>
+</body>
+</html>

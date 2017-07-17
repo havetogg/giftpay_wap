@@ -1,0 +1,91 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+h1{
+    margin: 40px 50px;
+    font-weight: 600;
+    font-size: 48px;
+    color: #666666;
+}
+h2{
+    font-size: 26px;
+    margin: 0px auto;
+    line-height: 38px;
+    width: 539px;
+    color: #008000;
+}
+.form{
+    margin: 58px 50px;
+}
+.form p{
+    margin: 0px 0px;
+    font-size: 24px;
+    color: #666666;
+}
+input{
+    font-size: 26px;
+    width: 324px;
+    height: 50px;
+    margin: 17px 0px;
+    border: 2px solid #e4e4e4;
+    text-indent: 5px;
+    border-radius: 8px;
+}
+.btn_3{
+    display: block;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #BF8F8F;
+    width: 162px;
+    height: 58px;
+    /* margin: -300px 373px; */
+    line-height: 58px;
+    position: absolute;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+    top: 243px;
+    left: 428px;
+}
+.btn_4{
+    display: none;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #BF8F8F;
+    width: 160px;
+    height: 58px;
+    /* margin: -300px 380px; */
+    line-height: 58px;
+    position: absolute;
+    background: #7C8A7E;
+    border-radius: 8px;
+    color: white;
+    top: 243px;
+    left: 428px;
+}
+.jiHuo{
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #5A3B3B;
+    width: 242px;
+    height: 50px;
+    margin: 146px 354px;
+    line-height: 52px;
+    position: absolute;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.tip{
+    position: absolute;
+    margin:-46px 52px;
+    font-size: 24px;
+    color: #666666;
+}
+.red{
+    color: red;
+}
+.f_26{
+    font-size: 26px;
+}

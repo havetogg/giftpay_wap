@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IPrizeDao">
+
+	<resultMap type="org.jumutang.giftpay.model.PrizeModel" id="baseResult">
+		<result column="prize_id" property="prizeId" />
+		<result column="prize_name" property="prizeName" />
+		<result column="prize_type" property="prizeType" />
+		<result column="prize_num" property="prizeNum" />
+		<result column="prize_chance" property="prizeChance" />
+		<result column="create_time" property="createTime" />
+		<result column="status" property="status" />
+		<result column="click_num" property="clickNum" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="prizeId !=null">
+				and prize_id = #{prizeId}
+			</if>
+			<if test="prizeType !=null">
+				and prize_type = #{prizeType}
+			</if>
+			<if test="status !=null">
+				and status = #{status}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryPrizeList" parameterType="org.jumutang.giftpay.model.PrizeModel" resultMap="baseResult">
+		select prize_id,prize_name,prize_type,prize_num,prize_chance,create_time,status,click_num from t_card_prize
+		<include refid="wherecause"/>
+	</select>
+
+	<update id="updatePrizeNum" parameterType="org.jumutang.giftpay.model.PrizeModel">
+		update t_card_prize
+		<set>
+			prize_num=#{prizeNum}
+		</set>
+		<where>
+			prize_id = #{prizeId}
+		</where>
+	</update>
+	<update id="updatePrizeClickNum" parameterType="org.jumutang.giftpay.model.PrizeModel">
+		update t_card_prize
+		<set>
+			click_num=click_num+1
+		</set>
+		<where>
+			prize_id = #{prizeId}
+		</where>
+	</update>
+
+
+	
+</mapper>

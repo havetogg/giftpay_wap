@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IOilSubRecordDao">
+
+	<resultMap type="org.jumutang.giftpay.model.OilSubRecordModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="recordid" property="recordid" />
+		<result column="userid" property="userid" />
+		<result column="amount" property="amount" />
+		<result column="status" property="status" />
+		<result column="createtime" property="createtime" />
+		<result column="updatetime" property="updatetime"/>
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="userid !=null">
+				and userid = #{userid}
+			</if>
+			<if test="recordid !=null">
+				and recordid = #{recordid}
+			</if>
+			<if test="id !=null">
+				and id = #{id}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询用户加油信息 -->
+	<select id="queryOilSubRecordModel" parameterType="org.jumutang.giftpay.model.OilSubRecordModel" resultMap="baseResult">
+		select id,recordid,userid,amount,status,createtime,updatetime from t_oil_subrecord
+		<include refid="wherecause"/>
+		ORDER BY createtime DESC
+	</select>
+	
+	<!-- 查询用户加油信息列表 -->
+	<select id="queryOilSubRecordModelList" parameterType="org.jumutang.giftpay.model.OilSubRecordModel" resultMap="baseResult">
+		select id,recordid,userid,amount,status,createtime,updatetime from t_oil_subrecord
+		<include refid="wherecause"/>
+		order by createtime desc
+	</select>
+
+
+	<!-- 创建用户加油信息 -->
+	<insert id="insertOilSubRecordModel" parameterType="org.jumutang.giftpay.model.UserOilInfoModel">
+		insert into t_oil_subrecord
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,recordid,userid,amount,status,createtime
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{id},#{recordid},#{userid},#{amount},0,now()
+		</trim>
+	</insert>
+	
+	<!-- 修改用户加油信息 -->
+	<update id="updateOilSubRecordModel" parameterType="org.jumutang.giftpay.model.UserOilInfoModel">
+			update t_oil_subrecord
+			<set>
+				<if test="status !=null">
+					status = #{status},
+				</if>
+			</set>
+			<where>
+				userid = #{userid}
+			</where>
+	</update>
+	
+</mapper>

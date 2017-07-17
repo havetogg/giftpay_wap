@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IRechargeAccountDao">
+
+	<resultMap type="org.jumutang.giftpay.model.liftPaytment.RechargeAccountModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="account_type" property="accountType" />
+		<result column="family_id" property="familyId"  />
+		<result column="pay_unit_id" property="payUnitId" />
+		<result column="pay_unit_name" property="payUnitName" />
+		<result column="pay_account" property="payAccount" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime"/>
+		<result column="card_id" property="cardId"/>
+		<result column="query_params" property="queryParams"/>
+
+	</resultMap>
+
+
+	<sql id="wherecause">
+		<where>
+			<if test="id!=null">
+				and id=#{id}
+			</if>
+			<if test="familyId!=null">
+				and family_id=#{familyId}
+			</if>
+			<if test="status!=null">
+				and status=#{status}
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryRechargeAccountList"  parameterType="org.jumutang.giftpay.model.liftPaytment.RechargeAccountModel" resultMap="baseResult" >
+		select id,card_id,account_type,family_id,pay_unit_id,pay_unit_name,pay_account,status,create_time,query_params from t_recharge_account
+		<include refid="wherecause"/>
+	</select>
+	<insert id="addRechargeAccountModel" parameterType="org.jumutang.giftpay.model.liftPaytment.RechargeAccountModel">
+		insert into t_recharge_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,account_type,family_id,pay_unit_id,pay_unit_name,pay_account,status,create_time,card_id,query_params
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{id},#{accountType},#{familyId},#{payUnitId},#{payUnitName},#{payAccount},#{status},now(),#{cardId},#{queryParams}
+		</trim>
+	</insert>
+	<update id="updateRechargeAccountModel" parameterType="org.jumutang.giftpay.model.liftPaytment.RechargeAccountModel">
+		update t_recharge_account
+		<set>
+			<if test="accountType !=null">
+				account_type = #{accountType},
+			</if>
+			<if test="payUnitId !=null">
+				pay_unit_id = #{payUnitId},
+			</if>
+			<if test="payUnitName  !=null">
+				pay_unit_name  = #{payUnitName },
+			</if>
+			<if test="payAccount !=null">
+				pay_account  = #{payAccount},
+			</if>
+			<if test="status !=null">
+				status  = #{status},
+			</if>
+			<if test="queryParams!=null">
+				query_params=#{queryParams},
+			</if>
+		</set>
+		<where>
+			<if test="id !=null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	
+	
+</mapper>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+</head>
+<body style="background-color: #f0f0f4">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" id="back">
+        零钱账单
+    </div>
+    <div class="rechargeRecords">
+        <ul id="ul">
+
+           
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+		//初始化页面数据
+		$.ajax({
+			url:"/giftpay_wap/queryPayInfo.htm",
+			type:"get",
+			dataType:"json",
+			success:function(data){
+				if(data.state==0){
+					var list = data.list;
+					var html = "";
+					$.each(list,function(i,field){
+						var dtime=field.dealTime;
+						dtime=dtime.substring(0,dtime.lastIndexOf("."))
+						html +="<li>" +
+						          "<div>" +
+						             "<div class='name_'>" +
+						               "<a>"+field.dealInfo+"</a>";
+										if(field.dealType == 2){
+											html += "<a class='flr'>+¥"+field.dealMoney+"</a>";
+										}else if(field.dealType == 1){
+											html += "<a class='flr'>-¥"+field.dealMoney+"</a>";
+										}else if(field.dealType==3){
+											html += "<a class='flr'>-¥"+field.dealMoney+"</a>";
+										}
+
+						             html +="<div>" +
+						           	 "<div class='time_'>" +
+						           	     "<a>"+dtime+"</a>";
+					    if(field.dealType==1){
+					    	if(field.dealState==3){
+					    		html +="<a class='changeBill_value3'>提现中</a>";
+					    	}else if(field.dealState==4){
+					    		html +="<a class='changeBill_value1'>已提现</a>";
+					    	}else if(field.dealState==5){
+					    		html +="<a class='cchangeBill_value2'>提现失败</a>";
+					    	}
+					    }else{
+					    	if(field.dealState == 1){
+					    		html +="<a class='changeBill_value1'>操作成功</a>";
+					    	}else if(field.dealState == 2){
+					    		html +="<a class='changeBill_value2'>操作失败</a>";
+					    	}
+					    }
+					});
+					$("#ul").append(html);
+				}else if(data.state==2){
+						$("#ul").append("<div style='height:50px;font-size:12px;'>暂无数据</div>");
+				}
+			}
+		});
+		
+		//返回
+		$("#back").click(function(){
+			history.back();
+		});
+</script>
+</body>
+</html>

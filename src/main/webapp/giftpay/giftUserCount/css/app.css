@@ -1,0 +1,725 @@
+/*首页*/
+.index_content{
+    width: 94%;
+    margin: 0rem auto;
+    background-color: #fff;
+    height:auto;
+    padding: 4rem 0;
+}
+.index_bg{
+    background: url(../img/index_bg.png);
+    font-size: 1.4rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.index_title{
+    text-align: center;
+    margin: 0rem;
+    padding: 2.2rem;
+}
+.index_title img{
+
+}
+.index_content_title{
+    text-align: center;
+    padding: 4rem 0;
+}
+.index_content_title text{
+    font-size: 2.8rem;
+    color: #fff;
+    background-color: #ea5404;
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    letter-spacing: 8px;
+    line-height: 4rem;
+    height: 4rem;
+}
+.index_content_title1{
+    text-align: center;
+    font-size: 4.5rem;
+    color: #ea5404;
+    font-family: 'Microsoft YaHei';
+    font-weight: 600;
+}
+.index_content_title1 a:nth-child(1){
+    color: #f9a375;
+}
+.index_content_title6{
+    text-align: center;
+    font-size: 4.5rem;
+    color: #ea5404;
+    font-family: 'Microsoft YaHei';
+    font-weight: 600;
+    margin: 1rem 0 1rem;
+}
+.index_content_title6 a:nth-child(2){
+    color: #f9a375;
+}
+.index_content_title2{
+    text-align: center;
+    font-size: 2rem;
+    color: #595757;
+    font-family: 'Microsoft YaHei';
+    margin: 1rem 0;
+}
+.index_content_title3{
+    text-align: center;
+    font-size: 4rem;
+    color: #231815;
+    font-family: 'Microsoft YaHei';
+    margin: 3rem 0;
+    font-weight: 800;
+}
+.index_content_title4{
+    text-align: center;
+    font-size: 2rem;
+    color: #595757;
+    font-family: 'Microsoft YaHei';
+    margin: 1rem 0 0;
+}
+.content_box{
+    border: 2px solid #fbbd9e;
+    width: 94%;
+    margin: 1rem auto 0;
+    text-align: center;
+    padding: 4rem 0;
+    border-radius: 5px;
+    position: relative;
+}
+.content_box ul{
+
+}
+.content_box ul li{
+    font-size: 3rem;
+    color: #595757;
+    font-family: 'Microsfot YaHei';
+    line-height: 6rem;
+}
+.index_content_title5{
+    font-size: 4rem;
+    color: #231815;
+    position: relative;
+    text-align: center;
+    top: 3rem;
+    background-color: #fff;
+    z-index: 888;
+    width: 60%;
+    margin: 0 auto;
+    font-family: 'Microsoft YaHei';
+    font-weight: 800;
+}
+
+/*img style*/
+.box{
+    text-align: center;
+    margin: 0rem auto;
+    padding-top: 2rem;
+}
+.box img{
+    width:96%;
+}
+.inputs{
+    margin: 4rem auto;
+    width: 93%;
+}
+.inputs li{
+    height: 10rem;
+    line-height: 10rem;
+    position: relative;
+}
+.inputs li input:nth-child(1){
+    height: 6rem;
+    width: 96%;
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 0 auto;
+    font-size: 3rem;
+    padding-left: 10px;
+}
+.inputs li:nth-child(2) input{
+    height: 6rem;
+    width: 55%;
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 0 auto;
+    font-size: 3rem;
+    padding-left: 10px;
+}
+.code_btn{
+    font-size: 3rem;
+    color: #fff;
+    color: #fff;
+    background-color: #3c394c;
+    display:block;
+    height: 8rem;
+    line-height: 8rem;
+    padding: 0 2rem;
+    border-radius: 10px;
+    width: 28%;
+    TEXT-ALIGN: CENTER;
+    margin-left: 1rem;
+    position: absolute;
+    right: 0px;
+    top: 4px;
+}
+.bottom_btn{
+    width: 93%;
+    margin: 1rem auto;
+    font-size: 2.4rem;
+    color: #888888;
+}
+.bottom_btn img{
+    width:100%;
+}
+.bottom_logo{
+    text-align: center;
+    margin: 1rem auto;
+}
+.bottom_logo img{
+    width: 18rem;
+}
+.text_btn{
+    display: inline-block;
+    vertical-align: text-top;
+    line-height: 3.5rem;
+}
+
+/*推荐页面*/
+.recommend_bg{
+    background: url(../img/recommendBg.png);
+    position: relative;
+    width: 100%;
+    height: 736px;
+    background-size: 100% 100%;
+}
+.recommend_{
+    text-align: center;
+    margin: 0px auto;
+    width: 92%;
+    height: 100%;
+}
+.recommend_title{
+    text-align: center;
+    margin: 0rem;
+    padding: 2.2rem;
+}
+.recommend_txt{
+    color: #f75926;
+    background-color: #fff;
+    height: 20px;
+    line-height: 20px;
+    width: 70%;
+    margin: 0px auto;
+    border-radius: 50px;
+    font-size: 12px;
+    font-family: 'Microsoft YaHei';
+    letter-spacing: 2px;
+}
+.recommend_title img{
+
+}
+.recommend_content{
+    margin: 25px 0 10px;
+}
+.recommend_content li{
+
+}
+.recommend_content li img{
+    width: 90%;
+}
+.recommend_img{
+    width: 100%;
+}
+.recommend_btns{
+    width: 180px;
+    margin: 0px 0 5px;
+}
+.recommend_logo{
+    width: 100px;
+    margin: 20px auto;
+}
+.r_title img{
+    width: 70%;
+    margin: 15px 0 10px;
+}
+.recommend_btns:active{
+    background-color: transparent;
+    transform: scale(0.98);
+    animation: changes 1s;
+}
+.changes{
+    transform: scale(0.5);
+}
+.money_btns{
+    width: 110px;
+    margin: 10px 5px 5px;
+}
+.shareTip{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    align-items: center;
+    display: none;
+    /*animation: bounceIn 1s;*/
+}
+.shareTip img{
+    width: 100%;
+    position: fixed;
+}
+.my_money_on{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    /*animation: bounceIn 1s;*/
+}
+.getMy_money_off{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    align-items: center;
+    display: none;
+    /*animation: bounceIn 1s;*/
+}
+.my_money1_on{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    /*animation: bounceIn 1s;*/
+}
+.getMy_money1_off{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    align-items: center;
+    display: none;
+    /*animation: bounceIn 1s;*/
+}
+.getMy_money_on{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    /*animation: bounceIn 1s;*/
+}
+.getMy_money1_on{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    /*animation: bounceIn 1s;*/
+}
+.my_money_off{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    align-items: center;
+    display: none;
+}
+.my_money1_off{
+    background-color: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    margin: 0;
+    align-items: center;
+    display: none;
+}
+.my_money_content{
+    animation: bounceIn 1s;
+    background: url(../img/red_bg.png);
+    /* position: fixed; */
+    width: 76%;
+    background-size: 100% 100%;
+    border-radius: 5px;
+    margin: 0px 12%;
+}
+.my_money_title{
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}.my_money_title1{
+     text-align: center;
+     color: #fff;
+     font-size: 40px;
+     font-weight: bold;
+     margin: 20px;
+}
+/*.my_money_subTitle{*/
+    /*text-align: center;*/
+    /*background-color: #f7edea;*/
+    /*height: 35px;*/
+    /*line-height: 35px;*/
+    /*color: #f74019;*/
+/*}*/
+
+.my_money_subTitle {
+    text-align: center;
+    background-color: #f7edea;
+    height: 35px;
+    line-height: 35px;
+    color: #f74019;
+    font-size: 18px;
+}
+.my_money_subTitle1{
+    text-align: center;
+    background-color: #f7edea;
+    height: 60px;
+    line-height: 60px;
+    color: #f74019;
+    font-size: 32px;
+}
+
+
+.my_money_subNumber{
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    color: #363535;
+    font-weight: bold;
+    font-size: 25px;
+}
+.my_money_subNumber1{
+     text-align: center;
+     height: 120px;
+     line-height: 120px;
+     color: #363535;
+     font-weight: bold;
+     font-size: 40px;
+}
+.my_money_content .subContent{
+    margin: 10px 0;
+}
+.my_money_content .subContent li{
+    text-align: center;
+    background-color: #fff;
+    width: 31%;
+    margin: 10px;
+}
+.my_money_iknow{
+    width: 100%;
+    text-align: center;
+    background-color: #ea461a;
+    border-radius: 0 0 5px 5px;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 18px;
+}
+.my_money_iknow1{
+    width: 100%;
+    text-align: center;
+    background-color: #ea461a;
+    border-radius: 0 0 5px 5px;
+    height: 90px;
+    line-height: 90px;
+    color: #fff;
+    font-size: 30px;
+}
+.person_{
+    font-size: 16px;
+    margin-left: 5px;
+}.person_1{
+    font-size: 30px;
+    margin-left: 5px;
+}
+.my_money_content .imgss li{
+    width: 31%;
+    margin: 10px;
+}
+.my_money_content .imgss li img{
+    width: 80px;
+}
+.my_money_content .imgss li .tips1{
+    font-size: 16px;
+    color: #fff;
+    line-height: 15px;
+}
+.my_money_content .imgss li .tips11{
+    font-size: 32px;
+    color: #fff;
+    line-height: 40px;
+}
+.my_money_content .imgss li .tips2{
+    color: #fff;
+    font-size: 70px;
+    font-weight: bold;
+    font-family: 'Microsoft YaHei';
+}
+.my_money_content .imgss li .tips22{
+    color: #fff;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Microsoft YaHei';
+}
+.my_money_content .imgss li .tips3{
+     color: #fff;
+     font-size: 18px;
+     font-family: 'Microsoft YaHei';
+     margin-left: 5px;
+}
+.my_money_content .imgss li .tips33{
+     color: #fff;
+     font-size: 35px;
+     font-family: 'Microsoft YaHei';
+     margin-left: 5px;
+}
+
+
+.my_money_content1 .imgss li{
+    width: 31%;
+    margin: 10px;
+}
+.my_money_content1 .imgss li img{
+    width: 80px;
+}
+.my_money_content1 .imgss li .tips1{
+    font-size: 16px;
+    color: #fff;
+    line-height: 15px;
+}
+.my_money_content1 .imgss li .tips2{
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Microsoft YaHei';
+}.my_money_content1 .imgss li .tips3{
+     color: #fff;
+     font-size: 18px;
+     font-family: 'Microsoft YaHei';
+     margin-left: 5px;
+ }
+ .red_bg{
+     background: url(../img/red_bg.png);
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     background-size: 100% 100%;
+ }
+ .getCash_cancel{
+     background-color: #cc401a;
+     border-radius: 0 0 0 5px;
+ }
+ .getCash_txt{
+     margin: 30px 0;
+ }
+ .getCash_text{
+     text-align: center;
+     color: #fff;
+     font-size: 16px;
+ }
+.my_money_content1 {
+    animation: bounceIn 1s;
+    background: url(../img/red_bg.png);
+    width: 76%;
+    background-size: 100% 100%;
+    border-radius: 5px;
+    margin: 0px 12%;
+}
+.my_money_input{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    text-indent: 10px;
+    margin: 20px 0 0;
+    -webkit-appearance: none;
+}
+.my_money_getBtn_{
+    background-color: #ccc;
+    border-radius: 0 0 5px 0;
+}
+/*index2*/
+.index2_bg{
+    background: url(../img/index2_bg.png);
+    font-size: 1.4rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding-bottom: 30px;
+}
+.index2_content{
+    width: 80%;
+    margin: 0rem auto;
+    height: auto;
+}
+.index2_content img{
+    width:100%;
+}
+.index2_btns{
+    margin: 20px 0;
+}
+.index2_code{
+    text-align: center;
+}
+.index2_code img{
+    width:30%;
+}
+.index2_code_title{
+    font-size: 36px;
+    color: #fff;
+    margin: 20px 0;
+    font-family: 'Microsoft YaHei';
+}
+.index2_code_title1{
+    font-size: 24px;
+    color: #fff;
+    font-family: 'Microsoft YaHei';
+}
+.shuText{
+    width: 10%;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}
+.shuText a{
+    width: 30px;
+    display: inline-block;
+    margin: 350px auto;
+}
+.gulide-box {
+    position: absolute;
+    top: 500px;
+    left: 0;
+    right: 0;
+    padding: 0 30px;
+    z-index: 10;
+}
+.name {
+    background: url('../img/name1.png') no-repeat;
+    background-size: 100% 100%;
+    width: .28rem;
+}
+.phone {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAfCAYAAAAIjIbwAAABSUlEQ…yLD3dA4SfW8KACq/p6wej99Bwv8Rg398DrNH7pnKSU3vwFmD5GK1gU7acAAAAASUVORK5CYII=) no-repeat;
+    background-size: 100% 100%;
+    width: .21rem;
+}
+.ma {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAADFklEQ…h2PIwrTT0dXsaTEXFwukSdwOoaLc8KuS4ewZvl2taR/gb1lMzgLAvlHQAAAABJRU5ErkJggg==) no-repeat;
+    background-size: 100% 100%;
+    width: .27rem;
+    height: .3rem;
+}
+.gulide-box .pec-gulide {
+    position: relative;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e7e7e7;
+    padding: 30px;
+}
+.gulide-box .pec-gulide .pec-gulide-item {
+    line-height: 1.26;
+    position: relative;
+    min-height: 1rem;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    padding-left: .4rem;
+    box-sizing: border-box;
+}
+.gulide-box .pec-gulide .pec-gulide-item .pec-item-1 {
+    color: #666;
+    font-size: .3rem;
+    min-width: .34rem;
+    box-sizing: border-box;
+    margin-right: .3rem;
+}
+.gulide-box .pec-gulide .pec-gulide-item .pec-item-2 {
+    color: #1e1e1e;
+    font-size: .3rem;
+    margin-right: .3rem;
+}
+.pec-input, input.pec-input {
+    font-size: 28px;
+    width: 80%;
+    height: 70px;
+    line-height: 70px;
+    box-sizing: border-box;
+    border: none;
+    color: #1e1e1e;
+    outline: none;
+}
+.pec-input, input.pec-input1 {
+    font-size: 28px;
+    width: 40%;
+    height: 70px;
+    line-height: 70px;
+    box-sizing: border-box;
+    border: none;
+    color: #1e1e1e;
+    outline: none;
+}
+.pec-gulide li{
+    height: 90px;
+    line-height: 90px;
+}
+.pec-gulide li img{
+    width: 40px;
+    height: 40px;
+    margin-right: 25px;
+    position: relative;
+    top: 7px;
+}
+.getCode_text{
+    display: inline-block;
+    width: 40%;
+    font-size: 28px;
+    color: blue;
+}
+.submitBtn1{
+    font-size: 30px;
+    background-color: #d9d9d9;
+    text-align: center;
+    margin: 30px 0;
+    height: 80px;
+    line-height: 80px;
+    color: #fff;
+}
+.submitBtn2{
+    font-size: 30px;
+    background-color: #f37c3f;
+    text-align: center;
+    margin: 30px 0;
+    height: 80px;
+    line-height: 80px;
+    color: #fff;
+    border-radius: 10px;
+}

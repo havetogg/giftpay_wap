@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IGasPackagesDao">
+	<resultMap type="org.jumutang.caranswer.model.GasPackages" id="gasPackage">
+		<result column="c_gaspackagesid" property="gasPackagesID"/>
+		<result column="c_gaspackagesname" property="gasPackagesName"/>
+		<result column="c_price" property="price"/>
+		<result column="c_monthcount" property="monthCount"/>
+		<result column="c_monthmoney" property="monthMoney"/>
+		<result column="c_allmoney" property="allMoney"/>
+		<result column="c_createtime" property="createTime"/>
+		<result column="c_updatetime" property="updateTime"/>
+		<result column="c_deletetime" property="deleteTime"/>
+	</resultMap>
+
+
+<select id="queryGasPackage" parameterType="org.jumutang.caranswer.model.GasPackages" resultMap="gasPackage">
+	select * from t_gaspackages where 1 =1 
+		<if test="monthCount != null and monthCount != '' ">
+			and c_monthcount = 	#{monthCount}
+		</if>
+		<if test="allMoney != null and allMoney != '' ">
+			and c_allmoney = #{allMoney}
+		</if>
+		<if test="gasPackagesID != null and gasPackagesID != '' ">
+			and c_gaspackagesid = #{gasPackagesID}
+		</if>
+</select>
+
+</mapper>

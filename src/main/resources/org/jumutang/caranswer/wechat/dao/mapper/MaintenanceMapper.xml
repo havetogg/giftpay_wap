@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IMaintenanceDao">
+	<insert id="addMaintenance" parameterType="org.jumutang.caranswer.model.MaintenanceInfo">
+		insert into t_maintenance (c_maintenanceid , c_usertel , c_cartype , c_servicetype , c_addtime)
+		values (#{maintenanceID},#{userTel},#{carType},#{serviceType},now())
+	</insert>
+	
+	
+	
+	<insert id="addBusiness" parameterType="org.jumutang.caranswer.model.BusinessInfo">
+		insert into t_businessinfo(c_businessid , c_context , c_usertel , c_username , c_addtime)
+		values (#{businessID},#{context},#{userTel},#{userName},now())
+	</insert>
+</mapper>
+
+

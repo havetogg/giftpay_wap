@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.WithdrawDao">
+
+    <resultMap id="BaseResultMap" type="org.jumutang.giftpay.model.WithdrawModel">
+        <id column="withdrawid" property="withdrawId"></id>
+        <result column="openid" property="openId"/>
+        <result column="userid" property="userId"/>
+        <result column="phone" property="phone"/>
+        <result column="withdrawamount" property="withdrawAmount"/>
+        <result column="status" property="status"/>
+        <result column="createtime" property="createTime"/>
+        <result column="audittime" property="auditTime"/>
+        <result column="ipaddress" property="ipAddress"/>
+    </resultMap>
+
+    <sql id="insertYs">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="withdrawId !=null">
+                withdrawid,
+            </if>
+            <if test="openId !=null">
+                openid,
+            </if>
+            <if test="userId !=null">
+                userid,
+            </if>
+            <if test="phone !=null">
+                phone,
+            </if>
+            <if test="withdrawAmount !=null">
+                withdrawamount,
+            </if>
+            <if test="status !=null">
+                status,
+            </if>
+            <if test="createTime !=null">
+                createtime,
+            </if>
+            <if test="auditTime !=null">
+                audittime,
+            </if>
+            <if test="ipAddress !=null">
+                ipaddress,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="insertValue">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="withdrawId !=null">
+                #{withdrawId},
+            </if>
+            <if test="openId !=null">
+                #{openId},
+            </if>
+            <if test="userId !=null">
+                #{userId},
+            </if>
+            <if test="phone !=null">
+                #{phone},
+            </if>
+            <if test="withdrawAmount !=null">
+                #{withdrawAmount},
+            </if>
+            <if test="status !=null">
+                #{status},
+            </if>
+            <if test="createTime !=null">
+                #{createTime},
+            </if>
+            <if test="auditTime !=null">
+                #{auditTime},
+            </if>
+            <if test="ipAddress !=null">
+                #{ipAddress},
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="saveWithdraw" parameterType="org.jumutang.giftpay.model.WithdrawModel">
+        INSERT INTO t_withdraw
+        <include refid="insertYs"/>
+        VALUES
+        <include refid="insertValue"/>
+    </insert>
+
+    <update id="updateWithdraw" parameterType="org.jumutang.giftpay.model.WithdrawModel">
+        UPDATE t_withdraw
+        <set>
+            <if test="status !=null">
+                status = #{status},
+            </if>
+            <if test="auditTime !=null">
+                audittime = #{auditTime},
+            </if>
+        </set>
+        <where>
+            withdrawid = #{withdrawId}
+        </where>
+    </update>
+
+    <sql id="queryWhere">
+        <where>
+            <if test="withdrawId!=null">
+                AND withdrawid = #{withdrawId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="getWithdraw" parameterType="org.jumutang.giftpay.model.WithdrawModel" resultMap="BaseResultMap">
+        SELECT * FROM t_withdraw
+        <include refid="queryWhere"/>
+    </select>
+</mapper>

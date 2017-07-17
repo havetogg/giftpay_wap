@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jumutang.caranswer.dao.IDemoUserDao">
+
+	
+	
+	<select id="queryUserInfo" resultType="org.jumutang.caranswer.model.DemoUserModel">
+		select u_id as userID , u_name as userName , u_address as userAddress , 
+				u_age as userAge , u_createtime as userCreateTime 
+		from t_user
+	</select>
+	
+	<insert id="addUser" parameterType="org.jumutang.caranswer.model.DemoUserModel">
+		insert into t_user (u_id , u_name , u_address , u_age , u_createtime)
+		values (#{userID} , #{userName} , #{userAddress} , #{userAge} , now())
+	</insert>
+
+</mapper>

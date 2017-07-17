@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=0.55,maximum-scale=0.55,minimum-scale=0.55, width=640, target-densitydpi=device-dpi">
+		<meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<title>新增家庭</title>
+		<link type="text/css" href="css/common/common.css" rel="stylesheet">
+		<link type="text/css" href="css/app.css" rel="stylesheet">
+		<script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+		<script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+		<script type="text/javascript" src="js/common/common.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<!--选择城市-->
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/mui.picker.css" />
+		<link rel="stylesheet" href="css/mui.poppicker.css" />
+		<script type="text/javascript" src="js/mui/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui/mui.picker.min.js"></script>
+		<script type="text/javascript" src="js/mui/mui.poppicker.js"></script>
+		<script type="text/javascript" src="js/mui/city.data-3.js"></script>
+		<style>
+			.mui-poppicker-header .mui-btn {
+				font-size: 24px;
+				padding: 10px 30px;
+			}
+			.mui-btn-blue, .mui-btn-primary, input[type=submit] {
+				color: #fff;
+				border: 1px solid #007aff;
+				background-color: #007aff;
+			}
+			.mui-poppicker-header .mui-btn {
+				font-size: 24px;
+				padding: 10px 30px;
+			}
+			.mui-poppicker-btn-cancel {
+				float: left;
+			}
+		</style>
+	</head>
+
+	<script>
+		var cityarray;
+		var provarray;
+
+		function editAccount() {
+			$('#edit').hide();
+			$('#cancelEdit').show();
+		}
+
+		function cancelSelectCity() {
+			$('.bg_block').hide();
+		}
+
+		function saveFamily() {
+			var name = $('#name').val();
+			var city = $('#c').val();
+			var provin = $("#province").val();
+			if(!name) {
+				TipShow('请输入家庭名称', 1000)
+			} else if(!city) {
+				TipShow('请选择所在城市', 1000)
+			} else {
+				loading("start");
+				$.ajax({
+					url: getRootPath() + "/giftpay/liftpayment/addFamily.htm",
+					type: "post",
+					data: { "name": name, "city": city, "prov": provin },
+					dataType: "json",
+					success: function(data) {
+						if(data.code=='0'){
+							TipShow(data.mess, 1000);
+							return;
+						}else{
+							TipShow("添加成功", 1000);
+							location.href=getRootPath()+"/giftpay/liftpayment/index.jsp";
+						}
+						loading("stop");
+					},
+					error: function() {
+						loading("stop");
+					}
+				});
+				/*TipShow('新增成功！', 1000);
+				window.location.href = "./index.html";*/
+			}
+		}
+
+		function goBack() {
+			window.location.href = "./index.html";
+		}
+		//MUI 仿ios 选择框
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//所在地区
+				var cityPicker3 = new $.PopPicker({
+					layer: 2
+				});
+				cityPicker3.setData(cityData3);
+				var showCityPickerButton = doc.getElementById('index_location');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker3.show(function(items) {
+						doc.getElementById('index_location')
+						//                        doc.getElementById('s').innerText=(items[0] || {}).text;
+						var province = (items[0] || {}).text;
+						var city = (items[1] || {}).text;
+						document.getElementById("province").value = province;
+						document.getElementById("c").value = city;
+						console.log(document.getElementById("province").value)
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+
+		function initCity() {
+		}
+	</script>
+
+	<body style="background-color: #f0f0f4">
+		<div style="background-color: #f0f0f4;position:fixed;" class="zoomer">
+			<div class="index">
+				<ul class="address_li">
+					<li>
+						<label class="_name">
+                     家庭名称
+                 </label>
+						<input id="name" type="text" placeholder="请输入家庭名称" class="addFamily_input" maxlength="4">
+					</li>
+					<li>
+						<label class="_name">
+                     所属城市
+                 </label>
+						<label class="subTittle" id="index_location">
+                     <input id="c" data-city="" type="text" placeholder="请选择所在城市" class="input3" readonly>
+                     <input id="province" type="hidden" />
+                 </label>
+						<label class="_img">
+                     <img src="img/right_arrow.png" alt="">
+                 </label>
+					</li>
+				</ul>
+				<div onclick="saveFamily()" class="address_saveBtn">
+					保存
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

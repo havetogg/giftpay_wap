@@ -1,0 +1,125 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+.content h1{
+    font-size: 34px;
+    margin: 42px 184px
+}
+.top{
+
+    font-size: 24px;
+
+    margin: 0px 68px;
+}
+.tip{
+
+    width: 455px;
+
+    margin: 28px 75px;
+
+    font-size: 24px;
+
+    line-height: 40px;
+}
+.chedaying{
+
+    font-size: 24px;
+
+    margin: 0px 411px;
+
+    width: 92px;
+}
+.peopleInfor{
+
+    margin: 44px 81px;
+
+}
+.peopleInfor p{
+
+    font-size: 22px;
+
+    line-height: 38px;
+}
+.payInfor{
+
+    margin: 0px 84px;
+}
+.payInfor span,.peopleInfor span{
+
+    font-size: 22px;
+}
+.payInfor p{
+    font-size: 22px;      line-height: 38px;}
+.footer{
+
+    height: 72px;
+
+    background: #e6e6e6;
+
+    position: fixed;
+
+    bottom: 106px;
+
+    border: 1px solid #444;
+
+    width: 100%;
+}
+.search{
+
+    width: 138px;
+
+    height: 44px;
+
+    line-height: 42px;
+
+    border: 1px solid #444;
+
+    font-size: 22px;
+
+    text-align: center;
+
+    float: right;
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 178px;
+}
+.queRen{
+    width: 138px;      height: 44px;      line-height: 42px;      border: 1px solid #444;      font-size: 22px;      text-align: center;      float: right;      position: absolute;      top: 14px;      right: 20px;}
+.rec{
+
+    color: #333333;
+
+    font-size: 30px !important;
+
+    margin: 12px -3px;
+
+    font-weight: 600;
+}
+.payxin{
+
+    color: #333333;
+
+    font-size: 30px !important;
+
+    margin: 12px -3px;
+
+    font-weight: 600;
+}
+.red{
+    color: red;
+}
+.f_24{
+    font-size: 24px !important;
+
+}
+#f24red{
+    font-size: 24px !important;
+
+}
+.f_500{
+    font-weight: bold;
+}

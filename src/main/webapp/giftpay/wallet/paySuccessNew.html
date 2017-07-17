@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>支付结果</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <link type="text/css" href="css/style.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <!--<script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>-->
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+<script>
+    $(function () {
+        $(".flexslider").flexslider({
+            animation: "slide", //String: Select your animation type, "fade" or "slide"图片变换方式：淡入淡出或者滑动
+            slideshowSpeed: 4000, //展示时间间隔ms
+            animationSpeed: 1100, //滚动时间ms
+            touch: true //是否支持触屏滑动
+        });
+    })
+</script>
+<body >
+
+<div class="zoomer" style="background-color: #ffffff;overflow-x: hidden;position: fixed">
+    <div style="margin: 25px;">
+        <div class="jmt_center">
+            <img src="img/paySuccess.png" alt="">
+        </div>
+        <div class="paySuccess_content11">
+            需付100元，实付50元红包抵扣50元
+        </div>
+        <div class="jmt_center">
+            <img src="img/code2.png" alt="" width="250px" height="250px">
+            <img src="img/code2.png" alt="" style="    position: absolute;top: 0;left: 0;z-index: 999;opacity: 0;">
+        </div>
+        <div class="paySuccess_subContent">长按二维码随时查看</div>
+        <div class="paySuccess_subContent">你的红包和更多优惠</div>
+    </div>
+    <!--<div class="noneBlock">-->
+
+    <!--</div>-->
+    <div class="index_content3">
+        <ul class="banner_bg flex">
+            <li class="banner_bg_yuan">
+                <lable class="iconY">￥</lable>
+                <lable>200</lable>
+            </li>
+            <li class="flex-1 banner_bg_text">
+                <div>恭喜您获得200元中石化易捷进口商城抵用券!</div>
+            </li>
+        </ul>
+    </div>
+    <div class="index_content12">
+        <ul class="flex">
+            <li class="flex-1 tuijian_line"></li>
+            <li class="tuiguang_">推广</li>
+            <li class="flex-1 tuijian_line"></li>
+        </ul>
+    </div>
+
+    <a class="index_content3" href="http://m.linkgift.cn/detail.html?item_uid=2140281_159624">
+        <img src="img/banner3.png" alt="" width="100%">
+    </a>
+    <div class="jmt_center pay_bottom_tel">
+        <a  href="tel:40008006065">推广合作/40008080655</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+        var countdown=60;
+        function settime(obj) {
+            var phone = $("#tel").val();
+            if(phone==""){
+                TipShow("请输入电话号码",1000);
+                return ;
+            }
+            if(countdown==60){
+                $.ajax({
+                    url:"/giftpay_wap/sendMsg.htm",
+                    type:"post",
+                    data:{"phone":phone},
+                    dataType:"json",
+                    success:function(data){
+
+                    }
+                });
+            }
+            setValMsgTime(obj);
+        }
+
+        function setValMsgTime(obj){
+            if (countdown == 0) {
+                $(obj).show();
+                $('#timer').hide();
+                $(obj).html("获取验证码");
+                countdown = 60;
+                return;
+            } else {
+                obj.value="重新发送(" + countdown + ")";
+                $(obj).hide();
+                $('#timer').show();
+                $('#timer').html("重新发送("+countdown+")");
+                countdown--;
+            }
+            setTimeout(function() {
+                        setValMsgTime(obj) }
+                    ,1000)
+        }
+
+        function goBack() {
+            history.back();
+        }
+        $(function(){
+            //判断用户SESSION
+            //复制跳转URL
+
+        })
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="goBack()">
+        绑定手机
+    </div>
+    <div class="binding_content">
+        <ul class="bindCellPhone">
+            <li>
+                <input id="tel" type="tel" placeholder="手机号" class="binding_input" maxlength="11">
+            </li>
+            <li>
+                <input id="code" type="tel"  placeholder="验证码" class="binding_input_short">
+                <div class="binding_getCode" onclick="settime(this)">获取验证码</div>
+                <div style="display: none;background-color: #7f7d7d;" id="timer" class="binding_getCode" >获取验证码</div>
+            </li>
+            <!--
+            <li>
+                <input id="psd" type="password" id="password" placeholder="登录密码" class="binding_input">
+            </li>
+            -->
+        </ul>
+        <div class="bindingCellPhone_text">
+            为了您的账户安全，请绑定手机号
+        </div>
+        <div class="common_btn">进入有礼付</div>
+    </div>
+</div>
+<script type="text/javascript">
+
+//获取路径参数
+function getQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+    var r = window.location.search.substr(1).match(reg); 
+    if (r != null) return decodeURI(r[2]); 
+    return null; 
+ } 
+ 
+ var html = getQueryString("html");
+ 
+
+//提交信息
+$(".common_btn").click(function(){
+	var phone = $("#tel").val();
+	var code = $("#code").val();
+	if(phone==""){
+        TipShow("请输入电话号码",1000);
+        return ;
+    }
+    if(code==""){
+        TipShow("请输入短信验证码",1000);
+        return ;
+    }
+	var json = {};
+	json.mobile = phone;
+    json.code=code;
+	if(html !=null){
+		json.entryUrl = html
+	}
+	$.ajax({
+		url:"/giftpay_wap/settingUserMobile.htm",
+		type:"post",
+		data:json,
+		dataType:"json",
+		success:function(data){
+			if(data.code =="10000" ){
+				TipShow("绑定成功",1000);
+				localStorage.setItem("bindPhone","bind")
+				//window.location.href=data.mess;
+			    location.href='./myCenter.html';
+            }else{
+				TipShow(data.mess,1000);
+			}
+		}
+	});
+});
+		
+</script>
+</body>
+</html>

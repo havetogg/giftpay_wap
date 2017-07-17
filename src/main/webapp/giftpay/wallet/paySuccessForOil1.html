@@ -1,0 +1,199 @@
+﻿<%@ page language="java" import="java.util.*" isELIgnored="false" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>支付结果</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <link type="text/css" href="css/style.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/Scratch.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+    <script>
+        $(function () {
+            $(".flexslider").flexslider({
+                animation: "slide", //String: Select your animation type, "fade" or "slide"图片变换方式：淡入淡出或者滑动
+                slideshowSpeed: 4000, //展示时间间隔ms
+                animationSpeed: 1100, //滚动时间ms
+                touch: true //是否支持触屏滑动
+            });
+        })
+    </script>
+    <style>
+        .flex-control-nav {
+            z-index: 5;
+            bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<script>
+		$(function() {
+			var timestamp = getUrlParam("timestamp");
+			$(".gunOilBox3 a").html(getLocalTime(timestamp));
+			$(".getCodeRedBtn").on("click",function(){
+				window.location.href="http://www.linkgift.cn/giftpay_wap/giftpay/third/addThirdUserIndex.htm?thirdName=zsh";
+			})
+		})
+		function getLocalTime(time){
+			var year=time.substring(0,4);
+			var month=time.substring(4,6)
+			var day=time.substring(6,8);
+			var hour=time.substring(8,10);
+			var min=time.substring(10,12);
+			var sec=time.substring(12,time.length);
+			return year+"-"+month+"-"+day+" "+hour+":"+min;
+		}
+	</script>
+<script>
+    $(function() {
+        var timestamp = $("#timestamp").val();
+        var redAmount = $("#redAmount").val();
+        var realAmount = new Number($("#realAmount").val());
+        $(".gunOilBox3 a").html(timestamp);
+        if(redAmount == '' || redAmount == '0' || redAmount == null) {
+            $(".gunOilBox2").html("<a>实付" +
+                    realAmount + "元</a>");
+        } else {
+            var num = new Number(redAmount);
+            $(".gunOilBox2").html(" 需付" + ((num + realAmount).toFixed(2)) + "元，红包抵扣" + num.toFixed(2) + "元，<a>实付" +
+                    realAmount + "元</a>");
+        }
+        $(".getCodeRedBtn").on("click", function() {
+            var thirdOpenId=$("#thirdOpenId").val();
+            var channelId=$("#channelId").val();
+            var amount=$("#amount").val();
+            var hasRed=$("#hasRed").val();
+            var orderId=$("#orderId").val();
+            var redId=$("#redId").val();
+            window.location.href = getRootPath()+"/giftpay/wallet/wxRedPkgBase.htm?thirdOpenId="+thirdOpenId+"&channelId="+channelId+"&amount="
+                    +amount+"&hasRed="+hasRed+"&redId="+redId+"&orderId="+orderId;
+        })
+    })
+</script>
+<body >
+
+<input id="gunNo" type="hidden" value="${gunNo}" />
+<input id="timestamp" type="hidden" value="${timestamp}" />
+<input id="redAmount" type="hidden" value="${redAmount}" />
+<input id="realAmount" type="hidden" value="${realAmount}" />
+
+<input id="thirdOpenId" type="hidden" value="${thirdOpenId}" />
+<input id="channelId" type="hidden" value="${channelId}" />
+<input id="hasRed" type="hidden" value="${hasRed}" />
+<input id="redId" type="hidden" value="${redId}" />
+<input id="orderId" type="hidden" value="${orderId}" />
+
+
+
+<div class="zoomer" style="background-color: #ffffff;overflow-x: hidden;position: fixed">
+    <div style="margin: 40px 40px 10px;text-align: center">
+        <img src="img/paySuccess_1.png" alt="">
+    </div>
+    <div class="gunOilBox">
+        <!--<div class="gunOilBox1">1号油枪加油完成，请放行</div>-->
+        <div class="gunOilBox3">
+            <img src="img/dottedO.png" alt="">
+            <a class="timeBg"></a>
+            <img src="img/dottedO.png" alt="">
+        </div>
+    </div>
+    <div class="index_content4 flex">
+        <div>
+            <img src="img/code3.png" alt="" width="160px">
+            <img src="img/code3.png" alt="" style="    position: fixed;top: 20%;width: 70%;left: 0px;opacity: 0;">
+        </div>
+        <div class="flex-1">
+            <div class="flex getRedCodeBanner_Div">
+                <div class="flex-1 getRedTittle">恭喜您获得 <a>兴业银行提供的50元加油支付红包</a></div>
+                <div class="getCodeRedBtn">领取</div>
+            </div>
+            <div class="getRedCodeBanner_tip">长按二维码随时查看你的红包和更多优惠</div>
+        </div>
+
+    </div>
+    <div class="htmleaf-container">
+        <div class="max-width">
+            <div class="scratch_container">
+                <div class="scratch_viewport">
+                    <a id="getRed">
+
+                    </a>
+                    <canvas id="js-scratch-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/Scratch.js"></script>
+    <script type="text/javascript">
+
+        var scratch = new Scratch({
+            canvasId: 'js-scratch-canvas',
+            imageBackground: './img/ggbg_prize.png',
+            imageBackgroundNone: './img/ggbg_none.png',
+            pictureOver: './img/ggbg.png',
+            cursor: {
+//                png: './images/piece.png',
+//                cur: './images/piece.cur',
+                x: '20',
+                y: '17'
+            },
+            radius: 30,
+            nPoints: 100,
+            percent: 30,
+            callback: function () {
+            },
+            pointSize: { x: 3, y: 3}
+        });
+        function switchUrl(url) {
+            window.location.href=url;
+        }
+    </script>
+    <div class="index_content12">
+        <ul class="flex">
+            <li class="flex-1 tuijian_line"></li>
+            <li class="tuiguang_">推广</li>
+            <li class="flex-1 tuijian_line"></li>
+        </ul>
+    </div>
+
+<<<<<<< .mine
+    <div class="flexslider" style="width: 90%;margin: 10px auto;">
+        <ul class="slides">
+            <li><img  src="img/banner1.png" alt="1" width="90%" onclick="switchUrl('http://m.linkgift.cn/index.html')"/></li>
+            <li><img  src="img/banner1.png" alt="1" width="90%" onclick="switchUrl('http://m.linkgift.cn/index.html')"/></li>
+            <li><img  src="img/banner1.png" alt="1" width="90%" onclick="switchUrl('http://m.linkgift.cn/index.html')"/></li>
+        </ul>
+    </div>
+    <!--<a class="index_content6" href="http://m.linkgift.cn/index.html">-->
+        <!--<img src="img/banner3.png" alt="" width="100%">-->
+    <!--</a>-->
+||||||| .r10812
+    <a class="index_content6" href="http://m.linkgift.cn/index.html">
+        <img src="img/banner3.png" alt="" width="100%">
+    </a>
+=======
+    <a class="index_content6" href="http://www.linkgift.cn/giftpay_wap/giftpay/wap/carValuation.jsp">
+        <img src="img/banner3.png" alt="" width="100%">
+    </a>
+>>>>>>> .r11464
+    <!--<a class="index_content5">-->
+        <!--<img src="img/banner5.png" alt="" width="572px">-->
+    <!--</a>-->
+    <div class="jmt_center pay_bottom_tel">
+        <a  href="tel:4000808065">推广合作</a>
+    </div>
+</div>
+</body>
+</html>

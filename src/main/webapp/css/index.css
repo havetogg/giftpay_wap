@@ -1,0 +1,89 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+    padding-bottom: 224px;
+}
+div,span{
+    font-size: 30px;
+    line-height: 59px;
+}
+.part1{
+    width: 612px;
+    height: 241px;
+    /*background: #cccccc;*/
+    margin: 0px 0px;
+    background: url("../img/background.png") center no-repeat;
+    margin: -46px 14px;
+    position: absolute;
+    border-radius: 19px;
+}
+.addOil{
+    width: 175px;
+    height: 180px;
+    border-radius: 100px;
+    background: white;
+    margin: 43px 418px;
+    text-align: center;
+    line-height: 168px;
+    position: absolute;
+}
+.returnBalance{
+    width: 272px;
+    height: 107px;
+    border: 5px solid white;
+    border-radius: 80px;
+    /* background: white; */
+    margin: 13px 25px;
+    text-align: center;
+    color: white;
+    font-size: 29px;
+    line-height: 22px;
+    position: absolute;
+}
+.problem{
+    width: 277px;
+    height: 56px;
+    border-radius: 100px;
+    background: white;
+    text-align: center;
+    margin: 161px 33px;
+    position: absolute;
+    color: red;
+    font-size: 28px;
+}
+.action{
+
+    width: 624px;
+
+    margin: -220px 0px;
+}
+.action1{
+
+    width: 294px;
+
+    height: 176px;
+
+    float: left;
+
+    margin: 3px 9px;
+
+    background: #f2f2f2;
+}
+.returnMoney{
+    font-size: 36px;
+    color: white;
+}
+.quan{
+    width: 640px;
+    height: 272px;
+    margin-top: 309px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+}
+.oldUser{
+
+    margin: 204px 12px;
+}

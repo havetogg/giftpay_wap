@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jumutang.giftpay.dao.CarValuationDao">
+	 <resultMap id="BaseResultMap" type="org.jumutang.caranswer.model.CarValuation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="openId" property="openId" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+	<insert id="addValuationInfo" parameterType="org.jumutang.caranswer.model.CarValuation">
+		insert into car_valuation( openId , tel )
+		values (#{openId} , #{tel})
+	</insert>
+	
+	<select id="isExist" parameterType="org.jumutang.caranswer.model.CarValuation" resultMap="BaseResultMap">
+		select id ,openId,tel,createtime
+		from car_valuation
+		where openId=#{openId} and tel=#{tel}
+	</select>
+	
+</mapper>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/app.css?v20170607" rel="stylesheet">
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/wx_share.js"></script>
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+
+<script>
+    $(function () {
+        localStorage.clear();
+        initUserRegister();
+        initOilService();
+      $(".flexslider").flexslider({
+            animation: "slide", //String: Select your animation type, "fade" or "slide"图片变换方式：淡入淡出或者滑动
+            slideshowSpeed: 4000, //展示时间间隔ms
+            animationSpeed: 1100, //滚动时间ms
+            touch: true //是否支持触屏滑动
+        });
+    })
+    function switchTab(type) {
+        if(type==2){
+            window.location.href='./find.html';
+        }
+        else if(type==3){
+            window.location.href='./myCenter.html';
+        }
+    }
+    function initUserRegister(){
+        $.ajax({
+            url: getRootPath() + "/giftpay/wap/isRegister.htm",
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                localStorage.setItem("bindPhone",data['mess']);
+            }, error: function (res) {
+            }
+        });
+    }
+    //获取易加油信息
+    function initOilService(){
+        $.ajax({
+            url: getRootPath() + "/oil/queryOilServiceList.htm",
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                if(data.success){
+                    var html = "";
+                    $.each(data.data,function (i,item) {
+                        html += "<li class='flex'>";
+                        html += "<div class='goodsBg'>";
+                        html += "<div class='yellowBg'>第"+item.name+"季</div>";
+                        html += "<div><span class='sale'>"+item.discount+"</span><span class='saleT'>折</span></div>";
+                        html += "<div>当季折扣</div>";
+                        html += "</div>";
+                        html += "<div class='flex-1 goods_info'>";
+                        html += "<div>有礼付易加油第"+item.name+"季</div>";
+                        html += "<div>";
+                        html += "<img src='img/s1.png' alt=''>";
+                        html += "<img src='img/s2.png' alt=''>";
+                        if(item.name == 3){
+                            html += "<label for='' class='tips'>光大银行特惠季</label>";
+                        }/*else if(item.name == 2){
+                            html += "<label for='' class='tips1'>招商银行特惠季</label>";
+                        }*/
+                        html += "</div>";
+                        html += "<div>限量"+item.totalStock+"份</div>";
+                        html += "<div class='index_range'>";
+                        html += "<div class='index_rangeV' style='width: "+(item.sales*1/item.totalStock*1*100)+"%;'></div>";
+                        html += "</div>";
+                        html += "</div>";
+                        if(item.state == 0){
+                            html += "<div class='goodsBg_m'>";
+                            html += "<div><img src='img/btn_catch.png' id='toOilTaocan' alt=''></div>";
+                            html += "<div>剩"+(item.totalStock*1-item.sales*1)+"份</div>";
+                            html += "</div>";
+                        }else if (item.state == 1){
+                            html += "<div class='goodsBg_m'>";
+                            html += "<img src='img/saleoff.png' alt='' class='sellOff_img'>";
+                            html += "</div>";
+                        }else if (item.state == 2){
+                            html += "<div class='goodsBg_m'>";
+                            html += "<div class='index_goingOn'>即将开始</div>";
+                            html += "</div>";
+                        }else if (item.state == 3){
+                            html += "<div class='goodsBg_m'>";
+                            html += "<div><img src='img/btn_catch.png' id='toOilTaocan2' alt=''></div>";
+                            html += "<div>剩"+(item.totalStock*1-item.sales*1)+"份</div>";
+                            html += "</div>";
+                        }
+                        html += "</li>";
+                    })
+                    $(".index_goods").html("");
+                    $(".index_goods").html(html);
+                    //跳转到九五折加油套餐
+                    $("#toOilTaocan,#toOilTaocan2").click(function() {
+                        //九折加油
+                        var mess = localStorage.getItem("bindPhone");
+                        //window.location.href="/giftpay_wap/rechargeoil/index.html";
+                        $.ajax({
+                            url: getRootPath() + "/giftpay/wap/queryUserInfo.htm",
+                            dataType: "json",
+                            type: "post",
+                            success: function (data) {
+                                console.log(data);
+                                if (data.success) {
+                                    var target = getRootPath() + "/rechargeoil/taocan.html?userId=" + data.userId + "&openId=" + data.openId;
+                                    ;
+                                    if (mess == "bind") {
+                                        window.location.href = target;
+                                    } else {
+                                        window.location.href = "./bindCellPhone.html?html=" + target;
+                                    }
+                                } else {
+                                    alert("获取用户信息超时，请重新登录");
+                                    location.href = getRootPath() + "/giftpay/wap/wxLogin.htm";
+                                }
+                            }, error: function (res) {
+
+                            }
+                        });
+                        //  location.href="../recharge/cellPhone_recharge.html";});
+                    });
+                }
+            }
+        });
+    }
+    function toMyWallet() {
+        var mess = localStorage.getItem("bindPhone");
+        console.log("1-------------------"+mess);
+        if(mess=="bind"){
+            window.location.href="./recharge.html";
+        }else{
+            window.location.href="./bindCellPhone.html?html=./recharge.html";
+        }
+    }
+</script>
+
+<body style="background-color: #f0f0f4;">
+<div style="background-color: #f0f0f4 !important;" class="zoomer">
+ <div class="index">
+     <div class="index_top">
+         <div class="flexslider">
+             <ul class="slides" style="height: 179px;">
+                 <li class="lifeRecharge">
+                    <img  src="img/index_banner1.png"  width="100%"/>
+                 </li>
+                 <li class="nineOil">
+                    <img  src="img/index_banner2.png"  width="100%"/>
+                 </li>
+             </ul>
+         </div>
+         <div class="index_icon_walletRecharge" onclick="toMyWallet()">
+             <img src="img/icon_wallet.png" alt="">
+             <span>钱包充值</span>
+         </div>
+     </div>
+     <div class="index_menus">
+         <ul class="flex jmt_center">
+             <li class="flex-1 oilCardRecharge">
+                 <div class="index_menus_icon"><img src="img/con2.png" alt=""></div>
+                 <div class="index_name">充油卡</div>
+             </li>
+             <li class="flex-1 phoneRecharge">
+                 <div class="index_menus_icon"><img src="img/con4.png" alt=""></div>
+                 <div class="index_name">充话费</div>
+             </li>
+             <li class="flex-1 flowRecharge">
+                 <div class="index_menus_icon"><img src="img/con3.png" alt=""></div>
+                 <div class="index_name">充流量</div>
+             </li>
+             <li class="flex-1 lifeRecharge">
+                 <div class="index_menus_icon"><img src="img/con1.png" alt=""></div>
+                 <div class="index_name">水电煤气</div>
+             </li>
+         </ul>
+     </div>
+     <div class="index_bottom">
+         <div>
+             <img src="img/index_banner.png" alt="" width="100%" id="toOilIndex">
+         </div>
+
+        <div class="topTextParent">
+            <span class="topText">优惠加油活动</span>
+        </div>
+
+         <ul class="index_goods">
+         </ul>
+     </div>
+ </div>
+</div>
+</div>
+<ul class="flex bottom_menu">
+    <li class="flex-1">
+        <img src="img/tab1_on.png" alt="" width="100%">
+    </li>
+    <li class="flex-1" onclick="switchTab(2)">
+        <img src="img/tab2.png" id="find" alt="" width="100%">
+    </li>
+    <li class="flex-1" onclick="switchTab(3)">
+        <img src="img/tab3.png" id="img3" alt="" width="100%">
+    </li>
+</ul>
+<script type="text/javascript">
+    $(function () {
+        $("#img3").click(function () {
+            window.location.href = "./myCenter.html";
+        });
+
+        $("#find").click(function () {
+            window.location.href = "./find.html";
+        });
+        $(".oilCardRecharge").click(function () {
+            //油卡充值
+            var mess = localStorage.getItem("bindPhone");
+            console.log("1-------------------" + mess);
+            if (mess == "bind") {
+                window.location.href = getRootPath() + "/giftpay/recharge/fuelCard_recharge_new.html";
+            } else {
+                window.location.href = "./bindCellPhone.html?html=" + getRootPath() + "/giftpay/recharge/fuelCard_recharge_new.html";
+            }
+        })
+        $(".lifeRecharge").click(function () {
+            var mess = localStorage.getItem("bindPhone");
+            console.log("1-------------------" + mess);
+            if (mess == "bind") {
+                location.href = getRootPath() + "/giftpay/liftpayment/rechargeIndex.htm";
+            } else {
+                window.location.href = "./bindCellPhone.html?html=" + getRootPath() + "/giftpay/liftpayment/rechargeIndex.htm";
+            }
+        });
+
+        $(".phoneRecharge").click(function () {
+            //话费
+            var mess = localStorage.getItem("bindPhone");
+            console.log("2-------------------" + mess);
+            if (mess == "bind") {
+                window.location.href = getRootPath() + "/giftpay/recharge/cellPhone_recharge.html";
+            } else {
+                window.location.href = "./bindCellPhone.html?html=" + getRootPath() + "/giftpay/recharge/cellPhone_recharge.html";
+            }
+
+        });
+
+        $(".flowRecharge").click(function () {
+            //流量
+            var mess = localStorage.getItem("bindPhone");
+            console.log("3-------------------" + mess);
+            if (mess == "bind") {
+                window.location.href = getRootPath() + "/giftpay/recharge/flow_recharge.jsp";
+            } else {
+                window.location.href = "./bindCellPhone.html?html=" + getRootPath() + "/giftpay/recharge/flow_recharge.jsp";
+            }
+
+        });
+
+        //九折加油
+        $(".nineOil,#toOilIndex").click(function () {
+            var mess = localStorage.getItem("bindPhone");
+            $.ajax({
+                url: getRootPath() + "/giftpay/wap/queryUserInfo.htm",
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        var target = getRootPath() + "/rechargeoil/index.html?userId=" + data.userId + "&openId=" + data.openId;
+                        ;
+                        if (mess == "bind") {
+                            window.location.href = target;
+                        } else {
+                            window.location.href = "./bindCellPhone.html?html=" + target;
+                        }
+                    } else {
+                        alert("获取用户信息超时，请重新登录");
+                        location.href = getRootPath() + "/giftpay/wap/wxLogin.htm";
+                    }
+                }, error: function (res) {
+
+                }
+            });
+        });
+    })
+</script>
+</body>
+<script src="https://s4.cnzz.com/z_stat.php?id=1261891522&web_id=1261891522
+" language="JavaScript"></script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261891522'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1261891522' type='text/javascript'%3E%3C/script%3E"));</script>
+</html>

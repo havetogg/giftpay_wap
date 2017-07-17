@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>排行榜</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <style>
+        ::-webkit-input-placeholder{
+            color: #68b7e9;
+        }
+    </style>
+    <script>
+        var num=0;
+        var num1=0;
+        function personInfo() {
+           if(num==0){
+               $('.index_tip1').show();
+               num++;
+           }
+           else if(num==1){
+               $('.index_tip1').hide();
+               num--;
+           }
+
+        }
+        function personInfoHide() {
+            console.log('1222222222');
+            $('.index_tip1').hide();
+        }
+        function tip2() {
+            if(num==0){
+                $('.index_tip2').show();
+                num++;
+            }
+            else if(num==1){
+                $('.index_tip2').hide();
+                num--;
+            }
+        }
+        var countdown=10;
+        function sendCode() {
+          var tel =  $('#tel').val();
+          if(!tel){
+              TipShow('请输入手机号',1000);
+          }
+          else if(!jxTool.isMobile(tel)){
+              TipShow('请输入正确的手机号',1000);
+          }
+          else{
+              TipShow('发送短信',1000);
+              settime();
+          }
+        }
+        function settime() {
+            if (countdown == 0) {
+                countdown = 10;
+                $('#codeBtn').show();
+                $('#code').hide();
+            } else {
+                $('#codeBtn').hide();
+                $('#code').show();
+                $('#code').html("重新发送(" + countdown + ")");
+                countdown--;
+                setTimeout(function() {
+                    settime()
+                },1000)
+            }
+        }
+        function submitInfo() {
+            var tel=$('#tel').val();
+            var code=$('#codeNumber').val();
+            if(!tel){
+                TipShow('请输入手机号',1000);
+            }
+            else if(!jxTool.isMobile(tel)){
+                TipShow('请输入正确的手机号',1000);
+            }
+             else if(!code){
+                TipShow('请输入验证码',1000);
+            }
+            else{
+                TipShow('提交成功！',1000);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="tip1" class="game_block">
+        <div class="index_login_block">
+            <div class="index_login_tip1">登录</div>
+            <div class="index_login_tip2">登录即送10钻石</div>
+            <div>
+                <input id="tel" type="tel" class="index_login_input1" placeholder="请输入手机号" maxlength="11">
+            </div>
+            <div style="margin: 20px 0;">
+                <input id="codeNumber" type="text" placeholder="请输入验证码" class="index_login_input2" maxlength="6">
+                <span id="codeBtn" class="index_login_getCode_block" onclick="sendCode()">获取验证码</span>
+                <span id="code" style="display: none;" class="index_login_getCode_block">获取验证码</span>
+            </div>
+            <div style="margin: 20px 0;">
+                <img src="img/submitt.png" alt="" onclick="submitInfo()">
+            </div>
+        </div>
+    </div>
+<div class="zoomer">
+    <ul class="flex index_banner_top">
+        <li class="flex-3 index_banner_top_personDiv" onclick="personInfo()">
+                <div class="flex">
+                    <div  style="width: 80px">
+                        <img src="img/icon.png" alt="" class="icon11_img">
+                    </div>
+                    <span class="flex-1 personInfo1">
+                        <span class="index_banner_top_personDivVIPlevel">vip1</span>
+                        <span class="index_banner_top_personDivName">很爱你的人</span>
+                    </span>
+                    <!--<span class="flex-1 personInfo2">-->
+                        <!--<span class="index_banner_top_personDivName">很爱你的人</span>-->
+                    <!--</span>-->
+                </div>
+                <div class="index_tip1">
+                    <div class="index_tip_arrow"></div>
+                    <label>VIP每周有 钻石收益哦</label>
+                </div>
+        </li>
+        <li style="width: 20px;"></li>
+        <li class="index_diamond1">
+            <img src="img/coin.png" alt="">
+            <label>9888</label>
+        </li>
+        <li style="width: 20px;"></li>
+        <li class="index_diamond1">
+            <img src="img/diamond.png" alt="">
+            <label>892</label>
+        </li>
+        <li style="width: 20px;"></li>
+        <li class="index_diamond" style="font-size: 50px;line-height: 15px;" onclick="tip2()">
+            <a></a>
+            <a></a>
+            <a></a>
+            <span>2</span>
+            <div class="index_tip2">
+                <div class="index_tip2_arrow"></div>
+                <div style="border-bottom: 1px solid #cccccc;">登陆送积分</div>
+                <div style="position: relative;">
+                    <span class="red_number_">2</span>
+                    我的消息
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="gameTop_banner">
+        <img src="img/index_banner.png" alt="" width="100%">
+        <div class="text1">
+            <label>
+                玩游戏，兑好礼！
+            </label>
+        </div>
+    </div>
+    <div class="gameCenterIndex">
+        <ul class="flex" style="padding-top: 40px;">
+            <li class="flex-1 jmt_center">
+                <div><img src="img/index_icon1.png" alt="" class="icons_index"></div>
+                <div class="icon_bg">
+                    <div class="indexIcon_text1">充值大厅</div>
+                    <div class="indexIcon_text2">限时优惠</div>
+                </div>
+            </li>
+            <li class="flex-1 jmt_center">
+                <div><img src="img/index_icon2.png" alt="" class="icons_index"></div>
+                <div class="icon_bg">
+                    <div class="indexIcon_text1">钻石商城</div>
+                    <div class="indexIcon_text2">兑超值好礼</div>
+                </div>
+            </li>
+            <li class="flex-1 jmt_center">
+                <div><img src="img/index_icon3.png" alt="" class="icons_index"></div>
+                <div class="icon_bg">
+                    <div class="indexIcon_text1">我的游戏</div>
+                    <div class="indexIcon_text2"><a>4</a>收藏</div>
+                </div>
+            </li>
+            <li class="flex-1 jmt_center">
+                <div><img src="img/index_icon4.png" alt="" class="icons_index"></div>
+                <div class="icon_bg">
+                    <div class="indexIcon_text1">排行榜</div>
+                    <div class="indexIcon_text2"><a>2</a>入榜</div>
+                </div>
+            </li>
+        </ul>
+        <div class="gameRank">
+            <ul>
+                <li>
+                    <div class="title">
+                        加油达人
+                    </div>
+                    <div>
+                        <img src="img/rank1.png" alt="" class="banner1">
+                    </div>
+                    <div class="title1">
+                        加油机操作员的日常
+                    </div>
+                    <img src="img/collectbtn.png" alt="" class="rankTip1" onclick="collectCommand(this)">
+                </li>
+
+                <li>
+                    <div class="title">
+                        加油达人
+                    </div>
+                    <div>
+                        <img src="img/rank1.png" alt="" class="banner1">
+                    </div>
+                    <div class="title1">
+                        加油机操作员的日常
+                    </div>
+                    <img src="img/haveCollect.png" alt="" class="rankTip1">
+                </li>
+            </ul>
+            <div style="height: 30px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

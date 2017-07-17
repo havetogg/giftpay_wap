@@ -1,0 +1,1 @@
+INSERT INTO `carchat`.`t_gaspackages` (`c_gaspackagesid`, `c_gaspackagesname`,`c_price`, `c_monthcount`, `c_monthmoney`, `c_allmoney`, `c_createtime`) VALUES ('D5A0ECBDD3BA443988BC24F205FA8BC9', '充值2700分6个月返3000', '2700', '6', '500', '3000', '2015-12-01');

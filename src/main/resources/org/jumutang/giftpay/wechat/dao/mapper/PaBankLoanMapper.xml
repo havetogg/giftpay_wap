@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.PaBankLoanDao">
+
+	<resultMap type="org.jumutang.giftpay.entity.PaBankLoanModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="username" property="username" />
+		<result column="openid" property="openid" />
+		<result column="phone" property="phone" />
+		<result column="third_code" property="third_code" />
+		<result column="createtime" property="createtime" />
+		<result column="address" property="address" />
+		<result column="ipaddress" property="ipaddress" />
+		<result column="ipaddress_true" property="ipaddress_true" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="openid !=null">
+				and openid = #{openid}
+			</if>
+			<if test="username !=null">
+				and username = #{username}
+			</if>
+			<if test="phone !=null">
+				and phone = #{phone}
+			</if>
+		</where>
+	</sql>
+
+	<!--添加数据 -->
+	<insert id="PaBankLoanAdd" parameterType="org.jumutang.giftpay.entity.PaBankLoanModel" >
+		insert into t_pabank_loan
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			openid,username,phone,createtime,third_code,address,ipaddress,ipaddress_true
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			#{openid},#{username} ,#{phone},now(),#{third_code},#{address},#{ipaddress},#{ipaddress_true}
+		</trim>
+	</insert>
+
+	<!--修改数据-->
+	<update id="PaBankLoanUpdate"  parameterType="org.jumutang.giftpay.entity.PaBankLoanModel"  >
+		update t_pabank_loan
+		<set>
+			<if test="phone !=null">
+				phone = #{phone},
+			</if>
+			<if test="username !=null">
+				username  = #{username},
+			</if>
+			<if test="ipaddress_true !=null">
+				ipaddress_true  = #{ipaddress_true},
+			</if>
+
+		</set>
+		<where>
+			openid = #{openid}
+		</where>
+	</update>
+
+	<!--查询数据-->
+	<select id="PaBankLoanList" parameterType="org.jumutang.giftpay.entity.PaBankLoanModel" resultMap="baseResult">
+		select * from t_pabank_loan
+		<include refid="wherecause" />
+	</select>
+
+	
+</mapper>

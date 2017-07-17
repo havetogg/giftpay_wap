@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jumutang.giftpay.dao.IUserMainDao" >
+  <resultMap id="BaseResultMap" type="org.jumutang.giftpay.model.UserMainModel" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="val_num" property="valNum" jdbcType="VARCHAR" />
+    <result column="balance_number" property="balanceNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, phone, status, create_time,id_card,user_name,val_num
+  </sql>
+
+  <select id="queryUserMainModel" resultMap="BaseResultMap" parameterType="org.jumutang.giftpay.model.UserMainModel">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    <where>
+    <if test="id!=null">
+      and ID=#{id}
+    </if>
+    <if test="phone!=null">
+      and phone=#{phone}
+    </if>
+    <if test="status!=null">
+      and status=#{status}
+    </if>
+        <if test="idCard !=null">
+      and id_card = #{idCard}
+    </if>
+    <if test="userName !=null">
+      and user_name = #{userName}
+    </if>
+      <if test="valNum !=null">
+        and val_num = #{valNum}
+      </if>
+    </where>
+  </select>
+
+  <insert id="addUserMainModel" parameterType="org.jumutang.giftpay.model.UserMainModel" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+        create_time
+      <if test="valNum != null" >
+        val_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+        now(),
+      <if test="valNum != null" >
+        #{valNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateUserMainModel" parameterType="org.jumutang.giftpay.model.UserMainModel" >
+    update t_user
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="valNum != null" >
+        val_num = #{valNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="queryUserCount" resultMap="BaseResultMap" parameterType="org.jumutang.giftpay.model.UserMainModel">
+   <![CDATA[
+   select u.id,u.phone,u.create_time,b.balance_number from t_user u
+    inner join t_balance b
+    on u.id=b.account_id
+    where u.phone<>'' and u.phone is not null
+    order by b.balance_number*1 desc,u.create_time
+]]>
+  </select>
+</mapper>

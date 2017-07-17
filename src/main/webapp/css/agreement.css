@@ -1,0 +1,27 @@
+.contentdiv{
+
+    width: 569px;
+
+    margin:  0px auto;
+
+    padding-bottom: 206px;
+}
+h1{
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin: 20px auto;
+
+    width: 288px;
+}
+.foot{
+
+}
+.text{
+
+    font-size: 20px;
+
+    line-height: 32px;
+}

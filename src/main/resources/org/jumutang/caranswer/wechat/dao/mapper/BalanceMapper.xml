@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.BalanceDaoI">
+
+	<resultMap type="org.jumutang.giftpay.model.BalanceModel" id="baseResult">
+		<result column="balance_id" property="balanceId" />
+		<result column="account_id" property="accountId" />
+		<result column="balance_number" property="balanceNumber" />
+		<result column="congeal_balance" property="congealBalance" />
+		<result column="pay_password" property="payPassword" />
+		<result column="change_time" property="changeTime" />
+		<result column="balance_state" property="balanceState" />
+		<result column="remark" property="remark" />
+		<result column="create_time" property="createTime"/>
+		<result column="id_card" property="idCard"/>
+		<result column="user_name" property="userName"/>
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="balanceId !=null">
+				and balance_id = #{balanceId}
+			</if>
+			<if test="accountId !=null">
+				and account_id = #{accountId}
+			</if>
+			<if test="payPassword !=null">
+				and pay_password = #{payPassword}
+			</if>
+			<if test="balanceState !=null">
+				and balance_state = #{balanceState}
+			</if>
+			<if test="idCard !=null">
+				and d_card = #{idCard}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryBalances" parameterType="org.jumutang.giftpay.model.BalanceModel" resultMap="baseResult">
+		select balance_id,account_id,balance_number,congeal_balance,pay_password,change_time,balance_state,remark from t_balance
+		<include refid="wherecause"/>
+	</select>
+
+
+	<!-- 创建账户 -->
+	<insert id="insertBalace" parameterType="org.jumutang.giftpay.model.BalanceModel">
+		insert into t_balance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			balance_id,account_id,balance_number,pay_password,balance_state,create_time,
+			<if test="congealBalance !=null">
+				congeal_balance,
+			</if>
+			<if test="changeTime !=null">
+				change_time,
+			</if>
+			<if test="remark !=null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{balanceId},#{accountId},#{balanceNumber},#{payPassword},#{balanceState},#{createTime},
+			<if test="congealBalance !=null">
+				#{congealBalance},
+			</if>
+			<if test="changeTime !=null">
+				#{changeTime},
+			</if>
+			<if test="remark !=null">
+				#{remark},
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 修改账户余额 -->
+	<update id="updateBalance" parameterType="org.jumutang.giftpay.model.BalanceModel">
+			update t_balance
+			<set>
+				<if test="congealBalance !=null">
+					congeal_balance = #{congealBalance},
+				</if>
+				<if test="idCard  !=null">
+					id_card  = #{idCard },
+				</if>
+				<if test="remark  !=null">
+					remark  = #{remark },
+				</if>
+				<if test="balanceNumber !=null">
+					balance_number  = #{balanceNumber },
+				</if>
+				<if test="changeTime  !=null">
+					change_time  = #{changeTime },
+				</if>
+			</set>
+			<where>
+				account_id = #{accountId}
+			</where>
+	</update>
+	
+</mapper>

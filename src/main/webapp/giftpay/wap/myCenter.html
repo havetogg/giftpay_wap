@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/wx_share.js"></script>
+    <script>
+        function switchUrl(type) {
+            if(type==1){
+                window.location.href="./myWallet.html";
+            }else if(type==3){
+                window.location.href="./setting.html";
+            }
+        }
+        function switchTab(type) {
+            if(type==1){
+                window.location.href='./index.html';
+            }
+            else if(type==2){
+                window.location.href='./find.html';
+            }
+        }
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position:fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+        
+    <div class="myCenter">
+        <div style="    background-color: #fff;">
+            <img src="img/myCenterBg.png" alt="" width="100%">
+            <!--已登录-->
+            <div class="myCenter_icon" style="display: none" id="state">
+             
+            </div>
+            <!--未登录-->
+            <div class="myCenter_icon1" style="display: none" id="un">
+                <div class="unLogin">
+                    <img src="img/unLogin.png" alt="">
+                </div>
+                <div class="myCenter_name">未登录</div>
+            </div>
+            <!--未绑定-->
+            <div class="myCenter_icon1">
+              
+            </div>
+        </div>
+    <ul class="myCenter_bottom_Ul">
+        <li >
+            <img src="img/myWallet.png" id="wallet" alt="">
+        </li>
+        <li id="myRed" >
+            <img src="img/redCenter.png" alt="">
+        </li>
+        <li  onclick="switchUrl(3)">
+            <img src="img/set.png" id="set" alt="">
+        </li>
+    </ul>
+    </div>
+</div>
+<ul class="flex bottom_menu">
+    <li class="flex-1" onclick="switchTab(1)">
+        <img src="img/tab1.png" id="index" alt="" width="100%">
+    </li>
+    <li class="flex-1" onclick="switchTab(2)">
+        <img src="img/tab2.png" id="foods" alt="" width="100%">
+    </li>
+    <li class="flex-1" >
+        <img src="img/tab3_on.png" alt="" width="100%">
+    </li>
+</ul>
+<script type="text/javascript">
+
+	var flag = true;
+
+	//判断是否登录
+	$.ajax({
+		url:"/giftpay_wap/isBuildPhone.htm",
+		type:"get",
+		async:false,
+		dataType:"json",
+		success:function(data){
+			if(data.state==1){
+				flag = false;
+                var htmlUrl = "./myCenter.html";
+                var html = "<div><img src='"+data.headUrl+"' alt=''></div>" +
+                        "<div class='myCenter_tel' >"+data.name+"</div>" +
+                        "<div class='myCenter_tel toBind' style='color: #3fc0e7' >点击绑定手机</div>";
+                $("#state").append(html);
+                $("#state").show();
+                $("#myRed").attr("accountId",data.id);
+                $(".toBind").on("click",function(){
+                    window.location.href="./bindCellPhone.html?html="+htmlUrl;
+                });
+			}else if(data.state==0){
+				var html = "<div><img src='"+data.headUrl+"' alt=''></div>" +
+				"<div class='myCenter_tel' >"+data.name+"</div>" +
+                "<div class='myCenter_tel' >"+data.phone+"</div>";
+				 $("#state").append(html);
+				 $("#state").show();
+				 $("#myRed").attr("accountId",data.id);
+			}else if(data.state==2){
+                alerw("请重新登录","",function(){
+                    //location.href="http://test2.juxinbox.com/giftpay_wap/giftpay/wap/wxLogin.htm"
+                })
+            }
+		}
+	});
+	//点击进入我的钱包
+	$("#wallet").click(function(){
+		var html = "./myCenter.html";
+		if(flag){
+			window.location.href="./myWallet.html";
+			return;
+		}else{
+			window.location.href="./bindCellPhone.html?html="+html;
+			return ;
+			}
+		
+	});
+	//红包中心
+	$("#myRed").click(function(){
+		var id = $("#myRed").attr("accountId");
+		var post = window.location.host;
+		window.location.href="http://"+post+"/giftcenter/toIndex?id="+id+"&mark="+1;
+	});
+</script>
+</body>
+</html>

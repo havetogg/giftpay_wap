@@ -1,0 +1,188 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+h1{
+    margin: 22px 50px;
+    font-weight: bold;
+    font-size: 48px;
+    color: #666666;
+}
+.tip,.tip span{
+    margin: 0px auto;
+    width: 539px;
+    font-size: 26px;
+    line-height: 38px;
+    color: #666666;
+}
+.select1 p{
+    width: 140px;
+    height: 30px;
+    font-size: 26px;
+    color: #666;
+}
+.quota{
+    margin: -37px 149px;
+    float: left;
+}
+.nu{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+.select1{
+    margin: 24px 46px;
+    width: 592px;
+    height: 50px;
+}
+
+
+
+
+.select2 p{
+    width: 140px;
+    height: 30px;
+    font-size: 26px;
+    color: #666;
+}
+.time{
+    margin: -37px 149px;
+    float: left;
+}
+.nu11{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+
+.nu12{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+
+.nu13{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+
+.nu21{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+.nu22{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+.nu23{
+    width: 96px;
+    height: 40px;
+    border: 1px solid #9E3939;
+    /* background: red; */
+    margin: 0px 0px;
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+}
+
+.select2{
+    margin: 24px 46px;
+    width: 592px;
+    height: 50px;
+}
+
+
+
+.protocol{
+    margin: 66px 38px;
+}
+.checkBoxBox{
+    width: 22px;
+    height: 22px;
+}
+.checkBox{
+    font-size: 24px;
+    color: #666;
+}
+
+.top{
+
+    margin: 76px 0px;
+}
+
+.pay{
+    margin: 38px 330px;
+    font-size: 26px;
+    width: 283px;
+    font-weight: bold;
+    color: #666;
+}
+.money{
+    font-size: 34px;
+    color: red;
+    font-weight: bold;
+}
+.apply{
+    width: 248px;
+    height: 62px;
+    margin: 36px 323px;
+    font-size: 26px;
+    line-height: 62px;
+    border: 1px solid;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+    background: #22ac38;
+    position: absolute;
+}
+.green{
+    background:#339933;
+}
+.white{
+    color: white;
+}
+.jiaYou{
+    font-size: 24px;
+    color: #666;
+    text-decoration: underline;
+}

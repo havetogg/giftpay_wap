@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>有礼付数据统计分析</title>
+    <link rel="shortcut icon" href="favicon.png">
+    <!---CSS Files-->
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <!---jQuery Files-->
+    <script src="js/jQuery-1.11.3.js"></script>
+    <script src="js/jquery-ui-1.8.17.min.js"></script>
+    <script src="js/styler.js"></script>
+    <script src="js/jquery.tipTip.js"></script>
+    <script src="js/colorpicker.js"></script>
+    <script src="js/sticky.full.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/flot/jquery.flot.min.js"></script>
+    <script src="js/flot/jquery.flot.resize.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
+    <script src="js/filterUser.js"></script>
+    <script src="js/oilCount.js"></script>
+</head>
+<style>
+    .ad-stats ul h3 {
+        text-align: right;
+        width: 120px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+    }
+    #todayForm li span,#totalForm li span{
+        font-size:16px;
+    }
+</style>
+<body>
+<div class="top-bar">
+    <ul id="nav">
+        <li id="user-panel">
+            <img src="img/giftLogo.png" id="usr-avatar" alt=""/>
+            <div id="usr-info">
+                <p id="usr-name">欢迎回来, admin.</p>
+                <p><a href="javascript:void(0)" onclick="initClosePage()">退出</a>
+                    <a href="javascript:void(0)" onclick="initLogon()">注销</a></p>
+            </div>
+        </li>
+        <li>
+            <ul id="top-nav">
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/dash.png" alt=""/>
+                        <p>用户数据</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="oilDashboard.html"><img src="img/nav/anlt-active.png" alt=""/>
+                        <p>95折加油</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="zshDashboard.html"><img src="img/nav/grid.png" alt=""/>
+                        <p>支付平台</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="PAdashboard.html"><img src="img/nav/flm.png" alt=""/>
+                        <p>平安办卡</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="PaLoanDashBoard.html"><img src="img/nav/flmloan.png" alt=""/>
+                        <p>平安贷款</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/tb.png" alt=""/>
+                        <p>缴费充值</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"> <img src="img/nav/cal.png" alt=""/>
+                        <p>乐途点</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/widgets.png" alt=""/>
+                        <p>自有商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/grid.png" alt=""/>
+                        <p>三方商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/flm.png" alt=""/>
+                        <p>积分商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/icn.png" alt=""/>
+                        <p>福利中心</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/err.png" alt=""/>
+                        <p>游戏中心</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/typ.png" alt=""/>
+                        <p>活动中心</p></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content container_12">
+	<div class="box grid_2">
+        <div class="box-head"><h2>总份数</h2></div>
+        <div class="box-content ad-stats">
+        	<h1 style="text-align: right;" id="totalNum">0</h1>
+        </div>
+        <div class="box-head"><h2>总金额</h2></div>
+        <div class="box-content ad-stats">
+            <h1 style="text-align: right;" id="totalPay">0</h1>
+        </div>
+        <div class="box-head"><h2>总返还</h2></div>
+        <div class="box-content ad-stats">
+            <h1 style="text-align: right;" id="totalAmount">0</h1>
+        </div>
+        <div class="box-head"><h2>总未返还</h2></div>
+        <div class="box-content ad-stats">
+            <h1 style="text-align: right;" id="totalReturn">0</h1>
+        </div>
+    </div>
+    <div class="box grid_2">
+        <div class="box-head"><h2>当日新增</h2></div>
+        <div class="box-content ad-stats">
+            <ul id="todayForm" >
+                <li><h3>当日份数</h3>
+                    <span class="add" id="todayNum">0</span></li>
+                <li><h3>当日金额</h3>
+                    <span class="register" id="todayPay">0</span></li>
+
+                <li><h3>新增返还</h3>
+                    <span class="zsh" id="todayReturn">0</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box grid_2">
+        <div class="box-head"><span class="fugue-24 counter"></span>
+            <h2>当月新增</h2></div>
+        <div class="box-content ad-stats">
+            <ul id="totalForm">
+                <li><h3>当月份数</h3>
+                    <span class="add" id="monthNum">0</span></li>
+                <li><h3>当月金额</h3>
+                    <span class="register" id="monthPay">0</span></li>
+                <li><h3>当月需返还</h3>
+                    <span class="zsh" id="monthReturn">0</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box grid_6">
+        <div class="box-head"><span class=" fugue-24 system-monitor"></span>
+            <h2>折线图</h2></div>
+        <div class="box-content">
+            <div id="flot-demo"></div>
+        </div>
+    </div>
+    <div class="box grid_12">
+        <div class="box-head"><h2>加油记录表</h2></div>
+        <div class="box-content no-pad">
+            <table class="display" id="example">
+            <thead>
+             <tr>
+               <th>用户编号</th>
+               <th>手机号</th>
+               <th>数量</th>
+               <th>记录生成时间</th>
+               <th>记录更新时间</th>
+               <th>付款金额</th>
+               <th>返还金额</th>
+               <th>未返还金额</th>
+           </tr>
+           </thead>
+           <tbody>
+           </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>南京聚目堂数码科技有限公司©版权所有</p>
+</div>
+
+<script> /* SCRIPTS */
+$(function () {
+   /* var sin = [], cos = [];
+    for (var i = 0; i < 14; i += 0.5) {
+        sin.push([i, Math.sin(i)]);
+        cos.push([i, Math.cos(i)]);
+    }
+   //x轴
+    var plot =$.plot($("#flot-demo"),  [ { label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] }, { label: "Bar", data: [ [11, 13], [19, 11], [30, -7] ] } ] ); 
+    var previousPoint = null;
+    $("#flot-demo").bind("plothover", function (event, pos, item) {
+        if ($("#enablePosition:checked").length > 0) {
+            var str = "(" + pos.x.toFixed(2) + ", " + pos.y.toFixed(2) + ")";
+            $("#hoverdata").text(str);
+        }
+    });*/
+});
+function getRootPath() {
+    // 获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var curWwwPath = window.document.location.href;
+    // 获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    // 获取主机地址，如： http://localhost:8083
+    var localhostPaht = curWwwPath.substring(0, pos);
+    // 获取带"/"的项目名，如：/uimcardprj
+    var projectName = pathName
+            .substring(0, pathName.substr(1).indexOf('/') + 1);
+    return (localhostPaht + projectName);
+}
+</script>
+
+
+</body>
+</html>

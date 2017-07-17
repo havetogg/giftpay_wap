@@ -1,0 +1,65 @@
+﻿<%@ page language="java" import="java.util.*" isELIgnored="false" pageEncoding="UTF-8"%>
+<%@include file="inc/timestamp.inc"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>支付结果</title>
+	<%@include file="inc/head.inc"%>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <link type="text/css" href="css/style.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <!--<script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>-->
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+<script>
+    $(function () {
+    	console.log(getQueryString("realAmount"));
+    	var realAmount = getQueryString("realAmount");
+    	var amount = realAmount + 50;
+    	$('.paySuccess_content').html('需付'+amount+'元，实付'+realAmount+'元红包抵扣50元');
+        $(".flexslider").flexslider({
+            animation: "slide", //String: Select your animation type, "fade" or "slide"图片变换方式：淡入淡出或者滑动
+            slideshowSpeed: 4000, //展示时间间隔ms
+            animationSpeed: 1100, //滚动时间ms
+            touch: true //是否支持触屏滑动
+        });
+    })
+</script>
+<body >
+
+<div class="zoomer" style="background-color: #ffffff;overflow-x: hidden;">
+    <div style="margin: 80px;">
+        <div class="jmt_center">
+            <img src="img/paySuccess.png" alt="">
+        </div>
+        <div class="paySuccess_content"></div>
+        <div class="jmt_center">
+            <img src="img/code.png" alt="" width="250px" height="250px">
+            <img src="img/code.png" alt="" style="    position: absolute;top: 0;left: 0;z-index: 999;opacity: 0;">
+        </div>
+
+        <div class="paySuccess_subContent">长按二维码随时查看</div>
+        <div class="paySuccess_subContent">你的红包和更多优惠</div>
+    </div>
+    <div class="noneBlock">
+
+    </div>
+    <div class="flexslider" style="width: 90%;margin: 10px auto;">
+        <ul class="slides">
+            <li><img  src="img/banner1.png" alt="1" width="90%"/></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

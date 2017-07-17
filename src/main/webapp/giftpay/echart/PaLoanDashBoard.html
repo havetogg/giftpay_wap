@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>有礼付数据统计分析</title>
+    <link rel="shortcut icon" href="favicon.png">
+    <!---CSS Files-->
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <!---jQuery Files-->
+    <script src="js/jQuery-1.11.3.js"></script>
+    <script src="js/jquery-ui-1.8.17.min.js"></script>
+    <script src="js/styler.js"></script>
+    <script src="js/jquery.tipTip.js"></script>
+    <script src="js/colorpicker.js"></script>
+    <script src="js/sticky.full.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/flot/jquery.flot.min.js"></script>
+    <script src="js/flot/jquery.flot.resize.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
+    <script src="js/filterUser.js"></script>
+
+</head>
+<style>
+    .ad-stats ul h3 {
+        text-align: right;
+        width: 120px;
+        font-family: "微软雅黑";
+        font-size: 14px;
+    }
+    #todayForm li span,#totalForm li span{
+        font-size:16px;
+    }
+</style>
+<body>
+<div class="top-bar">
+    <ul id="nav">
+        <li id="user-panel">
+            <img src="img/giftLogo.png" id="usr-avatar" alt=""/>
+            <div id="usr-info">
+                <p id="usr-name">欢迎回来, admin.</p>
+                <p><a href="javascript:void(0)" onclick="initClosePage()">退出</a>
+                    <a href="javascript:void(0)" onclick="initLogon()">注销</a></p>
+            </div>
+        </li>
+        <li>
+            <ul id="top-nav">
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/dash.png" alt=""/>
+                        <p>用户数据</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="oilDashboard.html"><img src="img/nav/anlt.png" alt=""/>
+                        <p>95折加油</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="zshDashboard.html"><img src="img/nav/grid.png" alt=""/>
+                        <p>支付平台</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="PAdashboard.html"><img src="img/nav/flm.png" alt=""/>
+                        <p>平安办卡</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="PaLoanDashBoard.html"><img src="img/nav/flmloan-active-active.png" alt=""/>
+                        <p>平安贷款</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/tb.png" alt=""/>
+                        <p>缴费充值</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"> <img src="img/nav/cal.png" alt=""/>
+                        <p>乐途点</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/widgets.png" alt=""/>
+                        <p>自有商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/grid.png" alt=""/>
+                        <p>三方商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/flm.png" alt=""/>
+                        <p>积分商城</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/icn.png" alt=""/>
+                        <p>福利中心</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/err.png" alt=""/>
+                        <p>游戏中心</p></a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html"><img src="img/nav/typ.png" alt=""/>
+                        <p>活动中心</p></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="content container_12">
+
+    <!--<div class="box grid_1">-->
+        <!--<div class="box-head"><h2>渠道号总计</h2></div>-->
+        <!--<div class="box-content ad-stats">-->
+            <!--<ul id="todayForm" >-->
+                <!--<li>渠道总数：-->
+                    <!--<span class="add" id="allCount">0</span></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+
+
+    <!--<div class="box grid_11">-->
+        <!--<div class="box-head"><h2>渠道信息汇总表</h2></div>-->
+        <!--<div class="box-content no-pad">-->
+            <!--<table class="display" id="example2">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>渠道CODE</th>-->
+                    <!--<th>渠道用户点击量</th>-->
+                    <!--<th>渠道留存手机号码数量</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
+   <!-- <div class="box grid_6">
+        <div class="box-head"><span class=" fugue-24 system-monitor"></span>
+            <h2>折线图</h2></div>
+        <div class="box-content">
+            <div id="flot-demo"></div>
+        </div>
+    </div>-->
+    <div class="box grid_12">
+        <div class="box-head"><h2>平安贷款</h2></div>
+        <div class="box-content no-pad">
+            <table class="display" id="example">
+            <thead>
+             <tr>
+               <th>序号</th>
+               <th>姓名</th>
+               <th>手机号</th>
+               <th>手机归属地</th>
+                 <th>IP地址</th>
+                 <th>IP归属地</th>
+               <th>注册时间</th>
+           </tr>
+           </thead>
+           <tbody>
+           </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>南京聚目堂数码科技有限公司©版权所有</p>
+</div>
+
+<script> /* SCRIPTS */
+$(function () {
+
+});
+function getRootPath() {
+    // 获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var curWwwPath = window.document.location.href;
+    // 获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    // 获取主机地址，如： http://localhost:8083
+    var localhostPaht = curWwwPath.substring(0, pos);
+    // 获取带"/"的项目名，如：/uimcardprj
+    var projectName = pathName
+            .substring(0, pathName.substr(1).indexOf('/') + 1);
+    return (localhostPaht + projectName);
+}
+</script>
+
+<script type="text/javascript" >
+
+    $(function (){
+        initThirdTables();
+    })
+
+    function initThirdTables() {
+        $.ajax({
+            type: "GET",
+            url: getRootPath() + "/pinganBankGo/searchLoanUserList.htm",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                var str='';
+                $.each(data,function(index,item){
+                    if(index%2==0){
+                        str+='<tr class="odd gradeX">';
+                    }else{
+                        str+='<tr class="even gradeC">';
+                    }
+
+                    str+='<td>'+item.id+'</td>';
+                    str+='<td class="center">'+item.username+'</td>';
+                    str+=' <td>'+item.phone+'</td>';
+                    str+=' <td class="center">'+item.address+'</td>';
+                    str+=' <td>'+item.ipaddress+'</td>';
+                    str+=' <td class="center">'+item.ipaddress_true+'</td>';
+                    str+=' <td>'+item.createtime+'</td></tr>';
+
+                })
+                $("#example tbody").html(str);
+                $('#example').DataTable();
+
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

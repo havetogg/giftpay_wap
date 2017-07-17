@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.PaBankUserDao">
+
+	<resultMap type="org.jumutang.giftpay.entity.PaBankUser" id="baseResult">
+		<result column="id" property="id" />
+		<result column="openid" property="openid" />
+		<result column="phone" property="phone" />
+		<result column="createtime" property="createtime" />
+		<result column="get_bankuser" property="get_bankuser" />
+		<result column="old_bankuser" property="old_bankuser" />
+		<result column="total_count" property="total_count" />
+		<result column="exits" property="exits" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="openid !=null">
+				and openid = #{openid}
+			</if>
+			<if test="phone !=null">
+				and phone = #{phone}
+			</if>
+		</where>
+	</sql>
+
+
+	<!--添加数据 -->
+	<insert id="PaUserAdd" parameterType="org.jumutang.giftpay.entity.PaBankUser" >
+		insert into t_pabank_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			openid,phone ,createtime
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			#{openid},#{phone} ,now()
+		</trim>
+	</insert>
+
+	<!--修改数据-->
+	<update id="PaUserUpdate"  parameterType="org.jumutang.giftpay.entity.PaBankUser"  >
+		update t_pabank_user
+		<set>
+			<if test="phone !=null">
+				phone = #{phone},
+			</if>
+			<if test="get_bankuser !=null">
+				get_bankuser  = #{get_bankuser},
+			</if>
+			<if test="old_bankuser  !=null">
+				old_bankuser  =old_bankuser +  #{old_bankuser},
+			</if>
+		</set>
+		<where>
+			openid = #{openid}
+		</where>
+	</update>
+
+	<!--查询数据-->
+	<select id="PaUserList" parameterType="org.jumutang.giftpay.entity.PaBankUser" resultMap="baseResult">
+		select * from t_pabank_user
+		<include refid="wherecause" />
+	</select>
+
+	
+</mapper>

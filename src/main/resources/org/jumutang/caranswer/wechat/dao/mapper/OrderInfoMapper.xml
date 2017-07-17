@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IOrderInfoDao">
+
+	<resultMap type="org.jumutang.caranswer.wechat.viewmodel.OrderInfoView" id="orderInfoView">
+		<result column="c_price" property="price"/>
+		<result column="c_monthcount" property="monthCount"/>
+		<result column="c_allmoney" property="allMoney"/>
+		<result column="c_createtime" property="orderTime"/>
+		<result column="backMonth" property="backMonth"/>
+		
+		<result column="c_orderid" property="orderId"/>
+		<result column="c_businessorderid" property="businessorderid"/>
+	</resultMap>
+	
+	
+	<resultMap type="org.jumutang.caranswer.model.OrderInfo" id="orderInfo">
+		<result column="c_orderid" property="orderID"/>
+		<result column="c_gaspackagesid" property="gasPackagesID"/>
+		<result column="c_userid" property="userID"/>
+		<result column="c_price" property="price"/>
+		<result column="c_businessorderid" property="businessOrderID"/>
+		<result column="c_status" property="status"/>
+		<result column="c_createtime" property="createTime"/>
+		<result column="c_payurl" property="payurl"/>
+	</resultMap>
+	
+
+	<insert id="insertOrderInfo" parameterType="org.jumutang.caranswer.model.OrderInfo">
+		insert into
+		t_orderinfo
+		(c_orderid,c_gaspackagesid,c_userid,c_price,c_status,c_createtime)
+		values
+		(#{orderID},#{gasPackagesID},#{userID},#{price},'2',now())
+	</insert>
+
+	<update id="updateOrderInfo" parameterType="org.jumutang.caranswer.model.OrderInfo">
+		update t_orderinfo 
+			<set>
+				<if test="businessOrderID != null and businessOrderID != '' ">
+				c_businessorderid = #{businessOrderID},
+				</if>
+				<if test="result != null and result != '' ">
+				c_result = #{result},
+				</if>
+				<if test="status != null and status != '' ">
+				c_status = #{status},
+				</if>
+				<if test="payurl != null and payurl != '' ">
+				c_payurl = #{payurl},
+				</if>
+				
+				<if test="status != null and status == '0'.toString() ">
+				c_deletetime = now(),
+				</if>
+
+				c_updatetime = now() 
+			</set>
+		where 
+			1 = 1 
+			<if test="userID != null and userID != '' ">
+				and	c_userid = #{userID} 
+			</if>
+			<if test="orderID != null and orderID != '' ">
+				and c_orderid = #{orderID} 
+			</if>
+			
+		
+	</update>
+	
+	
+	<select id="queryOrderRecords" parameterType="org.jumutang.caranswer.model.OrderInfo" resultMap="orderInfoView">
+		select a.c_orderid , DATE_FORMAT(a.c_createtime,'%Y-%m-%d %T') c_createtime ,a.c_price  , 
+		b.c_monthcount ,b.c_allmoney  , count(c.c_orderid) backMonth ,
+		 a.c_orderid , a.c_businessorderid
+		from t_orderinfo a left join t_gaspackages b 
+		on a.c_gaspackagesid = b.c_gaspackagesid
+		left join t_redinfo c on a.c_orderid =  c.c_orderid  and c.c_starttime > now()
+		where  c_status = '1'  
+		<if test="orderID !=null and orderID != '' ">
+			and a.c_orderid = #{orderID} 
+		</if>
+		<if test="userID != null and userID != '' ">
+			and	a.c_userid = #{userID} 
+		</if>
+		group by c.c_orderid 
+	</select>
+	
+	
+	<select id="queryOrderInfo" parameterType="org.jumutang.caranswer.model.OrderInfo" resultMap="orderInfo">
+			select * from t_orderinfo
+			where 1=1 
+			<if test="orderID != null and orderID != '' ">
+				and c_orderid = #{orderID} 
+			</if>
+			<if test="userID != null and userID != '' ">
+				and c_userid = #{userID} 
+			</if>
+			<if test="status != null and status != '' ">
+				and c_status = #{status} 
+			</if>
+	</select>
+
+
+</mapper>

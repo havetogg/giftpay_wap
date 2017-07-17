@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>电费充值</title>
+   <link type="text/css" href="css/account.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js" ></script>
+    <script type="text/javascript" src="js/common/common.js" ></script>
+    <script type="text/javascript" src="js/recharge.js" ></script>
+    <script type="text/javascript" src="js/index.js" ></script>
+</head>
+
+<script>
+
+</script>
+
+<body>
+<div class="zoomer">
+    <div class="rechargeAccount">
+        <div class="card3">
+            <ul>
+				<li>
+					<label>缴费单位</label>
+					<span class="unitName"></span>
+				</li>
+				<li>
+					<label>缴费户号</label>
+					<span class="unitNo"></span>
+				</li>
+				<li>
+					<label>当前欠费</label>
+					<span  id="balance">-</span>
+					<!--
+						欠费时使用	
+						<span class="rmb">110.00</span> 
+					-->
+				</li>
+            </ul>
+        </div>
+        <!--无欠费,有记录-->
+        <div class="not_arrearage">
+        	<ul>
+        		<li>
+        			<label>最近缴费</label>
+        			<span class="rechargeTime"></span>
+        		</li>
+        		<li>
+        			<label>缴费金额</label>
+        			<span class="rmb"></span>
+        		</li>
+        	</ul>
+        </div>
+        <!--有欠费-->
+        <div class="arrearage">
+        	<ul>
+        		<li>
+        			<label>充值金额</label>
+        			<input type="number" class="rechargeMoney"  placeholder="请输入充值金额" />
+        		</li>
+        		<li  class="redLi">
+        			<label>抵用券</label>
+        			<span class="redpkgs">暂无抵用券</span>
+        		</li>
+        	</ul>
+        </div>
+    </div> 
+    <!--充值按钮/欠费时显示-->
+    <a class="recharge" href="javascript:;">充值</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+.top{
+
+    margin: 68px 150px;
+
+    font-weight: bold;
+
+    font-size: 34px;
+
+    color: #666666;
+}
+.call{
+
+    font-size: 28px;
+
+    margin: -29px 29px;
+}
+.tip{
+
+    font-size: 27px;
+
+    width: 563px;
+
+    line-height: 43px;
+
+    margin: 48px 31px;
+}
+.chedaying{
+
+    font-size: 26px;
+
+    margin: 47px 463px;
+
+    width: 122px;
+}
+.pic{
+
+    margin: 0px 211px;
+}
+.tips{
+
+    font-size: 24px;
+
+    line-height: 35px;
+
+    width: 494px;
+
+    margin: 82px 60px;
+
+    color: #008000;
+}
+.totleMoney{
+    font-size: 27px;
+
+}

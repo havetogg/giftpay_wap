@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/city.js"></script>
+</head>
+
+<script>
+function editAccount() {
+    $('#edit').hide();
+    $('#cancelEdit').show();
+}
+function editAccountCancel() {
+    $('#cancelEdit').hide();
+    $('#edit').show();
+}
+function selectCity() {
+  $('.bg_block').show();
+}
+function cancelSelectCity() {
+    $('.bg_block').hide();
+}
+function saveAddress() {
+    window.location.href="./index.html";
+}
+function goBack() {
+    window.location.href="./index.html";
+}
+</script>
+
+<body style="background-color: #f0f0f4">
+<div style="background-color: #f0f0f4;position:fixed;" class="zoomer">
+     <div class="index">
+         <div class="html_top">
+             <img src="img/left_arrow.png" alt="" onclick="goBack()">
+            修改地址
+         </div>
+         <ul class="address_li">
+             <li>
+                 <label class="_name">
+                     所属省份
+                 </label>
+                 <label>
+                     <select name="" id="">
+                         <option value="">请选择省份</option>
+                         <option value="">江苏省</option>
+                         <option value="">安徽省</option>
+                         <option value="">福建省</option>
+                     </select>
+                 </label>
+                 <label class="_img">
+                     <img src="img/right_arrow.png" alt="">
+                 </label>
+             </li>
+             <li>
+                 <label class="_name">
+                     所属城市
+                 </label>
+                 <label>
+                     <select name="">
+                         <option value="">请选择省份</option>
+                         <option value="">江苏省</option>
+                         <option value="">安徽省</option>
+                         <option value="">福建省</option>
+                     </select>
+                 </label>
+                 <label class="_img">
+                     <img src="img/right_arrow.png" alt="">
+                 </label>
+             </li>
+         </ul>
+         <div onclick="saveAddress()" class="address_saveBtn">
+             保存
+         </div>
+     </div>
+</div>
+</body>
+</html>

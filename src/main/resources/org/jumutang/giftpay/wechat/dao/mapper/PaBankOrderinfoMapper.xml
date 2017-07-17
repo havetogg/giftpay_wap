@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.PaBankOrderinfoDao">
+
+	<resultMap type="org.jumutang.giftpay.entity.PaBankOrderinfo" id="baseResult">
+		<result column="id" property="id" />
+		<result column="openid" property="openid" />
+		<result column="createtime" property="createtime" />
+		<result column="money" property="money" />
+		<result column="phone" property="phone" />
+		<result column="usercount" property="usercount" />
+		<result column="status" property="status" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="openid !=null">
+				and openid = #{openid}
+			</if>
+			<if test="phone !=null">
+				and phone = #{phone}
+			</if>
+		</where>
+	</sql>
+
+	<!--添加提现订单-->
+	<insert id="PaBankOrderinfoAdd"  parameterType="org.jumutang.giftpay.entity.PaBankOrderinfo" >
+		insert into t_pabank_orderinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			openid ,usercount ,money  ,phone ,createtime
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			#{openid},#{usercount},#{money},#{phone},now()
+		</trim>
+	</insert>
+
+	<!--查询数据-->
+	<select id="PaBankOrderList" parameterType="org.jumutang.giftpay.entity.PaBankOrderinfo"  resultMap="baseResult" >
+		select * from t_pabank_orderinfo
+		<include refid="wherecause" />
+	</select>
+
+	
+</mapper>

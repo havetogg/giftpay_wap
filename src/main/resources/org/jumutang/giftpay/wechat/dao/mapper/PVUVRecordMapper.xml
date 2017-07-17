@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IPVUVRecordDao">
+
+	<resultMap type="org.jumutang.giftpay.entity.PVUVRecordModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="pv_today" property="pvToday" />
+		<result column="uv_today" property="uvToday" />
+		<result column="pv_total" property="pvTotal" />
+		<result column="uv_total" property="uvTotal" />
+	</resultMap>
+
+	<select id="queryAllPVUVRecord" parameterType="org.jumutang.giftpay.entity.PVUVRecordModel" resultMap="baseResult">
+		select id,pv_today,uv_today,pv_total,uv_total from t_pvuv_record
+	</select>
+
+</mapper>

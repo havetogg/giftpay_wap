@@ -1,0 +1,84 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+h1{
+    margin: 58px 50px;
+    font-weight: bold;
+    font-size: 48px;
+    color: #666666;
+}
+.tip,.tip span{
+    font-size: 26px;
+    margin: -32px auto;
+    line-height: 38px;
+    width: 539px;
+    color: #666666;
+}
+.tip1,.tip2,.tip3{
+    font-size: 32px;
+    /* margin: 10px 0px; */
+    line-height: 56px;
+}
+.tip0{
+    margin: 86px 51px;
+    width: 554px;
+}
+.tip0 span{
+    font-size: 41px;
+    color: red;
+    font-weight: bold;
+}
+.oldMoney{
+    font-size: 23px;
+    color: black !important;
+    font-weight: bold;
+}
+.protocol{
+    margin: -92px 92px;
+    /* width: 448px; */
+}
+.checkBoxBox{
+    width: 24px;
+    height: 24px;
+}
+.checkBox{
+    font-size: 26px;
+    color: #666;
+}
+
+
+
+.xieYi{
+    font-size: 26px;
+}
+.apply{
+    width: 246px;
+    height: 68px;
+    margin: 136px 346px;
+    font-size: 26px;
+    line-height: 68px;
+    border: 1px solid;
+    text-align: center;
+    position: absolute;
+    border-radius: 8px;
+    color: white;
+    background: #22ac38;
+}
+.green{
+    background:#339933;
+}
+.tip4{
+    margin: 114px 45px;
+    font-size: 22px;
+    color: #FB0000;
+    width: 544px;
+    line-height: 36px;
+}
+.readAgreement{
+    margin: 22px 164px;
+    font-size: 28px;
+    color: #22ac38;
+    width: 138px;
+    text-decoration: underline;
+}

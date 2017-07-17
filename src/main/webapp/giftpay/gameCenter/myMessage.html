@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>我的消息</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script>
+    function getReward() {
+        $('#tip1').show();
+    }
+    function closeTip() {
+        $('#tip1').hide();
+    }
+    </script>
+</head>
+<body>
+<div id="tip1" class="game_block">
+    <div class="recharge_block">
+        <div class="tip_contentText2">
+            领取成功
+        </div>
+        <div class="tip_contentDiv2">
+                <label class="diamond_bg">
+                    <label class="coin_diamond_value">30</label>
+                </label>
+                <label class="coin_bg">
+                    <label class="coin_diamond_value">300</label>
+                </label>
+        </div>
+        <div>
+            <img src="img/recharge_btn.png" alt="" onclick="closeTip()">
+        </div>
+    </div>
+</div>
+<div class="zoomer">
+    <div class="gameCenter">
+        <div class="systemMessages">
+            <ul>
+                <li>
+                    <div class="flex">
+                        <div class="flex-1">
+                            <div>
+                                <span class="tittle">VIP LV2 每周会员钻石福利已到账</span>
+                            </div>
+                            <div>
+                                <span class="content">亲爱的会员，我们已将10钻石双手奉上！</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/getBtn.png" alt="" onclick="getReward()">
+                        </div>
+                    </div>
+                    <div class="timeParent">
+                        <span class="time">2017-03-23  12:00:00</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div class="flex-1">
+                            <div>
+                                <span class="tittle">排行榜钻石福利已到账</span>
+                            </div>
+                            <div>
+                                <span class="content">您在上周“加油达人”游戏中获得的金币数量超越了大部分玩家，名列排行榜NO.10，特发5钻石，以兹鼓励。</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/getBtn.png" alt="" onclick="getReward()">
+                        </div>
+                    </div>
+                    <div class="timeParent">
+                        <span class="time">2017-03-23  12:00:00</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span class="tittle">VIP等级提升！</span>
+                    </div>
+                    <div>
+                        <span class="content">您的VIP等级已提升为 VIP LV2 ，每周将获得10钻石奖励！</span>
+                    </div>
+                    <div class="timeParent">
+                        <span class="time">2017-03-23  12:00:00</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <span class="tittle">充值到账通知</span>
+                    </div>
+                    <div>
+                        <span class="content">您充值的300钻已成功到账。</span>
+                    </div>
+                    <div class="timeParent">
+                        <span class="time">2017-03-23  12:00:00</span>
+                    </div>
+                </li>
+            </ul>
+            <!--没有消息-->
+            <div class="noMessages" style="display: none;">
+                <div class="jmt_center">
+                    <img src="img/messageIcon.png" alt="">
+                </div>
+
+                <div class="noMessageDiv">
+                    您还没有收到消息哦
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IRecoGoodsDao">
+
+	<resultMap type="org.jumutang.giftpay.model.RecoGoodsModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="imgUrl" property="imgUrl" />
+		<result column="linkUrl" property="linkUrl" />
+		<result column="originalCost" property="originalCost" />
+		<result column="discountCost" property="discountCost" />
+		<result column="discount" property="discount" />
+		<result column="clickNum" property="clickNum"/>
+		<result column="state" property="state" />
+		<result column="createTime" property="createTime" />
+	</resultMap>
+
+    <insert id="addGoods"  parameterType="org.jumutang.giftpay.model.RecoGoodsModel" >
+    insert into t_reco_goods(name,imgUrl,linkUrl,originalCost,discountCost,discount,clickNum)
+    value(#{name},#{imgUrl},#{linkUrl},#{originalCost},#{discountCost},#{discount},0);
+    </insert>
+	 
+	 
+	 <select id="queryGoodsList" parameterType="org.jumutang.giftpay.model.RecoGoodsModel" resultMap="baseResult">
+		select id,name,imgUrl,linkUrl,originalCost,discountCost,discount,clickNum,state,createTime
+		from t_reco_goods where state = 1  order by createTime desc  limit 0,6;
+	</select>
+	 
+	 <update id="updateClickNum" parameterType="org.jumutang.giftpay.model.RecoGoodsModel">
+		update t_reco_goods
+		<set>
+			clickNum=clickNum+1
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	
+</mapper>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.contents{
+    		width: 640px;
+    		min-height: 1065px;
+    		position: absolute;
+    		background: #f0f0f4;
+    	}
+    	.head{
+    		width: 640px;
+    		height: 70px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.jiantou{
+    		position: absolute;
+    		width: 16px;
+    		height: 28px;
+    		margin: 20px 20px;
+    	}
+    	.title{
+    		width: 640px;
+    		height: 70px;
+    		text-align: center;
+    		font-size: 24px;
+    		line-height: 74px;
+    	}
+    	.list{
+    		width: 600px;
+    		height: 130px;
+    		background: #FFFFFF;
+    		margin-left: 20px;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.money{
+    		width: 200px;
+    		height:57px;
+    		font-size: 24px;
+    		line-height: 90px;
+    		float: left;
+    	}
+    	.money span{
+    		font-size: 24px;
+    	}
+    	.time{
+    		width: 400px;
+    		height: 57px;
+    		line-height: 90px;
+    		font-size: 20px;
+    		float: left;
+    		color: #999999;
+    		text-align: right;
+    	}
+    	.total-money{
+    		width: 190px;
+    		height: 40px;
+    		font-size: 20px;
+    		color: #999999;
+    		line-height: 69px;
+    		float: left;
+    	}
+    	.total-money span{
+    		color: #999999;
+    		font-size: 20px;
+    	}
+    	.total-time{
+    		width: 200px;
+    		height: 40px;
+    		font-size: 20px;
+    		color: #999999;
+    		line-height: 69px;
+    		float: left;
+    	}
+    	.total-time span{
+    		font-size: 20px;
+    		color: #999999;
+    	}
+    	.yuqi{
+    		width: 150px;
+    		height: 40px;
+    		font-size: 20px;
+    		color: #57a907;
+    		line-height: 69px;
+    		text-align: right;
+    		float: left;
+    		margin-left: 60px;
+    	}
+    	.yuqi span{
+    		color: #57a907;
+    		font-size: 20px;
+    	}
+    	.dingdan-list{
+    		width: 600px;
+    		height: 110px;
+    		margin-left: 20px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.dnew{
+    		width: 300px;
+    		height: 57px;
+    		line-height: 90px;
+    		font-size: 20px;
+    	}
+    	.dcard{
+    		width: 480px;
+    		height: 40px;
+    		line-height: 49px;
+    		font-size: 20px;
+    		color: #999999;
+    	}
+    	.dcard span{
+    		font-size: 20px;
+    		color: #999999;
+    	}
+    	.cont{
+    		width: 640px;
+    		background: #FFFFFF;
+    		border-bottom:solid #D9D9D9 1px;
+    	}
+    	.fnew{
+    		width: 300px;
+    		height: 70px;
+    		line-height: 90px;
+    		font-size: 20px;
+    		margin-left: 20px;
+    	}
+    	.con{
+    		width: 640px;
+    		background: #FFFFFF;
+    		margin: 0 auto;
+    	}
+    	.cont-pic{
+    		width: 1px;
+    		height: 100px;
+    		background: #D9D9D9;
+    		margin-left: 35px;
+    		float: left;
+    	}
+    	.time-list{
+    		width: 600px;
+    		height: 100px;
+    	}
+    	.time-list-pic{
+    		width: 10px;
+    		height: 10px;
+    		border-radius: 50px;
+    		background: #D9D9D9;
+    		float: left;
+    		margin-left: -5px;
+    	}
+    	.time-list-pic_{
+    		width: 15px;
+    		height: 15px;
+    		border-radius: 50px;
+    		background: url(img/19.png);
+    		float: left;
+    		margin-left: 28px;
+    		z-index: 9999;
+    		position: absolute;
+    	}
+    	.time-list-con{
+    		width: 500px;
+    		margin-left: 54px;
+    		font-size: 24px;
+    		line-height: 30px;
+    	}
+    	.time-list-time{
+    		width: 500px;
+    		margin-left: 65px;
+    		font-size: 24px;
+    	}
+    	.time-list-con_{
+    		width: 500px;
+    		margin-left: 54px;
+    		font-size: 24px;
+    		line-height: 30px;
+    		color: #57a907;
+    	}
+    	.time-list-time_{
+    		width: 500px;
+    		margin-left: 65px;
+    		font-size: 24px;
+    		color: #57a907;
+    	}
+    	.tip{
+    		width: 600px;
+    		height: 200px;
+    		margin: 26px auto;
+    	}
+    	p{
+    		width: 600px;
+    		font-size: 20px;
+    		color: #888888;
+    		letter-spacing: 1px;
+    		line-height: 30px;
+    		margin-top: 20px;
+    	}
+    	p span{
+    		font-size: 20px;
+    		color: #218ded;
+    	}
+		.time-list-time span{
+			line-height: 43px;
+			font-size: 20px !important;
+		}
+    </style>
+    <script type="text/javascript">
+    	$(function(){
+    		$.ajax({
+    	        url: getRootPath() + "/oil/queryOilRecord.htm",
+    	        data: {"recordId": getUrlParam('recordId')},
+    	        dataType: "json",
+    	        type: "post",
+    	        success: function (data) {
+    	        	if(data.success){
+						var data = data.data;
+						$('#payAmount').html(data.payamount);
+						$('#createTime').html(data.createTime);
+						$('#totalAmount').html(data.totalamount);
+						$('#cycle').html(data.cycle);
+						$('#oilRecordId').html(data.id);
+						var monthamount = data.monthamount;
+						var beginYear = data.createtime.split("-")[0];
+						var beginMonth = data.createtime.split("-")[1];
+                        $.ajax({
+                            url: getRootPath() + "/oil/queryOilSubRecord.htm",
+                            data: {"recordId": getUrlParam('recordId')},
+                            dataType: "json",
+                            type: "post",
+                            success: function (data) {
+                                if(data.success){
+                                    var data = data.data;
+                                    var html = '<div class=\"fnew\">返还信息</div>';
+                                    if(data.length==0){
+                                        html += "<div class=\"time-list\">"
+                                            + "                    <div class=\"cont-pic\"></div>"
+                                            + "                    <div class=\"time-list-pic_\"></div>"
+                                            + "                    <div class=\"time-list-con_\">【第1期】￥"+monthamount+"加油红包将于下方日期发放</div>"
+                                            + "                    <div class=\"time-list-time_\">"+beginYear+"-"+(beginMonth*1+1)+"-"+"20"+"</div>"
+                                            + "                </div>"
+                                    }else{
+                                        var year = parseInt(data[0].createtime.substring(0,4));
+                                        var month = parseInt(data[0].createtime.substring(5,7)) + 1;
+                                        if(month == 13){
+                                            year = year +1;
+                                            month = 1;
+										}
+                                        if(data.length!=12){
+                                            $('#leftMonth').html('余期：'+parseInt(12-data.length)+'个月');
+                                            html += "<div class=\"time-list\">"
+                                                + "                    <div class=\"cont-pic\"></div>"
+                                                + "                    <div class=\"time-list-pic_\"></div>"
+                                                + "                    <div class=\"time-list-con_\">【第"+(data.length*1+1)+"期】￥"+monthamount+"加油红包将于下方日期发放</div>"
+                                                + "                    <div class=\"time-list-time_\">"+year+"-"+month+"-"+"20"+"</div>"
+                                                + "                </div>"
+                                        }else{
+                                            $('#leftMonth').html('已完成');
+                                        }
+                                        for(var i = 0; i < data.length; i++){
+                                            var item = data[i];
+                                            html += "<div class=\"time-list\">"
+                                                + "                    <div class=\"cont-pic\"></div>"
+                                                + "                    <div class=\"time-list-pic\"></div>"
+                                                + "                    <div class=\"time-list-con\">【第"+(i*1+1)+"期】￥"+monthamount+"加油红包将于下方日期发放</div>"
+                                                + "                    <div class=\"time-list-time\"><span>"+item.createtime.substring(0,10)+"</span></div>"
+                                                + "                </div>"
+                                        }
+                                    }
+                                    $('.cont').html(html);
+                                }else{
+                                    alert(data.errMsg);
+                                }
+                            }
+                        });
+    	        	}else{
+    	        		alert('获取信息失败');
+    	        	}
+    	        }
+    	    });
+    		$(".jiantou").click(function(){
+    			location.href="dingdanqueren.html"
+    		})
+    	})
+    </script>
+	</head>
+	<body>
+		<div class="zoomer">
+			<div class="contents">
+				<div class="head">
+					<div class="jiantou" style="display:none"><img src="img/1.png"></div>
+					<div class="title">购买记录详情</div>
+				</div>
+				<div class="con">
+				<div class="list">
+					<div class="money">支付金额￥<span id="payAmount"></span></div>
+					<div class="time" id="createTime"></div>
+					<div class="total-money">奖励总额：￥<span id="totalAmount"></span></div>
+					<div class="total-time">服务期限：<span id="cycle"></span>个月</div>
+					<div class="yuqi"><span id="leftMonth"></span></div>
+					<div class="over" style="display: none;" id="status"></div>
+				</div>
+				<div class="dingdan-list">
+					<div class="dnew">订单信息</div>
+					<div class="dcard">订单编号：<span id="oilRecordId"></span></div>
+				</div>
+				</div>
+				<div class="cont">
+					<div class="fnew">返还信息</div>
+					
+					<!-- <div class="time-list">
+						<div class="cont-pic"></div>
+						<div class="time-list-pic_"></div>
+						<div class="time-list-con_">【12月】￥500加油红包将于下个日期发放</div>
+						<div class="time-list-time_">2016-12-01</div>
+					</div>
+					<div class="time-list">
+						<div class="time-list-pic"></div>
+						<div class="time-list-con">【12月】￥500加油红包将于下个日期发放</div>
+						<div class="time-list-time">2016-12-01</div>
+					</div>
+					<div class="time-list">
+						<div class="time-list-pic"></div>
+						<div class="time-list-con">【12月】￥500加油红包将于下个日期发放</div>
+						<div class="time-list-time">2016-12-01</div>
+					</div> -->
+					
+				</div>
+				<div class="tip">
+				<div class="tip-title"><img src="img/18.png"></div>
+				<p>本记录仅供查询使用，不作任何凭据。如对记录内容有任何疑问，请致电客服：<span>400-0808-065</span>咨询。</p>
+			</div>
+			</div>
+		</div>
+	</body>
+</html>

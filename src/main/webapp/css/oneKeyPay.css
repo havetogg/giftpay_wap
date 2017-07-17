@@ -1,0 +1,71 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+.top {
+
+    width: 640px;
+
+    height: 157px;
+
+    background: #e5e9ec;
+
+    border-bottom: 1px solid #888;
+}
+.top h1{
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    margin: 27px 224px;
+
+    position: absolute;
+
+    color: #231E1E;
+}
+.money{
+
+    position: absolute;
+
+    margin: 92px 182px;
+
+    font-size: 50px;
+
+    color: #fd625d;
+}
+.haoMuch{
+    position: absolute;
+    font-size: 50px;
+    color: #fd625d;
+}
+.bankCard{
+
+    height: 101px;
+
+    border: 1px solid #888;
+
+    margin: 34px 0px;
+
+    background: white;
+}
+.cardNum{
+
+    font-size: 30px;
+
+    position: absolute;
+
+    margin: 26px 0px;
+}
+.bankCard input{
+
+}
+.pay{
+
+}
+.chaBank{
+
+}
+.tip{
+
+}

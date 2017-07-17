@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="html_gray">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>平安银行</title>
+    <script src="js/layout.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="js/index2.js"></script>
+    <script src="js/m.tool.juxinbox.com.js"></script>
+    <link rel="stylesheet" href="css/tool.css">
+    <link rel="stylesheet" href="css/app2.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+</head>
+<body>
+    <div class="index2_bg">
+        <div id="money_tip" class="my_money1_off">
+            <div class="my_money_content">
+                <div style="padding: 10px 20px;">
+                    <div class="my_money_title1">我的奖金</div>
+                    <ul class="flex subContent">
+                        <li class="flex-1">
+                            <div class="my_money_subTitle1">已推荐</div>
+                            <div class="my_money_subNumber1"><a>200</a><a class="person_1">人</a></div>
+                        </li>
+                        <li class="flex-1">
+                            <div class="my_money_subTitle1">推荐成功</div>
+                            <div class="my_money_subNumber1"><a>10</a><a class="person_1">人</a></div>
+                        </li>
+                    </ul>
+                    <ul class="flex imgss">
+                        <li class="flex-1 jmt_center">
+                            <img src="img/pig.png" alt="" style="    width: 180px;">
+                        </li>
+                        <li class="flex-1">
+                            <div class="tips11">已获奖金</div>
+                            <div><a class="tips22">70</a><a class="tips33">元</a></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="my_money_iknow1" onclick="iKnows()">我知道了</div>
+            </div>
+        </div>
+        <div id="GetMoney_tip" class="getMy_money1_off">
+            <div class="my_money_content1">
+                <div style="padding: 20px 20px;">
+                    <div class="my_money_title">申请提现</div>
+
+                    <div class="getCash_txt">
+                        <div class="getCash_text">
+                            确认将已获奖金
+                        </div>
+                        <div class="getCash_text">
+                            提现至微信钱包吗
+                        </div>
+                        <div>
+                            <input id="my_money_input" class="my_money_input" maxlength="11" type="tel" placeholder="请输入手机号码">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="my_money_iknow flex" onclick="iKnows()">
+                    <div class="flex-1 getCash_cancel" onclick="getCashCancel()">取消</div>
+                    <div id="getCashBtn" class="flex-1 my_money_getBtn_" onclick="getCashSure()">确认提现</div>
+                </div>
+            </div>
+        </div>
+        <div class="index_title">
+            <img src="img/index_top.png" alt="">
+        </div>
+        <div class="flex">
+            <div class="shuText">
+                <a>
+                    下面还有更多惊喜
+                </a>
+            </div>
+            <div class="index2_content">
+                <div>
+                    <img src="img/index2.png" alt="">
+                </div>
+                <div class="text">
+                	<h1>平安车主信用卡推广，成功开卡并首刷得50元佣金</h1>
+                	<p>（本单任务限首次办理平安信用卡的用户）</p>
+                </div>
+                <div class="index2_btns">
+                    <img src="img/btn2.png" alt="" onclick="showMoneyTip()">
+                </div>
+                <div class="index2_btns">
+                    <img src="img/btn1.png" alt="" onclick="getCascadeTip()">
+                </div>
+                <div class="index2_code">
+                    <img src="img/code.png" alt="">
+                    <div class="index2_code_title">长按二维码</div>
+                    <div class="index2_code_title1">随时查看业绩和待推产品</div>
+                </div>
+            </div>
+            <div class="shuText">
+                <a>
+                    下面还有更多惊喜
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

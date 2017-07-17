@@ -1,0 +1,69 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+h1{
+    font-size: 38px;
+    margin: 34px 44px;
+    font-weight: bold;
+}
+h2{
+    font-size: 26px;
+    margin: 23px 32px;
+}
+.tip1{
+    font-size: 28px;
+    margin: -1px 37px;
+    width: 600px;
+    line-height: 38px;
+    color: #008000;
+}
+.information{
+    margin: 104px 0px;
+}
+.information p:nth-of-type(2n+1){
+    margin: 32px 36px;
+    font-size: 33px;
+    font-weight: 600;
+}
+.information p:nth-of-type(2n){
+    margin: 4px 34px;
+    font-size: 32px;
+}
+.protocol{
+    margin: 50px 36px;
+}
+.checkBoxBox{
+
+    width: 30px;
+
+    height: 30px;
+
+    margin: 4px 0px;
+}
+.checkBox{
+
+    font-size: 32px;
+
+    position: absolute;
+
+    margin: 5px 8px;
+}
+.yes{
+
+    margin: 3px 392px;
+
+    width: 200px;
+
+    height: 68px;
+
+    font-size: 32px;
+
+    line-height: 66px;
+
+    text-align: center;
+
+    background: #efefef;
+
+    border: 1px solid #444;
+}

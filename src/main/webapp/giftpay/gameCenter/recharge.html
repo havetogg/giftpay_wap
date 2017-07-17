@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>充值大厅</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script>
+        function switchTab(type) {
+            if(type==1){
+                $('#tab1').attr('class','flex-1 selected');
+                $('#tab2').attr('class','flex-1 noSelect');
+                $('#diamonds').show();
+                $('#coins').hide();
+            }else if(type==2){
+                $('#tab1').attr('class','flex-1 noSelect');
+                $('#tab2').attr('class','flex-1 selected');
+                $('#diamonds').hide();
+                $('#coins').show();
+            }
+        }
+        function closeTip1() {
+            $('#tip1').hide();
+        }
+        function closeTip2() {
+            $('#tip2').hide();
+        }
+        function exchangeBtn() {
+            $('#tip1').show();
+        }
+    </script>
+</head>
+<body>
+<div id="tip1" class="game_block" style="display: none">
+    <div class="recharge_block">
+        <div class="tip_contentDiv">
+            <img src="img/nikeBlue.png" alt="">
+        </div>
+        <div class="tip_contentText">
+            兑换成功！
+        </div>
+        <div class="tip_contentText3">
+            请在"我的消息"中领取
+        </div>
+        <div>
+            <img src="img/recharge_btn.png" alt="" onclick="closeTip1()">
+        </div>
+    </div>
+</div>
+
+<div id="tip2" class="game_block" style="display: none">
+    <div class="recharge_block">
+        <div class="tip_contentDiv1">
+
+        </div>
+        <div class="tip_contentText1">
+            钻石不足，无法兑换
+        </div>
+        <div>
+            <img src="img/recharge_btn.png" alt="" onclick="closeTip2()">
+        </div>
+    </div>
+</div>
+<div class="zoomer">
+    <ul class="collections_bar flex">
+       <li id="tab1" class="flex-1 selected" onclick="switchTab(1)">钻石充值</li>
+        <li class="shu"></li>
+       <li id='tab2' class="flex-1 noSelect" onclick="switchTab(2)">金币兑换</li>
+    </ul>
+    <div class="rechargeList">
+        <ul id="diamonds">
+            <div class="recharge_top_banner flex">
+                <div class="recharge_topBanner_level">LV0</div>
+                <div class="recharge_topBanner_levelContent">只要一次性充值60钻石，即可恢复到之前的最高等级</div>
+                <div>
+                    <img src="img/seeRight.png" alt="" class="recharge_topBanner_right">
+                </div>
+            </div>
+            <div class="jmt_center">
+                <img src="img/diamond_btn.png" alt="" width="95%">
+            </div>
+            <li class="flex rechargeList_bg">
+                <div class="flex-3 verticalCenter">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="numbers">X30</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <div class="Diamondssss1">￥3.00</div>
+                    <img src="img/exchangeBtn.png" alt="" onclick="exchangeBtn()">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3 verticalCenter">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="numbers">X30</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <div class="Diamondssss1">￥3.00</div>
+                    <img src="img/exchangeBtn.png" alt="" onclick="exchangeBtn()">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3 verticalCenter">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="numbers">X30</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <div class="Diamondssss1">￥3.00</div>
+                    <img src="img/exchangeBtn.png" alt="" onclick="exchangeBtn()">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3 verticalCenter">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="numbers">X30</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <div class="Diamondssss1">￥3.00</div>
+                    <img src="img/exchangeBtn.png" alt="" onclick="exchangeBtn()">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3 verticalCenter">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="numbers">X30</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <div class="Diamondssss12">
+                        <div class="Diamondssss_cut">优惠</div>
+                        ￥3.00</div>
+                    <img src="img/exchangeBtn.png" alt="" onclick="exchangeBtn()">
+                </div>
+            </li>
+        </ul>
+        <ul id="coins" style="display: none;">
+            <li class="flex rechargeList_bg">
+                <div class="flex-3">
+                    <img src="img/coin.png" alt="" class="coinsss">
+                    <label class="numbers">X3000</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <div class="Diamondssss">30</div>
+                    <img src="img/exchangeBtn.png" alt="">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3">
+                    <img src="img/coin.png" alt="" class="coinsss">
+                    <label class="numbers">X3000</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="Diamondssss">60</label>
+                    <img src="img/exchangeBtn.png" alt="">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3">
+                    <img src="img/coin.png" alt="" class="coinsss">
+                    <label class="numbers">X3000</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="Diamondssss">180</label>
+                    <img src="img/exchangeBtn.png" alt="">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3">
+                    <img src="img/coin.png" alt="" class="coinsss">
+                    <label class="numbers">X3000</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="Diamondssss">360</label>
+                    <img src="img/exchangeBtn.png" alt="">
+                </div>
+            </li>
+
+            <li class="flex rechargeList_bg">
+                <div class="flex-3">
+                    <img src="img/coin.png" alt="" class="coinsss">
+                    <label class="numbers">X3000</label>
+                </div>
+                <div class="shu"></div>
+                <div class="flex-5 center">
+                    <img src="img/diamond.png" alt="" class="DiamondssssImg">
+                    <label class="Diamondssss">1800</label>
+                    <img src="img/exchangeBtn.png" alt="">
+                </div>
+            </li>
+        </ul>
+        <div style="height: 30px;">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

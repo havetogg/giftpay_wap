@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.contents{
+    		width: 640px;
+    		min-height: 1065px;
+    		position: absolute;
+    		background: #f0f0f4;
+    	}
+    	.head{
+    		width: 640px;
+    		height: 70px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.jiantou{
+    		position: absolute;
+    		width: 16px;
+    		height: 28px;
+    		margin: 20px 20px;
+    	}
+    	.title{
+    		width: 340px;
+    		height: 70px;
+    		text-align: center;
+    		font-size: 24px;
+    		line-height: 74px;
+    		float: left;
+    		margin-left: 150px;
+    	}
+    	.cont{
+    		width: 640px;
+    		background: #FFFFFF;
+    	}
+    	.list{
+    		width: 640px;
+    		height: 138px;
+    		border-bottom:solid #D9D9D9 1px;
+    	}
+    	.list-title{
+    		width:400px;
+            height: 60px;
+            font-size: 24px;
+            margin-left: 20px;
+            line-height: 100px;
+            float: left;
+    	}
+    	.list-money{
+    		width:200px;
+            height: 60px;
+            font-size: 24px;
+            line-height: 100px;
+            float: left;
+            text-align: right;
+    	}
+    	.list-time{
+    		width:400px;
+            height: 60px;
+            font-size: 24px;
+            margin-left: 20px;
+            line-height: 70px;
+            float: left;
+            color: #999999;
+    	}
+    	.list-dar{
+    		width:200px;
+            height: 60px;
+            font-size: 24px;
+            line-height: 70px;
+            float: left;
+            text-align: right;
+            color: #57a907;
+    	}
+        .con_-pic{
+             width: 114px;
+             height: 130px;
+             margin: 62px auto 22px;
+         }
+        .con_-con{
+            color: #999999;
+            font-size: 26px;
+            text-align: center;
+        }
+
+    </style>
+    <script type="text/javascript">
+	$(function(){
+	    var flag1 = false;
+	    var flag2 = false;
+		$.ajax({
+	        url: getRootPath() + "/oil/queryPayInfoList.htm",
+	        data: {},
+	        dataType: "json",
+	        type: "post",
+            async:false,
+	        success: function (data) {
+	        	if(data.success){
+	        		var data = data.data;
+					var html = $('.cont').html();
+					if(data.length == 0 ){
+					    flag1 = true;
+                    }else{
+                        for(var i = 0; i < data.length; i++){
+                            var item = data[i];
+                            //判断使用加号还是减号
+                            var dealtype = item.dealType;
+                            var dealtypeStr = '';
+                            var dealDetailStr = '';
+                            if(dealtype == 5){
+                                dealtypeStr = "-￥";
+                                dealDetailStr = "转入余额";
+                            }else{
+                                continue;
+                            }
+                            //判断账单状态
+                            var dealstate = item.dealState;
+                            var dealstateStr = '';
+                            if(dealstate == 1){
+                                dealstateStr = "已完成";
+                            }else if(dealstate == 2){
+                                dealstateStr = "未成功";
+                            }else if(dealstate == 3){
+                                dealstateStr = "提现中";
+                            }else if(dealstate == 4){
+                                dealstateStr = "已提现";
+                            }else if(dealstate == 5){
+                                dealstateStr = "提现失败";
+                            }
+                            html += "<div class=\"list\">"
+                                + "                    <div class=\"list-title\">"+dealDetailStr+"</div>"
+                                + "                    <div class=\"list-money\">"+dealtypeStr+item.dealRealMoney+"</div>"
+                                + "                    <div class=\"list-time\">"+item.dealTime.substring(0,19)+"</div>"
+                                + "                    <div class=\"list-dar\">"+dealstateStr+"</div>"
+                                + "                </div>"
+                        }
+                        $('.cont').append(html);
+                    }
+	        	}else{
+	        		alert(data.errMsg);
+	        	}
+	        }
+	    });
+        $.ajax({
+            url: getRootPath() + "/oil/queryOilSubRecord.htm",
+            data: {},
+            dataType: "json",
+            type: "post",
+            async:false,
+            success: function (data) {
+                var arr = data.data;
+                if(arr.length == 0){
+                    flag2 = true;
+                }else{
+                    var html ="";
+                    $.each(arr,function (i,item) {
+                        html += "<div class=\"list\">"
+                            + "                    <div class=\"list-title\">加油红包发放</div>"
+                            + "                    <div class=\"list-money\">+￥"+item.amount+"</div>"
+                            + "                    <div class=\"list-time\">"+item.createtime.substring(0,19)+"</div>"
+                            + "                    <div class=\"list-dar\">已完成</div>"
+                            + "                    </div>"
+                    })
+                    $('.cont').append(html);
+                }
+
+            }
+        });
+        if(flag1&&flag2){
+            $(".con_").show();
+        }
+	})
+    </script>
+	</head>
+	<body>
+		<div class="zoomer">
+			<div class="contents">
+				<div class="head">
+					<div class="jiantou" style="display:none"><img src="img/1.png"></div>
+					<div class="title">加油红包余额账单</div>
+			    </div>
+			    <div class="cont">
+			    	<!-- <div class="list">
+			    		<div class="list-title">退款到账</div>
+			    		<div class="list-money">+￥50</div>
+			    		<div class="list-time">2016-12-15  01：06：54</div>
+			    		<div class="list-dar">已完成</div>
+			    	</div>
+			    	<div class="list">
+			    		<div class="list-title">油卡充值</div>
+			    		<div class="list-money">-￥50</div>
+			    		<div class="list-time">2016-12-15  01：06：54</div>
+			    		<div class="list-dar" style="color: #E8403E;">已退款</div>
+			    	</div>
+			    	<div class="list">
+			    		<div class="list-title">油卡充值</div>
+			    		<div class="list-money">+￥50</div>
+			    		<div class="list-time">2016-12-15  01：06：54</div>
+			    		<div class="list-dar" style="color: #FFAA24;">充值中</div>
+			    	</div>
+			    	<div class="list">
+			    		<div class="list-title">转入零钱</div>
+			    		<div class="list-money">+￥50</div>
+			    		<div class="list-time">2016-12-15  01：06：54</div>
+			    		<div class="list-dar">已完成</div>
+			    	</div>
+			    	<div class="list">
+			    		<div class="list-title">加油红包发放</div>
+			    		<div class="list-money">+￥50</div>
+			    		<div class="list-time">2016-12-15  01：06：54</div>
+			    		<div class="list-dar">已完成</div> -->
+			    	</div>
+                    <div class="con_" style="display: none">
+                        <div class="con_-pic"><img src="img/noRecords.png"></div>
+                        <div class="con_-con">暂无纪录</div>
+                    </div>
+			    </div>
+			</div>
+		</div>
+	</body>
+</html>

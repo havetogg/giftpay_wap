@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="html_gray">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <title>平安车主信用卡</title>
+    <script src="lib/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/m.tool.juxinbox.com.js"></script>
+    <link rel="stylesheet" href="css/tool.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+</head>
+<body>
+    <div class="recommend_bg">
+        <div id="shareTip" class="shareTip" onclick="shareTipHide()">
+            <img src="img/shareBg.png" alt="">
+        </div>
+        <div id="money_tip" class="my_money_off">
+            <div class="my_money_content">
+                <div style="padding: 10px 20px;">
+                    <div class="my_money_title">我的奖金</div>
+                    <ul class="flex subContent">
+                        <li class="flex-1">
+                            <div class="my_money_subTitle">已推荐</div>
+                            <div class="my_money_subNumber"><a>200</a><a class="person_">人</a></div>
+                        </li>
+                        <li class="flex-1">
+                            <div class="my_money_subTitle">推荐成功</div>
+                            <div class="my_money_subNumber"><a>10</a><a class="person_">人</a></div>
+                        </li>
+                    </ul>
+                    <ul class="flex imgss">
+                        <li class="flex-1 jmt_center">
+                            <img src="img/pig.png" alt="">
+                        </li>
+                        <li class="flex-1">
+                            <div class="tips1">已获奖金</div>
+                            <div><a class="tips2">70</a><a class="tips3">元</a></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="my_money_iknow" onclick="iKnows()">我知道了</div>
+            </div>
+        </div>
+
+        <div id="GetMoney_tip" class="getMy_money_off">
+            <div class="my_money_content1">
+                <div style="padding: 20px 20px;">
+                    <div class="my_money_title">申请提现</div>
+
+                    <div class="getCash_txt">
+                        <div class="getCash_text">
+                            确认将已获奖金
+                        </div>
+                        <div class="getCash_text">
+                            提现至微信钱包吗
+                        </div>
+                        <div>
+                            <input id="my_money_input" class="my_money_input" maxlength="11" type="tel" placeholder="请输入手机号码">
+                        </div>
+                    </div>
+                    </div>
+
+
+                <div class="my_money_iknow flex" onclick="iKnows()">
+                    <div class="flex-1 getCash_cancel" onclick="getCashCancel()">取消</div>
+                    <div id="getCashBtn" class="flex-1 my_money_getBtn_" onclick="getCashSure()">确认提现</div>
+                </div>
+            </div>
+        </div>
+        <div class="recommend_">
+            <div class="r_title">
+                <img src="img/title.png" alt="">
+            </div>
+
+            <div class="recommend_txt">
+                平安车主信用卡，加油只要88折
+            </div>
+            <ul class="flex recommend_content">
+                <li class="flex-1">
+                    <img src="img/img1.png" alt="">
+                </li>
+                <li class="flex-1">
+                    <img src="img/img2.png" alt="">
+                </li>
+                <li class="flex-1">
+                    <img src="img/img3.png" alt="">
+                </li>
+                <li class="flex-1">
+                    <img src="img/img4.png" alt="">
+                </li>
+                <li class="flex-1">
+                    <img src="img/img5.png" alt="">
+                </li>
+                <li class="flex-1">
+                    <img src="img/img6.png" alt="">
+                </li>
+            </ul>
+            <div>
+                <img class="recommend_img" src="img/recommendImg.png" alt="">
+            </div>
+            <div>
+                <img class="recommend_btns" src="img/recommendBtn.png" alt="" onclick="shareTip()">
+            </div>
+            <div>
+                <img class="money_btns" src="img/btn_money.png" alt="" onclick="showMoneyTip()">
+                <img class="money_btns" src="img/getCash.png" alt="" onclick="getCascadeTip()">
+            </div>
+            <div>
+                <img class="recommend_logo" src="img/logo2.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

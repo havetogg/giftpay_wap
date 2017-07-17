@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IBlackUserModelDao">
+
+	<resultMap type="org.jumutang.giftpay.model.BlackUserModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="open_id" property="openId" />
+		<result column="user_id" property="userId" />
+		<result column="recharge_num" property="rechargeNum" />
+		<result column="ip" property="ip" />
+		<result column="recharge_name" property="rechargeName" />
+		<result column="recharge_price" property="rechargePrice" />
+		<result column="create_time" property="createTime" />
+		<result column="recharge_desc" property="rechargeDesc" />
+
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="id!=null">
+				and id=#{id}
+			</if>
+			<if test="openId!=null">
+				and open_id=#{openId}
+			</if>
+			<if test="userId!=null">
+				and user_id=#{userId}
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="queryBlackUserList"  parameterType="org.jumutang.giftpay.model.BlackUserModel" resultMap="baseResult" >
+		select
+		id,open_id,user_id,recharge_num,ip,recharge_name,recharge_price,create_time,
+		recharge_desc
+		from t_black_user
+		<include refid="wherecause"/>
+		order by create_time desc
+	</select>
+
+	<insert id="addBlackUserModel"  parameterType="org.jumutang.giftpay.model.BlackUserModel" >
+		insert into t_black_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			open_id,user_id,recharge_num,ip,recharge_name,recharge_price,create_time,recharge_desc
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{openId},#{userId},#{rechargeNum},#{ip},#{rechargeName},#{rechargePrice},#{createTime},#{rechargeDesc}
+		</trim>
+	</insert>
+
+</mapper>

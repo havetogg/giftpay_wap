@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/cellPhone.js"></script>
+    <script>
+        var goodsId = "";
+        var tel = '';
+        var realMoney = '';
+        function selectAmount(self, id, price) {
+            goodsId = id;
+            realMoney = price;
+            tel = $('#number').val().replace(/\s/g, "");
+            $('.cellPhoneNumberPrice').find('li').attr('class', 'flex-1 jmt_center phone');
+            $(self).attr('class', 'flex-1 jmt_center phone_on');
+            if (tel && (/^1[34578]\d{9}$/.test(tel))) {
+                $('.jmt_center button').removeClass("no");
+            }
+            else {
+                $('.jmt_center button').addClass("no");
+            }
+        }
+        function rechargeNow() {
+            var value = $("#ticket").children('option:selected').attr("data");
+            var data = new Object();
+            tel = $('#number').val().replace(/\s/g, "");
+            if ($("#red").is(":hidden") || $("#ticket").attr("disabled") == "disabled") {
+                data.goodsId = goodsId;
+                data.tel = tel;
+                data.realMoney = realMoney;
+                data.companyName = $("#companyName").text();
+                data.ticket = "";
+                data.value = "";
+            } else {
+                data.goodsId = goodsId;
+                data.tel = tel;
+                data.realMoney = realMoney;
+                data.companyName = $("#companyName").text();
+                data.ticket = $("#ticket").children('option:selected').val();
+                data.value = $("#ticket").children('option:selected').attr("data");
+            }
+            if (!tel) {
+                TipShow("请输入手机号", 1000);
+            }
+            else if (!(/^1[34578]\d{9}$/.test(tel))) {
+                TipShow("请输入正确的手机号", 1000);
+            } else {
+                $.ajax({
+                    url: getRootPath() + "/giftpay/telRecharge/prePayCell.htm",
+                    data: data,
+                    dataType: "json",
+                    type: "post",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.success == '1') {
+                            location.href = getRootPath() + "/giftpay/liftpayment/orderPay.html?payamount=" + data.payamount + "&rechargeType=" + data.rechargeType + "&lifeType=" + data.lifeType + "&redPkgId=" + data.redPkgId + "&redPkgValue=" + data.redPkgValue + "&payInfo=" + data.payInfo;
+                        } else {
+                            alert(data.errMsg);
+                        }
+                    }
+                });
+            }
+        }
+        function OnInput(event) {
+            var tel = event.target.value.replace(/\s/g, "");
+            if (tel && (/^1[34578]\d{9}$/.test(tel)) && $(".phone_on").length == 1) {
+                $('.jmt_center button').removeClass("no");
+            }
+            else {
+                $('.jmt_center button').addClass("no");
+            }
+            $(".phone_on").removeClass("phone_on").addClass("phone");
+            $('#companyName').html("");
+            if (tel.length == 11 && !(/^1[34578]\d{9}$/.test(tel))) {
+                $('#companyName').html("<div class=\"serviceCompanyNo\">无法识别运营商，请稍后重试</div>");
+            }
+            else if ((tel.length == 11 && (/^1[34578]\d{9}$/.test(tel)))) {
+                // $('#companyName').html("<div class=\"serviceCompany\">江苏移动</div>");
+                getphoneStatus(tel);
+                $('.historyNumber').hide();
+            }
+        }
+        function handle() {
+            var inputVal = $('#number').val(),
+                    trimPhoneNum = inputVal.replace(/\s+/g, ''),
+                    len = trimPhoneNum.length;
+            if (len < 4) {
+                var value1 = trimPhoneNum.replace(/\s+/g, '');
+                $('#number').val(value1);
+            } else if (len >= 4 && len < 8) {
+                $('#number').val(trimPhoneNum.replace(/(\d{3})(\d+)/g, '$1 $2'));
+            } else if (len >= 8 && len < 11) {
+                $('#number').val(trimPhoneNum.replace(/(\d{3})(\d{4})(\d+)/g, '$1 $2 $3'));
+            } else if (len == 11) {
+                $('#number').val(trimPhoneNum.replace(/(\d{3})(\d{4})(\d{4})/g, '$1 $2 $3'));
+            } else if (trimPhoneNum.length > 11) {
+                return false;
+            }
+        }
+        function selectHistoryNumber(self) {
+            $('#number').val($(self).html());
+            $('.historyNumber').hide();
+            if (tel && (/^1[34578]\d{9}$/.test(tel))) {
+                $('.jmt_center button').removeClass("no");
+            }
+            $("#companyName").text($(self).parent().find("label").text());
+        }
+        $(function () {
+            $("#number").focus(function () {
+                if ($(".history li").length != 0) {
+                    $('.historyNumber').show();
+                }
+            });
+            initPhoneGoods("");
+            initRedpkgList();
+
+            $("#companyName").bind('DOMNodeInserted', function (e) {
+                //alert('element now contains: ' + $(e.target).html());
+                var num = $(e.target).html();
+                if (num.indexOf("移动") > 0) {
+                    siwtchGoodList(1); //移动
+                } else if (num.indexOf("电信") > 0) {
+                    siwtchGoodList(3);//电信
+                } else {
+                    siwtchGoodList(2); //联通
+                }
+            });
+
+        })
+
+        function gradeChange(self) {
+            var redPkg = $(self).children('option:selected').text();
+            $(self).parent().find("span").html(redPkg);
+        }
+
+
+        function eventHandle(e) {
+            var e = e || window.event;
+            var obj = e.target || e.srcElement;
+            if (!obj.id) {
+                $('.historyNumber').hide();
+            }
+        }
+    </script>
+</head>
+<body onclick="eventHandle(event)">
+<div class="zoomer">
+    <div class="tab_text">
+        <div>话费充值</div>
+        <a class="rechargeRecords" href="/giftpay_wap/giftpay/recharge/rechargeRecords.jsp?type=1">充值记录</a>
+    </div>
+    <div class="recharge_Content">
+        <div class="recharge_Content_goods">
+            <div class="serviceName">请输入需要充值的手机号</div>
+            <div class="phone_num">
+                <input id="number" type="tel" maxlength="13" class="phoneNumber" onkeyup="handle()"
+                       oninput="OnInput (event)" onpropertychange="OnPropChanged(event)">
+                <div class="historyNumber">
+                    <ul class="history">
+                    </ul>
+                    <p>最多存在5条记录，请删除无用记录 <a class="" onclick="delAll()">删除全部</a></p>
+                </div>
+            </div>
+            <!--输入完号码插入号码归属-->
+            <div id="companyName">
+            </div>
+        </div>
+        <div class="ticketSelect flex" id="red">
+            <label class="">抵用券</label>
+            <span>暂无可使用红包</span>
+            <!--无抵用券时 disabled/选择抵用券时,替换上面span文字-->
+            <select class="flex-1" id="ticket" onchange="gradeChange(this)">
+                <option value="10元兑换券">10元抵用券</option>
+                <option value="50元兑换券">50元抵用券</option>
+                <option value="100元兑换券">100元抵用券</option>
+            </select>
+        </div>
+        <div class="jmt_center">
+            <button class="toPay no" onclick="rechargeNow()">充值</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

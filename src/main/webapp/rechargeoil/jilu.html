@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.contents{
+    		width: 640px;
+    		min-height: 1065px;
+    		position: absolute;
+    		background: #f0f0f4;
+    	}
+    	.head{
+    		width: 640px;
+    		height: 70px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.jiantou{
+    		position: absolute;
+    		width: 16px;
+    		height: 28px;
+    		margin: 20px 20px;
+    	}
+    	.title{
+    		width: 640px;
+    		height: 70px;
+    		text-align: center;
+    		font-size: 24px;
+    		line-height: 74px;
+    	}
+    	.list{
+    		width: 640px;
+    		height: 130px;
+    		background: #FFFFFF;
+    		border-bottom: solid #B3B3B3 1px;
+    	}
+    	.money{
+    		width: 200px;
+    		height:57px;
+    		font-size: 24px;
+    		line-height: 90px;
+    		margin-left: 20px;
+    		float: left;
+    	}
+    	.money span{
+    		font-size: 24px;
+    	}
+    	.time{
+    		width: 400px;
+    		height: 57px;
+    		line-height: 90px;
+    		font-size: 20px;
+    		float: left;
+    		color: #999999;
+    		text-align: right;
+    	}
+    	.total-money{
+    		width: 190px;
+    		height: 40px;
+    		font-size: 20px;
+    		margin-left: 20px;
+    		color: #999999;
+    		line-height: 69px;
+    		float: left;
+    	}
+    	.total-money span{
+    		color: #999999;
+    		font-size: 20px;
+    	}
+    	.total-time{
+    		width: 200px;
+    		height: 40px;
+    		font-size: 20px;
+    		color: #999999;
+    		line-height: 69px;
+    		float: left;
+    	}
+    	.total-time span{
+    		font-size: 20px;
+    		color: #999999;
+    	}
+    	.yuqi{
+    		width: 150px;
+    		height: 40px;
+    		font-size: 20px;
+    		color: #57a907;
+    		line-height: 69px;
+    		text-align: right;
+    		float: left;
+    		margin-left: 60px;
+    	}
+    	.yuqi span{
+    		color: #57a907;
+    		font-size: 20px;
+    	}
+    	.over{
+    		width: 94px;
+    		height: 40px;
+    		color: #999999;
+    		font-size: 20px;
+    		position: absolute;
+    		margin-left: 536px;
+    		margin-top: 79px;
+    	}
+        .con_-pic{
+            width: 114px;
+            height: 130px;
+            margin: 62px auto 22px;
+        }
+        .con_-con{
+            color: #999999;
+            font-size: 26px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+    	$(function(){
+            /*查询加油记录*/
+    		$.ajax({
+    	        url: getRootPath() + "/oil/queryOilRecordList.htm",
+    	        data: {},
+    	        dataType: "json",
+    	        type: "post",
+    	        success: function (data) {
+    	        	if(data.success){
+						var data = data.data;
+						var html = '';
+                        if(data == null ){
+                            $(".con_").show();
+                        }else{
+                            for(var i = 0; i < data.length; i++){
+                                var item = data[i];
+                                var month = 12;
+                                $.ajax({
+                                    url: getRootPath() + "/oil/queryOilSubRecord.htm",
+                                    data: {"recordId": item.id},
+                                    dataType: "json",
+                                    async: false,
+                                    type: "post",
+                                    success: function (data) {
+                                        if (data.success) {
+                                            var data = data.data;
+                                            month = month - data.length;
+                                            var s = item.status==0?'余期'+month+"月":'已完成';
+                                            html += "<div class=\"list\" onclick=queryOilRecordList('"+item.id+"')>"
+                                                + "                    <div class=\"money\">支付金额￥<span>"+item.payamount+"</span></div>"
+                                                + "                    <div class=\"time\">"+item.createtime.substring(0,19)+"</div>"
+                                                + "                    <div class=\"total-money\">奖励总额：￥<span>"+item.totalamount+"</span></div>"
+                                                + "                    <div class=\"total-time\">服务期限：<span>"+item.cycle+"</span>个月</div>"
+                                                + "                    <div class=\"over\">"+s+"</div>"
+                                                + "                </div>"
+                                        }
+                                    }
+                                })
+                            }
+                            $('#list').html(html);
+                        }
+    	        	}else{
+    	        		alert('获取信息失败');
+    	        	}
+    	        }
+    	    });
+    		$(".jiantou").click(function(){
+    			location.href="dingdanqueren.html"
+    		})
+    	})
+		function queryOilRecordList(recordId){
+    		location.href="xiangqing.html?recordId="+recordId;
+    	}
+    </script>
+	</head>
+	<body>
+		<div class="zoomer">
+			<div class="contents">
+				<div class="head">
+					<div class="jiantou" style="display:none"><img src="img/1.png"></div>
+					<div class="title">购买记录</div>
+				</div>
+				<div id="list"></div>
+                <div class="con_" style="display: none">
+                    <div class="con_-pic"><img src="img/noRecords.png"></div>
+                    <div class="con_-con">暂无纪录</div>
+                </div>
+				<!-- <div class="list ">
+					<div class="money">支付金额￥<span>2700</span></div>
+					<div class="time">2016-12-15 01:06:54</div>
+					<div class="total-money">套餐额度：￥<span>3000</span></div>
+					<div class="total-time">套餐期限：<span>6</span>个月</div>
+					<div class="yuqi">余期：<span>5</span>个月</div>
+					<div class="over" style="display: none;">发放完毕</div>
+				</div>
+				<div class="list">
+					<div class="money">支付金额￥<span>2700</span></div>
+					<div class="time">2016-12-15 01:06:54</div>
+					<div class="total-money">套餐额度：￥<span>3000</span></div>
+					<div class="total-time">套餐期限：<span>6</span>个月</div>
+					<div class="yuqi" style="display: none;">余期：<span>5</span>个月</div>
+					<div class="over">发放完毕</div>
+				</div>
+				<div class="list">
+					<div class="money">支付金额￥<span>2700</span></div>
+					<div class="time">2016-12-15 01:06:54</div>
+					<div class="total-money">套餐额度：￥<span>3000</span></div>
+					<div class="total-time">套餐期限：<span>6</span>个月</div>
+					<div class="yuqi" style="display: none;">余期：<span>5</span>个月</div>
+					<div class="over">发放完毕</div>
+				</div> -->
+			</div>
+		</div>
+	</body>
+</html>

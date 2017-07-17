@@ -1,0 +1,174 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+h1{
+
+    margin: 38px 50px;
+
+    font-weight: bold;
+
+    font-size: 38px;
+
+    color: #666666;
+}
+h2{
+
+    color: #888;
+
+    font-size: 26px;
+
+    margin: 37px 49px;
+
+    width: 300px;
+}
+.tip{
+
+    margin: -11px auto;
+
+    width: 535px;
+
+    font-size: 26px;
+
+    line-height: 38px;
+
+    color: red;
+}
+.choseType{
+
+    width: 550px;
+
+    margin: -16px 39px;
+}
+.checkBox1{
+
+}
+.choseThis{
+
+    width: 120px;
+
+    height: 62px;
+
+    border: 1px solid rgb(136, 136, 136);
+
+    border-radius: 10px;
+
+    margin: 0px 6px;
+
+    float: left;
+
+    font-size: 36px;
+
+    color: rgb(136, 136, 136);
+
+    line-height: 63px;
+
+    text-align: center;
+}
+.phone11{
+
+    width: 219px;
+
+    margin: -50px 0px;
+}
+.phone11 h2{
+
+    margin: 168px 52px;
+
+    width: 300px;
+}
+.tle{
+
+    margin: -142px 47px;
+
+    height: 62px;
+
+    width: 528px;
+
+    position: absolute;
+
+    border-radius: 14px;
+
+    font-size: 30px;
+
+    box-shadow: 2px 1px 7px 0px;
+
+    text-indent: 1ex;
+}
+.carType{
+
+    width: 300px;
+}
+.type{
+
+    margin: 66px 47px;
+
+    height: 62px;
+
+    width: 528px;
+
+    position: absolute;
+
+    border-radius: 14px;
+
+    box-shadow: 2px 1px 7px 0px;
+
+    font-size: 30px;
+
+    text-indent: 1ex;
+}
+.carType h2{
+
+    margin: -33px 48px;
+
+    width: 300px;
+}
+.apply{
+
+    position: absolute;
+
+    margin: 180px 340px;
+
+    font-size: 33px;
+
+    width: 240px;
+
+    height: 68px;
+
+    text-align: center;
+
+    line-height: 70px;
+
+    background: #22ac38;
+
+    border-radius: 8px;
+
+    color: white;
+
+}
+.hr{
+    width: 532px;
+    margin: 300px 46px;
+    border-bottom: 1px solid #888;
+    position: absolute;
+}
+.tip_2{
+
+    position: absolute;
+
+    margin: 286px 0px;
+}
+.tip_2 h2{
+
+    font-size: 26px;
+
+    color: red;
+}
+.tip_2 p{
+
+    margin: -17px 46px;
+
+    font-size: 24px;
+
+    color: #666;
+}

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <!--如果IE用户安装了Chrome Frame插件，则使用这个插件渲染页面，否则用IE最新的、最好的引擎来渲染页面-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .contents {
+            width: 640px;
+            min-height: 1065px;
+            position: absolute;
+            background: #f0f0f4;
+        }
+
+        .head {
+            width: 640px;
+            height: 90px;
+            background: #FFFFFF;
+            border-bottom: solid #e8e7e8 1px;
+        }
+
+        .jiantou {
+            position: absolute;
+            width: 16px;
+            height: 28px;
+            margin: 20px 20px;
+        }
+
+        .title {
+           width: 640px;
+    		height: 40px;
+    		text-align: center;
+    		font-size: 24px;
+    		line-height: 64px;
+    		color: #888888;
+        }
+
+        .cont {
+            width: 640px;
+            height: 123px;
+            background: #FFFFFF;
+			border-bottom: solid #e8e7e8 1px;
+        }
+
+        .ed {
+            width: 600px;
+            height: 138px;
+            margin: 0 auto;
+        }
+
+        .ed-title {
+            width: 100px;
+            height: 30px;
+            color: #888888;
+            font-size: 20px;
+            position: absolute;
+            margin-top: 30px;
+        }
+
+        .li {
+            width: 600px;
+            height: 150px;
+            position: absolute;
+            margin-top: 70px;
+        }
+
+        .money {
+            width: 156px;
+            height: 76px;
+            background: url(img/5.png) no-repeat;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            float: left;
+        }
+
+        .money_ {
+            width: 156px;
+            height: 76px;
+            background: url(img/6.png) no-repeat;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            float: left;
+        }
+
+        .qixian {
+            width: 156px;
+            height: 76px;
+            background: url(img/5.png) no-repeat;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            float: left;
+        }
+
+        .qixian_ {
+            width: 156px;
+            height: 76px;
+            background: url(img/6.png) no-repeat;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            float: left;
+        }
+
+        .mon3 {
+            margin-left: 62px;
+        }
+
+        .mon2 {
+            margin-left: 70px;
+        }
+
+        .way-con {
+            width: 640px;
+            height: 479px;
+            background: #FFFFFF;
+        }
+
+        .way {
+            width: 640px;
+            height: 60px;
+            border-top: solid #e8e7e8 1px;
+        }
+
+        .way-title {
+            width: 150px;
+            height: 50px;
+            font-size: 24px;
+            margin-left: 20px;
+            line-height: 65px;
+            float: left;
+        }
+
+        .way-pic{
+            width: 34px;
+            height: 34px;
+            float: left;
+            margin-top: 17px;
+            margin-left: 284px;/*修改*/
+        }
+        .way-cont{
+            width: 99px;/*修改*/
+            height: 50px;
+            font-size: 24px;
+            float: left;
+            line-height: 65px;
+            margin-left: 20px;/*修改*/
+            text-align: right;/*修改*/
+        }
+
+
+        .way-jiantou {
+            width: 23px;
+            height: 32px;
+            float: left;
+            margin-top: 30px;
+        }
+
+        .mon {
+            width: 640px;
+            height: 60px;
+            border-top: solid #e8e7e8 1px;
+        }
+
+        .mon-title {
+            width: 150px;
+            height: 50px;
+            font-size: 24px;
+            margin-left: 20px;
+            line-height:65px;
+            float: left;
+
+        }
+
+        .mon-cont {
+            width: 127px;
+            height: 50px;
+            font-size: 24px;
+            float: left;
+            color: #888888;
+            line-height: 65px;
+            margin-left: 307px;
+            text-align: right;
+        }
+		.mon-cont2{
+    		height: 50px;
+    		font-size: 30px;
+    		color:#ff5224 ;
+    		line-height: 65px;
+    	}
+        .hongbao {
+            width: 340px;
+            height: 246px;
+            background: url(img/12_03.png);
+            margin: 25px auto;
+        }
+
+        .hongbao-li {
+            width: 300px;
+            position: absolute;
+            margin-top: 120px;
+            margin-left: 20px;
+        }
+
+        .zonge {
+            font-size: 20px;
+            color: white;
+            float: left;
+        }
+
+        .zonge-txt {
+            width: 220px;
+            color: white;
+            font-size: 20px;
+            text-align: right;
+            float: left;
+        }
+
+        .time-li {
+            width: 300px;
+            position: absolute;
+            margin-top: 160px;
+            margin-left: 20px;
+        }
+
+        .money-li {
+            width: 300px;
+            position: absolute;
+            margin-top: 200px;
+            margin-left: 20px;
+        }
+
+        p {
+            width: 600px;
+            font-size: 20px;
+            color: #999999;
+            margin: 25px auto;
+			text-align: center;
+        }
+
+        .green {
+            width: 340px;
+            margin:-16px auto;
+        }
+
+        .green-pic {
+            width: 20px;
+            height: 20px;
+            float: left;
+            background: url(img/11.png) no-repeat;
+        }
+
+        .green-pic_ {
+            width: 20px;
+            height: 20px;
+            float: left;
+            background: url(img/10.png) no-repeat;
+        }
+
+        .green-tit {
+            width: 300px;
+            font-size: 20px;
+            color: black;
+            margin-left: 36px;
+        }
+
+        .green-tit span {
+            font-size: 20px;
+            color: #218ded;
+        }
+
+        .zhifu-btn1 {
+            width: 600px;
+            height: 70px;
+            margin: 15px auto 40px;
+        }
+
+        /* #alerw_div .ab{
+        margin-top:-25px;
+        } */
+        .ed-kuang{
+            width: 600px;
+            height:136px;
+            margin: 0px 20px;/*修改*/
+            position: absolute;
+            /*border: solid 1px #ff5224;*/
+            border-radius: 7px;
+        }
+        .solo-money{
+            width:270px;
+            color: #888888;
+            font-size: 24px;
+            margin:24px 0px 0px 0px;/*修改*/
+        }
+        .money-con{
+            color: #ffaa24;
+            font-size: 24px;
+        }
+        .solo-time{
+            width: 270px;
+            height: 30px;
+            color: #888888;
+            margin: 24px 0px 0px 0px;
+            font-size: 24px;
+            /*text-align: right;*/
+        }
+        .time-con{
+            color: #ffaa24;
+            font-size: 24px;
+        }
+        .time-con1{
+            color: #ffaa24;
+            font-size: 24px;
+        }
+        .change{
+            width: 190px;
+            height: 60px;
+            position: absolute;
+            overflow: hidden;
+            margin: -71px 403px; /*修改*/
+            border-radius: 10px;
+            /*border: 1px solid  #ff5224;*/    /*修改*/
+        }
+        .jian{
+            margin-top: 8px;
+            width: 48px;
+            height: 48px;
+            background: url(img/jian.png);
+            float: left;
+        }
+        .num{
+            text-align: center;
+            line-height: 42px;
+            width: 70px;
+            height: 42px;
+            float: left;
+            font-size:34px;
+            margin: 10px 10px;
+            border: solid 1px #dbdbdb;
+        }
+        .jia{
+            background: url(img/jia.png);
+            margin-top: 8px;
+            width: 48px;
+            height: 48px;
+            float: left;
+        }
+        .tip-con{
+            height: 40px;
+            font-size: 20px;
+            line-height: 40px;
+            color: #888888;
+            margin-left: 20px;
+        }
+        .tip-con2{
+        	height: 30px;
+        	margin-top: 10px;
+        	font-size: 18px;
+        	color: #ffaa24;
+        	text-align: center;
+        }
+		 #dep{
+        	height: 65px;
+        	color: #888888;
+        	font-size: 24px;
+        	line-height: 65px;
+        }
+        #dep-con{
+        	font-size: 24px;
+			color: #888888;
+			height: 65px;
+			line-height: 65px;
+        }
+		.ban{
+        	width: 640px;
+        	height: 130px;
+        	background: #FFFFFF;
+        	margin-bottom: 10px;
+        }
+        .ban-title{
+        	font-size: 24px;
+        	height: 63px;
+        	color: #888888;
+        	text-align: center;
+        	line-height: 63px;
+        }
+        .ban-change{
+            width: 600px;
+            height: 50px;
+            overflow: hidden;
+            margin: 0px 20px;
+        }
+        .ban-jian{
+            width: 48px;
+            height: 48px;
+            background: url(img/jian.png);
+            float: left;
+        }
+		.ban-cont{
+            width: 482px;
+            height:47px;
+            float: left;
+            font-size:34px;
+            margin:0px 10px;
+            border: solid 1px #E8E7E8;
+            border-radius: 5px;
+        }
+        .ban-num{
+            width:78%;
+            line-height: 47px;
+        	height: 47px;
+            font-size:34px;
+            text-align: center;
+            float:left;
+        }
+        .ban-jia{
+            background: url(img/jia.png);
+            width: 48px;
+            height: 48px;
+            float: left;
+        }
+        .monn{
+            border-bottom: solid #e8e7e8 1px;
+        }
+		.bigcot{
+        	width: 434px;
+		    height: 65px;
+		    text-align: right;
+		    float: left;
+        }
+		.ban-li{
+        	width: 10%;
+        	height:47px;
+        	font-size: 16px;
+        	color: #888888;
+        	margin-left: 8px;
+        	margin-top: 4px;
+        	line-height: 20px;
+        	float: left;
+        }
+        .ban-li2{
+        	width: 10%;
+        	height:47px;
+        	font-size: 18px;
+        	color: #888888;
+        	line-height: 20px;
+        	float: left;
+        	line-height: 47px;
+        	text-align: center;
+        }
+    </style>
+    <script>
+        var recordNum = -1;//购买数量
+        var cycle = -1;//周期
+        var discount = -1;//打折
+        var monthAmount = -1;//每月返还
+        var payAmount = -1;//实际付款
+        var totalAmount = -1;//应付金额
+        var num = 2; //商品数量默认为1；
+        var dep;//立省金额
+        var bannum=500;//预计加油数量
+        $(function () {
+            $.ajax({
+                url: getRootPath() + "/oil/queryOilRecordList.htm",
+                data: {},
+                dataType: "json",
+                async:false,
+                type: "post",
+                success: function (data) {
+                    if(data.success){
+                        var data = data.data;
+                        if(data==null||data==undefined||data.length==0){
+                            recordNum = 0;
+                        }else if(data.length == 10){
+                            alert('您已购买10份无法购买');
+                            return;
+                        }else{
+                            recordNum = data.length;
+                            if(recordNum == 9||recordNum == 8){
+                                num = 10-recordNum;
+                                if(num == 1){
+                                    $(".jian").css("background","url(img/jian-.png)");
+                                    $(".ban-jian").css("background","url(img/jian-.png)");
+                                }
+                                $(".jia").css("background","url(img/jia-.png)");
+                                $(".ban-jia").css("background","url(img/jia-.png)");
+                            }
+                        }
+                    }else{
+                        alert('获取购买记录信息失败');
+                        return;
+                    }
+                }
+            });
+            if(recordNum==-1){
+                alert("获取用户信息失败");
+            }else{
+                initServiceInfo();
+                //同意按钮
+                $(".green").click(function () {
+                    if ($("#check").hasClass("green-pic")) {
+                        $("#check").removeClass("green-pic").addClass("green-pic_");
+                    } else {
+                        $("#check").removeClass("green-pic_").addClass("green-pic");
+                    }
+
+                });
+                //服务条款
+                $(".clause").click(function () {
+                    location.href = getRootPath() + "/rechargeoil/clause.html"
+                })
+                //支付按钮
+                $(".zhifu-btn1").click(function () {
+                    if(num > 10-recordNum){
+                        alert("每个用户限量购买10份");
+                        return;
+                    }
+                    if (!$(".green div").hasClass("green-pic_")) {
+                        alerw("请阅读服务条款");
+                    } else {
+                        $.ajax({
+                            url: getRootPath() + "/oil/getPayPre.htm",
+                            type: "post",
+                            data: {
+                                "num":num
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                if(data.code == "10000") {
+                                    var res=data.mess;
+                                    res=JSON.parse(res);
+                                    res.backUrl=getRootPath()+"/rechargeoil/dingdanqueren.html?totalmoney="+(totalAmount * num)+"&cycle="+cycle+"&payamount="+(payAmount* num);
+                                    res.backUrl=encodeURI(encodeURI(res.backUrl));
+                                    location.href='http://www.linkgift.cn/wxpay_gate/information.jsp?backUrl='+res.backUrl+
+                                        '&fromName='+res.fromName+
+                                        '&goodsName='+encodeURI(encodeURI(res.goodsName))+
+                                        '&md5='+res.md5+
+                                        '&money='+res.money+
+                                        '&openId='+res.openId+
+                                        '&orderNo='+res.orderNo+
+                                        '&payType='+res.payType+
+                                        '&redirectUrl='+res.redirectUrl+
+                                        '&remark='+res.remark+
+                                        '&timestamp='+res.timestamp;
+                                }
+                            }
+                        });
+
+                    }
+                })
+            }
+
+        })
+        function initServiceInfo(){
+            $.ajax({
+                url: getRootPath() + "/oil/queryOilService.htm",
+                dataType: "json",
+                type: "post",
+                success: function (data){
+                    if(data.success){
+                        cycle = data.data.cycle;
+                        discount = data.data.discount;
+                        monthAmount = data.data.monthAmount;
+                        payAmount = data.data.payAmount;
+                        totalAmount = data.data.totalAmount;
+                        $(".num").html(num);
+                        $(".ban-num").html(bannum);
+                        //应付金额
+                        $(".mon-cont").html("" + totalAmount * num);
+                        //奖励总额
+                        $("#totalmoney").html("￥" + totalAmount * num);
+                        //每期奖励
+                        $("#month").html("￥" + monthAmount * num);
+                        //立省金额
+                        $("#dep-con").html((totalAmount-payAmount)*num);
+                        //实付金额
+                        $("#bew").html("￥"+payAmount* num);
+                    }else{
+                        alert('获取加油信息失败');
+                    }
+                }
+            });
+        }
+        //减
+        function jian(dom) {
+            if (num == 1) {
+                return;
+            } else{
+                num = num - 1;
+                $(".num").html(num);
+                if(num == 1){
+                    $(".jian").css("background","url(img/jian-.png)");
+                    $(".ban-jian").css("background","url(img/jian-.png)");
+                }
+            }
+            //加油量减
+            bannum=bannum-250;
+            $(".ban-num").html(bannum);
+            //应付金额
+            $(".mon-cont").html("" + totalAmount * num);
+            //奖励总额
+            $("#totalmoney").html("￥" + totalAmount * num);
+            //每期奖励
+            $("#month").html("￥" + monthAmount * num);
+            //立省金额
+            $("#dep-con").html((totalAmount-payAmount)*num);
+            //实付金额
+            $("#bew").html("￥"+payAmount* num);
+            $(".jia").css("background","url(img/jia.png)");
+            $(".ban-jia").css("background","url(img/jia.png)");
+        }
+        //加
+        function jia(dom) {
+            if(num <= 9-recordNum){
+                num = num + 1;
+                $(".num").html(num);
+                //应付金额
+                $(".mon-cont").html("" + totalAmount * num);
+                //奖励总额
+                $("#totalmoney").html("￥" + totalAmount * num);
+                //每期奖励
+                $("#month").html("￥" + monthAmount * num);
+                //立省金额
+                $("#dep-con").html((totalAmount-payAmount)*num);
+                //实付金额
+                $("#bew").html("￥"+payAmount* num);
+                //加油量加
+                bannum=bannum+250;
+                $(".ban-num").html(bannum);
+                $(".jian").css("background","url(img/jian.png)")
+                $(".ban-jian").css("background","url(img/jian.png)")
+                if(num == 10 - recordNum){
+                    $(".jia").css("background","url(img/jia-.png)");
+                    $(".ban-jia").css("background","url(img/jia-.png)");
+                }
+          }
+        }
+    </script>
+</head>
+<body>
+<div class="zoomer">
+    <div class="contents">
+		<div class="ban">
+					<div class="ban-title">您每月预计加油量</div>
+					<div class="ban-change">
+                			<div class="ban-jian" onclick="jian(this)"></div>
+                			<div class="ban-cont">
+                				<div class="ban-li">每月<br>加油</div>
+                				<div class="ban-num">500</div>
+                				<div class="ban-li2">元</div>
+                			</div>
+                			<div class="ban-jia" onclick="jia(this)"></div>
+            		</div>
+				</div>
+        <div class="head">
+            <div class="title">购买易加油服务</div>
+			<div class="tip-con2">中石化/中石油/全国通用</div>
+        </div>
+        <div class="cont">
+            <div class="ed-kuang">
+                <div class="solo-money">单份服务费用：<span class="time-con1">￥<sapn><span class="money-con">3000</span></div>
+                <div class="solo-time">服务期限：<span class="time-con">12个月</span></div>
+                <div class="change" id="we1">
+                    <div class="jian" onclick="jian(this)"></div>
+                    <div class="num">2</div>
+                    <div class="jia" onclick="jia(this)"></div>
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="tip-con">tips:请根据每月加油量选择服务:如每月加油500元，可选择2份服务</div>
+        <div class="way-con">
+            <div class="way">
+                <div class="way-title">支付方式</div>
+                <div class="way-pic"><img src="img/9.png"></div>
+                <div class="way-cont">微信支付</div>
+                <!--<div class="way-jiantou"><img src="img/8.png"></div>-->
+            </div>
+            <div class="mon">
+                <div class="mon-title">应付金额</div>
+                <div class="mon-cont">6000.00</div>
+            </div>
+			<div class="mon monn">
+				<div class="mon-title">实付金额</div>
+				<div class="bigcot"><span class="mon-cont2" id="bew">￥5700.00</span><span id="dep">(立省</span><span id="dep-con">300</span><span id="dep">)</span></div>
+				<!--<div class="mon-cont2" id="bew">￥5700.00</div><div id="dep">(立省<span id="dep-con">300</span>)</div>-->
+			</div>
+            <div class="hongbao">
+                <div class="hongbao-li">
+                    <div class="zonge">奖励总额</div>
+                    <div class="zonge-txt" id="totalmoney">￥6000</div>
+                </div>
+                <div class="time-li">
+                    <div class="zonge">奖励期限</div>
+                    <div class="zonge-txt" id="totalmonth">12个月</div>
+                </div>
+                <div class="money-li">
+                    <div class="zonge">每期奖励</div>
+                    <div class="zonge-txt" id="month">500</div>
+                </div>
+            </div>
+        </div>
+		<div class="zhifu-btn1"><img src="img/7.png"></div>
+		<div class="green">
+            <div id="check" class="green-pic_"></div>
+            <div class="green-tit">我同意<span class="clause">《有礼付加油服务条款》</span></div>
+        </div>
+        <p>支付成功后，我们将从次月起每月20日为您发放加油红包</p>
+        
+        
+    </div>
+</div>
+</body>
+</html>

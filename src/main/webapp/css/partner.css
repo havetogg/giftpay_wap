@@ -1,0 +1,116 @@
+.content{
+
+}
+h1{
+
+    margin: 38px 50px;
+
+    font-weight: bold;
+
+    font-size: 38px;
+
+    color: #666666;
+}
+h2{
+
+    margin: 44px 52px;
+
+    width: 300px;
+
+    color: #888;
+
+    font-size: 26px;
+}
+.tip{
+
+    margin: -11px auto;
+
+    width: 535px;
+
+    font-size: 26px;
+
+    line-height: 38px;
+
+    color: red;
+}
+.textContent{
+
+}
+.textContents{
+
+    margin: 0px 47px;
+
+    height: 120px;
+
+    width: 528px;
+
+    border-radius: 7px;
+
+    font-size: 30px;
+
+    box-shadow: 0px 1px 2px 0px;
+
+    text-indent: 1ex;
+
+    line-height: 40px;
+}
+.phones{
+
+    margin: -24px 47px;
+
+    height: 54px;
+
+    width: 528px;
+
+    border-radius: 7px;
+
+    font-size: 30px;
+
+    box-shadow: 0px 1px 2px 0px;
+
+    text-indent: 1ex;
+}
+.phoness{
+
+}
+.people{
+
+}
+.person{
+
+    margin: -24px 47px;
+
+    height: 54px;
+
+    width: 528px;
+
+    border-radius: 7px;
+
+    font-size: 30px;
+
+    box-shadow: 0px 1px 2px 0px;
+
+    text-indent: 1ex;
+}
+.apply{
+
+    position: absolute;
+
+    margin: 80px 340px;
+
+    font-size: 33px;
+
+    width: 240px;
+
+    height: 68px;
+
+    text-align: center;
+
+    line-height: 70px;
+
+    background: #22ac38;
+
+    border-radius: 8px;
+
+    color: white;
+}

@@ -1,0 +1,1594 @@
+﻿*{
+    margin:0;
+    padding:0;
+    font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu
+}
+li{
+    list-style-type: none;
+}
+._loading_{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #2e3231 ;
+    z-index: 1000;
+    opacity: 1;
+}
+/**
+  * TipShow Stylesheets
+  */
+.loading-backdrop {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.3s linear;
+    -webkit-transition: opacity 0.3s linear;
+}
+.loading-wrapper {
+    float: left;
+    position: relative;
+    left: 50%;
+    top: 36%;
+}
+.loading-content {
+    width: 275px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 26px;
+    padding: 10px;
+    text-align: center;
+    line-height: 45px;
+    position: relative;
+    left: -50%;
+}
+.loading-backdrop.visible {
+    opacity: 1;
+    display: block;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    transition: opacity 0.3s linear;
+}
+
+/*页面基础*/
+html {height: 100%;}
+body {min-height: 100%; height: auto;}
+
+/*flexbox布局*/
+.flex{
+    /* 设置弹性布局 */
+    display:-webkit-box;/* android 2.1-3.0, ios 3.2-4.3 */
+    display:-webkit-flex;/* Chrome 21+ */
+    display:-ms-flexbox;/* WP IE 10 */
+    display:flex;/* android 4.4 */
+}
+.flex-direction-column{
+    /* 设置弹性布局的方向，子元素按照在源文档中声明的顺序从上到下显示 */
+    -webkit-box-orient: vertical;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex-direction: column;/* Chrome 21+ */
+    -ms-flex-direction: column;/* WP IE 10 */
+    flex-direction: column;/* android 4.4 */
+}
+.flex-1{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:1;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:1;/* Chrome 21+ */
+    -ms-flex:1;/* WP IE 10 */
+    flex:1;/* android 4.4 */
+}
+.flex-2{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:2;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:2;/* Chrome 21+ */
+    -ms-flex:2;/* WP IE 10 */
+    flex:2;/* android 4.4 */
+}
+.flex-3{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:3;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:3;/* Chrome 21+ */
+    -ms-flex:3;/* WP IE 10 */
+    flex:3;/* android 4.4 */
+}
+.flex-4{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:4;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:4;/* Chrome 21+ */
+    -ms-flex:4;/* WP IE 10 */
+    flex:4;/* android 4.4 */
+}.flex-5{
+     /* 子元素自动占据剩余的空间 */
+     -webkit-box-flex:5;/* android 2.1-3.0, ios 3.2-4.3 */
+     -webkit-flex:5;/* Chrome 21+ */
+     -ms-flex:5;/* WP IE 10 */
+     flex:5;/* android 4.4 */
+ }
+.flex-pack-center{
+    /* 水平布局下的子元素 水平居中 */
+    -webkit-box-pack: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: center;/* Chrome 21+ */
+    -ms-flex-pack: center;/* WP IE 10 */
+    justify-content: center;/* android 4.4 */
+}
+.flex-align-center{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: center;/* Chrome 21+ */
+    -ms-flex-align: center;/* WP IE 10 */
+    align-items: center;/* android 4.4 */
+}
+.flex-align-end{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: end;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: flex-end;/* Chrome 21+ */
+    -ms-flex-align: end;/* WP IE 10 */
+    align-items: flex-end;/* android 4.4 */
+}
+.flex-pack-justify{
+    /* 水平布局下的子元素 2端对齐 */
+    -webkit-box-pack: justify;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: space-between;/* Chrome 21+ */
+    -ms-flex-pack: justify;/* WP IE 10 */
+    justify-content: space-between;/* android 4.4 */
+}
+.jmt_center{
+    text-align: center;
+}
+.jmt_right{
+    text-align: right;
+}
+.jmt_left{
+    text-align: left;
+}
+
+
+/*首页*/
+.index{
+    background-color:#f0f0f4;
+}
+.html_top{
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 24px;
+    font-family: 'Microsoft YaHei';
+    background-color: #fff;
+    position: relative;
+}
+.index_top img{
+
+}
+.index_menus{
+    padding: 30px 0;
+    font-family: 'Microsfot YaHei';
+    background-color: #fff;
+}
+.index_menus .index_menus_icon{
+    text-align: center;
+}
+.index_menus .index_name{
+    font-size: 22px;
+    color: #2d2d2d;
+    text-align: center;
+    margin-top:5px;
+}
+.index_bottom{
+    margin: 30px auto 0;
+    width: 92%;
+}
+.index_bottom .topTextParent{
+    border-bottom: 1px solid #888;
+    height: 35px;
+    text-align: center;
+}
+.index_bottom .topText{
+    font-size: 26px;
+    color: #888888;
+    text-align: center;
+    background-color: #f0f0f4;
+    display: inline-block;
+    height: 30px;
+    margin: 20px auto 0;
+    padding: 0px 15px;
+}
+.index_goods{
+    margin-bottom: 80px;
+    margin-top: 40px;
+}
+.index_goods .tips{
+    color: #fff !important;
+    background-color: #6d1585;
+    border-radius: 40px;
+    padding: 1px 10px;
+    margin-left: 5px;
+    position: relative;
+    bottom: 4px;
+}
+.index_goods .tips1{
+    color: #fff !important;
+    background-color: #ce1313;
+    border-radius: 40px;
+    font-size: 18px;
+    padding: 1px 10px;
+    margin-left: 5px;
+    position: relative;
+    bottom: 3px;
+}
+.goodsBg_m div{
+    text-align: center;
+}
+.goods_info img{
+    vertical-align: sub;
+}
+.index_goods li{
+    margin: 25px 0;
+    background-color: #fff;
+    padding: 0px 10px;
+}
+.index_goods li .goodsBg{
+    background: url(../img/index_goodsBg.png);
+    font-size: 14px;
+    position: relative;
+    width: 140px;
+    height: 150px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+}
+.index_goods li .yellowBg{
+    background: url(../img/yellowBg.png);
+    font-size: 14px;
+    position: relative;
+    width: 140px;
+    height: 38px;
+    background-repeat: no-repeat;
+}
+.index_goods li .goodsBg_m{
+    text-align: center;
+    margin: 10px auto;
+    width: 130px;
+}
+
+.index_goods li .goodsBg_m div:nth-child(2){
+    font-size: 20px;
+    color: #ff5224;
+    text-align: center;
+    padding: 20px 4px 0;
+    border-radius: 2px;
+}
+.index_goods li .goodsBg div:nth-child(1){
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+    height: 40px;
+    line-height: 38px;
+    position: absolute;
+    top: -25px;
+}
+.index_goods li .goodsBg div:nth-child(2){
+    text-align: center;
+    height: 75px;
+    line-height: 110px;
+}
+.index_goods li .goodsBg div:nth-child(3){
+     font-size: 20px;
+     collr: #ffff;
+     color: #fff;
+     text-align: center;
+}
+.index_goods li .goodsBg div .sale{
+     font-size: 48px;
+     color: #fff;
+}.index_goods li .goodsBg div .saleT{
+     font-size: 28px;
+     color: #fff;
+     margin-left: 5px;
+}
+.index_goods li .goods_info{
+    margin: 10px auto 10px 15px;
+    line-height: 35px;
+}
+.index_goods li .goods_info :nth-child(1){
+    font-size: 24px;
+    color: #2b2b2b;
+    margin-right: 5px;
+}
+.index_goods li .goods_info :nth-child(2){
+  line-height: 35px;
+}
+
+.index_goods li .goods_info :nth-child(3){
+     font-size: 20px;
+     color: #888;
+}
+.index_range {
+    width: 90%;
+    background-color: #ffeac9;
+    display: inline-block;
+    height: 12px;
+    border-radius: 50px;
+}
+.index_rangeV {
+    background-color: #ff5224;
+    height: 12px;
+    border-radius: 50px;
+}
+.index_nav{
+    background-color: #fff;
+    border-bottom: 1px solid #e8e7e8;
+    overflow-x: hidden;
+}
+#rightUl{
+    border-left: 1px solid #e8e7e8;
+}
+#rightUl li:nth-child(1){
+    border-bottom: 1px solid #e8e7e8;
+}
+.index_toRecharge{
+    font-size: 24px;
+    color: #ff5224;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+}
+.index_ul{
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px 10px 0px;
+}
+.index_subTittle{
+    font-size: 24px;
+    color: #888;
+    margin-left: 10px;
+    vertical-align: super;
+}
+.index_banner_bottom{
+    padding: 10px 0 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+.bottom_menu{
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+}
+.bottom_menu img{
+    width:100%;
+    vertical-align: bottom;
+}
+/*发现*/
+.find{
+    margin: 20px auto;
+    text-align: center;
+}
+.find li{
+    margin-bottom: 20px;
+}
+.find ul li img{
+    width: 94%;
+}
+/*我的*/
+.myCenter{
+    background-color: #fff;
+    height: 250px;
+}
+.myCenter li{
+
+}
+.myCenter ul li img{
+
+}
+.myCenter_icon{
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+    bottom: 140px;
+}
+.myCenter_icon img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid #f0f0f4;
+}
+.myCenter_icon1{
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+    bottom: 140px;
+}
+.myCenter_icon1 .unLogin{
+    height:240px;
+}
+.myCenter_name{
+    font-size: 24px;
+    color: #202020;
+}
+.myCenter_tel{
+    font-size: 20px;
+    color: #888888;
+}
+.myCenter_bottom_Ul{
+    background-color: #fff;
+    height: 250px;
+    position: relative;
+    bottom: 100px;
+
+}
+/*绑定微信*/
+.binding_content{
+    width: 94%;
+    margin: 0 auto;
+}
+.binding_logo{
+    text-align: center;
+    margin: 60px auto;
+}
+.binding_text{
+    font-size: 20px;
+    text-align: center;
+    color: #888888;
+    height: 70px;
+}
+.binding_text2{
+     text-align: right;
+     font-size: 20px;
+     color: #888;
+     margin-top: 20px;
+}
+.blue_text{
+    color: #22a4d0;
+}
+.htmlTop{
+    background-color: #fff;
+    text-align: center;
+    font-size: 24px;
+    line-height: 70px;
+    height: 70px;
+    position: relative;
+    box-shadow: 1px 1px 1px #d6d3d3;
+}
+.htmlTop img{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+.common_btn{
+    background-color: #ff5224;
+    color: #fff;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    font-size: 24px;
+    border-radius: 5px;
+}
+.common_btn_gray{
+    background-color: #ccc;
+    color: #fff;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    font-size: 24px;
+    border-radius: 5px;
+}
+.bindCellPhone{
+    margin: 70px auto;
+}
+.binding_input{
+    width: 100%;
+    height: 70px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 24px;
+    text-indent: 20px;
+    outline: none;
+}
+.binding_input_short{
+    width: 65%;
+    height: 70px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 24px;
+    text-indent: 20px;
+    outline: none;
+}
+.bindCellPhone li{
+    margin-top: 40px;
+}
+.bindingCellPhone_text{
+    font-size: 20px;
+    text-align: center;
+    color: #888888;
+    height: 50px;
+}
+.binding_getCode{
+    text-align: center;
+    background-color: #2e2e2e;
+    width: 32%;
+    height: 70px;
+    line-height: 70px;
+    float: right;
+    color: #fff;
+    font-size: 24px;
+    border-radius: 5px;
+}
+/*更换登录密码*/
+.editPassword {
+    margin: 90px auto;
+}
+.editPassword  li{
+    border: 1px solid #cccccc;
+    margin-top: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    position: relative;
+}
+.editPassword  li input{
+    background-color: transparent;
+    outline: none;
+}
+.edit_input{
+    width: 100%;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+    font-size: 24px;
+    text-indent: 20px;
+}
+.edit_input_short{
+    width: 60%;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+    font-size: 24px;
+    text-indent: 20px;
+}
+.editPasswordTittle{
+    font-size: 24px;
+    color: #000;
+    margin-left: 20px;
+    width: 140px;
+    display: inline-block;
+}
+.blue_text2 {
+    color: #218ded;
+}
+.setPayWord_text{
+    font-size: 20px;
+    text-align: center;
+    color: #888888;
+    height: 40px;
+}
+.tips_red{
+    font-size: 24px;
+    color: #e8403e;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: none;
+}
+.authenticationInfo{
+    margin: 0 auto;
+    background-color: #fff;
+}
+.authenticationInfo li{
+    height: 75px;
+    line-height: 75px;
+    border-bottom: 1px solid #e8e7e8;
+    padding: 0 20px;
+}
+.authenticationInfo_name_left{
+    font-size: 24px;
+    color: #202020;
+}
+.authenticationInfo_name_right{
+    font-size: 24px;
+    color: #202020;
+    float: right;
+}
+.turnBackBtn{
+    background-color: #e8403e;
+    color: #fff;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    font-size: 24px;
+    border-radius: 5px;
+    margin: 25px 20px;
+}
+.setting_arrow{
+    margin-left: 20px;
+    vertical-align: middle;
+    width: 15px;
+}
+.setting_tel{
+    color: #888888;
+    font-size: 24px;
+}
+.green_text{
+    color: #57a907;
+}
+.red_text{
+    color: #e8403e;
+}
+/*我的钱包*/
+.myWallet_bill{
+    font-size: 24px;
+    color: #ffaa24;
+    position: absolute;
+    right: 20px;
+}
+.myWalletBg{
+    background: url(../img/myWalletBg.png);
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+    height: 230px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.myWalletBg ul{
+    height: 200px;
+    padding: 35px 0;
+}
+.iconName{
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}
+.iconNo{
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+.icon_bottom_name{
+    font-size: 20px;
+    color: #202020;
+    height: 40px;
+    line-height: 40px;
+}
+.recommand_tittle{
+    font-size: 24px;
+    color: #888;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    border-bottom: 1px solid #e8e7e8;
+}
+.myWallet_icons{
+    background-color: #ffffff;
+    border-bottom: 1px solid #e8e7e8;
+}
+.myWallet_icons ul{
+    padding: 20px 0;
+}
+.myWallet_icons>ul>li.jmt_center>div>img{
+	display: block;
+	height: 48px;
+	margin: 0 auto;
+}
+.rechargeRecords{
+    background-color: #fff;
+}
+.rechargeRecords ul{}
+.rechargeRecords ul li{
+    padding: 30px 20px;
+    line-height: 40px;
+    position: relative;
+    border-bottom: 1px solid #dbdbdb;
+}
+.rechargeRecords ul li .name_{
+    font-size: 24px;
+    color: #000;
+}
+.rechargeRecords ul li .time_{
+    font-size: 20px;
+    color: #888;
+}
+.rechargeRecords_value1{
+    font-size: 30px;
+    color: #ffaa24;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}.rechargeRecords_value2{
+    font-size: 30px;
+    color: #57a907;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}
+ /*提现*/
+.getCash{
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+.getCash_tittle{
+    font-size: 24px;
+    color: #000;
+}
+.getCash_tittle1{
+    font-size: 24px;
+    color: #000;
+    margin: 20px 0;
+}
+.getCash_text{
+    font-size: 24px;
+    color: #888888;
+}
+ .getCash_Bottom_tip{
+     color: #888888;
+     font-size: 20px;
+     text-align: center;
+ }
+ .getCashInput{
+     height: 70px;
+     border-bottom: 1px solid #cccccc;
+ }
+.getCashInput input{
+    font-size: 60px;
+    color: #000;
+    text-indent: 10px;
+    width: calc(100% - 35px);
+    border: none;
+    height: 70px;
+    line-height: 70px;
+    outline: none;
+    float: left;
+ }
+ .getCash_icon{
+ 	 height: 70px;
+ 	 line-height: 70px;
+ 	 display: block;
+ 	 width: 35px;
+     font-size: 36px;
+     color: #000000;
+     text-align: center;
+     float: left;
+ }
+ .getCash_bottom_text{
+     font-size: 20px;
+     color: #888888;
+     height: 70px;
+     line-height: 70px;
+ }
+ .edol_color{
+     color: #ffaa24;
+ }
+ .recharge_select{
+     appearance:none;
+     -moz-appearance:none;
+     -webkit-appearance:none;
+     outline: none;
+     height: 70px;
+     width: 100%;
+     border-radius: 5px;
+     font-size: 24px;
+     color: #888888;
+     text-indent: 10px;
+     /*background: url(../img
+     pso/down_arrow.png)no-repeat scroll right center transparent;*/
+     overflow-x:hidden;
+     position: relative;
+ }
+ .select_arrow{
+     pointer-events: none;
+     position: absolute;
+     right: 20px;
+     top: 30px;
+ }
+ /*充值结果*/
+.rechargeResult{
+    margin: 20px;
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+}
+.rechargeResult_bg{
+    background: url(../img/rechargeBg.png);
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+    height: 230px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.rechargeResult_ul{
+    padding: 20px 30px 10px;
+}
+.rechargeResult_ul li{
+    line-height: 60px;
+}
+.rechargeResult_ul li span{
+    font-size: 24px;
+    color: #2e2e2e;
+    font-family: 'Microsoft YaHei';
+}
+.recharge_value1{
+    font-size: 24px;
+    color: #878787;
+    margin-left: 10px;
+}
+.recharge_value2{
+    font-size: 24px;
+    color: #ff5224;
+    margin-left: 10px;
+}
+.pay_successImg{
+    text-align: center;
+    position: relative;
+    top: 50px;
+}
+.pay_successFlex{
+    margin: 160px 21px 0px;
+}
+.line{
+    height: 1px;
+    background-color: #d6d6d6;
+    margin-bottom: 40px
+}
+.complete_btn{
+    color: #ffaa24;
+    float: right;
+    position: relative;
+    right: 25px;
+}
+.flr{
+    float: right;
+}
+/*完成*/
+.changeBill_value1{
+    color: #57a907;
+    float: right;
+}
+/*已退款*/
+.changeBill_value2{
+    color: #e8403e;
+    float: right;
+}
+/*提现中*/
+.changeBill_value3{
+    color: #ffaa24;
+    float: right;
+}
+
+/*总资产*/
+.totalAssets{
+
+}
+.totalAssets_top{
+    background-color: #fff;
+    margin: 0 0 40px;
+    padding: 30px 20px;
+    height: 330px;
+}
+.totalAssets_name{
+    font-size: 24px;
+    color: #888888;
+}
+.color_box1{
+    width: 25px;
+    height: 25px;
+    background-color: #ffaa24;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-right: 20px;
+}
+.color_box1_price1{
+    font-size: 24px;
+    color: #ffaa24;
+    margin-left: 40px;
+}
+
+.color_box2{
+    width: 25px;
+    height: 25px;
+    background-color: #ff5224;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-right: 20px;
+}
+.color_box1_price2{
+    font-size: 24px;
+    color: #ff5224;;
+    margin-left: 40px;
+}
+.totalAssetsInfo{
+    margin: 70px 10px;
+}
+.totalAssetsInfo div{
+    line-height: 45px;
+}
+.canvas_name{
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+}
+.canvas_value{
+    font-size: 30px;
+    color: #e94024;
+    text-align: center;
+}
+.canvas_content{
+    position: relative;
+    bottom: 230px;
+}
+.canvas_content div{
+    line-height: 60px;
+}
+.myRed_name{
+    color: #202020;
+    font-size: 24px;
+    margin-left: 20px;
+}
+.myRed_{
+    padding: 20px;
+}
+.myRed_ img{
+    vertical-align: bottom;
+}
+/*核销页面*/
+.writeOff_icon{
+    margin: 80px auto 60px;
+    text-align: center;
+}
+.writeOff_text{
+    text-align: center;
+    font-size: 20px;
+    color: #888888;
+    font-family: 'Microsoft YaHei';
+}
+.writeOff_login_ul{
+     margin: 20px auto;
+    width: 90%;
+}
+.writeOff_login_ul ul{}
+.writeOff_login_ul ul li{
+    height: 70px;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin-top: 40px;
+    line-height: 70px;
+}
+.writeOff_login_ul ul label{
+    font-size: 24px;
+    width: 150px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+    font-family: 'Microsoft YaHei';
+}
+.writeOff_login_ul ul input{
+    font-size: 24px;
+    color: #ccc;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+.writeOff_login_btn{
+    background-color: #ff5224;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    height: 70px;
+    line-height: 70px;
+    margin-top: 80px;
+    border-radius: 5px;
+    letter-spacing: 5px;
+}
+.returnIndex{
+    position: absolute;
+    right: 30px;
+}
+.writeOff_bg{
+    background: url(../img/writeOff_bg.png);
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+    height: 310px;
+    background-repeat: no-repeat;
+}
+.writeOff_bg_tittle{
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    line-height: 65px;
+    font-family: 'Microsoft YaHei';
+}
+.yuan_{
+    color: #ff5224;
+    font-size: 36px;
+    font-family: 'Microsoft YaHei';
+}
+.writeOffValue{
+    font-size: 60px;
+    color: #ff5224;
+    font-family: 'Microsoft YaHei';
+}
+.writeOff_text_name{
+    font-size: 36px;
+    color: #000;
+    font-family: 'Microsoft YaHei';
+}
+.writeOff_little{
+    font-size: 24px;
+    color: #ffaa24;
+    font-family: 'Microsoft YaHei';
+    margin: 20px 0 15px;
+}
+.writeOff_contentDetail{
+    font-size: 20px;
+    color: #888888;
+    font-family: 'Microsoft YaHei';
+    line-height: 40px;
+}
+.writeOff_flex_left{
+    margin-top: 100px;
+    text-align: center;
+    width: 160px;
+}
+.writeOff_flex_right{
+    margin: 50px 20px 10px;
+}
+.writeOff_fail_text{
+    font-size: 30px;
+    color: #000;
+    font-family: 'Microsoft YaHei';
+    margin-top: 20px;
+}
+.writeOff_fail_content{
+    font-size: 24px;
+    color: #888888;
+    margin-top: 40px;
+}
+.writeOff_fail{
+    margin: 60px auto;
+    width: 96%;
+}
+.writeOff_success_bg{
+    background: url(../img/writeOff_success.png);
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background-repeat: no-repeat;
+}
+.getCash_bg{
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 3;
+    display: none;
+}
+.getCash_block{
+    background-color: #fff;
+    width: 580px;
+    margin: 35% auto;
+    padding: 60px 30px 30px;
+    position: relative;
+    border-radius: 10px;
+}
+.getCash_block input{
+    width: 100%;
+    height: 70px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin: 50px 0px 50px;
+    font-size: 24px;
+    text-indent: 10px;
+}
+.getCash_close{
+    width: 60px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+.getCash_tip_tittle{
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Microsoft YaHei';
+}
+/*订单确认*/
+.orderConfirm_content{
+    border: 1px solid #c2c2c2;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.orderConfirm_content li{
+    height: 65px;
+    line-height: 65px;
+}
+.orderConfirm_name{
+    font-size:24px;
+    color:#2e2e2e;
+    font-family: 'Microsoft YaHei';
+}
+.orderConfirm_name1{
+    font-size:24px;
+    color:#ff5224;
+    font-family: 'Microsoft YaHei';
+}
+.orderConfirm_name2{
+    font-size:24px;
+    color:#878787;
+    font-family: 'Microsoft YaHei';
+    margin-left: 20px;
+}
+.orderConfirm_btn{
+    font-size: 24px;
+    text-align: center;
+    background-color: #ff5224;
+    color: #fff;
+    height: 70px;
+    line-height: 70px;
+    margin-top: 50px;
+    border-radius: 5px;
+    font-family: 'Microsoft YaHei';
+}
+/*eye*/
+.eye_css{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 10px;
+}
+.getCash_text1{
+    text-align: center;
+    font-size: 30px;
+    line-height: 90px;
+    font-weight: bold;
+}
+.getCash_money{
+    text-align: center;
+    font-size: 30px;
+}
+/*车辆评估页面开发*/
+.carValuation_banner{
+    position: relative;
+    /*background: url(../img/banner_bg.png);*/
+    /*font-size: 14px;*/
+    /*position: relative;*/
+    /*width: 100%;*/
+    /*height: 290px;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 100% 100%;*/
+}
+.carValuation_banner_div1{
+    position: absolute;
+    top: 18px;
+    left: 10px;
+    width: 100%;
+}
+.carValuation_banner_div1 .tittle{
+    font-size: 24px;
+    color: #fff;
+    padding-left: 10px;
+    vertical-align: super;
+    font-family: 'Microsoft YaHei';
+}
+.carValuation_banner_div2{
+    font-size: 100px;
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    color: #fff;
+    font-family: 'Microsoft YaHei';
+    width: 600px;
+    height: 100px;
+    line-height: 85px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.carValuation_content{
+    background-color: #fff;
+}
+.carValuation_content ul{
+
+}
+.carValuation_content ul li{
+    height: 80px;
+    line-height: 80px;
+    border-bottom: 1px solid #ccc;
+    padding-left: 10px;
+    position: relative;
+}
+.carValuation_content ul li .menuName{
+    font-size: 24px;
+    color: #000;
+    font-family: 'Microsoft YaHei';
+    margin-left: 20px;
+}
+.carValuation_content ul li .icons{
+    position: relative;
+    top: 0px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+}
+.carValuation_content ul li .icon{
+    position: relative;
+    top: 5px;
+}
+.carValuation_content ul li .arrow{
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    line-height: 20px;
+    font-size: 24px;
+    font-family: 'Microsoft YaHei';
+    color: #000000;
+}
+.carValuation_content ul li .subTittle{
+    font-size: 24px;
+    color: #888888;
+    float: right;
+    position: relative;
+    right: 40px;
+}
+.carValuation_content ul li .input1{
+    border: none;
+    text-align: right;
+    font-size: 24px;
+    color: #000;
+    float: right;
+    position: relative;
+    top: 20px;
+    padding-right: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei';
+    width: 350px;
+    height: 45px;
+    line-height: 45px;
+}
+.carValuation_content ul li .input4{
+    border: none;
+    text-align: right;
+    font-size: 24px;
+    color: #000;
+    position: relative;
+    padding-right: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei';
+    width: 250px;
+    height: 45px;
+    line-height: 45px;
+}
+.carValuation_content ul li .input3{
+    border: none;
+    text-align: right;
+    font-size: 24px;
+    color: #000;
+    float: right;
+    padding-right: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei';
+    width: 350px;
+    height: 80px;
+    line-height: 80px;
+}
+.carValuation_content ul li .input2{
+    border: none;
+    text-align: right;
+    font-size: 24px;
+    color: #000;
+    float: right;
+    position: relative;
+    right: 80px;
+    top: 20px;
+    padding-right: 20px;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-family: 'Microsoft YaHei';
+    width: 350px;
+    height: 40px;
+    line-height: 40px;
+}
+.start_val{
+    font-size: 24px;
+    text-align: center;
+    background-color: #cacaca;
+    width: 94%;
+    margin: 50px auto 20px;
+    line-height: 75px;
+    border-radius: 5px;
+    letter-spacing: 8px;
+    color: #908d8d;
+}
+.end_val{
+    font-size: 24px;
+    text-align: center;
+    background-color: #ff5224;
+    width: 94%;
+    margin: 50px auto 20px;
+    line-height: 75px;
+    border-radius: 5px;
+    letter-spacing: 8px;
+    color: #fff;
+    display: none;
+}
+/*礼券中心*/
+.coupon_banner{
+
+}
+.coupon_banner img{
+    width: 100%;
+}
+.coupon_content{
+    margin: 30px;
+    height: 100%;
+}
+.coupon_content ul{}
+.coupon_content ul li:nth-child(2n+1){
+    width: 48%;
+    float: left;
+    margin-bottom: 35px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+.coupon_content ul li:nth-child(2n){
+    width: 48%;
+    float: right;
+    margin-bottom: 35px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+.coupon_content ul li img:nth-child(2n+1){
+    width: 100%;
+    border-radius: 15px;
+}
+.coupon_content ul li img:nth-child(2n){
+    width: 100%;
+    border-radius: 15px;
+}
+/*购买礼券*/
+.couponBuy_banner{
+    text-align: center;
+}
+.couponBuy_banner_img img{
+    border: 10px solid #fff;
+    border-radius: 40px;
+    box-sizing: border-box;
+    position: relative;
+    right: 10px;
+}
+.couponBuy_content{
+    margin: 30px;
+    height: auto;
+}
+.couponName{
+    margin: 20px 0;
+}
+.couponName label{
+    font-size: 30px;
+    color: #333333;
+    font-family: 'Microsoft YaHei';
+}.couponBuy_tittle{
+    margin: 20px 0;
+}
+.couponBuy_tittle label{
+    font-size: 24px;
+    color: #888888;
+    font-family: 'Microsoft YaHei';
+    margin-right: 10px;
+}
+.card_bg1{
+    background: url(../img/card_bg.png);
+    font-size: 14px;
+    position: relative;
+    width: 182px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.card_bg2{
+    background: url(../img/card_bg2.png);
+    font-size: 14px;
+    position: relative;
+    width: 182px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.card_bg3{
+    background: url(../img/card_bg3.png);
+    font-size: 14px;
+    position: relative;
+    width: 182px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.card_bg4{
+    background: url(../img/card_bg4.png);
+    font-size: 14px;
+    position: relative;
+    width: 182px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.couponBuy_cards{
+
+}
+.couponBuy_cards li:nth-child(2n){
+    margin: 0px 20px 30px;
+}
+.couponBuy_card_value{
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+    height: 95px;
+    line-height: 95px;
+}
+.couponBuy_card_value1{
+    font-size: 30px;
+    color: #ff5224;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+    height: 60px;
+    line-height: 60px;
+}.couponBuy_card_value2{
+    font-size: 30px;
+    color: #888888;
+    text-align: center;
+    font-family: 'Microsoft YaHei';
+     height: 60px;
+     line-height: 60px;
+}
+ .coupon_number{
+     font-size: 30px;
+     color: #ff5224;
+     vertical-align: super;
+     margin: 10px;
+     display: inline-block;
+     font-family: 'Microsoft YaHei';
+ }
+ .couponBuy_tip{
+     font-size: 24px;
+     color: #888;
+     font-family: 'Microsoft YaHei';
+     margin: 0px 15px;
+ } .couponBuy_tip1{
+     font-size: 24px;
+     color: #888;
+     font-family: 'Microsoft YaHei';
+ }
+.couponTotalValue{
+    font-size: 32px;
+    color: #ff5224;
+    font-family: 'Microsoft YaHei';
+}
+.couponBuy_totalValue_{
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+}
+.couponBuy_buyBtn{
+    background-color: #ff5224;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 10px;
+}
+.couponBuy_line_{
+    border-bottom: 1px solid #999;
+    margin: 80px 0 20px;
+}
+.goSellCarBtn{
+    font-size: 30px;
+    color: #ef8400;
+    float: right;
+    position: relative;
+    right: 10px;
+    bottom: 10px;
+    display: none;
+}
+.coupon_cardName{
+    font-size: 30px;
+    text-align: center;
+    color: #999999;
+    padding: 20px 0 30px;
+}
+.card_active{
+    transform: translateY(-10px);
+    transition: all 1s;
+    box-shadow: 0 5px 15px #9e9c99;
+}
+.card_activeNone{
+     transform: translateY(0px);
+     transition: all 1s;
+     box-shadow: 0 5px 10px #f3efeb;
+}
+.index_icon_walletRecharge{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 40px;
+}
+.index_icon_walletRecharge span{
+    font-size: 22px;
+    color: #ff5224;
+}
+.index_icon_walletRecharge img{
+    vertical-align: sub;
+    margin-right: 5px;
+}
+.index_goingOn{
+    font-size: 24px;
+    color: #cccccc;
+    height: 120px;
+    line-height: 120px;
+}
+.sellOff_img{
+    margin-top: 25px;
+}
+.sellCar_bottom_text{
+    font-size: 24px;
+    color: #888;
+    line-height: 40px;
+    display: inline-block;
+    text-align: left;
+    width: 92%;
+}
+.sellCar_bottom_text a{
+    color:red;
+}
+.getCodeBtn{
+    font-size: 22px;
+    color: #fff;
+    background-color: #ff5f29;
+    border-radius: 5px;
+    margin: 0 20px 0 10px;
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+}
+.getCodeBtn_{
+    font-size: 22px;
+    color: #fff;
+    background-color: #cacaca;
+    border-radius: 5px;
+    margin: 0 20px 0 10px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    display: none;
+}

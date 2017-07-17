@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IManagerCountDao">
+
+	<resultMap type="org.jumutang.giftpay.entity.ManagerCountModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="user_name" property="userName" />
+		<result column="user_pwd" property="userPwd" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+	<select id="queryManagerCountUserList" parameterType="org.jumutang.giftpay.entity.ManagerCountModel" resultMap="baseResult">
+		select id,user_name,user_pwd,status,create_time from t_manager_count
+		where user_name=#{userName} and  user_pwd=#{userPwd}
+	</select>
+
+	
+</mapper>

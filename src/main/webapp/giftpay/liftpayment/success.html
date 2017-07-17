@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>支付结果</title>
+    <link type="text/css" href="css/account.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/Scratch.js"></script>
+</head>
+
+<script>
+    var type="";
+    var orderNo="";
+    $(function () {
+        var backUrl = getUrlParam("backUrl");
+        if (backUrl == '' || backUrl == undefined || backUrl == null) {
+            backUrl = '';
+        }
+        type=getUrlParam("type");//途径
+        if(type=='wx'){
+            $(".type").text("微信支付");
+        }else{
+            $(".type").text("余额支付");
+        }
+        var money=getUrlParam("money");
+        $(".rmb").text(money);
+        orderNo=decodeURI(getUrlParam("orderNo"))//订单号
+        $(".toHomePage").on("click", function () {
+            if (backUrl != '') {
+                location.href = backUrl;
+            } else {
+                location.href = getRootPath() + '/giftpay/wap/wxLogin.htm';
+            }
+        });
+        initPayInfo();
+        initAdvertise();
+
+    })
+    function initPayInfo() {
+        loading("start")
+        $.ajax({
+            url: getRootPath() + "/giftpay/recharge/getPayOrderInfo.htm",
+            type: "post",
+            data:{"orderNo":orderNo},
+            dataType: "json",
+            success: function (data) {
+                loading("stop");
+                var data=data.mess;
+                data=JSON.parse(data);
+                console.log(data)
+                $(".name").text(data.dealInfo+""+data.dealMoney+"元");
+                $(".time").text((data.dealTime).substring(0,(data.dealTime).indexOf(".")));
+            },
+            error: function () {
+                loading("stop");
+            }
+        });
+    }
+    function initAdvertise(){
+        $.ajax({
+            url: getRootPath() + "/giftpay/commonSetting/queryRandomAdvertise.htm",
+            type: "post",
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                $(".index_content6").attr("itemHref",data[0].advertiseHref);
+                $(".index_content6").attr("itemId",data[0].advertiseId);
+                $(".index_content6").html('<img src="'+data[0].advertiseImgUrl+'" alt="" width="100%">');
+                $(".index_content6").on("click",function(){
+                    $.ajax({
+                        url: getRootPath() + "/giftpay/commonSetting/updateAdverClickNumOL.htm",
+                        type: "post",
+                        data: {"id": $(".index_content6").attr("itemId")},
+                        dataType: "json",
+                        success: function (res) {
+                            console.log(res);
+                            if(res.code=='1'){
+                                location.href=$(".index_content6").attr("itemHref");
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    }
+</script>
+
+<body>
+<div class="zoomer">
+    <div class="success">
+        <header>
+            <img src="img/success.png"/>
+            <p>订单支付成功</p>
+            <a class="toHomePage" href="javascript:;">前往首页</a>
+        </header>
+        <!--广告位/随机-->
+        <!--<div class="ad">-->
+        <!--<a href="javascript;:"><img src="img/ad1.png"/></a>-->
+        <!--</div>-->
+        <!--充值详情-->
+        <ul class="recharge">
+            <li>
+                <label>产品名称:</label>
+                <span class="name">油卡充值1000元-1234567890123456789</span>
+            </li>
+            <li>
+                <label>付款方式:</label>
+                <span class="type">钱包余额</span>
+            </li>
+            <li>
+                <label>实付金额:</label>
+                <span class="rmb">￥199</span>
+            </li>
+            <li>
+                <label>下单时间:</label>
+                <span class="time">2017-03-05  14:25</span>
+            </li>
+        </ul>
+
+        <div class="htmleaf-container">
+            <div class="max-width">
+                <div class="scratch_container">
+                    <div class="scratch_viewport">
+                        <a id="getRed">
+
+                        </a>
+                        <canvas id="js-scratch-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/Scratch.js"></script>
+        <script type="text/javascript">
+
+            var scratch = new Scratch({
+                canvasId: 'js-scratch-canvas',
+                imageBackground: './img/ggbg_prize.png',
+                imageBackgroundNone: './img/ggbg_none.png',
+                pictureOver: './img/ggbg.png',
+                cursor: {
+//                png: './images/piece.png',
+//                cur: './images/piece.cur',
+                    x: '20',
+                    y: '17'
+                },
+                radius: 30,
+                nPoints: 100,
+                percent: 30,
+                callback: function () {
+                },
+                pointSize: { x: 3, y: 3}
+            });
+        </script>
+        <div class="index_content12">
+            <ul class="flex">
+                <li class="flex-1 tuijian_line"></li>
+                <li class="tuiguang_">推广</li>
+                <li class="flex-1 tuijian_line"></li>
+            </ul>
+        </div>
+
+       <!-- <a class="index_content6" href="http://m.linkgift.cn/index.html">
+            <img src="img/shopping.jpg" alt="" width="100%">
+        </a>-->
+        <a class="index_content6">
+        </a>
+        <div class="jmt_center pay_bottom_tel">
+            <a  href="tel:4000808065">推广合作</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

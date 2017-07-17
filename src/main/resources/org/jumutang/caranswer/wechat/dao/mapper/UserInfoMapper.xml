@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IUserInfoDao">
+	<resultMap type="org.jumutang.caranswer.model.UserInfo" id="userInfo">
+		<result column="c_userid" property="userID" />
+		<result column="c_sourceid" property="sourceID" />
+		<result column="c_utel" property="userTel" />
+		<result column="c_recommendcode" property="recommendCode" />
+		<result column="c_createtime" property="createTime" />
+		<result column="c_updatetime" property="updateTime" />
+		<result column="c_deletetime" property="deleteTime" />
+	</resultMap>
+
+
+	<select id="queryUserInfo" parameterType="org.jumutang.caranswer.model.UserInfo"
+		resultMap="userInfo">
+		select * from t_userinfo where 1=1
+		<if test="userID != null and userID != '' ">
+			and c_userid = #{userID}
+		</if>
+		<if test="userTel !=null and userTel != '' ">
+			and c_utel = #{userTel}
+		</if>
+	</select>
+
+	<insert id="addUserInfo" parameterType="org.jumutang.caranswer.model.UserInfo">
+		insert into t_userinfo
+		(c_userid,
+		<if test="sourceID != null and sourceID != '' ">
+		c_sourceid,
+		</if>
+		c_utel,
+		<if test="recommendCode !=null and recommendCode != ''">
+		c_recommendcode,
+		</if>
+		c_createtime)
+		values
+		(#{userID},
+		<if test="sourceID != null and sourceID != '' ">
+		#{sourceID},
+		</if>
+		#{userTel},
+		<if test="recommendCode !=null and recommendCode != ''">
+		#{recommendCode},
+		</if>
+		now())
+	</insert>
+	
+	
+	<select id="queryRefundRecords" resultMap="userInfo">
+		select a.c_userid , b.c_utel 
+		from t_redinfo a left join t_userinfo b on a.c_userid = b.c_userid
+		where DATE_FORMAT(a.c_starttime,'%Y-%m-%d') = DATE_FORMAT(now(),'%Y-%m-%d')
+	</select>
+	
+	<select id="queryUserTel" parameterType="java.lang.String" resultType="java.lang.String">
+		select b.c_utel from t_orderinfo a left join t_userinfo b 
+		on a.c_userid = b.c_userid where a.c_orderid = #{1}
+	</select>
+
+</mapper>

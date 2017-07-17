@@ -1,0 +1,993 @@
+﻿*{
+    margin:0;
+    padding:0;
+}
+li{
+    list-style-type: none;
+}
+/**
+  * TipShow Stylesheets
+  */
+.loading-backdrop {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.3s linear;
+    -webkit-transition: opacity 0.3s linear;
+}
+.loading-wrapper {
+    float: left;
+    position: relative;
+    left: 50%;
+    top: 36%;
+}
+.loading-content {
+    width: 275px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 26px;
+    padding: 10px;
+    text-align: center;
+    line-height: 45px;
+    position: relative;
+    left: -50%;
+}
+.loading-backdrop.visible {
+    opacity: 1;
+    display: block;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    transition: opacity 0.3s linear;
+}
+
+/*页面基础*/
+html {height: 100%;}
+
+body {
+    min-height: 100%;
+    height: auto;
+    background-color: #f0f0f4;
+}
+
+/*flexbox布局*/
+.flex{
+    /* 设置弹性布局 */
+    display:-webkit-box;/* android 2.1-3.0, ios 3.2-4.3 */
+    display:-webkit-flex;/* Chrome 21+ */
+    display:-ms-flexbox;/* WP IE 10 */
+    display:flex;/* android 4.4 */
+}
+.flex-direction-column{
+    /* 设置弹性布局的方向，子元素按照在源文档中声明的顺序从上到下显示 */
+    -webkit-box-orient: vertical;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex-direction: column;/* Chrome 21+ */
+    -ms-flex-direction: column;/* WP IE 10 */
+    flex-direction: column;/* android 4.4 */
+}
+.flex-1{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:1;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:1;/* Chrome 21+ */
+    -ms-flex:1;/* WP IE 10 */
+    flex:1;/* android 4.4 */
+}
+.flex-2{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:2;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:2;/* Chrome 21+ */
+    -ms-flex:2;/* WP IE 10 */
+    flex:2;/* android 4.4 */
+}
+.flex-3{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:3;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:3;/* Chrome 21+ */
+    -ms-flex:3;/* WP IE 10 */
+    flex:3;/* android 4.4 */
+}
+.flex-4{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:4;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:4;/* Chrome 21+ */
+    -ms-flex:4;/* WP IE 10 */
+    flex:4;/* android 4.4 */
+}.flex-5{
+    /* 子元素自动占据剩余的空间 */
+    -webkit-box-flex:5;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-flex:5;/* Chrome 21+ */
+    -ms-flex:5;/* WP IE 10 */
+    flex:5;/* android 4.4 */
+}
+.flex-pack-center{
+    /* 水平布局下的子元素 水平居中 */
+    -webkit-box-pack: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: center;/* Chrome 21+ */
+    -ms-flex-pack: center;/* WP IE 10 */
+    justify-content: center;/* android 4.4 */
+}
+.flex-align-center{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: center;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: center;/* Chrome 21+ */
+    -ms-flex-align: center;/* WP IE 10 */
+    align-items: center;/* android 4.4 */
+}
+.flex-align-end{
+    /* 水平布局下的子元素 垂直居中 */
+    -webkit-box-align: end;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-align-items: flex-end;/* Chrome 21+ */
+    -ms-flex-align: end;/* WP IE 10 */
+    align-items: flex-end;/* android 4.4 */
+}
+.flex-pack-justify{
+    /* 水平布局下的子元素 2端对齐 */
+    -webkit-box-pack: justify;/* android 2.1-3.0, ios 3.2-4.3 */
+    -webkit-justify-content: space-between;/* Chrome 21+ */
+    -ms-flex-pack: justify;/* WP IE 10 */
+    justify-content: space-between;/* android 4.4 */
+}
+.jmt_center{
+    text-align: center;
+}
+.jmt_right{
+    text-align: right;
+}
+.jmt_left{
+    text-align: left;
+}
+.gameCenter{
+    background-color: #0c1625;
+    /*background-color: #ef8400;*/
+}
+/*系统消息*/
+.systemMessages{
+    min-height: 1135px;
+    height: auto;
+}
+.systemMessages ul{
+
+}
+.systemMessages ul li{
+    border-bottom: 1px solid #4982ad;
+    width: 92%;
+    margin: 0 auto;
+    padding: 20px 0 10px 0;
+}
+.systemMessages ul li .tittle{
+    font-size: 24px;
+    color: #fff;
+    font-family: 'Microsoft YaHei';
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+.systemMessages ul li .content{
+    font-size: 20px;
+    color: #68b7e9;
+    font-family: 'Microsoft YaHei';
+    line-height: 30px;
+}
+.systemMessages ul li .time{
+    font-size: 18px;
+    color: #224e80;
+    font-family: 'Microsoft YaHei';
+}
+.systemMessages ul li .timeParent{
+    text-align: right;
+    margin-top: 25px;
+}
+.noMessages{
+    padding: 80px;
+}
+.noMessageDiv{
+    font-size: 25px;
+    color: #68b7e9;
+    text-align: center;
+    margin: 45px auto;
+}
+/*游戏排行*/
+.gameTop_banner{
+    display: inherit;
+    position: relative;
+}
+.gameTop_banner img{
+     display: inherit;
+}
+.gameTop_banner .text1{
+    font-size: 20px;
+    background-color: rgba(0, 0,0,0.2);
+    LINE-HEIGHT: 40px;
+    height: 40px;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    color: #fff;
+}.gameTop_banner .text1 label{
+    padding-left: 20px;
+}
+.gameTopContent{
+    background-color: #0c1625;
+    min-height: 885px;
+    color: #fff;
+    font-size: 20px;
+    padding-top: 20px;
+}
+.gameTopContent table{
+    width: 86%;
+    text-align: center;
+    margin: 0px auto;
+}
+.gameTopContent table thead{}
+.gameTopContent table img{
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.gameTopContent table thead tr{}
+.gameTopContent table thead tr td{
+    background-color: #1692cc;
+    padding: 10px 20px;
+}
+.gameTopContent table thead tr td:not(:last-child){
+    border-right: 10px solid #0d1726;
+}
+.gameTopContent table tbody{}
+.gameTopContent table tbody tr{
+    height: 80px;
+    line-height: 80px;
+    border-bottom: 1px solid #1692cc;
+}
+.gameTopContent table tbody tr td{}
+/*rank排行*/
+.gameRank{
+    background-color: #0d1726;
+    min-height: 1135px;
+    height: auto;
+}
+.gameRank ul{
+    width: 92%;
+    margin: 0px auto;
+    padding-top: 5px;
+}
+.gameRank ul li{
+    box-shadow: 1px 1px 2px 2px #305981 inset;
+    border: 1px solid #4982ad;
+    border-radius: 5px;
+    padding: 10px 10px  0px 10px;
+    margin-top: 25px;
+    position: relative;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#0d1726), to(#224268));
+}
+.gameRank ul li .title{
+    font-size: 24px;
+    color: #fff;
+    height: 60px;
+    line-height: 50px;
+}
+.gameRank ul li .title1{
+    font-size: 20px;
+    color: #68b7e9;
+    height: 35px;
+    line-height: 35px;
+}
+.gameRank ul li .banner1{
+    width: 100%;
+}
+.gameRank ul li .rankTip{
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+/*我的收藏*/
+.collections_bar{
+    text-align: center;
+    background-color: #19203c;
+    color: #fff;
+    font-size: 24px;
+    height: 50px;
+    line-height: 50px;
+    font-family: 'Microsoft YaHei';
+    padding: 15px 0;
+}
+.collections_bar .selected{
+    background: url(../img/selectedBg.png) 100% 100%;
+    height: 70px;
+    width: 320px;
+    background-position-y: -5px;
+    background-repeat: no-repeat;
+}
+.collections_bar .noSelect{
+    height: 70px;
+    width: 320px;
+    background-position-y: -5px;
+    background-repeat: no-repeat;
+    color: #41629a;
+    font-family: 'Microsoft YaHei';
+}.collections_bar .shu{
+     width: 1px;
+     background-color: #fff;
+}
+.gameRank ul li .rankTip1{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+#myCollection{
+
+}
+#havePlay{
+    display: none;
+}
+.myGames{
+    background-color: #0d1826;
+    min-height: 1135px;
+}
+.myGames .myGamesList{
+    padding: 20px 10px;
+}
+.myGames .recentText{}
+.myGames .myGamesList ul{}
+.myGames .myGamesList ul li{
+    border: 1px solid #417496;
+    border-radius: 5px;
+    padding: 10px 0 10px 10px;
+    box-shadow: 2px 0px 2px #1e374a inset;
+    position: relative;
+    background: -webkit-gradient(linear, 120% 79, 0 bottom, from(#0d1726), to(#224268));
+    margin-bottom: 20px;
+}
+.myGames .myGamesList ul li .right{
+    padding-left:20px;
+}.myGames .myGamesList ul li .banners{
+     height: 100%;
+     width: 100%;
+}
+.myGames .myGamesList ul li .name{
+     font-size: 24px;
+     color: #fff;
+     font-family: 'Microsoft YaHei';
+}
+.myGames .myGamesList ul li .time{
+    font-size: 24px;
+    color: #fff;
+    font-family: 'Microsoft YaHei';
+    margin-left: 10px;
+}
+.myGames .myGamesList ul li .timeParent{
+     height: 50px;
+     line-height: 50px;
+}
+/*我的成就*/
+.myAchievements_range{
+    width: 250px;
+    background-color: #fff;
+    display: inline-block;
+    height: 20px;
+    border-radius: 50px;
+    margin: 0 10px;
+}.myAchievements_rangeV{
+     background-color: #f4d057;
+     height: 20px;
+     border-radius: 50px;
+}
+ .myAchievements_range_parent{
+     position: absolute;
+     right: 10px;
+}
+.cups{
+    vertical-align: sub;
+}
+/*积分兑换*/
+.integralExchange{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+.integralExchangeList{
+    background-color: #0d1826;
+    min-height: 1135px;
+    height: auto;
+}
+.integralExchangeList_red_bg{
+    background: url(../img/red_bg.png);
+    width: 258px;
+    background-repeat: no-repeat;
+    font-size: 24px;
+    color: #fff;
+    line-height: 70px;
+    height: 70px;
+    padding-left: 20px;
+    font-family: 'Microsoft YaHei';
+    float: left;
+}
+.integralExchangeList ul{}
+.integralExchangeList ul li{
+    width: 44%;
+    border: 1px solid #417395;
+    border-radius: 5px;
+    padding: 10px;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 18px;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#0d1726), to(#224268));
+}
+.integralExchangeList ul li img{
+    width: 100%;
+}
+.integralExchangeList ul li .gname{
+    font-size: 24px;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.integralExchangeList ul li .price{
+    font-size: 24px;
+    color: #ffda44;
+}
+.integralExchangeList ul li .txt{
+    font-size: 24px;
+    color: #68b7e9;
+    margin-left: 5px;
+}
+/*成就详情*/
+.achievementsDetail{
+    background-color: #0d1726;
+    min-height: 1135px;
+    height: auto;
+}
+.achievementsDetails{}
+.achievementsDetails_ul{
+    width: 92%;
+    margin: 0 auto;
+}
+.achievementsDetails_ul li{
+    border: 1px solid #4982ad;
+    margin-top: 25px;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+.achievementsDetails_ul .name2{
+    font-size: 24px;
+    color: #fff;
+    line-height: 40px;
+    height: 40px;
+}
+.achievementsDetails_ul .content2{
+    font-size: 20px;
+    color: #68b7e9;
+    line-height: 35px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.achievementsDetails_icon{
+    padding: 10px;
+}
+.nikeGreen{
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    width: 50px;
+}
+#achievementsDetails_content2{
+    display: none;
+}
+#achievementsDetails_content3{
+    display: none;
+}
+/*充值大厅*/
+.rechargeList{
+    background-color: #0d1927;
+    height: auto;
+    min-height: 1135px;
+    padding-top: 20px;
+}
+.rechargeList .shu{
+    width: 1px;
+    background-color: #ffffff;
+}
+.rechargeList ul{}
+.rechargeList ul li{
+    padding: 20px;
+    width: 88%;
+    margin: 0px auto 20px;
+    border-radius: 5px;
+    /*background: -webkit-gradient(linear, 70% 79, 0 bottom, from(#0d1726), to(#224268));*/
+}
+.rechargeList_bg{
+    background: url(../img/blue_bg.png);
+    height: 90px;
+    width: 594%;
+    background-repeat: no-repeat;
+}
+.rechargeList .numbers{
+    font-size: 30px;
+    color: #fff;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.coinsss{
+    position: relative;
+    top: 15px;
+}
+.verticalCenter{
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-flex;
+    display: flex;
+}
+.DiamondssssImg{
+    width: 60px;
+}
+.DiamondssssImg1{
+    width: 60px;
+    position: relative;
+    top: 10px;
+}
+.Diamondssss{
+    font-size: 30px;
+    color: #ffd21c;
+    display: inline-block;
+    height: 70px;
+    line-height: 70px;
+    vertical-align: bottom;
+    text-align: center;
+    width: 110px;
+}
+.Diamondssss1{
+    font-size: 30px;
+    color: #ffd21c;
+    display: inline-block;
+    height: 70px;
+    line-height: 70px;
+    vertical-align: bottom;
+    text-align: center;
+    width: 160px;
+    position: relative;
+}
+.Diamondssss12{
+    font-size: 30px;
+    color: #ffd21c;
+    display: inline-block;
+    height: 70px;
+    vertical-align: bottom;
+    text-align: center;
+    width: 160px;
+    position: relative;
+}
+.Diamondssss_cut{
+    font-size: 18px;
+    color: #fff;
+    background-color: #e53080;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: bottom;
+    text-align: center;
+    width: 95px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+.rechargeList ul li .center{
+    text-align: center;
+    position: relative;
+    top: 10px;
+}
+.recharge_top_banner{
+    background: url(../img/recharge_topBg.png);
+    height: 95px;
+    width: 94%;
+    background-repeat: no-repeat;
+    margin: 10px auto;
+    position: relative;
+}
+.recharge_topBanner_right{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}.recharge_topBanner_level{
+     font-size: 30px;
+     color: #fff;
+     height: 95px;
+     line-height: 95px;
+     text-align: center;
+     width: 125px;
+}
+ .recharge_topBanner_levelContent{
+     font-size: 20px;
+     color: #68b7e9;
+     width: 320px;
+     height: 153px;
+     margin: 20px 15px;
+ }
+/*钻石兑换*/
+.game_block{
+    background-color: rgba(0,0,0,0.4);
+    height:100%;
+    width:100%;
+    position: fixed;
+    z-index: 999;
+}
+.recharge_block{
+    background: url(../img/recharge_bg.png);
+    height: 311px;
+    width: 462px;
+    background-repeat: no-repeat;
+    margin: 50% auto;
+    text-align: center;
+}
+.index_login_block{
+    background: url(../img/login_bg.png);
+    height: 401px;
+    width: 462px;
+    background-repeat: no-repeat;
+    margin: 50% auto;
+    text-align: center;
+}
+.index_login_getCode_block{
+    background: url(../img/getCode.png);
+    height: 81px;
+    width: 210px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    line-height: 81px;
+    color: #905918;
+    font-size: 24px;
+}
+.tip_contentDiv{
+    height: 150px;
+    line-height: 200px;
+}
+.tip_contentDiv1{
+    height: 100px;
+    line-height: 100px;
+}.tip_contentDiv2{
+    height: 100px;
+    line-height: 135px;
+}
+.tip_contentText{
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    height: 35px;
+    line-height: 20px;
+}
+.tip_contentText1{
+     font-size: 30px;
+     color: #fff;
+     text-align: center;
+     height: 115px;
+     line-height: 120px;
+}
+.tip_contentText2{
+     font-size: 30px;
+     color: #fff;
+     text-align: center;
+     height: 115px;
+     line-height: 120px;
+}.tip_contentText3{
+     font-size: 24px;
+     color: #fff;
+     text-align: center;
+     line-height: 30px;
+     height: 35px;
+}
+.diamond_bg{
+    background: url(../img/diamod_bg.png);
+    height: 85px;
+    width: 85px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    color: #fff;
+}
+.coin_bg{
+    background: url(../img/coin_bg.png);
+    height: 85px;
+    width: 85px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    color: #fff;
+}
+.coin_diamond_value{
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+/*游戏中心首页*/
+.gameCenterIndex{
+    background-color: #0d1726;
+}
+.icons_index{
+    z-index: 3;
+    position: relative;
+}
+.icon_bg{
+    background: url(../img/index_iconBg.png);
+    height: 83px;
+    width: 143px;
+    background-repeat: no-repeat;
+    position: relative;
+    bottom: 20px;
+    left: 10px;
+    z-index: 0;
+}
+.icon_bg a{
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0 10px;
+    vertical-align: bottom;
+}
+.indexIcon_text1{
+    font-size: 20px;
+    color: #fff;
+    height: 45px;
+    line-height: 60px;
+    font-family: 'Microsoft YaHei';
+}
+.indexIcon_text2{
+    font-size: 18px;
+    color: #ffd21c;
+    font-family: 'Microsoft YaHei';
+}
+.index_banner_top{
+    position: fixed;
+    width: 96%;
+    top: 15px;
+    z-index: 3;
+    left: 10px;
+    align-items: center;
+    display: flex;
+}
+.index_banner_top li{
+
+}
+.index_diamond1{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50px;
+    height: 40px;
+    width: 130px;
+    display: inline-block;
+    font-size: 18px;
+    color: #fff9f4;
+    line-height: 45px;
+    text-align: center;
+    position: relative;
+}
+.index_diamond a{
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 50%;
+    vertical-align: baseline;
+}
+.index_diamond1 img{
+    width: 30px;
+    position: absolute;
+    left: 10px;
+    top: 7px;
+}
+.index_diamond{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50px;
+    height: 40px;
+    width: 90px;
+    display: inline-block;
+    color: #fff9f4;
+    text-align: center;
+    position: relative;
+}
+.index_diamond a{
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 50%;
+    vertical-align: baseline;
+    position: relative;
+    left: 5px;
+}
+.index_diamond img{
+    width: 30px;
+    position: relative;
+    top: 5px;
+}
+.index_diamond span{
+    font-size: 20px;
+    color: #fff;
+    background-color: #ff0000;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    line-height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    right: -5px;
+    top: -2px;
+    text-align: center;
+}
+.index_banner_top_personDiv{
+    background-color: #1d1714;
+    height: 70px;
+    /*line-height: 70px;*/
+    color: #fff;
+    border-radius: 50px;
+    position: relative;
+}
+.icon11_img{
+    width: 70px;
+    border-radius: 50%;
+}
+.index_banner_top_personDivVIPlevel{
+    font-size: 14px;
+    color: #ffea00;
+    display: block;
+}
+.index_banner_top_personDivName{
+    font-size: 18px;
+    color: #fff;
+    display: block;
+}
+.personInfo1{
+    padding-top: 10px;
+}
+.personInfo2{
+    padding-top: 22px;
+}
+.index_tip1{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    top: 15px;
+    display: none;
+}
+.index_tip1 label{
+    font-size: 20px;
+}
+.index_tip_arrow{
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 18px solid rgba(0,0,0,0.5);
+    position: absolute;
+    top: -18px;
+    left: 80px;
+}
+.index_tip2{
+    width: 150px;
+    position: absolute;
+    font-size: 20px;
+    right: 0px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 40px;
+    top: 50px;
+    display: none;
+}
+.index_tip2_arrow{
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: absolute;
+    top: -9px;
+    right: 30px;
+}
+.red_number_{
+    font-size: 20px;
+    color: #fff;
+    background-color: #ff0000;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    line-height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    text-align: center;
+    left: 125px;
+}
+.index_login_tip1{
+    font-size: 24px;
+    color: #fff;
+    height: 50px;
+    line-height: 60px;
+}
+.index_login_tip2{
+    font-size: 20px;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+}
+.index_login_input1{
+    background-color: #0c1625;
+    width: 90%;
+    height: 70px;
+    border: 1px solid #417396;
+    border-radius: 5px;
+    font-size: 24px;
+    text-indent: 1rem;
+    font-family: 'Microsoft YaHei';
+    color: #68b7e9;
+}
+.index_login_input2{
+    background-color: #0c1625;
+    width: 45%;
+    height: 70px;
+    border: 1px solid #417396;
+    border-radius: 5px;
+    font-size: 24px;
+    text-indent: 1rem;
+    font-family: 'Microsoft YaHei';
+    color: #68b7e9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.index{
+    width: 100%;
+    background-color: #ffaa24;
+}
+.index_bg{
+    background: url(../img/red_bg.png);
+    height: 860px;
+    width: 620px;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-size: 14px;
+    right: 10px;
+    top: 40px;
+    margin: 1px auto;
+}
+.red_bg{
+    background: url(../img/red.png);
+    height: 431px;
+    width: 592px;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-size: 14px;
+    right: 15px;
+    top: 120px;
+    text-align: center;
+}

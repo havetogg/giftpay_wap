@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jumutang.giftpay.dao.IUserSubDao">
+    <resultMap id="BaseResultMap" type="org.jumutang.giftpay.model.UserSubModel">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="open_id" property="openId" jdbcType="VARCHAR"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID, user_id, phone, open_id, detail, status, type, create_time, nick_name
+  </sql>
+
+    <select id="queryUserSubModel" resultMap="BaseResultMap" parameterType="org.jumutang.giftpay.model.UserSubModel">
+        select
+        <include refid="Base_Column_List"/>
+        from t_subUser
+        <where>
+            <if test="id != null">
+                and ID=#{id,jdbcType=VARCHAR}
+            </if>
+            <if test="userId != null">
+                and user_id=#{userId,jdbcType=VARCHAR}
+            </if>
+            <if test="phone != null">
+                and phone=#{phone,jdbcType=VARCHAR}
+            </if>
+            <if test="openId != null">
+                and open_id=#{openId,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status=#{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addUserSubModel" parameterType="org.jumutang.giftpay.model.UserSubModel">
+        insert into t_subUser
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            create_time,
+            <if test="nickName != null">
+                nick_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            now(),
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateUserSubModel" parameterType="org.jumutang.giftpay.model.UserSubModel">
+        update t_subUser
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+        <if test="openId != null">
+            and open_id = #{openId,jdbcType=VARCHAR}
+        </if>
+    </update>
+
+
+    <select id="queryAddCountByToday" resultType="java.lang.Integer">
+         <![CDATA[
+
+      select count(1) from (select u.id from t_user u left join t_subuser s on u.id=s.user_id GROUP BY u.id) u
+
+        ]]>
+  </select>
+    <select id="queryTotalAddCount" resultType="java.lang.Integer">
+<![CDATA[
+
+select count(1) from (select u.id from t_user u  left join t_subuser s on u.id=s.user_id where DATE_FORMAT(u.create_time,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d') GROUP BY u.id) u
+
+        ]]>
+  </select>
+    <select id="queryPhoneUserCountByToday" resultType="java.lang.Integer">
+<![CDATA[
+
+
+
+select count(1) from (select u.id from t_user u  left join t_subuser s on u.id=s.user_id where DATE_FORMAT(u.create_time,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d') and u.phone<>'' GROUP BY u.id) u
+
+
+
+        ]]>
+  </select>
+    <select id="queryPhoneUserAllCount" resultType="java.lang.Integer">
+<![CDATA[
+
+
+
+select count(1) from (select u.id from t_user u  left join t_subuser s on u.id=s.user_id where u.phone<>'' GROUP BY u.id) u
+
+
+
+        ]]>
+  </select>
+    <select id="queryPhoneUserCountByZshToday" resultType="java.lang.Integer">
+<![CDATA[
+
+select count(1) from (select u.id from t_user u  left join t_subuser s on u.id=s.user_id where DATE_FORMAT(u.create_time,'%Y-%m-%d')=DATE_FORMAT(now(),'%Y-%m-%d') and u.phone<>'' and s.type='2' GROUP BY u.id) u
+
+        ]]>
+  </select>
+    <select id="queryAllZshUserCount" resultType="java.lang.Integer">
+<![CDATA[
+
+select count(1) from (select u.id from t_user u  left join t_subuser s on u.id=s.user_id where u.phone<>'' and s.type='2' GROUP BY u.id) u
+
+        ]]>
+  </select>
+    <select id="queryOldUserCount" resultType="java.lang.Integer">
+        <![CDATA[
+
+      select count(1) from t_olduser
+
+        ]]>
+    </select>
+</mapper>

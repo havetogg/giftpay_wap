@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IGasCardDao">
+
+
+
+	<resultMap type="org.jumutang.caranswer.model.GasCard" id="gasCard">
+		<result column="c_gascardid" property="gascardID" />
+		<result column="c_userid" property="userID" />
+		<result column="c_gascardnumber" property="gasCardNumber" />
+		<result column="c_buildtel" property="buildTel" />
+		<result column="c_builduname" property="buildUname" />
+		<result column="c_createtime" property="createTime" />
+		<result column="c_updatetime" property="updateTime" />
+		<result column="c_deletetime" property="deleteTime" />
+	</resultMap>
+
+
+
+	<insert id="bindingUserCard" parameterType="org.jumutang.caranswer.model.GasCard">
+		insert into t_gascard
+		(c_gascardid,c_userid,c_gascardnumber,c_buildtel,c_builduname,c_createtime)
+		values
+		(#{gascardID},#{userID},#{gasCardNumber},#{buildTel},#{buildUname},now())
+	</insert>
+
+	<update id="changeGasCard" parameterType="org.jumutang.caranswer.model.GasCard">
+		update t_gascard set
+		c_gascardnumber = #{gasCardNumber} ,c_buildtel=#{buildTel}
+		,c_builduname = #{buildUname} ,c_updatetime = now() 
+		where 1 = 1
+		<if test="userID != null and userID != '' ">
+			and c_userid = #{userID} 
+		</if>
+
+		<if test="gascardID !=null and gascardID != '' ">
+			and c_gascardid = #{gascardID}
+		</if>
+	</update>
+
+
+	<select id="queryGasCard" parameterType="org.jumutang.caranswer.model.GasCard"
+		resultMap="gasCard">
+		select * from t_gascard where 1=1 
+		
+		<if test="userID != null and userID != '' ">
+			and c_userid = #{userID} 
+		</if>
+		
+		<if test="gasCardNumber != null and gasCardNumber != '' ">
+			and c_gascardnumber = #{gasCardNumber}
+		</if>
+		
+		<if test="gascardID !=null and gascardID != '' ">
+			and c_gascardid = #{gascardID}
+		</if>
+	</select>
+	
+	<select id="vaildGasCard" parameterType="org.jumutang.caranswer.model.GasCard"
+		resultType="int">
+		select count(1) from t_gascard where 1=1 
+		<if test="userID != null and userID != '' ">
+			and c_userid = #{userID} 
+		</if>
+		
+		<if test="gasCardNumber != null and gasCardNumber != '' ">
+			and c_gascardnumber = #{gasCardNumber}
+		</if>
+		
+		<if test="gascardID !=null and gascardID != '' ">
+			and c_gascardid = #{gascardID}
+		</if>
+	</select>
+
+
+</mapper>

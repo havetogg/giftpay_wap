@@ -1,0 +1,77 @@
+@charset "utf-8";
+/*CSS Reset*/
+*{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+ul,ol,li{list-style:none; margin: 0; padding: 0;}
+em,i{font-style:normal;}
+img{border:none;}
+a,a:hover{text-decoration:none;transition: all 0.2s linear;}
+input,img {vertical-align: middle;}
+.clearfix:after{display:block;content:'';clear:both;visibility:hidden;}
+.none{display:none;}
+.no-spacing{margin:0;padding:0;}
+.margin-center{margin:0 auto;text-align:center;}
+body{font-family: "微软雅黑";width: 100%; background: #223344;}
+body,html{ height: 100%;}
+*{box-sizing: border-box;}
+
+/*加载字体*/
+@font-face { 
+font-family: LCDAT;
+src: url(../font/LCDAT&TPhoneTimeDate.ttf);
+} 
+
+/*公共样式*/
+header{ width: 640px; height: 200px; background: url(../img/header.png)no-repeat; background-size: 640px 200px;}
+.f40{ font-size: 40px;}
+
+/*统计页*/
+.count{width: 640px;}
+.count .tip{ width: 640px; padding: 35px 50px; margin: 10px 0;}
+.count .tip h1{ width: calc(100% - 55px); height: 66px; line-height: 66px; background: #ff6600 url(../img/title.png) no-repeat right; background-size: 268px 66px; border-radius: 20px; font-size: 30px; color: #fff; letter-spacing:5px; padding-left: 70px; margin-left: 50px; position: relative;}
+
+.count .tip h1 i{ width: 100px; height: 100px; position: absolute; left: -50px; top: -17px; border-radius: 50px; display: block;}
+.count .tip h1.new i{ background: #0099dd url(../img/new.png) no-repeat center center; background-size: 60px 60px;}
+.count .tip h1.user i{ background: #0099dd url(../img/user.png) no-repeat center center; background-size: 60px 60px;}
+.count .tip .round{ overflow: hidden; margin-top: 45px; width: 100%;}
+.count .tip .round li{ float: left; width: 50%;}
+.count .tip .round li:first-child{ background: url(../img/li.png) no-repeat right center; background-size: 4px 180px;}
+.count .tip .round li .num1{ width: 170px; height: 170px; line-height: 170px; text-align: center; font-size: 60px; font-weight: bold; color: #fff; background: url(../img/num1.png) no-repeat; background-size: 170px 170px; margin: 0 auto;}
+.count .tip .round li .num2{ width: 170px; height: 170px; line-height: 170px; text-align: center; font-size: 44px; font-weight: bold; color: #fff; background: url(../img/num2.png) no-repeat; background-size: 170px 170px; margin: 0 auto;}
+.count .tip .round li p{ text-align: center; color: #fff; font-weight: bold; font-size: 24px;letter-spacing:5px;}
+
+/*2017.3.28新增*/
+/*计算器格式统计*/
+.num{ width: 600px; height: 120px; background: url(../img/num.png) no-repeat; background-size: 600px 120px; margin: 54px 20px 0; font-family: "LCDAT"; font-size: 130px; color: #000; padding: 0 64px; position: relative; line-height: 130px; text-align: right;}
+.num .bg{ position: absolute; top: 0; left: 64px; display: block; width: 472px; height: 120px; opacity: 0.3;}
+.num #value7{ position: absolute; top: 0; left: 64px; display: block; width: 472px; height: 120px;}
+.num .glass{ width: 600px; height: 120px; position: absolute; top: 0; left: 0;}
+
+/*图表相关样式*/
+.count .tip h1 a{ color: #fff; font-size: 16px; line-height: 66px; display: block; float: right; margin-right: 15px;}
+.count .tip .chart{ display: none;}
+.chart .buttom{ height: 60px; width: 560px;}
+.chart .buttom li{ float: left; width: 160px; text-align: center; height: 60px; line-height: 60px; background: #17222e; border-radius: 10px; color: #fff; font-weight: bold; font-size: 22px; margin-right: 35px;}
+.chart .buttom li:last-child{ margin-right: 0;}
+.chart .buttom li.cur{ background: #0099dd;}
+
+/*九宫格*/
+.linkList{ width: 600px; height: 600px; overflow: hidden; margin: 20px auto;}
+.linkList li{ float: left; width: 194px; height: 194px; background: #ff6600; color: #fff; text-align: center; line-height: 200px; font-size: 30px; margin-bottom: 6px; margin-right: 6px;}
+.linkList li a{ color: #fff; display: block; border: none; outline: none;}
+
+/*红包列表*/
+.amount{ width: 640px; color: #fff; margin: 0 auto; overflow: hidden;}
+.amount .head{ width: 640px; height: 200px; background: url(../img/header2.png)no-repeat; background-size: 640px 200px;}
+.amount .head a{ display: block; width: 100%; height: 100%;}
+.amount .tip{ float: left; margin-left: 30px; height: 85px; line-height: 85px; font-weight: bold; font-size: 30px;}
+.amount .tip span{ color: #ff6600;}
+
+.redPacket_list{ width: 600px; margin: 0 auto; overflow: auto;}
+.redPacket_list li{ width: 600px; background: url(../img/li_bg.png) no-repeat; color: #fff; padding-bottom: 20px; border-radius: 30px; font-size: 22px; margin-bottom: 20px; background-size: 100% 100%; position: relative; overflow: hidden;}
+.redPacket_list li h1{ height: 60px; line-height: 60px; border-bottom: 1px solid #fff; padding: 0 20px; margin-bottom: 20px;  font-weight: normal;}
+.redPacket_list li h1 span{ margin-right: 20px;}
+.redPacket_list li p{ height: 45px; line-height: 45px; padding: 0 20px;}
+.redPacket_list li p label{ height: 45px; line-height: 45px; float: left;}
+.redPacket_list li b{ font-size: 120px; position: absolute; bottom: -35px; right: 20px; opacity: 0.1;}

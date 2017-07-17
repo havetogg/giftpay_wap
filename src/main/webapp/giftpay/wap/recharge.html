@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-1.0.0.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body style="background-color: #f0f0f4;position:fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" id="back" alt="">
+        充值
+    </div>
+    <div class="getCash">
+        <div class="getCash_tittle1">支付方式</div>
+        <div style="position:relative;">
+            <select name="" id="" class="recharge_select">
+                <option value="1">微信支付</option>
+            </select>
+            <img src="img/down_arrow.png" alt="" class="select_arrow">
+        </div>
+        <div class="getCash_tittle1">充值金额</div>
+        <div class="getCashInput">
+            <label class="getCash_icon">¥</label>
+            <input type="number" id="money" onpropertychange="OnPropChanged(event)"/>
+        </div>
+        <div class="common_btn">
+            充值
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+    //保存充值金额进入余额
+    $(".common_btn").click(function () {
+//        alert("维护中");
+//        return ;
+        var payStatus=localStorage.getItem("payStatus");
+        if(payStatus=='1'){
+            alert("重复提交订单")
+            location.href="./myWallet.html";
+        }
+        var json = {};
+        var money = $("#money").val();
+        var reg = /^(([0-9]+\d*)|([0-9]+\d*\.\d{1,2}))$/;
+        if (!reg.test($("#money").val())) {
+            alert("请输入正确的充值金额");
+            $('#money').val('');
+            return;
+        }
+        else if($("#money").val()==''){
+            alert("请输入金额");
+            return;
+        }
+        json.dealMoney = money;
+        json.dealRealMoney = money;
+        loading("start");
+        $.ajax({
+            url: "/giftpay_wap/preOrder.htm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ",
+            type: "post",
+            data: json,
+            dataType: "json",
+            success: function (data) {
+                loading("stop");
+                if (data.code == "10000") {
+                    var res=data.mess;
+                    res=JSON.parse(res);
+                    localStorage.setItem("payStatus","1");
+                    location.href="http://"+window.location.host+'/wxpay_gate/information.jsp?backUrl='+res.backUrl+
+                            '&fromName='+res.fromName+
+                            '&goodsName='+encodeURI(encodeURI(res.goodsName))+
+                            '&md5='+res.md5+
+                            '&money='+res.money+
+                            '&openId='+res.openId+
+                            '&orderNo='+res.orderNo+
+                            '&payType='+res.payType+
+                            '&redirectUrl='+res.redirectUrl+
+                            '&remark='+res.remark+
+                            '&timestamp='+res.timestamp;
+                }else{
+                    alert(data.mess);
+                }
+
+              /*  if (data.code == "10000") {
+                    var payResult = JSON.parse(data.mess)
+                    var payId = payResult.orderId;
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        appId: payResult.appId, // 必填，公众号的唯一标识
+                        timestamp: payResult.timestamp, // 必填，生成签名的时间戳
+                        nonceStr: payResult.nonceStr, // 必填，生成签名的随机串
+                        signature: payResult.paySign,// 必填，签名，见附录1
+                        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    });
+                    wx.ready(function () {
+                        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                        wx.chooseWXPay({
+                            timestamp: payResult.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                            nonceStr: payResult.nonceStr, // 支付签名随机串，不长于 32 位
+                            package: payResult.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                            signType: payResult.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                            paySign: payResult.paySign, // 支付签名
+                            success: function (res) {
+                                loading("stop");
+                                window.location.href = "./rechargeResult.html?orderId=" + payId;
+                            }, error: function (res) {
+                                loading("stop");
+                                alert('f');
+                            }, cancel:function(res){
+                                loading("stop");
+                            }
+                        });
+                    });
+//					window.location.href="./rechargeResult.html?orderId="+payId;
+                } else if (data.code == "30000") {
+                    loading("stop");
+                    alerw("登录超时，请重新登录", "", function () {
+                        window.location.href = "/giftpay_wap/giftpay/wap/wxLogin.htm";
+                    });
+                } else {
+                    loading("stop");
+                    alerw(data.mess);
+                }*/
+            }, error: function (res) {
+                console.log(res);
+                loading("stop");
+            }
+        });
+    });
+
+    //返回
+    $("#back").click(function () {
+        history.back();
+    });
+</script>
+</body>
+</html>

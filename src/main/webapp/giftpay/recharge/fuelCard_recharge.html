@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fuel.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script>
+        function OnInput (event) {
+            var tel=event.target.value.replace(/\s+/g, '');
+            if(tel&&(/^1[34578]\d{9}$/.test(tel))&&rechargeAmount){
+                $('#PayShow').show();
+                $('#PayHide').hide();
+            }
+            else{
+                $('#PayShow').hide();
+                $('#PayHide').show();
+            }
+            if(tel.length==16||tel.length==19){
+                $('#companyName').html("<div class=\"serviceCompany\">中国石化</div>");
+                $('.historyNumber').hide();
+            }
+            else{
+                $('#companyName').html("<div class=\"serviceCompanyNo\">无法识别运营商，请稍后重试</div>");
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="zoomer">
+    <div class="tab_text">
+        <img src="img/arrowLeft.png" alt="" class="arrowLeft">
+        <div>油卡充值</div>
+        <div class="rechargeRecords">充值记录</div>
+    </div>
+    <div class="recharge_Content">
+        <div class="recharge_Content_goods">
+            <div class="serviceName">请输入16位加油卡号</div>
+            <div>
+                <input id="cardNo"  class="phoneNumber" type="tel" oninput="OnInput (event)" onpropertychange="OnPropChanged(event)">
+            </div>
+            <div id="companyName">
+                <!--服务提供商-->
+            </div>
+            <div style="display: none;" class="jmt_center">
+                <img src="img/closing.png" alt="">
+            </div>
+            <div class="cellPhoneNumberPrice">
+                <ul class="flex">
+                    <li class="flex-1 jmt_center phone" onclick="selectAmount(this,'10')">
+                        <div>100元</div>
+                        <img class="ico1" src="img/yellow_arrow.png" alt="">
+                        <img class="ico2" src="img/gif.png" alt="">
+                        <img class="ico3" src="img/gif1.png" alt="">
+                    </li>
+                    <li class="flex-1 jmt_center phone" onclick="selectAmount(this,'20')">
+                        <div>200元</div>
+                        <img class="ico1" src="img/yellow_arrow.png" alt="">
+                        <img class="ico2" src="img/gif.png" alt="">
+                        <img class="ico3" src="img/gif1.png" alt="">
+                    </li>
+                    <li class="flex-1 jmt_center phone" onclick="selectAmount(this,'30')">
+                        <div>500元</div>
+                        <img class="ico1" src="img/yellow_arrow.png" alt="">
+                        <img class="ico2" src="img/gif.png" alt="">
+                        <img class="ico3" src="img/gif1.png" alt="">
+                    </li>
+                </ul>
+
+                <ul class="flex">
+                    <li class="flex-1 jmt_center phone" onclick="selectAmount(this,'50')">
+                        <div>1000元</div>
+                        <img class="ico1" src="img/yellow_arrow.png" alt="">
+                        <img class="ico2" src="img/gif.png" alt="">
+                        <img class="ico3" src="img/gif1.png" alt="">
+                    </li>
+                    <li class="flex-1 jmt_center phone" onclick="selectAmount(this,'100')">
+                        <div>1500元</div>
+                        <img class="ico1" src="img/yellow_arrow.png" alt="">
+                        <img class="ico2" src="img/gif.png" alt="">
+                        <img class="ico3" src="img/gif1.png" alt="">
+                    </li>
+                    <li class="flex-1 jmt_center phone" onclick="selectAmount(this,'other')">
+                        <div>其它</div>
+                        <img class="ico1" src="img/yellow_arrow.png" alt="">
+                        <img class="ico2" src="img/gif.png" alt="">
+                        <img class="ico3" src="img/gif1.png" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div style="margin-top: 10px;">
+                <input id="amount" class="fuelRecharge_inputMoney" type="tel" placeholder="自定义充值金额" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" oninput="amountInput (event)" onpropertychange="OnPropChanged(event)">
+            </div>
+        </div>
+
+        <div class="ticketSelect flex">
+            <label class="">兑换券</label>
+            <select name="" id="" class="flex-1">
+                <option value="10元兑换券">10元兑换券</option>
+                <option value="50元兑换券">50元兑换券</option>
+                <option value="100元兑换券">100元兑换券</option>
+            </select>
+        </div>
+
+        <div class="jmt_center">
+            <img id="PayShow" src="img/pay_now.png" alt="" width="100%" onclick="rechargeNow()">
+            <img id="PayHide" src="img/pay_off.png" alt="" width="100%">
+        </div>
+        <div class="jmt_center marginTop30">
+            <img src="img/moreService.png" alt="" width="100%">
+        </div>
+        <div class="moreService">
+            <ul class="flex">
+                <li class="flex-1 jmt_center">
+                    <img src="img/bill_recharge.png" alt="">
+                    <div class="moreIconText">话费充值</div>
+                </li>
+                <li class="flex-1 jmt_center">
+                    <img src="img/flow_recharge.png" alt="">
+                    <div class="moreIconText">流量充值</div>
+                </li>
+                <li class="flex-1 jmt_center">
+                    <img src="img/giftMall.png" alt="">
+                    <div class="moreIconText">有礼付</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

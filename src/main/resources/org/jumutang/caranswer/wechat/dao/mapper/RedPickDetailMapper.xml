@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IRedPickDetailDao">
+	<insert id="addRedPickDetail" parameterType="org.jumutang.caranswer.model.RedPickDetail">
+		insert into t_redpickdetail (c_redpickdetailid , c_redpickid , c_redid ,c_createtime)
+		values
+		(#{redPickDetailID},#{redPickID},#{redID},now())
+	</insert>
+	
+	
+	<update id="updateRedPickDetail" parameterType="java.lang.String">
+		update t_redpickdetail set c_deletetime = now() 
+		where c_redpickid = #{1}
+	</update>
+
+</mapper>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+		<meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<title>家庭管理</title>
+		<link type="text/css" href="css/common/common.css" rel="stylesheet">
+		<link type="text/css" href="css/app.css" rel="stylesheet">
+		<script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+		<script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+		<script type="text/javascript" src="js/common/common.js"></script>
+		<script type="text/javascript" src="js/city.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+	</head>
+
+	<script>
+		var fid = "";
+		$(function() {
+			fid = getUrlParam("fid");
+			initFamilyInfo();
+		})
+
+		function initFamilyInfo() {
+			loading("start");
+			$.ajax({
+				url: getRootPath() + "/giftpay/liftpayment/queryFamilyInfo.htm",
+				type: "post",
+				dataType: "json",
+				data: { "fid": fid },
+				success: function(data) {
+					loading("stop");
+					var fam = data.mess;
+					fam = JSON.parse(fam);
+					fam = fam[0];
+					$(".famName").html(fam.familyName);
+				},
+				error: function() {
+					loading("stop");
+				}
+			});
+		}
+
+		function deleteM() {
+			$('#del').attr('class', 'bg_delete_on');
+		}
+
+		function cancelDelete() {
+			$('#del').attr('class', 'bg_delete_off');
+		}
+
+		function deleteSure() {
+			//    删除操作
+			$.ajax({
+				url: getRootPath() + "/giftpay/liftpayment/removeFamily.htm",
+				type: "post",
+				dataType: "json",
+				data: { "fId": fid },
+				success: function(data) {
+					loading("stop");
+					console.log(data);
+					if(data.code == '0') {
+						TipShow('删除失败！', 1000);
+						return;
+					} else {
+						TipShow('删除成功！', 1000);
+						$('#del').attr('class', 'bg_delete_off');
+						location.href = getRootPath() + "/giftpay/liftpayment/index.jsp";
+					}
+				},
+				error: function() {
+					loading("stop");
+				}
+			});
+			//			$('#del').attr('class', 'bg_delete_off');
+		}
+		//编辑操作
+		function editM() {
+			$('#edit').attr('class', 'bg_delete_on');
+		}
+
+		function closeEditDiv() {
+			$('#edit').attr('class', 'bg_edit_off');
+		}
+
+		function editSure() {
+			var name = $('#name').val();
+			var famName = $(".famName").html();
+			if(name == famName) {
+				TipShow('家庭名称不能相同！', 1000)
+				return;
+			} else if(!name) {
+				TipShow('家庭名称不能为空！', 1000)
+				return;
+			} else {
+				loading("start");
+				$.ajax({
+					url: getRootPath() + "/giftpay/liftpayment/updateFamily.htm",
+					type: "post",
+					dataType: "json",
+					data: { "fId": fid, "fName": name },
+					success: function(data) {
+						loading("stop");
+						console.log(data);
+						TipShow('修改成功！', 1000);
+						$('#edit').attr('class', 'bg_edit_off');
+						initFamilyInfo();
+					},
+					error: function() {
+						loading("stop");
+					}
+				});
+
+			}
+		}
+	</script>
+
+	<body style="background-color: #f0f0f4">
+		<!--删除弹框-->
+		<div id="del" class="bg_delete_off">
+			<div class="delete_div">
+				<div class="delete_div_text">确定要删除吗？</div>
+				<div>
+					<span class="delete_div_btn1" onclick="cancelDelete()">手滑了</span>
+					<span class="delete_div_btn2" onclick="deleteSure()">删除</span>
+				</div>
+			</div>
+		</div>
+		<!--修改名称弹框-->
+		<div id="edit" class="bg_edit_off">
+			<div class="delete_div">
+				<img src="img/closeBtn.png" alt="" class="closeBtn_icon" onclick="closeEditDiv()">
+				<div class="family_edit_title">修改家庭</div>
+				<div>
+					<input id="name" type="text" placeholder="请输入家庭名称（不超过4个字符）" class="family_edit_input" maxlength="4">
+				</div>
+				<div class="edit_sureBtn" onclick="editSure()">
+					确定
+				</div>
+			</div>
+		</div>
+		<div style="background-color: #f0f0f4;position:fixed;" class="zoomer">
+			<div class="index">
+				<div class="common_content2">
+					<div class="myFamily_location">
+						<img src="img/demo.png" alt="" class="myFamily_icon">
+						<span class="famName">我家</span>
+						<img src="img/setting.png" alt="" class="setting_icon_f" onclick="editM()">
+					</div>
+
+					<div class="myFamily_btns">
+						<div class="myFamily_addNew" onclick="javascript:location.href='addFamily.html'">
+							新增家庭
+						</div>
+						<div class="myFamily_deleteOld" onclick="deleteM()">
+							删除
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

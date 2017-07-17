@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.ChannelCountDao">
+
+	<!-- channelCount表-->
+	<resultMap type="org.jumutang.giftpay.entity.ChannelCountModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="click_num" property="click_num" />
+		<result column="channel_code" property="channel_code" />
+		<result column="channel_desc" property="channel_desc" />
+		<result column="createtime" property="createtime" />
+		<result column="exist" property="exist" />
+	</resultMap>
+
+	<!-- channelCount表和thirdUesr表 -->
+	<resultMap type="org.jumutang.giftpay.entity.ChannelCountModel" id="channelDataAll">
+		<result column="third_name" property="channel_code" />
+		<result column="channel_desc" property="channel_desc" />
+		<result column="click_num" property="click_num" />
+		<result column="count" property="exist" />
+	</resultMap>
+
+	<!-- thirdUser表 -->
+	<resultMap type="org.jumutang.giftpay.entity.ThirdUserModel" id="thirdUserResultMap">
+		<result column="t_id" property="tId" />
+		<result column="phone" property="phone" />
+		<result column="status" property="status" />
+		<result column="name" property="name" />
+		<result column="create_time" property="createTime" />
+		<result column="third_name" property="thirdName" />
+	</resultMap>
+
+	<!-- channelCount表 where规则-->
+	<sql id="wherecause">
+		<where>
+			<if test="channel_code !=null">
+				and channel_code = #{channel_code}
+			</if>
+			<if test="channel_desc !=null">
+				and channel_desc = #{channel_desc}
+			</if>
+			<if test="exist !=0">
+				and exist = #{exist}
+			</if>
+		</where>
+	</sql>
+
+	<!-- thirdUser表 where规则-->
+	<sql id="whereThirdUser">
+		<where>
+			<if test="phone !=null">
+				and phone = #{phone}
+			</if>
+			<if test="thirdName !=null">
+				and third_name = #{thirdName}
+			</if>
+			<if test="name !=null">
+				and name = #{name}
+			</if>
+			and  name !=''
+		</where>
+	</sql>
+
+	<!-- 查询渠道是否存在 -->
+	<select id="channelIsExits" parameterType="org.jumutang.giftpay.entity.ChannelCountModel" resultType="java.lang.Integer">
+		select count(*) from t_channel_count
+		<include refid="wherecause"/>
+	</select>
+
+	<!-- 更新指定渠道码 点击率-->
+	<update id="channelUpdateClickNum" parameterType="org.jumutang.giftpay.entity.ChannelCountModel" >
+		update t_channel_count
+		<set>
+			click_num=click_num+1
+		</set>
+		<include refid="wherecause"/>
+	</update>
+
+	<!-- 新增渠道数据 -->
+	<insert id="channelAdd" parameterType="org.jumutang.giftpay.entity.ChannelCountModel" >
+		insert into t_channel_count (channel_code , createtime)
+		values (#{channel_code} , now())
+	</insert>
+
+	<!-- 查询当前所有的渠道数据进行统计-->
+	<select id="channelList" parameterType="org.jumutang.giftpay.entity.ChannelCountModel" resultMap="baseResult" >
+		select * from t_channel_count
+		<include refid="wherecause"/>
+	</select>
+
+	<!-- 查询 [渠道码], [渠道点击率] ，[办卡数量]-->
+	<select id="searchAllData" resultMap="channelDataAll" >
+		select th.third_name ,tc.channel_desc,tc.click_num ,count(th.third_name) as count  from t_channel_count tc inner join t_third_user th on tc.channel_code = th.third_name group by tc.channel_code
+	</select>
+
+	<!--查询thirdUser表下 渠道用户数据-->
+	<select id="searchThirdUserList" parameterType="org.jumutang.giftpay.entity.ThirdUserModel"  resultMap="thirdUserResultMap">
+		 select * from t_third_user
+		 <include refid="whereThirdUser" />
+	</select>
+
+
+
+</mapper>

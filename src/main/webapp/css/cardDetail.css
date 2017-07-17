@@ -1,0 +1,70 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+
+}
+.content h1{
+
+    font-size: 42px;
+
+    font-weight: 400;
+
+    margin: 40px 108px;
+}
+.stage{
+
+    font-size: 22px;
+
+    position: absolute;
+
+    margin: -56px 490px;
+
+    width: 80px;
+
+    color: #008000;
+}
+.detial{
+    width: 600px;
+    margin: 66px auto;
+}
+.detial p{
+
+    font-size: 28px;
+
+    line-height: 48px;
+}
+.footer{
+
+    width: 250px;
+
+    height: 400px;
+
+    margin: 138px auto;
+}
+.footer p{
+
+    font-size: 38px;
+
+    margin: 20px 0px;
+
+    text-align: center;
+
+    color: #66cc00;
+}
+.detial span{
+    font-size: 28px;
+    line-height: 48px;
+    width: 400px;
+}
+.shuoMing{
+    width: 400px;
+    margin: -46px 146px;
+}
+.shuoMing1{
+    width: 400px;
+
+    margin: -46px 146px;
+}
+.part_2 {
+    margin: 50px 0px;
+}

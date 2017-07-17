@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=0.55,maximum-scale=0.55,minimum-scale=0.55, width=640, target-densitydpi=device-dpi">
+		<meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<title>新增缴费账户</title>
+		<link type="text/css" href="css/common/common.css" rel="stylesheet">
+		<link type="text/css" href="css/app.css" rel="stylesheet">
+		<script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+		<script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+		<script type="text/javascript" src="js/common/common.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<!--选择城市-->
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/mui.picker.css" />
+		<link rel="stylesheet" href="css/mui.poppicker.css" />
+		<script type="text/javascript" src="js/mui/mui.min.js"></script>
+		<script type="text/javascript" src="js/mui/mui.picker.min.js"></script>
+		<script type="text/javascript" src="js/mui/mui.poppicker.js"></script>
+		<script type="text/javascript" src="js/mui/city.data-3.js"></script>]
+		<script type="text/javascript" src="js/index.js"></script>]
+		<style>
+			select {
+				direction: rtl;
+			}
+		</style>
+	</head>
+
+	<script>
+		var fid = ""; //家庭id
+		var accountType = ""; //充值类型
+		var accountInt = ""; //充值类型 数字
+		var accountUnit = ""; //缴费单位ID
+		var accountUnitName = ""; //缴费单位名称
+		$(function() {
+			fid = getUrlParam("fid");
+			accountType = getUrlParam("accountType");
+			initFamily(fid);
+			initRechargeList(fid, accountType);
+			typeStyle(accountType)
+		})
+
+		function typeStyle(accountType) {
+			if(accountType == 'shui') {
+				$(".rechargeIcon").attr("src", "img/icon2.png");
+				$(".rechargeTypeName").html("水费");
+				accountInt = "001";
+			} else if(accountType == 'dian') {
+				$(".rechargeIcon").attr("src", "img/icon3.png");
+				$(".rechargeTypeName").html("电费");
+				accountInt = "002";
+			} else if(accountType == 'mei') {
+				$(".rechargeIcon").attr("src", "img/icon4.png");
+				$(".rechargeTypeName").html("燃气费");
+				accountInt = "003";
+			}
+		}
+
+		function initFamily(fid) {
+			loading("start");
+			$.ajax({
+				url: getRootPath() + "/giftpay/liftpayment/queryFamilyInfo.htm",
+				type: "post",
+				dataType: "json",
+				success: function(data) {
+					loading("stop");
+					var fam = data.mess;
+					fam = JSON.parse(fam);
+					var str = '';
+					$.each(fam, function(index, item) {
+						if(fid == item.id) {
+							str += '<option value="' + item.id + '" selected>' + item.familyName + '</option>';
+							$(".addAccount_NAMW").val(item.cityName);
+						} else {
+							str += '<option value="' + item.id + '">' + item.familyName + '</option>';
+						}
+					})
+					$("#familySelect").html(str);
+					$("#familySelect").on("change", function() {
+						fid = $("#familySelect option:selected").val();
+						initFamily(fid);
+					})
+				},
+				error: function() {
+					loading("stop");
+				}
+			});
+		}
+
+		function initRechargeList(fid, type) {
+			loading("start");
+			$.ajax({
+				url: getRootPath() + "/giftpay/liftpayment/queryRechargeUnit.htm",
+				type: "post",
+				data: { "fId": fid, "type": type },
+				dataType: "json",
+				success: function(data) {
+					loading("stop");
+					var str = '';
+					if(data.length == 0) {
+						str += '<option value="">暂不支持该地区</option>';
+					} else {
+						str += '<option value="">请选择缴费单位</option>';
+						$.each(data, function(index, item) {
+							str += '<option value="' + item.payUnitId + '">' + item.payUnitName + '</option>'
+						});
+					}
+					$("#company").html(str);
+					$("#company").on("change", function() {
+						accountUnit =$("#company option:selected").val();
+						accountUnitName =$("#company option:selected").text();
+					})
+				},
+				error: function() {
+					loading("stop");
+				}
+			});
+		}
+
+		function editAccount() {
+			$('#edit').hide();
+			$('#cancelEdit').show();
+		}
+
+		function cancelSelectCity() {
+			$('.bg_block').hide();
+		}
+
+		function saveFamily() {
+			var company = $('#company').val();
+			var account = $('#account').val();
+			var protocol = $('#protocol').val();
+			if(!company) {
+				TipShow('请选择缴费单位', 1000);
+			} else if(!account) {
+				TipShow('请输入账号', 1000);
+			} else if(!protocol) {
+				TipShow('请选择协议', 1000);
+			} else {
+				/*TipShow('新增成功！', 1000);
+				window.location.href = "./index.html";*/
+				loading("start");
+				$.ajax({
+					url: getRootPath() + "/giftpay/liftpayment/addRechargeAccount.htm",
+					type: "post",
+					data:{"operationType":"save","fid":fid,"accountInt":accountInt,"accountUnit":accountUnit,"accountUnitName":accountUnitName,"account":account},
+					dataType: "json",
+					success: function(data) {
+						loading("stop");
+						console.log(data);
+//						if(data.code=='1'){
+							TipShow('添加成功', 1000);
+							location.href=getRootPath()+"/giftpay/liftpayment/index.jsp";
+//						}
+//						else{
+//							TipShow("账户信息查询失败", 1000);
+//						}
+					},
+					error: function() {
+						loading("stop");
+					}
+				});
+			}
+		}
+
+		function goBack() {
+			window.location.href = "./index.html";
+		}
+		//MUI 仿ios 选择框
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				//所在地区
+				var cityPicker3 = new $.PopPicker({
+					layer: 2
+				});
+				cityPicker3.setData(cityData3);
+				var showCityPickerButton = doc.getElementById('index_location');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker3.show(function(items) {
+						doc.getElementById('index_location')
+						//                        doc.getElementById('s').innerText=(items[0] || {}).text;
+						var city = (items[1] || {}).text;
+						document.getElementById("c").value = city;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})(mui, document);
+
+		function checkAllvar() {
+			var company = $('#company').val();
+			var account = $('#account').val();
+			var protocol = $('#protocol').prop('checked');
+			if(company && account && protocol) {
+				$('.address_gray').hide();
+				$('.address_saveBtn_on').show();
+			} else {
+				$('.address_gray').show();
+				$('.address_saveBtn_on').hide();
+			}
+		}
+		setInterval('checkAllvar()', 500);
+	</script>
+
+	<body style="background-color: #f0f0f4">
+		<div style="background-color: #f0f0f4;position:fixed;" class="zoomer">
+			<div class="index">
+				<ul class="addAccount_li">
+					<li>
+						<img src="" class="rechargeIcon" alt="">
+						<label class="_name rechargeTypeName" style="margin-left: 10px;">
+                 </label>
+						<!--<label class="subTittle" id="index_location">-->
+						<input readonly="readonly" type="text" data-city="" placeholder="" class="addAccount_NAMW" maxlength="4" value="南京市">
+						</label>
+						<label class="_img">
+                     <img src="img/right_arrow.png" alt="" class="arrows" style="display: none">
+                 </label>
+					</li>
+					<li>
+						<label class="_name">
+                     设置家庭
+                 </label>
+						<label>
+                     <!--<input  id="name" type="text" placeholder="我家" class="input2" maxlength="4">-->
+                      <select disabled="disabled" name="" id="familySelect" class="select11" style="direction: rtl;">
+                     </select>
+                 </label>
+						<label class="_img">
+                     <img src="img/right_arrow.png" alt="" class="arrows" style="display: none">
+                 </label>
+					</li>
+				</ul>
+
+				<ul class="addAccount_li">
+					<li>
+						<label class="_name">
+                     缴费单位
+                 </label>
+						<label>
+                     <!--<input id="company" data-city="" type="text" placeholder="请选择缴费单位" class="input2" readonly>-->
+                     <select name="" id="company" class="select11">
+                         
+                     </select>
+                 </label>
+						<label class="_img">
+                     <img src="img/right_arrow.png" alt="" class="arrows">
+                 </label>
+					</li>
+					<li>
+						<label class="_name">
+                     账户号
+                 </label>
+						<label>
+                     <input id="account"  type="text" placeholder="请输入账号" class="input1">
+                 </label>
+					</li>
+				</ul>
+
+				<div class="jmt_center" style="height: 50px;line-height: 50px;">
+					<input id="protocol" type="checkbox" checked><span class="protocol_title">同意</span>
+					<a class="protocol_text">《有礼付自助缴费服务协议》</a>
+				</div>
+
+				<div onclick="saveFamily()" class="address_saveBtn_on">
+					完成
+				</div>
+				<div class="address_gray">
+					完成
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

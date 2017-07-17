@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IAdvertiseRecordDao">
+
+	<resultMap type="org.jumutang.giftpay.model.AdvertiseRecordModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="user_num" property="userNum" />
+		<result column="advertise_type" property="advertiseType" />
+		<result column="ip" property="ip" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="userNum !=null">
+				and user_num = #{userNum}
+			</if>
+			<if test="ip !=null">
+				and ip = #{ip}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryAdvertiseRecordList" parameterType="org.jumutang.giftpay.model.AdvertiseRecordModel" resultMap="baseResult">
+		select id,user_num,advertise_type,ip,create_time from t_advertise_record
+		<include refid="wherecause"/>
+	</select>
+
+	<insert id="addAdvertiseRecordModel" parameterType="org.jumutang.giftpay.model.AdvertiseRecordModel">
+		insert into t_advertise_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			user_num,advertise_type,ip,create_time
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{userNum},#{advertiseType},#{ip},now()
+		</trim>
+	</insert>
+
+
+	
+</mapper>

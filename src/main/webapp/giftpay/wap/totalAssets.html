@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        function goBack() {
+            history.back();
+        }
+    </script>
+    <script>
+        
+  
+        
+      //初始化页面
+    	$.ajax({
+    		url:"/giftpay_wap/getBalanceList.htm",
+    		type:"get",
+    		dataType:"json",
+    		success:function(data){
+    			 if(data.state ==0){
+    				 var obj = data.data;
+    		            var totalValue=obj.balanceNumber+obj.congealBalance;
+    		            var id = obj.accountId;
+    		            var value1=obj.balanceNumber;
+    		            var value2=obj.congealBalance;
+    		            $(".myRed_").attr("id",id);
+    		            $('.color_box1_price1').html(value1);
+    		            $('.color_box1_price2').html(value2);
+    		            $('.canvas_value').html(totalValue);
+    		            var perCent=(value1)/(totalValue);
+    		            var canvas = document.getElementById("myCanvas");
+    		            if(canvas.getContext){
+    		                var ctx = canvas.getContext("2d");
+    		                //开始一个新的绘制路径
+    		                ctx.beginPath();
+    		                ctx.strokeStyle = "#ff5224";
+    		                ctx.lineWidth = 25;
+    		                ctx.arc(165,165,140,-0.5*Math.PI,2*perCent*Math.PI-0.5*Math.PI,false);
+    		                ctx.stroke();
+    		                ctx.closePath();
+    		                ctx.beginPath();
+    		                ctx.strokeStyle = "#ffaa24";
+    		                ctx.lineWidth = 25;
+    		                ctx.arc(165,165,140,2*perCent*Math.PI-0.5*Math.PI,-0.5*Math.PI,false);
+    		                ctx.stroke();
+    		                ctx.closePath();
+    		            }
+    			 }
+    		}
+    	});
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="goBack()">
+        总资产
+    </div>
+    <div class="totalAssets">
+        <div class="flex totalAssets_top">
+            <div class="flex-3" style="position: relative;">
+                <canvas id="myCanvas" width="330px" height="330px"></canvas>
+                <div class="canvas_content">
+                    <div class="canvas_name">总资产</div>
+                    <div class="canvas_value">￥0</div>
+                </div>
+            </div>
+            <div class="flex-2 totalAssetsInfo">
+                <div>
+                    <label class="color_box1"></label><label class="totalAssets_name">零钱余额</label>
+                    <div class="color_box1_price1">￥0</div>
+                </div>
+                <div>
+                    <label class="color_box2"></label><label class="totalAssets_name">加油红包余额</label>
+                    <div class="color_box1_price2">￥0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="totalAssets_bottom">
+            <div class="myWallet_icons">
+                <div class="recommand_tittle">其他资产</div>
+                <div class="myRed_">
+                    <img src="img/redIcon.png" alt="">
+                    <label class="myRed_name">我的红包</label>
+                    <img src="img/right_arrow.png" alt="" class="flr">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+function getQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+    var r = window.location.search.substr(1).match(reg); 
+    if (r != null) return decodeURI(r[2]); 
+    return null; 
+ }
+
+	$(".myRed_").click(function(){
+		var post = window.location.host;
+		var id = $(".myRed_").attr("id");
+		window.location.href="http://"+post+"/giftcenter/toIndex?id="+id+"&mark=1";
+	});
+</script>
+</body>
+</html>

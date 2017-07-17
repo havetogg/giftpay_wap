@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        function goBack() {
+            window.location.href="./myCenter.html";
+        }
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="goBack()">
+        我的钱包
+        <label class="myWallet_bill" id="bill">账单</label>
+    </div>
+    <div class="">
+        <div class="myWalletBg">
+            <ul class="flex">
+                <li class="flex-1 jmt_center" id="money">
+                    <img src="img/icon1.png" alt="">
+                    <div class="iconName">提现</div>
+                </li>
+                <li class="flex-1 jmt_center" onclick="totalAssets()">
+                    <img src="img/icon2.png" alt="">
+                    <div class="iconName">总资产</div>
+                    <div class="iconNo">￥0</div>
+                </li>
+                <li class="flex-1 jmt_center" id="cz">
+                    <img src="img/icon3.png" alt="">
+                    <div class="iconName">充值</div>
+                </li>
+            </ul>
+        </div>
+        <div class="myWallet_icons">
+            <div class="recommand_tittle">为您推荐</div>
+            <ul class="flex">
+                <li class="flex-1 jmt_center" id="nine">
+                    <div>
+                        <img src="img/icon4.png" alt="">
+                    </div>
+                    <div class="icon_bottom_name">易加油</div>
+                </li>
+                <li class="flex-1 jmt_center" id="hfcz">
+                    <div>
+                        <img src="img/icon5.png" alt="">
+                    </div>
+                    <div class="icon_bottom_name">话费充值</div>
+                </li>
+                <li class="flex-1 jmt_center" id="living">
+                    <div>
+                        <img src="img/icon6.png" alt="">
+                    </div>
+                    <div class="icon_bottom_name" >生活缴费</div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	localStorage.setItem("payStatus","0");
+})
+ function totalAssets() {
+     window.location.href='./totalAssets.html';
+ }
+
+	var flag = true;
+	//初始化页面
+	$.ajax({
+		url:"/giftpay_wap/getBalanceList.htm",
+		type:"get",
+		success:function(data){
+			 data = JSON.parse(data);
+			 if(data.state ==0){
+				 var obj = data.data;
+				 console.log(obj);
+				if(obj != undefined){
+					$(".iconNo").text("￥"+(obj.balanceNumber+obj.congealBalance));
+				}else{
+					$(".iconNo").text("￥0");
+				}
+				 
+			 }
+		}
+	});
+	
+	//提现
+	$("#money").click(function(){
+		var html = "./getCash.html";
+		var flag = 0;
+		//判断用户是否设置密码
+		$.ajax({
+			url:"/giftpay_wap/getBalanceList.htm",
+			type:"get",
+			dataType:"json",
+			async:false,
+			success:function(data){
+				var obj = data.data;
+				if(data.state==0){
+					console.log(obj.payPassword);
+					if(obj.payPassword == undefined || obj.payPassword==""){
+						flag = 1;
+					}else{
+						window.location.href="./getCash.html";
+					}
+				}
+			}
+		});
+		//判断用户是否验证身份
+		if(flag == 1){
+			$.ajax({
+				url:"/giftpay_wap/checkIdCard.htm",
+				type:"get",
+				dataType:"json",
+				success:function(data){
+					if(data.state==3){
+							window.location.href="./Authentication.html?html="+html;
+						}else{
+							window.location.href="./setPayPassword.html?html="+html;
+						}
+				}
+			});
+		}
+	});	
+	//充值
+	$("#cz").click(function(){
+		window.location.href="./recharge.html";
+	});
+	
+	//账单
+	$("#bill").click(function(){
+		window.location.href="./changeBill.html";
+	});
+	
+	//生活缴费
+	$("#living").click(function(){
+		var mess = localStorage.getItem("bindPhone");
+		if(mess="bind"){
+			window.location.href=getRootPath()+"/giftpay/liftpayment/rechargeIndex.htm";
+		}else{
+			window.location.href="./bindCellPhone.html?html="+getRootPath()+"/giftpay/liftpayment/rechargeIndex.htm";
+		}
+		
+	});
+	
+	//话费充值
+	$("#hfcz").click(function(){
+		var mess = localStorage.getItem("bindPhone");
+		if(mess="bind"){
+		window.location.href="http://www.linkgift.cn/giftpay_wap/giftpay/recharge/cellPhone_recharge.html";
+		}else{
+			window.location.href="./bindCellPhone.html?html=http://www.linkgift.cn/giftpay_wap/giftpay/recharge/cellPhone_recharge.html";
+		}
+	});
+	
+	//九折油卡
+	$("#nine").click(function(){
+		$.ajax({
+			url: getRootPath() + "/giftpay/wap/queryUserInfo.htm",
+			dataType: "json",
+			type: "post",
+			success: function (data) {
+				console.log(data);
+				if(data.success){
+					location.href= getRootPath()+"/rechargeoil/index.html?userId="+data.userId+"&openId="+data.openId;
+				}else{
+					alert("获取用户信息超时，请重新登录");
+					location.href=getRootPath() + "/giftpay/wap/wxLogin.htm";
+				}
+			}, error: function (res) {
+
+			}
+		});
+	});
+</script>
+</body>
+</html>

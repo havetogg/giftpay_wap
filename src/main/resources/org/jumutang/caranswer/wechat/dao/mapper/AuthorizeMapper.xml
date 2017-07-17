@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IAuthorizeDao">
+
+	<resultMap type="org.jumutang.caranswer.model.Authorize" id="authorize">
+		<result column="c_authorizeid" property="authorizeID" />
+		<result column="c_userid" property="userID" />
+		<result column="c_nikename" property="nikeName" />
+		<result column="c_sex" property="sex" />
+		<result column="c_province" property="province" />
+		<result column="c_city" property="city" />
+		<result column="c_country" property="country" />
+		<result column="c_headimgurl" property="headimgurl" />
+		<result column="c_privilege" property="privilege" />
+		<result column="c_createtime" property="createTime" />
+		<result column="c_updatetime" property="updateTime" />
+		<result column="c_deletetime" property="deleteTime" />
+		<result column="c_wechatcode" property="weChatCode" />
+	</resultMap>
+
+	<select id="queryAuthorize" resultMap="authorize"
+		parameterType="org.jumutang.caranswer.model.Authorize">
+		select * from t_authorize where 1=1
+		<if test="userID != null and userID != '' ">
+			and c_userid = #{userID}
+		</if>
+		<if test="weChatCode != null and weChatCode != '' ">
+			and c_wechatcode = #{weChatCode}
+		</if>
+	</select>
+
+	<insert id="addAuthorize" parameterType="org.jumutang.caranswer.model.Authorize">
+		insert into t_authorize
+		(c_authorizeid,c_userid,c_nikename,c_sex,c_province,c_city,c_country,c_headimgurl,c_privilege,c_createtime,c_wechatcode)
+		values
+		(#{authorizeID},#{userID},#{nikeName},#{sex},#{province},#{city},#{country},#{headimgurl},#{privilege},now(),#{weChatCode})
+	</insert>
+
+</mapper>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, user-scalable=no,width=640, target-densitydpi=device-dpi">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="css/count.css" />
+		<script type="text/javascript" src="js/jQuery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/jWeChat-Adaptive.js"></script>
+		<script type="text/javascript" src="js/count.js"></script>
+		<script type="text/javascript" src="js/echarts.common.min.js"></script>
+		<title>有礼付统计</title>
+	</head>
+
+	<body>
+		<div class="zoomer">
+			<div class="count">
+				<header></header>
+				<!--计算器格式统计-->
+				<div class="num">
+					<!--占位虚字-->
+					<span class="bg">88888888</span>
+					<!--实际统计数字-->
+					<span id="value7">0</span>
+					<!--玻璃-->
+					<img class="glass" src="img/glass.png" />
+				</div>
+				<div class="linkList">
+					<ul>
+						<li>
+							<a href="tj/95gasoline.html">95加油</a>
+						</li>
+						<li>
+							<a href="tj/userBalance.html">用户余额</a>
+						</li>
+						<li>
+							<a href="tj/sellCar.html">卖车用户</a>
+						</li>
+						<li>
+							<a href="tj/payinfo.html">用户订单</a>
+						</li>
+						<li>
+							<a href="tj/redpkgList.html?state=1">红包(激活)</a>
+						</li>
+						<li>
+							<a href="tj/redpkgList.html?state=2">红包(使用)</a>
+						</li>
+						<li>
+							<a href="javascript:;">待定</a>
+						</li>
+						<li>
+							<a href="javascript:;">待定</a>
+						</li>
+						<li>
+							<a href="javascript:;">待定</a>
+						</li>
+					</ul>
+				</div>
+				<!--新增用户-->
+				<div class="tip">
+					<h1 class="new">新增用户 <i></i><a class="switch" href="javascript:;" style="display: none">v查看图表v</a></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value1">0</span></div>
+							<p>今日新增</p>
+						</li>
+						<li>
+							<div class="num2"><span id="value2">0</span></div>
+							<p>累计新增</p>
+						</li>
+					</ul>
+					<!--图表1-->
+					<div class="chart">
+						<div id="chart1" style="width: 560px; height: 320px;"></div>
+						<ul class="buttom">
+							<li>按日统计</li>
+							<li class="cur">按周统计</li>
+							<li>按月统计</li>
+						</ul>
+					</div>
+				</div>
+				<!--登记用户-->
+				<div class="tip">
+					<h1 class="user">登记用户 <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value3">0</span></div>
+							<p>今日新增</p>
+						</li>
+						<li>
+							<div class="num2"><span id="value4">0</span></div>
+							<p>累计新增</p>
+						</li>
+					</ul>
+				</div>
+
+				<div class="tip">
+					<h1 class="user">兴业银行(中石化) <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value5">0</span></div>
+							<p>今日登记用户</p>
+							<!--留手机-->
+						</li>
+						<li>
+							<div class="num2"><span id="value6">0</span></div>
+							<p>累计登记人数</p>
+							<!--未留手机的-->
+						</li>
+					</ul>
+				</div>
+				<div class="tip">
+					<h1 class="user">兴业银行(1912活动) <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value77">0</span></div>
+							<p>今日登记用户</p>
+							<!--留手机-->
+						</li>
+						<li>
+							<div class="num2"><span id="value8">0</span></div>
+							<p>累计登记人数</p>
+							<!--未留手机的-->
+						</li>
+					</ul>
+				</div>
+				<!--<div class="tip">
+					<h1 class="user">平安银行 <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value9">0</span></div>
+							<p>今日登记用户</p>
+							&lt;!&ndash;留手机&ndash;&gt;
+						</li>
+						<li>
+							<div class="num2"><span id="value10">0</span></div>
+							<p>累计登记人数</p>
+							&lt;!&ndash;未留手机的&ndash;&gt;
+						</li>
+					</ul>
+				</div>-->
+				<div class="tip">
+					<h1 class="user">福利中心 <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="fuliToday">0</span></div>
+							<p>今日登记用户</p>
+							<!--留手机-->
+						</li>
+						<li>
+							<div class="num2"><span id="fuliTotal">0</span></div>
+							<p>累计登记人数</p>
+							<!--未留手机的-->
+						</li>
+					</ul>
+				</div>
+				<div class="tip">
+					<h1 class="user">中石化进口商城PV <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value11">0</span></div>
+							<p>今日</p>
+							<!--留手机-->
+						</li>
+						<li>
+							<div class="num2"><span id="value12">0</span></div>
+							<p>累计</p>
+							<!--未留手机的-->
+						</li>
+					</ul>
+				</div>
+				<div class="tip">
+					<h1 class="user">中石化进口商城UV <i></i></h1>
+					<ul class="round">
+						<li>
+							<div class="num1"><span id="value13">0</span></div>
+							<p>今日</p>
+							<!--留手机-->
+						</li>
+						<li>
+							<div class="num2"><span id="value14">0</span></div>
+							<p>累计</p>
+							<!--未留手机的-->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					type: "GET",
+					url: getRootPath() + "/count/countAllUserData.htm",
+					dataType: "json",
+					success: function(data) {
+						initAllData(data);
+					},
+					error: function(res) {
+						console.log(res)
+					}
+				});
+
+				$.ajax({
+						type: "GET",
+						url: getRootPath() + "/giftpay/third/thirdCount.htm",
+						dataType: "json",
+						success: function(data) {
+						var allxy=JSON.parse(data.xingye).length;
+						var allpa=JSON.parse(data.pingan).length;
+						var allfl=JSON.parse(data.fuli).length;
+						var todayxy=JSON.parse(data.xingyeToday).length;
+						var todaypa=JSON.parse(data.pinganToday).length;
+						var todayfl=JSON.parse(data.fuliToday).length;
+						$("#value77").numberRock({
+							speed: 5,
+							count: todayxy * 1
+						})
+						$("#value8").numberRock({
+							speed: 5,
+							count:allxy * 1
+						})
+						$("#value9").numberRock({
+							speed: 5,
+							count: todaypa * 1
+						})
+						$("#value10").numberRock({
+							speed: 5,
+							count: allpa * 1
+						})
+						$("#fuliToday").numberRock({
+							speed: 5,
+							count: todayfl * 1
+						})
+						$("#fuliTotal").numberRock({
+							speed: 5,
+							count: allfl * 1
+						})
+					},
+					error: function(res) {
+						console.log("error:" + res)
+					}
+				});
+			})
+
+			function initAllData(data) {
+
+				$("#value1").numberRock({
+					speed: 5, //数字越大数字滚动速度越慢
+					count: data.dataB * 1 //最终停留数字
+				})
+				$("#value2").numberRock({
+					speed: 5,
+					count: data.dataA * 1
+				})
+				$("#value3").numberRock({
+					speed: 5,
+					count: data.dataC * 1
+				})
+				$("#value4").numberRock({
+					speed: 5,
+					count: data.dataD * 1
+				})
+				$("#value5").numberRock({
+					speed: 5,
+					count: data.dataE * 1
+				})
+				$("#value6").numberRock({
+					speed: 5,
+					count: data.dataF * 1
+				})
+				$("#value7").numberRock({
+					speed: 30,
+					count: (data.dataG * 1 + data.dataD * 1)
+				})
+				
+				var dataH=JSON.parse(data.dataH);
+				dataH=dataH[0];
+				$("#value11").numberRock({
+					speed: 5,
+					count: dataH.pvToday * 1
+				})
+				$("#value12").numberRock({
+					speed: 5,
+					count:dataH.pvTotal * 1
+				})
+				$("#value13").numberRock({
+					speed: 5,
+					count: dataH.uvToday  * 1
+				})
+				$("#value14").numberRock({
+					speed: 5,
+					count: dataH.uvTotal  * 1
+				})
+			}
+
+			/*图表隐藏/展示*/
+			$(".tip .switch").on("click", function() {
+				$(this).toggleClass("open");
+				if(!$(this).hasClass("open")) {
+					$(this).parent().siblings(".round").fadeIn();
+					$(this).parent().siblings(".chart").hide();
+					$(this).text("v查看图表v");
+				} else {
+					$(this).parent().siblings(".round").hide();
+					$(this).parent().siblings(".chart").fadeIn();
+					$(this).text("^收起图表^");
+				}
+			})
+
+			/*图表切换*/
+			$(".chart li").on("click", function() {
+				$(this).addClass("cur").siblings().removeClass("cur");
+			});
+
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('chart1'));
+			// 指定图表的配置项和数据
+			option = {
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						type: 'cross',
+						label: {
+							backgroundColor: '#6a7985'
+						}
+					}
+				},
+				grid: {
+					containLabel: true,
+				},
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					data: ['1', '2', '3', '4', '5', '6', '7']
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					type: 'line',
+					areaStyle: { normal: {} },
+					data: [120, 132, 101, 134, 90, 230, 210],
+					color: ['#106189']
+				}]
+			};
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+    <script>
+        $(function () {
+            $(".flexslider").flexslider({
+                animation: "slide", //String: Select your animation type, "fade" or "slide"图片变换方式：淡入淡出或者滑动
+                slideshowSpeed: 4000, //展示时间间隔ms
+                animationSpeed: 1100, //滚动时间ms
+                touch: true //是否支持触屏滑动
+            });
+        })
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" id="back" alt="">
+        充值结果
+        <label class="complete_btn" id="finish">完成</label>
+    </div>
+    <div class="rechargeResult">
+        <div class="rechargeResult_bg">
+            <div class="pay_successImg">
+                <img src="img/pay_success.png" alt="">
+            </div>
+        </div>
+        <ul class="rechargeResult_ul">
+           <li>
+               <span>充值金额:</span>
+               <a class="recharge_value1" id="money">￥100</a>
+           </li>
+           <li>
+               <span>实付金额:</span>
+               <a class="recharge_value2">￥100</a>
+           </li>
+           <li>
+               <span>订单号码:</span>
+               <a class="recharge_value1" id="order"></a>
+           </li>
+        </ul>
+    </div>
+    <div class="pay_successFlex">
+        <div class="line"></div>
+        <div class="flexslider">
+            <ul class="slides" style="height: 179px;">
+                <li>
+                    <img  src="img/banner.png"  width="100%"/>
+                </li>
+                <li>
+                    <img  src="img/banner.png"  width="100%"/>
+                </li>
+                <li>
+                    <img  src="img/banner.png"  width="100%"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	//获取url参数
+	function getQueryString(name) { 
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	    var r = window.location.search.substr(1).match(reg); 
+	    if (r != null) return decodeURI(r[2]); 
+	    return null; 
+	 } 
+	var id = getQueryString("orderId");
+	//初始化数据
+	$.ajax({
+		url:"/giftpay_wap/queryPayInfo.htm",
+		type:"post",
+		data:{"orderId":id},
+		dataType:"json",
+		success:function(data){
+			if(data.state==0){
+				var obj = data.list[0];
+				$("#money").text("￥"+obj.dealMoney);
+				$(".recharge_value2").text("￥"+obj.dealRealMoney);
+				$("#order").text(obj.orderNo);
+			}
+		}
+	});
+	//完成
+	$("#finish").click(function(){
+		window.location.href="./myWallet.html";
+	});
+	//返回
+	$("#back").click(function(){
+		history.back();
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+
+<script>
+    $(function () {
+        $(".flexslider").flexslider({
+            animation: "slide", //String: Select your animation type, "fade" or "slide"图片变换方式：淡入淡出或者滑动
+            slideshowSpeed: 4000, //展示时间间隔ms
+            animationSpeed: 1100, //滚动时间ms
+            touch: true //是否支持触屏滑动
+        });
+    })
+    function switchTab(type) {
+        if(type==2){
+            window.location.href='./find.html';
+        }
+        else if(type==3){
+            window.location.href='./myCenter.html';
+        }
+    }
+    function toMyWallet() {
+        var mess = localStorage.getItem("bindPhone");
+        console.log("1-------------------"+mess);
+        if(mess=="bind"){
+            window.location.href="./myWallet.html";
+        }else{
+            window.location.href="./bindCellPhone.html?html=./myWallet.html";
+        }
+    }
+</script>
+
+<body style="background-color: #f0f0f4;position:fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+ <div class="index">
+     <div class="index_top">
+         <!--<div class="flexslider">-->
+             <!--<ul class="slides" style="height: 179px;">-->
+                 <!--<li>-->
+                     <!--<img  src="img/banner.png"  width="100%"/>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<img  src="img/banner.png"  width="100%"/>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<img  src="img/banner.png"  width="100%"/>-->
+                 <!--</li>-->
+             <!--</ul>-->
+         <!--</div>-->
+         <img src="img/banner.png" class="oilRecharge9" alt="" width="100%">
+         <div class="index_icon_walletRecharge" onclick="toMyWallet()">
+             <img src="img/icon_wallet.png" alt="">
+             <span>钱包充值</span>
+         </div>
+     </div>
+     <div class="index_nav">
+         <ul class="flex">
+             <li class="flex-1">
+                 <img src="img/oilCard.png" alt="">
+             </li>
+             <li class="flex-1">
+                 <ul id="rightUl" class="flex flex-direction-column">
+                     <li class="flex-1">
+                         <img src="img/bill.png" id="bill" alt="">
+                     </li>
+                     <li class="flex-1">
+                         <img src="img/flow.png" id="flow" alt="">
+                     </li>
+                 </ul>
+             </li>
+         </ul>
+     </div>
+     <div class="index_ul">
+        <div>
+            <img src="img/index_icon1.png" alt="">
+            <label class="index_subTittle">生活缴费</label>
+            <div class="index_banner_bottom">
+                <img src="img/banner1.png" alt="" width="100%">
+            </div>
+            <div class="index_toRecharge">前往充值</div>
+        </div>
+     </div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+		$("#img3").click(function(){
+			window.location.href="./myCenter.html";
+		});
+
+		$("#find").click(function(){
+			window.location.href="./find.html";
+		});
+		
+		$(".index_toRecharge").click(function(){
+			window.location.href="http://testd.juxinbox.com/giftPay_recharge/weixinMng/Utilities/index.htm";
+		});
+		
+		$("#bill").click(function(){
+			window.location.href="http://testd.juxinbox.com/giftPay_recharge/weixinMng/Manage/index.htm?CHANGETYPE=1";
+		});
+		
+		$("#flow").click(function(){
+			window.location.href="http://testd.juxinbox.com/giftPay_recharge/weixinMng/Manage/index.htm?CHANGETYPE=2";
+		});
+</script>
+</body>
+</html>

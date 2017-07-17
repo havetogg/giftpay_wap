@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.UserNumRecordDao">
+
+	<resultMap type="org.jumutang.giftpay.model.UserNumRecord" id="baseResult">
+		<result column="id" property="id" />
+		<result column="userId" property="userId" />
+		<result column="number" property="number" />
+		<result column="numberType" property="numberType" />
+		<result column="createTime" property="createTime" />
+		<result column="number_desc" property="number_desc" />
+	</resultMap>
+
+
+	
+	
+	<insert id="addUserNumRecord" parameterType="org.jumutang.giftpay.model.UserNumRecord">
+		insert into t_userNumRecord
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			<if test="userId !=null">
+				userId,
+			</if>
+			<if test="number !=null">
+				number,
+			</if>
+			<if test="numberType !=null">
+				numberType,
+			</if>
+			<if test="createTime !=null">
+				createTime,
+			</if>
+			<if test="number_desc !=null">
+				number_desc
+			</if>
+		</trim>
+
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			#{id},
+			<if test="userId !=null">
+				#{userId},
+			</if>
+			<if test="number !=null">
+				#{number},
+			</if>
+			<if test="numberType !=null">
+				#{numberType},
+			</if>
+			<if test="createTime !=null">
+				#{createTime},
+			</if>
+			<if test="number_desc !=null">
+				#{number_desc}
+			</if>
+		</trim>
+	</insert>
+	
+	<select id = "queryNumRecordByType" parameterType = "org.jumutang.giftpay.model.UserNumRecord"
+	    resultMap = "baseResult">
+	    select id, userId, number, numberType ,number_desc
+	    from t_userNumRecord
+	    where numberType = #{numberType} and userId = #{userId}
+	</select>
+	
+	<select id = "isNumExist" parameterType = "org.jumutang.giftpay.model.UserNumRecord" resultType = "java.lang.Integer">
+	    select count(id) 
+	    from t_userNumRecord
+	    where userId = #{userId} and number = #{number} and numberType=#{numberType}
+	</select>
+
+	<!--流量充值 查询用户最近5条充值手机号码记录-->
+	<select id="historyFlowOrder" parameterType = "org.jumutang.giftpay.model.UserNumRecord" resultMap="baseResult" >
+		select *  from t_userNumRecord as ur where ur.userId=#{0} and ur.numberType=#{1} order by  ur.createTime desc   limit 0,5
+	</select>
+
+
+	<!--流量充值 如果存在相同的userId和number的数据，则更新createTime-->
+	<update id="updateCreateTime"  >
+		update t_userNumRecord as ur  set createTime = #{createTime} where ur.userId = #{userId} and ur.number=#{number}
+	</update>
+
+	<!--流量充值 删除userNumRecord表中存在的数据 -->
+	<delete id="delUserNumRecord" parameterType = "org.jumutang.giftpay.model.UserNumRecord" >
+		delete from t_userNumRecord   where  userId =#{userId} and  number =#{number}
+	</delete>
+
+     <delete id="delAll" parameterType = "java.lang.String" >
+		delete from t_userNumRecord   where  userId =#{0} 
+	</delete>
+
+
+
+
+</mapper>

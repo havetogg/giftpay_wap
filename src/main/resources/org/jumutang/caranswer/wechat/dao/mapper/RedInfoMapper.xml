@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IRedInfoDao">
+
+	<resultMap type="org.jumutang.caranswer.model.RedInfo" id="redInfo">
+		<result column="c_redid" property="redID" />
+		<result column="c_userid" property="userID" />
+		<result column="c_orderid" property="orderID" />
+		<result column="c_redname" property="redName" />
+		<result column="c_redmoney" property="redMoney" />
+		<result column="c_starttime" property="startTime" />
+		<result column="c_endtime" property="endTime" />
+		<result column="c_createtime" property="createTime" />
+		<result column="c_updatetime" property="updateTime" />
+		<result column="c_deletetime" property="deleteTime" />
+		<result column="c_preferential" property="preferential" />
+	</resultMap>
+
+
+	<resultMap type="org.jumutang.caranswer.wechat.viewmodel.RedInfoView"
+		id="redInfoView">
+		<result column="c_redmoney" property="redMoney" />
+		<result column="c_starttime" property="startTime" />
+		<result column="c_name" property="activityName" />
+		<result column="redstate" property="redInfoState" />
+		<result column="isTrue" property="isTrue" />
+		<result column="month" property="month" />
+	</resultMap>
+
+
+	<resultMap type="org.jumutang.caranswer.wechat.viewmodel.MyRedInfoView"
+		id="myRedInfoView">
+		<result column="allReturnMoney" property="allReturnMoney" />
+		<result column="allGetRedMoney" property="allGetRedMoney" />
+		<result column="getLastRedMoney" property="getLastRedMoney" />
+		<result column="allPreferential" property="allPreferential" />
+	</resultMap>
+	
+	
+
+
+	<select id="loadRedGetInfo" parameterType="java.lang.String"
+		resultMap="redInfoView">
+		select c.* from (
+		select
+		a.c_redmoney,DATE_FORMAT(a.c_starttime,'%Y-%m-%d %T')
+		c_starttime,a.c_redname, '未提现' redstate , '1' source
+		from
+		t_redinfo a
+		where a.c_userid
+		= #{userID} and a.c_starttime &lt; now() and
+		a.c_deletetime is null
+		union
+		select
+		a.c_redmoney,DATE_FORMAT(a.c_starttime,'%Y-%m-%d %T')
+		c_starttime,a.c_redname, '已提现' redstate , '0' source
+		from
+		t_redinfo a
+		where a.c_userid
+		= #{userID} and a.c_starttime &lt; now() and
+		a.c_deletetime is not null
+		) c order by source desc , c.c_starttime desc
+	</select>
+
+
+
+	<insert id="insertRedInfo" parameterType="org.jumutang.caranswer.model.RedInfo">
+		insert t_redinfo
+		(c_redid,c_userid,c_orderid,c_redname,c_redmoney,c_starttime,c_endtime,c_createtime,c_preferential)
+		values
+		(#{redID},#{userID},#{orderID},#{redName},#{redMoney},#{startTime},#{endTime},now(),#{preferential})
+	</insert>
+
+
+	<select id="getNotReturnMoney" parameterType="org.jumutang.caranswer.model.RedInfo"
+		resultType="double">
+		select sum(c_redmoney) allReturnMoney from t_redinfo where
+		c_userid = #{userID} and c_starttime &gt; now()
+		group by c_userid
+	</select>
+
+	<select id="getAllRedMoney" parameterType="java.lang.String"
+		resultType="double">
+		select sum(c_redmoney) allGetRedMoney from t_redinfo where
+		c_userid = #{1} and c_starttime &lt; now() group by c_userid
+	</select>
+
+	<select id="getLastRedMoney" parameterType="java.lang.String"
+		resultType="double">
+		select a.getLastRedMoney from (select c_redmoney
+		getLastRedMoney
+		,c_starttime from t_redinfo where c_userid = #{1}
+		and
+		c_starttime &lt; now() ) a order by a.c_starttime desc limit 0,1
+	</select>
+
+
+	<select id="allPreferential" parameterType="java.lang.String"
+		resultType="double">
+		select sum(c_preferential) allPreferential from t_redinfo
+		where c_userid = #{1} and c_starttime &lt; now() group by c_userid
+	</select>
+
+
+	<select id="canExtractRed" parameterType="java.lang.String"
+		resultMap="redInfo">
+		select * from t_redinfo red 
+		where red.c_userid = #{1}
+		and red.c_deletetime is null
+		and red.c_starttime <![CDATA[<]]> now()
+		and red.c_redid not in (
+			select redpd.c_redid from t_redpickdetail redpd 
+		    left join t_redpickinfo redp on redp.c_redpickid =  redpd.c_redpickid
+		    where redpd.c_redid = red.c_redid and (redp.c_status = '2' or redp.c_status = '1')
+		)
+	</select>
+
+
+	<select id="getSumRedById" resultType="double">
+		select sum(c_redmoney) from t_redinfo
+		where c_redid in
+		<foreach collection="array" open="(" separator="," close=")"
+			item="redids">
+			#{redids}
+		</foreach>
+
+	</select>
+
+
+	<update id="updateRedInfo" parameterType="java.lang.String">
+		update t_redinfo set
+		c_deletetime = now()
+		where c_redid in ( select c_redid from
+		t_redpickdetail where c_redpickid =
+		#{1} )
+	</update>
+
+
+	<select id="queryOrderDetail" parameterType="java.lang.String"
+		resultMap="redInfoView">
+		select b.* from (
+		select a.* from (
+		SELECT
+		c_redname,
+		c_redmoney,
+		c_starttime,
+		DATE_FORMAT(c_starttime, '%Y-%m') MONTH,
+		'未发放' isTrue
+		FROM
+		t_redinfo
+		WHERE
+		c_orderid = #{1} and c_starttime &gt; now()  order by c_starttime limit 0,1) a
+		UNION
+		SELECT
+		c_redname,
+		c_redmoney,
+		c_starttime,
+		DATE_FORMAT(c_starttime, '%Y-%m') MONTH,
+		'已发放' isTrue
+		FROM
+		t_redinfo
+		WHERE
+		c_orderid = #{1} and c_starttime &lt; now()  ) b order by b.c_starttime desc
+	</select>
+
+	<select id="vaildOrderCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(1) from t_redinfo where c_orderid = #{1}
+	</select>
+
+
+	<update id="updateRedInfoByredpickid" parameterType="java.lang.String">
+		update
+		t_redinfo set c_deletetime = now() where
+		c_redid in (select c_redid
+		from t_redpickdetail where c_redpickid = #{1} )
+	</update>
+
+
+
+</mapper>

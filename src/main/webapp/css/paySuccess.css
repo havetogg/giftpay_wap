@@ -1,0 +1,43 @@
+.red{
+    color: red;
+    font-size: 30px;
+}
+h1{
+    font-size: 36px;
+    margin: 52px 128px;
+    font-weight: bold;
+    font-size: 39px;
+    color: #666666;
+}
+h2{
+    font-size: 28px;
+    margin: 57px 26px;
+}
+
+h2>span{
+    font-size: 28px;
+}
+.foot{
+    font-size: 30px;
+    margin: 72px 485px;
+    width: 100px;
+}
+.mainContent{
+    font-size: 26px;
+    width: 549px;
+    margin: -26px auto;
+    line-height: 40px;
+}
+.mainContent span{
+    font-size: 26px;
+}
+.look{
+    position: absolute;
+    margin: 6px 206px;
+    color: red;
+    font-size: 28px;
+    text-decoration: underline;
+}
+.erweima{
+    margin: 42px 168px;
+}

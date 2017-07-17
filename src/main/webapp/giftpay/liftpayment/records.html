@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js" ></script>
+</head>
+<style>
+	.noRecords_text {
+    font-size: 24px;
+    color: #888888;
+    margin: 40px;
+}
+</style>
+
+<script>
+function return_tip_bg_btnShow() {
+    $('.bg_block1').show();
+}
+function return_tip_bg_btn() {
+    $('.bg_block1').hide();
+}
+function initPayList(){
+	loading("start")
+        $.ajax({
+            url: getRootPath() + "/giftpay/liftpayment/queryPayList.htm",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                loading("stop");
+                console.log(data);
+                if(data.code=='2'){
+                	//无数据
+                	$(".records_ ul").html("");
+                	$("#noRecord").show();
+                }else if(data.code=='1'){
+                    $("#noRecord").hide();
+                	var pay=JSON.parse(data.mess);
+                	var str="";
+                	$.each(pay,function(index,item){
+                		console.log(item)
+                		var name=item.dealInfo;
+                		name=name.substring(0,name.indexOf("("));
+                		str+='<li class="flex">';
+                		if(name=='水费充值'){
+                			str+='<div><img src="img/icon2.png" alt=""></div>'
+                		}else if(name=='电费充值'){
+                			str+='<div><img src="img/icon3.png" alt=""></div>'
+                		}else if(name=='燃气费充值'){
+                			str+='<div><img src="img/icon4.png" alt=""></div>'
+                		}
+                		str+='<div class="flex-1 flex_li_2">';
+                		var time=item.dealTime;
+                		time=time.substring(0,time.indexOf("."));
+                		str+='<div><label class="records_Name">实付款￥'+item.dealRealMoney+'</label><label class="records_Time">'+time+'</label></div>';
+                		var status=item.dealState;
+                		if(status=='0'){
+                			status='充值中';
+                		}else if(status=='1'){
+                			status='已完成';
+                		}else if(status=='9'){
+                			status='已退款';
+                		}
+                		str+='<div><label class="records_Detail">'+item.dealInfo+item.dealMoney+'元-'+item.dealRemark+'</label><label class="records_status">'+status+'</label></div>';
+                		str+='</div> </li>';
+                	});
+                     $(".records_ ul").html(str);
+                }else if(data.code=='3'){
+                	TipShow(data.mess,1000);
+                }
+            },
+            error: function () {
+                loading("stop");
+            }
+        });
+}
+$(function(){
+	initPayList();
+})
+</script>
+
+<body style="background-color: #f0f0f4">
+<div class="bg_block1">
+    <div class="return_tip_bg">
+            <div class="records_Name">退款说明</div>
+            <div class="return_tip_bg_content">
+                <div>退款将存入有礼付钱包</div>
+                <div>请在钱包中提现</div>
+            </div>
+            <div class="return_tip_bg_btn" onclick="return_tip_bg_btn()">确定</div>
+    </div>
+</div>
+<div style="background-color: #f0f0f4;position:fixed;" class="zoomer">
+    <!--<div class="html_top">
+        <img src="img/left_arrow.png" alt="">
+        生活缴费充值记录
+    </div>-->
+    <div class="jmt_center" id="noRecord" style="margin: 20%;">
+        <img src="img/noRecords.png" alt="">
+        <div class="noRecords_text">暂无记录</div>
+    </div>
+        <div class="records_">
+          <ul>
+              <!--<li class="flex">
+                  <div><img src="img/icon1.png" alt=""></div>
+                  <div class="flex-1 flex_li_2">
+                      <div><label class="records_Name">实付款￥100</label><label class="records_Time">2017-11-23  01:06</label></div>
+                      <div><label class="records_Detail">油卡充值1000元-1234567891234567</label><label class="records_status">已退款</label></div>
+                  </div>
+              </li>
+              <li class="flex">
+                  <div><img src="img/icon2.png" alt=""></div>
+                  <div class="flex-1 flex_li_2">
+                      <div><label class="records_Name">实付款￥100</label><label class="records_Time">2017-11-23  01:06</label></div>
+                      <div><label class="records_Detail">水费充值100元-1234567891</label><label class="records_status1">已完成</label></div>
+                  </div>
+              </li>
+              <li class="flex">
+                  <div><img src="img/icon3.png" alt=""></div>
+                  <div class="flex-1 flex_li_2">
+                      <div><label class="records_Name">实付款￥100</label><label class="records_Time">2017-11-23  01:06</label></div>
+                      <div><label class="records_Detail">电费充值100元-1234567891</label><label class="records_status2">充值中</label></div>
+                  </div>
+              </li>
+              <li class="flex">
+                  <div><img src="img/icon4.png" alt=""></div>
+                  <div class="flex-1 flex_li_2">
+                      <div><label class="records_Name">实付款￥100</label><label class="records_Time">2017-11-23  01:06</label></div>
+                      <div><label class="records_Detail">燃气充值100元-1234567891</label><label class="records_status">退款中</label></div>
+                  </div>
+              </li>-->
+          </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

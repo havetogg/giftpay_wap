@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.jumutang.giftpay.dao.SellCarInfoDao">
+	 <resultMap id="BaseResultMap" type="org.jumutang.caranswer.model.SellCarInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="openId" property="openId" jdbcType="VARCHAR" />
+    <result column="sellerName" property="sellerName" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="series" property="series" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="sellChannel" property="sellChannel" jdbcType="VARCHAR" />
+    <result column="ct_date" property="ct_date" jdbcType="VARCHAR" />
+    <result column="regDate" property="regDate" jdbcType="VARCHAR" />
+    <result column="clue_id" property="clue_id" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="wherecause">
+		<where>
+			<if test="openId!=null">
+				and openId=#{openId}
+			</if>
+			<if test="model!=null">
+				and model=#{model}
+			</if>
+			<if test="tel!=null">
+				and tel=#{tel}
+			</if>
+			<if test="regDate!=null">
+			    and regDate=#{regDate}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryAllSellCarInfo" parameterType="org.jumutang.caranswer.model.SellCarInfo" resultMap="BaseResultMap">
+		select id,openId,sellerName,brand,series,model,location,tel,sellChannel,ct_date,regDate,clue_id from sell_car group by tel
+		order by ct_date desc
+	</select>
+
+
+	<insert id="addCarInfo" parameterType="org.jumutang.caranswer.model.SellCarInfo">
+		insert into sell_car (id , openId , sellerName , brand , series,model,location,tel,sellChannel,ct_date,regDate,clue_id)
+		values (#{id} , #{openId} , #{sellerName} , #{brand} , #{series},#{model},#{location},#{tel},#{sellChannel},now(),#{regDate},#{clue_id})
+	</insert>
+	
+	<update id="updateCarInfo" parameterType="org.jumutang.caranswer.model.SellCarInfo">
+		update sell_car set  clue_id=#{clue_id}
+		where openId=#{openId} and model=#{model} and tel=#{tel} and regDate=#{regDate}
+	</update>
+
+</mapper>

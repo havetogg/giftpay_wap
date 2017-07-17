@@ -1,0 +1,112 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+    padding-bottom: 1px;
+}
+
+.red{
+    color: red;
+}
+.part1,.part2,.part3,.part4{
+    margin: 55px auto;
+    width: 341px;
+    height: 138px;
+    border-bottom: 2px solid #999999;
+}
+p{
+    margin: 22px 0px;
+    font-size: 34px;
+    line-height: 48px;
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+}
+span{
+    font-size: 45px;
+}
+.jiLu{
+    width: 164px;
+    height: 164px;
+    border: 1px solid #999999;
+    border-radius: 100px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 164px;
+    margin: 0px 84px;
+    font-weight: bold;
+    color: white;
+    background: #22ac38;
+}
+.addOil{
+    width: 164px;
+    height: 164px;
+    border: 1px solid #999999;
+    border-radius: 100px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 164px;
+    margin: -166px 375px;
+    font-weight: bold;
+    color: white;
+    background: #22ac38;
+}
+.tips{
+    font-size: 24px;
+    width: 500px;
+    margin: 230px 41px 111px 65px;
+    line-height: 35px;
+}
+.fs_20{
+    font-size: 20px;
+}
+.oil{
+
+    position: absolute;
+
+    margin: 0px 0px;
+
+    font-size: 30px;
+
+    text-decoration: underline;
+
+    color: #006600;
+
+    font-weight: bold;
+}
+.oilRecord{
+
+    position: absolute;
+
+    margin: 0px 156px;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    width: 132px;
+
+    text-decoration: underline;
+
+    color: #006600;
+}
+.part0{
+
+    position: absolute;
+
+    margin: -28px 304px;
+
+    width: 325px;
+}
+.parts{
+
+    margin: 42px 0px;
+}
+.kong{
+    height: 6px;
+}
+.green {
+    color: #009900;
+}
+.f_w{
+    font-weight: bold;
+}

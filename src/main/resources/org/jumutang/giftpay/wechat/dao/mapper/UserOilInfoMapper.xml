@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IUserOilInfoDao">
+
+	<resultMap type="org.jumutang.giftpay.model.UserOilInfoModel" id="baseResult">
+		<result column="userid" property="userid" />
+		<result column="openid" property="openid" />
+		<result column="balance" property="balance" />
+		<result column="waitsendmoney" property="waitsendmoney" />
+		<result column="totalgetmoney" property="totalgetmoney" />
+		<result column="totalsavemoey" property="totalsavemoey" />
+		<result column="status" property="status" />
+		<result column="createtime" property="createtime" />
+		<result column="updatetime" property="updatetime"/>
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="userid !=null">
+				and userid = #{userid}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询用户加油信息 -->
+	<select id="queryUserOilInfo" parameterType="org.jumutang.giftpay.model.UserOilInfoModel" resultMap="baseResult">
+		select userid,openid,balance,waitsendmoney,totalgetmoney,totalsavemoey,status,createtime,updatetime from t_useroilinfo
+		<include refid="wherecause"/>
+	</select>
+
+
+	<!-- 创建用户加油信息 -->
+	<insert id="insertUserOilInfo" parameterType="org.jumutang.giftpay.model.UserOilInfoModel">
+		insert into t_useroilinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			userid,openid,createtime
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{userid},#{openid},now()
+		</trim>
+	</insert>
+	
+	<!-- 修改用户加油信息 -->
+	<update id="updateUserOilInfo" parameterType="org.jumutang.giftpay.model.UserOilInfoModel">
+			update t_useroilinfo
+			<set>
+				<if test="balance !=null">
+					balance = #{balance},
+				</if>
+				<if test="waitsendmoney !=null">
+					waitsendmoney  = #{waitsendmoney },
+				</if>
+				<if test="totalgetmoney !=null">
+					totalgetmoney = #{totalgetmoney },
+				</if>
+				<if test="totalsavemoey  !=null">
+					totalsavemoey = #{totalsavemoey },
+				</if>
+				<if test="status !=null">
+					status = #{status },
+				</if>
+			</set>
+			<where>
+				userid = #{userid}
+			</where>
+	</update>
+	
+</mapper>

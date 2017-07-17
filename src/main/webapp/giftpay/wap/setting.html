@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        function goBack() {
+            history.back();
+        }
+      
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="goBack()">
+        设置
+    </div>
+    <div class="authenticationInfo">
+        <ul>
+            <li id="tel">
+                <label class="authenticationInfo_name_left">绑定手机</label>
+                <label class="authenticationInfo_name_right setting_tel" id="phone">
+                    
+                </label>
+            </li>
+         <!--   <li>
+                <label class="authenticationInfo_name_left">登录密码</label>
+                <label class="authenticationInfo_name_right">
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow" onclick="switchTab(2)">
+                </label>
+            </li>
+            
+            -->
+            <li id="setPayPwd">
+                <label class="authenticationInfo_name_left">支付密码</label>
+                <label class="authenticationInfo_name_right green_text" id="pwd">
+
+                </label>
+            </li>
+
+            <li id="code">
+                <label class="authenticationInfo_name_left">身份信息</label>
+                <label class="authenticationInfo_name_right green_text" id="idCard">
+
+                </label>
+            </li>
+			<!-- 
+            <li>
+                <label class="authenticationInfo_name_left">绑定微信</label>
+                <label class="authenticationInfo_name_right setting_tel">jmt123
+                    <img src="img/right_arrow.png" alt="" class="setting_arrow" onclick="switchTab(5)">
+                </label>
+            </li>
+             -->
+        </ul>
+    </div>
+	<!--
+    <div class="turnBackBtn">
+        退出登录
+    </div>
+    -->
+</div>
+<script type="text/javascript">
+var idCard = "";
+var userName = "";
+//初始化页面
+$.ajax({
+	url:"/giftpay_wap/isSettingInfo.htm",
+	type:"post",
+	dataType:"json",
+	async:false,
+	success:function(data){
+		if(data.state==0){
+			var obj = data.data;
+			//绑定手机s
+			if(obj.phone==undefined || obj.phone == ""){
+				$("#phone").html('未绑定<img src="img/right_arrow.png" alt="" class="setting_arrow">');
+				$("#phone").removeClass("green_text").addClass("red_text");
+			}else{
+				$("#phone").html(obj.phone+'<img src="img/right_arrow.png" alt="" class="setting_arrow">');
+				$("#phone").removeClass("green_text").removeClass("red_text");
+			}
+
+
+			//身份信息
+			if(obj.idCard == undefined || obj.idCard==""){
+				$("#idCard").html('未设置<img src="img/right_arrow.png" alt="" class="setting_arrow">');
+				$("#idCard").removeClass("green_text").addClass("red_text");
+			}else{
+				idCard = obj.idCard;
+				userName = obj.userName;
+				$("#idCard").html('已设置<img src="img/right_arrow.png" alt="" class="setting_arrow">');
+				$("#idCard").removeClass("red_text").addClass("green_text");
+			}
+
+
+			//支付
+			if(data.pwd == undefined || data.pwd==""){
+				$("#pwd").html('未设置<img src="img/right_arrow.png" alt="" class="setting_arrow red_text">');
+				$("#pwd").removeClass("green_text").addClass("red_text");
+			}else{
+				$("#pwd").html('已设置<img src="img/right_arrow.png" alt="" class="setting_arrow green_text">');
+				$("#pwd").removeClass("red_text").addClass("green_text");
+			}
+		}
+	}
+});
+
+//绑定手机
+$("#tel").click(function(){
+	var seting = $("#phone").text();
+	if(seting == "未绑定"){
+		window.location.href="./bindCellPhone.html";
+	}else{
+		window.location.href="./editCellPhone.html";
+	}
+});
+//设置支付密码
+$("#setPayPwd").click(function(){
+	if($("#pwd").text() !="未设置"){
+		window.location.href="./editPayPassword.html";
+		return;
+	}
+	
+	if($("#idCard").text()=="未设置"){
+		window.location.href="./Authentication_set.html";
+	}else{
+		window.location.href="./setPayPassword.html"
+	}
+});
+
+//设置身份信息
+$("#code").click(function(){
+	if($("#idCard").text()=="未设置"){
+		window.location.href="./Authentication_set.html";
+	}else{
+		window.location.href="./AuthenticationInfo.html?idCard="+idCard+"&userName="+userName;
+	}
+});
+
+</script>
+</body>
+</html>

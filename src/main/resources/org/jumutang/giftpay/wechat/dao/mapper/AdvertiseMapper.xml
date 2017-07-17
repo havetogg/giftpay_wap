@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IAdvertiseDao">
+
+	<resultMap type="org.jumutang.giftpay.model.AdvertiseModel" id="baseResult">
+		<result column="advertise_id" property="advertiseId" />
+		<result column="advertise_name" property="advertiseName" />
+		<result column="advertise_img_url" property="advertiseImgUrl" />
+		<result column="advertise_desc" property="advertiseDesc" />
+		<result column="advertise_href" property="advertiseHref" />
+		<result column="create_time" property="createTime" />
+		<result column="status" property="status" />
+		<result column="click_num" property="clickNum" />
+		<result column="rate" property="rate" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="advertiseId !=null">
+				and advertise_id = #{advertiseId}
+			</if>
+			<if test="advertiseName !=null">
+				and advertise_name = #{advertiseName}
+			</if>
+			<if test="status !=null">
+				and status = #{status}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryAdvertiseList" parameterType="org.jumutang.giftpay.model.AdvertiseModel" resultMap="baseResult">
+		select advertise_id,advertise_name,advertise_img_url,advertise_desc,advertise_href,create_time,status,click_num,rate from t_advertise
+		<include refid="wherecause"/>
+	</select>
+
+	<update id="updateAdverClickNum" parameterType="org.jumutang.giftpay.model.AdvertiseModel">
+		update t_advertise
+		<set>
+			click_num=click_num+1
+		</set>
+		<where>
+			advertise_id = #{advertiseId}
+		</where>
+	</update>
+	
+	<update id="updateAdvertId" parameterType="java.lang.Integer"> 
+	update  t_advertise 
+	<set>
+	  advertise_id=#{newId,jdbcType=INTEGER}
+	</set>
+	<where>
+	   advertise_id=#{oldId,jdbcType=INTEGER}
+	</where>
+	</update>
+
+    
+    <insert id="addAdvertise"  parameterType="org.jumutang.giftpay.model.AdvertiseModel" >
+    insert into t_advertise(advertise_id,click_num,advertise_name,advertise_img_url,advertise_href,create_time,status,rate)
+    value(#{advertiseId},0,#{advertiseName},#{advertiseImgUrl},#{advertiseHref},now(),0,#{rate});
+    </insert>
+	
+</mapper>

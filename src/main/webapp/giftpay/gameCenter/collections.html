@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>我的游戏</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/fastclick.min.js"></script>
+    <script>
+        function switchTab(type) {
+            if(type==1){
+                $('#tab1').attr('class','flex-1 selected');
+                $('#tab2').attr('class','flex-1 noSelect');
+                $('#myCollection').show();
+                $('#havePlay').hide();
+            }else if(type==2){
+                $('#tab1').attr('class','flex-1 noSelect');
+                $('#tab2').attr('class','flex-1 selected');
+                $('#myCollection').hide();
+                $('#havePlay').show();
+            }
+        }
+        function collectCommand(self) {
+            TipShow('收藏！',1000);
+        }
+    </script>
+</head>
+<body>
+<div class="zoomer">
+    <ul class="collections_bar flex">
+       <li id="tab1" class="flex-1 selected" onclick="switchTab(1)">我收藏的</li>
+        <li class="shu"></li>
+       <li id='tab2' class="flex-1 noSelect" onclick="switchTab(2)">我玩过的</li>
+    </ul>
+    <div class="gameRank">
+        <ul id="myCollection">
+            <li>
+                <div class="title">
+                    加油达人
+                </div>
+                <div>
+                    <img src="img/rank1.png" alt="" class="banner1">
+                </div>
+                <div class="title1">
+                    加油机操作员的日常
+                </div>
+                <img src="img/haveCollect.png" alt="" class="rankTip1">
+            </li>
+            <li>
+                <div class="title">
+                    加油达人
+                </div>
+                <div>
+                    <img src="img/rank1.png" alt="" class="banner1">
+                </div>
+                <div class="title1">
+                    加油机操作员的日常
+                </div>
+                <img src="img/haveCollect.png" alt="" class="rankTip1">
+            </li>
+            <li>
+                <div class="title">
+                    加油达人
+                </div>
+                <div>
+                    <img src="img/rank1.png" alt="" class="banner1">
+                </div>
+                <div class="title1">
+                    加油机操作员的日常
+                </div>
+                <img src="img/haveCollect.png" alt="" class="rankTip1">
+            </li>
+            <li>
+                <div class="title">
+                    加油达人
+                </div>
+                <div>
+                    <img src="img/rank1.png" alt="" class="banner1">
+                </div>
+                <div class="title1">
+                    加油机操作员的日常
+                </div>
+                <img src="img/haveCollect.png" alt="" class="rankTip1">
+            </li>
+        </ul>
+        <ul id="havePlay">
+            <li>
+                <div class="title">
+                    加油达人
+                </div>
+                <div>
+                    <img src="img/rank1.png" alt="" class="banner1">
+                </div>
+                <div class="title1">
+                    加油机操作员的日常
+                </div>
+                <img src="img/collectbtn.png" alt="" class="rankTip1" onclick="collectCommand(this)">
+            </li>
+
+            <li>
+                <div class="title">
+                    加油达人
+                </div>
+                <div>
+                    <img src="img/rank1.png" alt="" class="banner1">
+                </div>
+                <div class="title1">
+                    加油机操作员的日常
+                </div>
+                <img src="img/haveCollect.png" alt="" class="rankTip1">
+            </li>
+        </ul>
+        <div style="height: 30px;">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>中石化红包查询</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app2.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+<script>
+    function activate() {
+        var tel = $.trim($('#tel').val());
+        if (!tel) {
+            alert("请输入手机号");
+        }
+        else if (!jxTool.isMobile(tel)) {
+            alert("请输入正确的手机号");
+        }
+        else {
+            // alert("激活成功！");
+            comitInfo(tel);
+        }
+    }
+    function clsoe_tip() {
+        $('.block_bg').hide();
+    }
+    function comitInfo(tel) {
+        $.ajax({
+            url: getRootPath() + "/giftpay/third/checkPhone.htm",
+            type: "post",
+            data: {"phone": tel},
+            dataType: "json",
+            success: function (data) {
+               if(data.code=='20000'){
+                   $("#fail_block").show();
+               }else{
+                   location.href="receiveRed.html?phone="+tel;
+               }
+            }
+        });
+    }
+</script>
+<body style="background-color: #ffaa24">
+<div id="fail_block" class="block_bg">
+    <div class="fail_block">
+        <img src="img/close1.png" alt="" class="close_img" onclick="clsoe_tip()">
+        <div class="fail_tittle">暂无红包</div>
+        <div class="jmt_center"><img src="img/failImg.png" alt="" class="fail_img_css"></div>
+        <div class="fail_text">
+            <div class="jmt_center">该号码下暂无红包哦~</div>
+            <div class="jmt_center">参与更多活动获取更多红包~</div>
+        </div>
+        <div>
+            <img src="img/ok.png" alt="" width="100%" onclick="clsoe_tip()">
+        </div>
+    </div>
+</div>
+<div class="zoomer" style="background-color: #ffaa24;position: fixed;">
+    <div class="content">
+        <div class="index_bg">
+            <div class="redNew1_bg">
+                <div class="redContent">
+                    <!--<div class="activate_yuan">50元</div>-->
+                    <!--<div class="yuanText">加油支付红包</div>-->
+                    <!--<div class="index_time">使用有效期：2017.1.1- 2017.12.31</div>-->
+                </div>
+            </div>
+
+            <div class="index_contentText">
+                <div style="padding-top: 60px;padding-bottom: 10px;">
+                    <input id="tel" type="tel" placeholder="输入手机号码查询并领取红包" maxlength="11"
+                    >
+                </div>
+                <div class="activate_content_text">
+                    输入您在参与有礼付与各品牌联合推出的活动时绑定的手机号，查询并领取红包。如有疑问请详询客服：4000808065
+                </div>
+                <div class="tips_parent">
+                    <div style="margin-top: 20px;">
+                        <img id="no" src="img/search_btn.png" alt="" onclick="activate()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

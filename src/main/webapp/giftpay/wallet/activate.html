@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>支付结果</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app2.css" rel="stylesheet">
+    <link type="text/css" href="css/flexslider.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+</head>
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+<script>
+    $(function(){
+        if (/Android/gi.test(navigator.userAgent)) {
+            window.addEventListener('resize', function () {
+                if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+                    window.setTimeout(function () {
+                        document.activeElement.scrollIntoViewIfNeeded();
+                    }, 0);
+                }
+            })
+        }
+    })
+    function clsoe_tip() {
+        $("#fail_block").hide();
+    }
+    function show_tip() {
+        $("#fail_block").show();
+    }
+    function activate() {
+        var tel=$.trim($('#tel').val());
+        if(!tel){
+            alert("请输入手机号");
+        }
+        else if(!jxTool.isMobile(tel)){
+            alert("请输入正确的手机号");
+        }
+        else{
+           // alert("激活成功！");
+            comitInfo(tel);
+        }
+        //show_tip();
+    }
+    function comitInfo(tel){
+        $.ajax({
+            type: "GET",
+            url: getRootPath().replace('wxpage','')+"updateXingyehongbao.htm",
+            data: {'openId':getUrlParam("openId"),'mobile':tel},
+            dataType: "json",
+            success: function(data){
+                if(data=='0'){
+                    location.href='https://ccshop.cib.com.cn:8010/application/cardapp/Fast/TwoBar/viewNew?id=da8e4ee985cf4ecc83ed701c50fe05c6';
+                }else{
+                    alert("激活失败!");
+                }
+            },error:function(res){
+            	alert(JSON.stringify(res));
+            }
+        });
+    }
+    function applyCard() {
+       /* clsoe_tip();
+        alert("申请信用卡");*/
+       location.href='https://wm.cib.com.cn/application/cardapp/Fast/TwoBar/view?id=278b88ce316b4ce3902b21948d2d6782';
+    }
+    function OnInput (event) {
+        var tel=event.target.value;
+        if(tel&&jxTool.isMobile(tel)){
+            $('#yes').show();
+            $('#no').hide();
+        }
+        else{
+            $('#yes').hide();
+            $('#no').show();
+        }
+    }
+</script>
+<body style="background-color: #ffaa24">
+<div id="fail_block" class="block_bg">
+    <div class="fail_block">
+        <img src="img/close.png" alt="" class="close_img" onclick="clsoe_tip()">
+        <div class="fail_tittle">亲！激活失败</div>
+        <div class="jmt_center"><img src="img/failImg.png" alt="" class="fail_img_css"></div>
+        <div class="fail_text">
+            <div class="jmt_center">快去办理兴业银行信用卡</div>
+            <div class="jmt_center">激活50元加油支付红包哟!</div>
+        </div>
+        <div>
+            <img src="img/applyBtn.png" alt="" width="100%" onclick="applyCard()">
+        </div>
+    </div>
+</div>
+<div class="zoomer" style="background-color: #ffaa24;position: fixed;">
+    <div class="content">
+        <div class="index_bg">
+            <div class="redNew_bg">
+                <div class="redContent">
+                    <div class="activate_yuan">50元</div>
+                    <div class="yuanText">加油支付红包</div>
+                    <div class="index_time">使用有效期：2017.1.1- 2017.12.31</div>
+                </div>
+            </div>
+
+            <div class="index_contentText">
+                <div>
+                    <input id="tel" type="tel" placeholder="请输入您用于绑定办理信用卡的手机号码" maxlength="11" oninput="OnInput (event)" onpropertychange="OnPropChanged (event)">
+                </div>
+                <div class="activate_content_text">
+                    亲，本优惠活动仅限通过本页面“申请办卡激活红包”按钮首次申请办理兴业银行信用卡的用户.老用户活动很快会有的,谢谢参与!
+                </div>
+                <div class="tips_parent">
+                    <ul class="flex">
+                        <li class="tips_text">
+                            Tips
+                        </li>
+                        <li class="flex-1 tips_contents">
+                            您拿到兴业银行信用卡后，只需在任意消费场景下首刷50元即可激活50元加油支付红包。如有问题，请详询客服电话：4000808065
+                        </li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <img style="display: none" id="yes" src="img/activate_btn.png" alt="" onclick="activate()">
+                        <img id="no" src="img/acticate_gray.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

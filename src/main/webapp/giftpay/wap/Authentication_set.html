@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+        var isIDCard=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+        function goBack() {
+            history.back();
+        }
+        function submitInfo() {
+            var name=$('#name').val();
+            var idCard=$('#idCard').val();
+            if(!name){
+                TipShow('请输入姓名',1000);
+                return ;
+            }
+            else if(!idCard){
+                TipShow('请输入身份证号',1000);
+                return;
+            }
+            else if(!isIDCard.test(idCard)){
+               $('.tips_red').show();
+               return;
+            }
+ //           else{
+ //               $('.tips_red').hide();
+ //               window.location.href='./AuthenticationSet_success.html';
+//            }
+            $.ajax({
+            	url:"/giftpay_wap/saveIdCard.htm",
+            	type:"post",
+            	data:{"userName":name,"idCard":idCard},
+            	dataType:"json",
+            	success:function(data){
+            		if(data.state==0){
+            			window.location.href="./AuthenticationSet_success.html";
+            		}
+            	}
+            });
+        }
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position:fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="goBack()">
+        身份设置
+    </div>
+    <div class="binding_content">
+        <ul class="editPassword">
+            <li>
+                <input id="name" type="text" placeholder="姓名" class="edit_input">
+            </li>
+            <li>
+                <input id="idCard" type="text" maxlength="18" placeholder="身份证号" class="edit_input">
+                <label class="tips_red">号码有误</label>
+            </li>
+        </ul>
+        <div class="setPayWord_text">身份信息将用于您的身份识别，设置后无法更换</div>
+        <div class="common_btn" onclick="submitInfo()">完成</div>
+    </div>
+</div>
+</body>
+</html>

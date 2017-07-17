@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IFamilyDao">
+
+	<resultMap type="org.jumutang.giftpay.model.liftPaytment.FamilyModel" id="baseResult">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="family_name" property="familyName"  />
+		<result column="province_name" property="provinceName" />
+		<result column="province_id" property="provinceId" />
+		<result column="city_name" property="cityName" />
+		<result column="city_id" property="cityId" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime"/>
+	</resultMap>
+
+
+	<sql id="wherecause">
+		<where>
+			<if test="id!=null">
+				and id=#{id}
+			</if>
+			<if test="userId!=null">
+				and user_id=#{userId}
+			</if>
+			<if test="status!=null">
+				and status=#{status}
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryFamilyList"  parameterType="org.jumutang.giftpay.model.liftPaytment.FamilyModel" resultMap="baseResult" >
+		select id,user_id,family_name,province_name,province_id,city_name,city_id,status,create_time from t_family
+		<include refid="wherecause"/>
+		order by create_time
+	</select>
+	<insert id="addFamilyModel" parameterType="org.jumutang.giftpay.model.liftPaytment.FamilyModel">
+		insert into t_family
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,user_id,family_name,province_name,province_id,city_name,city_id,status,create_time
+		</trim>
+		<trim prefix="value(" suffix=")" suffixOverrides=",">
+			#{id},#{userId},#{familyName},#{provinceName},#{provinceId},#{cityName},#{cityId},#{status},now()
+		</trim>
+	</insert>
+	<!-- 修改账户余额 -->
+	<update id="updateFamilyModel" parameterType="org.jumutang.giftpay.model.liftPaytment.FamilyModel">
+		update t_family
+		<set>
+			<if test="familyName !=null">
+				family_name = #{familyName},
+			</if>
+			<if test="provinceName !=null">
+				province_name = #{provinceName},
+			</if>
+			<if test="provinceId  !=null">
+				province_id  = #{provinceId },
+			</if>
+			<if test="cityName !=null">
+				city_name  = #{cityName},
+			</if>
+			<if test="cityId  !=null">
+				cityId  = #{cityId},
+			</if>
+			<if test="status !=null">
+				status  = #{status},
+			</if>
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+
+	
+	
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.ICountModelDao">
+
+    <resultMap type="org.jumutang.giftpay.entity.CountModel" id="baseResult">
+        <result column="num" property="num"/>
+        <result column="add_time" property="addTime"/>
+        <result column="count_type" property="countType"/>
+    </resultMap>
+
+    <select id="queryCountModelByType" parameterType="org.jumutang.giftpay.entity.CountModel" resultMap="baseResult">
+        <if test="countType=='newUser'">
+            <![CDATA[
+select count(1) num,DATE_FORMAT(u.create_time,'%Y-%m-%d') addtime from t_user u where DATE_FORMAT(u.create_time,'%Y-%m-%d') BETWEEN #{startTime} and #{endTime}
+ group by DATE_FORMAT(u.create_time,'%Y-%m-%d') order by u.create_time desc
+			]]>
+        </if>
+        <if test="countType=='registerUser'">
+            <![CDATA[
+select count(1) num,DATE_FORMAT(u.create_time,'%Y-%m-%d') addtime from t_user u where u.phone<>'' and u.phone is not null
+ and
+DATE_FORMAT(u.create_time,'%Y-%m-%d') BETWEEN #{startTime} and #{endTime}
+ group by DATE_FORMAT(u.create_time,'%Y-%m-%d') order by u.create_time desc
+			]]>
+        </if>
+        <if test="countType=='zshUser'">
+            <![CDATA[
+select count(1) num,DATE_FORMAT(u.create_time,'%Y-%m-%d') addtime from t_user u
+inner join t_subuser s
+on s.user_id=u.ID
+where s.type='2'
+and u.phone<>'' and u.phone is not null and
+DATE_FORMAT(u.create_time,'%Y-%m-%d') BETWEEN #{startTime} and #{endTime}
+ group by DATE_FORMAT(u.create_time,'%Y-%m-%d') order by u.create_time desc
+			]]>
+        </if>
+        <if test="countType=='fuliUser'">
+            <![CDATA[
+select count(1) num,DATE_FORMAT(create_time,'%Y-%m-%d') addtime from t_third_user where third_name='fuli'
+ and
+DATE_FORMAT(create_time,'%Y-%m-%d') BETWEEN #{startTime} and #{endTime}
+ group by DATE_FORMAT(create_time,'%Y-%m-%d') order by create_time desc
+			]]>
+        </if>
+        <if test="countType=='otherUser'">
+            <![CDATA[
+select count(1) num,DATE_FORMAT(create_time,'%Y-%m-%d') addtime from t_third_user where third_name='other'
+ and
+DATE_FORMAT(create_time,'%Y-%m-%d') BETWEEN #{startTime} and #{endTime}
+ group by DATE_FORMAT(create_time,'%Y-%m-%d') order by create_time desc
+			]]>
+        </if>
+    </select>
+
+</mapper>

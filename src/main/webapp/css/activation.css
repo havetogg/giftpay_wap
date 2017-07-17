@@ -1,0 +1,168 @@
+.content{
+    width: 640px;
+    min-height: 1004px;
+}
+h1{
+    margin: 81px 50px;
+    font-weight: bold;
+    font-size: 48px;
+    color: #666666;
+}
+.tip{
+    font-size: 26px;
+    margin: -6px auto;
+    line-height: 38px;
+    width: 539px;
+    color: #666666;
+}
+.form{
+    margin: 58px 50px;
+}
+.form p{
+    margin: 0px 0px;
+    font-size: 24px;
+    color: #666666;
+}
+input{
+    font-size: 26px;
+    width: 336px;
+    height: 50px;
+    margin: 17px 0px;
+    border: 2px solid #e4e4e4;
+    text-indent: 5px;
+    border-radius: 8px;
+}
+.btn_3{
+    display: block;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #BF8F8F;
+    width: 160px;
+    height: 50px;
+    margin: -182px 357px;
+    line-height: 52px;
+    position: absolute;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.btn_4{
+    display: none;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #BF8F8F;
+    width: 160px;
+    height: 50px;
+    margin: -182px 357px;
+    line-height: 52px;
+    position: absolute;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.jiHuo{
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #5A3B3B;
+    width: 310px;
+    height: 50px;
+    margin: 30px 162px;
+    line-height: 52px;
+    position: absolute;
+    border-radius: 8px;
+    color: white;
+    background: #22ac38;
+}
+.f_26{
+    font-size: 26px;
+}
+.red{
+    color: red;
+}
+.changeUser{
+    width: 304px;
+    height: 46px;
+    border: 1px solid;
+    text-align: center;
+    line-height: 46px;
+    font-size: 24px;
+    margin: 21px auto;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.changeWx{
+
+    width: 304px;
+    height: 46px;
+    border: 1px solid;
+    text-align: center;
+    line-height: 46px;
+    font-size: 24px;
+    margin: 25px auto;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+
+.alertInside>.btn_3{
+    display: block;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #BF8F8F;
+    width: 151px;
+    height: 50px;
+    margin: -90px 328px;
+    line-height: 52px;
+    position: absolute;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.alertInside>.btn_4{
+    display: none;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #BF8F8F;
+    width: 151px;
+    height: 50px;
+    margin: -90px 328px;
+    line-height: 52px;
+    position: absolute;
+    background: #22ac38;
+    border-radius: 8px;
+    color: white;
+}
+.alertInside>input{
+    font-size: 26px;
+    width: 272px;
+    height: 50px;
+    margin: 36px 35px;
+    border: 2px solid #e4e4e4;
+    text-indent: 5px;
+    border-radius: 8px;
+}
+.sureChange{
+
+    text-align: center;
+
+    font-size: 26px;
+
+    border: 1px solid #BF8F8F;
+
+    width: 445px;
+
+    height: 50px;
+
+    margin: 7px 35px;
+
+    line-height: 52px;
+
+    position: absolute;
+
+    background: #22ac38;
+
+    border-radius: 8px;
+
+    color: white;
+}

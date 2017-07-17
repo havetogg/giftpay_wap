@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script>
+        function switchTab(type) {
+            if(type==1){
+                window.location.href='./index.html';
+            }
+            else if(type==3){
+                window.location.href='./myCenter.html';
+            }
+        }
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="find">
+    <ul>
+        <li>
+            <img src="img/find1.png" alt="">
+        </li>
+        <li>
+            <img src="img/find2.png" alt="">
+        </li>
+        <li>
+            <img src="img/find3.png" alt="">
+        </li>
+        <li>
+            <img src="img/find4.png" alt="">
+        </li>
+    </ul>
+    </div>
+</div>
+<script type="text/javascript">
+	$("#center").click(function(){
+		window.location.href="./myCenter.html";
+	});
+	$("#index").click(function(){
+		window.location.href="./index.html";
+	});
+</script>
+</body>
+</html>

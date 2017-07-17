@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.caranswer.wechat.dao.IRedPickInfoDao">
+
+	<resultMap type="org.jumutang.caranswer.model.RedPickInfo" id="redPickInfo">
+		<result column="c_redpickid" property="redpickID"/>
+		<result column="c_userid" property="userID"/>
+		<result column="c_status" property="status"/>
+		<result column="c_result" property="result"/>
+		<result column="c_businessorderid" property="businessOrderID"/>
+		<result column="c_pickmeno" property="pickMeno"/>
+		<result column="c_createtime" property="createTime"/>
+		<result column="c_updatetime" property="updateTime"/>
+		<result column="c_deletetime" property="deleteTime"/>
+		<result column="c_redmoney" property="redMoney"/>
+		<result column="c_rednumber" property="redNumber"/>
+	</resultMap>
+
+
+	<select id="getRecords" parameterType="java.lang.String" resultMap="redPickInfo">
+		select	c_redpickid , c_redmoney , c_rednumber ,c_createtime , c_status  from t_redpickinfo 
+		where c_userid = #{1} order by c_createtime desc 
+<!-- 		and c_status = 1 -->
+	</select>
+	
+	
+	<insert id="addRedPickInfo" parameterType="org.jumutang.caranswer.model.RedPickInfo">
+		insert into t_redpickinfo (c_redpickid , c_userid , c_redmoney,c_rednumber,c_status ,c_pickmeno,c_createtime)
+		values 
+		(#{redpickID},#{userID},#{redMoney},#{redNumber},'2',#{pickMeno},now())
+	</insert>
+	
+	
+	<update id="updateRedPickInfo" parameterType="org.jumutang.caranswer.model.RedPickInfo">
+		update t_redpickinfo 
+			<set>
+				<if test="status != null and status != '' ">
+					c_status = #{status},
+				</if>
+				<if test="result != null and result != '' ">
+					c_result = #{result},
+				</if>
+				<if test="businessOrderID != null and businessOrderID != '' ">
+					c_businessorderid = #{businessOrderID},
+				</if>
+				<if test="status != null and status == '0'.toString() ">
+					c_deletetime = now(),
+				</if>
+				<if test="1 == 1">
+					c_updatetime = now() ,
+				</if>
+			</set>
+			
+		where c_redpickid = #{redpickID}
+	</update>
+
+</mapper>

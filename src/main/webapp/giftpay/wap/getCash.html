@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+        function goBack() {
+            history.back();
+        }
+        var todayMoney = 0;
+        var  residue  = 0;
+      //获取每日提现金额
+    	/*$.ajax({
+    		url:"/giftpay_wap/queryPayInfo.htm",
+    		type:"get",
+    		dataType:"json",
+    		 async:false,
+    		success:function(data){
+    			if(data.state==0){
+    				$.each(data.list,function(i,field){
+    					var date = field.dealTime;
+    					date = date.split(" ")[0];
+    					var now = new Date();
+    					var time = (now.getMonth()+1)+"";
+    					var dy = now.getDate()+"";			
+    					if(time.length ==1){
+    						time = "0"+(now.getMonth()+1);
+    					}
+    					if(dy.length == 1){
+    						dy = "0"+now.getDate();
+    					}
+    					now = now.getFullYear()+"-"+time+"-"+dy;
+    					if(field.dealType==1 && date == now){
+    						todayMoney +=field.dealMoney;
+    					}
+    				});
+    			}else if(data.state==2){
+    				todayMoney = 0;
+    			}
+    		}
+    	});*/
+        function getCash() {
+        	//获取今日还可以提现数
+        	residue = 1000 - todayMoney;
+            var money=$('#money').val();
+            var allMoney = $(".edol_color").text();
+            allMoney = allMoney.replace("￥","");
+            if(!money){
+                TipShow('请输入提现金额',1000);
+            }else if(parseFloat(money)>residue){
+            	TipShow('超出每日最大提现金额',1000);
+            }else if((parseFloat(money)+parseFloat(todayMoney))>1000){
+            	TipShow('今日提现总金额超出1000',1000);
+            }else if(parseFloat(money)>allMoney){
+            	TipShow('余额不足',1000);
+            }else{
+                $(".getCash_money").html("¥"+money);
+            	$('.getCash_bg').show();
+            }
+        }
+        function closeTip() {
+            $('.getCash_bg').hide();
+        }
+
+        var reg = /^(\d+(?:\.\d{2})?|\d+(?:\.\d{1}))$/;
+        function OnInput(event) {
+            console.log(event.target.value);
+            if (!reg.test(event.target.value)) {
+                $('#money').val('');
+            }
+        }
+    </script>
+</head>
+<body style="background-color: #f0f0f4;position: fixed;">
+<!--输入密码-->
+    <div class="getCash_bg">
+        <!--<div class="getCash_block">-->
+            <!--<img src="img/X.png" alt="" class="getCash_close" onclick="closeTip()">-->
+            <!--<div class="getCash_tip_tittle">支付密码</div>-->
+            <!--<div><input id="psd" type="password" placeholder="请输入6~16位支付密码"></div>-->
+            <!--<div>-->
+                <!--<img src="img/btn23.png" alt="" width="100%"  onclick="sure()">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="getCash_block">
+            <img src="img/X.png" alt="" class="getCash_close" onclick="closeTip()">
+            <div class="getCash_tip_tittle">请输入支付密码</div>
+            <div class="getCash_text1">提现</div>
+            <div class="getCash_money">¥500.00</div>
+            <div><input id="psd" type="password" placeholder="请输入6位数字支付密码" maxlength="6"></div>
+            <div>
+                <img src="img/btn23.png" alt="" width="100%"  onclick="sure()">
+            </div>
+        </div>
+    </div>
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" alt="" onclick="goBack()">
+        提现
+    </div>
+    <div class="getCash">
+        <div class="flex">
+            <div style="width: 100px;">
+                <img src="img/demo.png" id="headUrl" alt="" width="75px" height="75px" style="border-radius: 50%;">
+            </div>
+
+            <div class="flex-1" style="line-height: 35px;">
+                <div class="getCash_tittle">微信账号</div>
+                <div class="getCash_text" id="name"></div>
+            </div>
+        </div>
+        <div class="getCash_tittle1">提现金额</div>
+        <div class="getCashInput">
+            <label class="getCash_icon">¥</label>
+            <input id="money" type="number" oninput="OnInput (event)" onpropertychange="OnPropChanged(event)">
+        </div>
+        <div class="getCash_bottom_text">
+            当前余额 <a class="edol_color">￥0</a>，提现费率为2%（提现维护中）。
+        </div>
+        <!--<div class="common_btn" onclick="getCash()">-->
+            <!--提现-->
+        <!--</div> -->
+        <div class="common_btn_gray">
+            提现（维护中）
+        </div>
+    </div>
+    <div class="getCash_Bottom_tip">每日提现限额￥1000</div>
+</div>
+<script type="text/javascript">
+
+//初始化页面数据
+$.ajax({
+		url:"/giftpay_wap/getBalanceList.htm",
+		type:"get",
+		success:function(data){
+			 data = JSON.parse(data);
+			 if(data.state==0){
+				 var obj = data.data;
+				 $(".edol_color").text("￥"+obj.balanceNumber);
+                 $("#name").text(data.name);
+                 $("#headUrl").attr("src",data.headUrl);
+			 }
+		}
+	});
+$.ajax({
+    url:"/giftpay_wap/isBuildPhone.htm",
+    type:"get",
+    async:false,
+    dataType:"json",
+    success:function(data){
+       if(data.state==0){
+           $("#headUrl").attr("src",data.headUrl);
+           $("#name").text(data.name);
+        }else if(data.state==1){
+           window.location.href="./bindCellPhone.html";
+        }else{
+           alerw("请重新登录","",function(){
+               location.href="http://www.linkgift.cn/giftpay_wap/giftpay/wap/wxLogin.htm"
+           })
+       }
+    }
+});
+//初始化页面
+$.ajax({
+    url:"/giftpay_wap/isSettingInfo.htm",
+    type:"post",
+    dataType:"json",
+    async:false,
+    success:function(data){
+        if(data.state==0){
+            var obj = data.data;
+            //绑定手机s
+            if(obj.phone==undefined || obj.phone == ""){
+                window.location.href="./bindCellPhone.html";
+                return;
+            }
+
+            //身份信息
+            if(obj.idCard == undefined || obj.idCard==""){
+                window.location.href="./Authentication_set.html";
+                return;
+            }
+
+
+            //支付
+            if(data.pwd == undefined || data.pwd==""){
+                window.location.href="./setPayPassword.html"
+                return;
+            }
+        }
+    }
+});
+//提现
+function sure() {
+    var psd=$('#psd').val();
+    if(!psd){
+        TipShow('请输入MM',1000);
+        return ;
+    }
+	$.ajax({
+		url:getRootPath() + "/giftpay/withdraw/saveWithdraw.htm",
+		type:"post",
+		data:{
+		    amount:$('#money').val()
+        },
+		dataType:"json",
+		success:function(data){
+			if(data.result){
+				window.location.href = "./getCash_success.html";
+			}else{
+				  TipShow(data.msg,1000);
+			}
+		}
+	});
+}
+
+</script>
+</body>
+</html>

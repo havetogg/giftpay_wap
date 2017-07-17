@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5, width=640, target-densitydpi=device-dpi">
+    <meta http-eqiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>有礼付</title>
+    <link type="text/css" href="css/common/common.css" rel="stylesheet">
+    <link type="text/css" href="css/app.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common/jQuery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/common/jWeChat-Adaptive.js"></script>
+    <script type="text/javascript" src="js/common/m.tool.juxinbox.com.js"></script>
+    <script type="text/javascript" src="js/common/common.js"></script>
+</head>
+<body style="background-color: #f0f0f4">
+<div style="background-color: #f0f0f4;" class="zoomer">
+    <div class="htmlTop">
+        <img src="img/left_arrow.png" id="back" alt="">
+        账单记录
+    </div>
+    <div class="rechargeRecords">
+        <ul id="ul">
+          
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+		//初始化数据
+		$.ajax({
+			url:"/giftpay_wap/queryPayInfo.htm",
+			type:"get",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				if(data.state==0){
+					var list = data.list;
+					var html = "";
+					$.each(list,function(i,field){
+						var dtime=field.dealTime;
+						dtime=dtime.substring(0,dtime.lastIndexOf("."))
+							html += " <li>" +
+				                        "<div>" +
+		                                   "<div class='name_'>"+field.dealInfo+"</div>" +
+		                    					"<div class='time_'>"+dtime+"</div>" +
+		               						" </div>";
+		               						if(field.dealType==1){
+		               							html += "<a class='rechargeRecords_value1'>-￥"+field.dealMoney+"</a>";
+		               						}else if(field.dealType == 2){
+		               							html += "<a class='rechargeRecords_value1'>+￥"+field.dealMoney+"</a>";
+		               						}else if(field.dealType == 3){
+		               							html += "<a class='rechargeRecords_value1'>-￥"+field.dealMoney+"</a>";
+		               						}
+		                
+		            			 html +="</li>";
+					});
+					$("#ul").append(html);
+				}else{
+					alert(data.message);
+				}
+			}
+		});
+
+		//返回
+		$("#back").click(function(){
+			history.back();
+		});
+</script>
+</body>
+</html>
