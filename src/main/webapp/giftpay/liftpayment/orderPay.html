@@ -50,6 +50,7 @@
 				userId=getUrlParam("userId");
 				openId=getUrlParam("openId");
 				backUrl=getUrlParam("backUrl");
+				localStorage.setItem("successBackUrl",backUrl);
 				initRechargeName(rechargeType);
 				initRedStatus();
 				initBalance();

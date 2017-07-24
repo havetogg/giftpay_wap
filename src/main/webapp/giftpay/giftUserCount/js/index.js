@@ -71,6 +71,10 @@ function signUp() {
                     }else if(data.code=="5000"){
                         console.log("[false]手机号码获取异常code:"+data.code)
                         TipShow("系统访问人数过多，请重新进入当前页面！",3000);
+                    }else if(data.code="1199"){
+                        console.log("当前用户数据获取异常，重新授权！");
+                        TipShow("当前办卡用户过多！正在为您重新进入此页面！",3000);
+                        window.location.href=getRootPath()+"/giftUserGo/wxLogin.htm?third_name=zfwcy";
                     }
                 }
             }

@@ -23,6 +23,7 @@
 	</head>
 	<script>
 		$(function() {
+			ad_tip('show');
 			var gunNo = getUrlParam("gunNo"); //枪号\
 			$(".gunNo").attr("src", "demopay/img/gun" + gunNo + ".png");
 			$(".gunOilBox1").html(gunNo + "号油枪加油完成，请放行");

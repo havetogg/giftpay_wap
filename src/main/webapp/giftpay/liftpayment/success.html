@@ -21,7 +21,7 @@
     var type="";
     var orderNo="";
     $(function () {
-        var backUrl = getUrlParam("backUrl");
+        var backUrl = localStorage.getItem("successBackUrl");
         if (backUrl == '' || backUrl == undefined || backUrl == null) {
             backUrl = '';
         }
@@ -36,6 +36,7 @@
         orderNo=decodeURI(getUrlParam("orderNo"))//订单号
         $(".toHomePage").on("click", function () {
             if (backUrl != '') {
+            	localStorage.clear();
                 location.href = backUrl;
             } else {
                 location.href = getRootPath() + '/giftpay/wap/wxLogin.htm';
@@ -100,7 +101,7 @@
         <header>
             <img src="img/success.png"/>
             <p>订单支付成功</p>
-            <a class="toHomePage" href="javascript:;">前往首页</a>
+            <a class="toHomePage" href="javascript:;">返回</a>
         </header>
         <!--广告位/随机-->
         <!--<div class="ad">-->

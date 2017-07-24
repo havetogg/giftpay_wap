@@ -76,6 +76,8 @@ public class WalletModelController extends BaseController {
         gunNo = gunNo == null ? "" : gunNo;
         String empno = request.getParameter("empno");
         empno = empno == null ? "" : empno;
+        String redirectURL=request.getParameter("redirectURL");
+        redirectURL = redirectURL == null ? "" : redirectURL;
         modelMap.put("gunNo", gunNo);
         modelMap.put("timestamp", DateFormatUtil.formateString());
         modelMap.put("realAmount", amount);
@@ -85,6 +87,7 @@ public class WalletModelController extends BaseController {
         modelMap.put("orderId", orderId);
         modelMap.put("redId", redId);
         modelMap.put("empno", empno);
+        modelMap.put("redirectURL", redirectURL);
         logger.error("跳转支付结果员工号:"+empno);
         if (redId.equals("80")) {
             modelMap.put("redAmount", "50");

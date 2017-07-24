@@ -28,6 +28,7 @@
 		var redAmount = $("#redAmount").val();
 		var realAmount = new Number($("#realAmount").val());
 		$(".gunOilBox3 a").html(timestamp.substring(0,timestamp.lastIndexOf(":")));
+		var redirectURL=$("#redirectURL").val();
 		if(redAmount == '' || redAmount == '0' || redAmount == null) {
 			$(".gunOilBox2").html("<a>实付" +
 					realAmount + "元</a>");
@@ -45,6 +46,13 @@
 			var redId=$("#redId").val();
 			window.location.href = getRootPath()+"/giftpay/wallet/wxRedPkgBase.htm?thirdOpenId="+thirdOpenId+"&channelId="+channelId+"&amount="
 					+amount+"&hasRed="+hasRed+"&redId="+redId+"&orderId="+orderId;
+		})
+		$(".gunOilBox_returnBack").on("click",function(){
+			if(redirectURL==''){
+				$(".gunOilBox_returnBack").hide();
+			}else{
+				location.href=redirectURL;
+			}
 		})
 		initAdvertise();
 	})
@@ -90,6 +98,7 @@
 <input id="redId" type="hidden" value="${redId}" />
 <input id="orderId" type="hidden" value="${orderId}" />
 <input id="empno" type="hidden" value="${empno}" />
+<input id="redirectURL" type="hidden" value="${redirectURL}">
 
 
 <div class="zoomer" style="background-color: #ffffff;overflow-x:-webkit-overflow-scrolling:touch;">
@@ -104,6 +113,7 @@
 			<a class="timeBg"></a>
 			<img src="img/dottedO.png" alt="">
 		</div>
+        <div class="gunOilBox_returnBack" onclick="BalanceGoBack()">返回</div>
 	</div>
 	<!--<div class="index_content4 flex">
 		<div>

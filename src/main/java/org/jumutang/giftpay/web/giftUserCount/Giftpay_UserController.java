@@ -221,6 +221,15 @@ public class Giftpay_UserController extends BaseController {
         String userId =String.valueOf( session.getAttribute("userId"));
         logger.info("获取用户UserId:"+userId);
 
+        //办卡操作时，判断当前用户openId是否存在
+        logger.info("判断当前openId或者UserId是否为空!");
+        if(openIdISNull(openId) || openIdISNull(userId)){
+            jsonObject.put("status","false");
+            jsonObject.put("code", "1199");
+            jsonObject.put("mess","数据异常！未正确获取到openId["+openId+"],userId["+userId+"]！");
+            logger.info("数据异常!未正确获取到openId["+openId+"],userId["+userId+"]");
+            return jsonObject.toString();
+        }
 
         if(status=="0"){   //update更新用户的手机号码
             logger.info("当前用户openId[" + openId + "],手机号码不存在，准备绑卡操作.....");
@@ -253,6 +262,7 @@ public class Giftpay_UserController extends BaseController {
             //页面传递验证码和后台session中验证码进行匹配
             optionStatus=1;
         }
+
 
         if(optionStatus==1){
             logger.info(",验证码校验正确!插入数据到临时表中.....");

@@ -196,8 +196,7 @@
             <img id="btn_n" style="display:block" src="img/btn_gray.png" alt="">
         </div>
 
-        <div class="bottom_btn">tips:加油88折优惠活动仅限平安车主信用卡,进入办卡页面请选择 <a class="text_btn"><img src="img/more.png"
-                                                                                           alt=""></a>按钮,找到平安车主信用卡,点击进行在线办理
+        <div class="bottom_btn">tips:加油88折优惠活动仅限平安车主信用卡,进入办卡页面请选择 <a class="text_btn"><img src="img/more.png" alt=""></a>按钮,找到平安车主信用卡,点击进行在线办理
         </div>
         <div class="bottom_logo">
             <img src="img/logo.png" alt="">

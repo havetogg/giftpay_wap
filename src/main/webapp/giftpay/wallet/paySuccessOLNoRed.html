@@ -61,6 +61,10 @@
 				}
 			});
 		}
+		function BalanceGoBack() {
+			var redirectURL=getUrlParam("redirectURL");
+			location.href=redirectURL;
+		}
 	</script>
 
 	<body>
@@ -70,6 +74,7 @@
 				<div class="jmt_center">
 					<img src="img/paySuccess.png" alt="">
 				</div>
+                <div class="gunOilBox_returnBack" onclick="BalanceGoBack()">返回</div>
 			</div>
 			<!--<div class="index_content4 flex">
 				<div>

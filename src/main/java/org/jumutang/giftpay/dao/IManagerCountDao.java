@@ -8,6 +8,5 @@ import java.util.List;
  * Created by RuanYJ on 2017/6/26.
  */
 public interface IManagerCountDao {
-
     List<ManagerCountModel> queryManagerCountUserList(ManagerCountModel managerCountModel);
 }

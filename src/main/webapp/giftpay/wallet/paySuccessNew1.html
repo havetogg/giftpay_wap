@@ -65,6 +65,10 @@
 				}
 			});
 	}
+    function BalanceGoBack() {
+		var redirectURL=getUrlParam("redirectURL");
+		location.href=redirectURL;
+    }
 </script>
 <body >
 
@@ -77,6 +81,7 @@
 		<div class="paySuccess_content11">
 			需付100元，实付50元红包抵扣50元
 		</div>
+        <div class="gunOilBox_returnBack" onclick="BalanceGoBack()">返回</div>
 	</div>
 	<!--<div class="index_content4 flex">
 				<div>

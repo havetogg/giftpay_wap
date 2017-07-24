@@ -223,6 +223,7 @@ public class BaseController {
     protected String filterNickName(HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String nickName = request.getParameter("nickname");
+        //仍有乱码加以下代码
 //        nickName = new String(nickName.getBytes("ISO-8859-1"), "UTF-8");
         nickName = EmojiFilter.filterEmoji(nickName);
         return nickName;

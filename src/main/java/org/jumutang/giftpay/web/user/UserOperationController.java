@@ -122,9 +122,11 @@ public class UserOperationController extends BaseController {
             codeMess=new CodeMess("20000","phone参数不正确");
             return JSONObject.toJSONString(codeMess);
         }
+        UserSubModel userSub=new UserSubModel();
+        userSub.setOpenId(userSubModel.getOpenId());
         List<UserSubModel> subList;
         try {
-            subList=this.userSubService.queryUserSubModel(userSubModel);
+            subList=this.userSubService.queryUserSubModel(userSub);
         } catch (Exception e) {
             codeMess=new CodeMess("20001","接口异常");
             subList=new ArrayList<>();
@@ -146,16 +148,27 @@ public class UserOperationController extends BaseController {
                 this.userSubService.addUserSubModel(userSubModel);
                 codeMess=new CodeMess("10000","添加成功");
             }else{
-                //主表存在
+                //主表存在 子表不存在 判断手机是否为空
                 userMainModel=mainList.get(0);
+                if(StringUtils.isEmpty(userMainModel.getPhone())){
+                    userMainModel.setPhone(userSubModel.getPhone());
+                    //手机号为空更新手机号
+                    this.userMainService.updateUserMainModel(userMainModel);
+                }
                 userSubModel.setUserId(userMainModel.getId());
                 userSubModel.setId(UUIDUtil.getUUID());
                 this.userSubService.addUserSubModel(userSubModel);
                 codeMess=new CodeMess("10001","添加子关联表成功");
             }
         }else{
-            //已存在
+            //已存在 判断手机号是否为空
             codeMess=new CodeMess("10002","已存在相关联表");
+            for(UserSubModel subModel:subList){
+                //循环所有子表 手机号为空的用户更新手机号
+                if(StringUtils.isEmpty(subModel.getPhone())){
+                    this.userSubService.updateUserSubModel(subModel);
+                }
+            }
         }
         //判断用户是否有钱包 没有添加钱包模块
         BalanceModel balanceModel = new BalanceModel();
@@ -169,7 +182,6 @@ public class UserOperationController extends BaseController {
                 codeMess=new CodeMess("10003","添加用户钱包功能失败");
             }
         }
-
         return JSONObject.toJSONString(codeMess);
     }
 
