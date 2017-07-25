@@ -57,7 +57,7 @@ public class BalanceController {
 	public String queryBalances(BalanceModel balanceModel,HttpServletRequest request){
 		HttpSession session = request.getSession();
 		UserModel userModel =(UserModel) session.getAttribute("wxUser");
-		Map<String,Object> result = new HashMap<>();
+		Map<String,Object> result = new HashMap<String,Object>();
 		String userId = request.getParameter("openId");
 		logger.info("查询余额++++");
 		if(StringUtils.isEmpty(userId)){
@@ -101,7 +101,7 @@ public class BalanceController {
 	public String queryBalancesByOpenId(BalanceModel balanceModel,HttpServletRequest request){
 		HttpSession session = request.getSession();
 		UserModel userModel =(UserModel) session.getAttribute("wxUser");
-		Map<String,Object> result = new HashMap<>();
+		Map<String,Object> result = new HashMap<String,Object>();
 		String userId="";
 		String openId = request.getParameter("openId");
 		logger.info("查询余额++++");
@@ -138,7 +138,7 @@ public class BalanceController {
 	@ResponseBody
 	@RequestMapping("/withdrawalsBalance")
 	public String updateBalance(BalanceModel balanceModel,HttpSession session){
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		String phone = (String)session.getAttribute("loginMobile");
 		if(phone==null){
 			map.put("state", 3);
@@ -169,7 +169,7 @@ public class BalanceController {
 		BalanceModel balanceModel = new BalanceModel();
 		balanceModel.setAccountId(openId);
 		int result = balanceServiceI.insertBalace(balanceModel);
-		Map<String,Object> param = new HashMap<>();
+		Map<String,Object> param = new HashMap<String,Object>();
 		if(result>0){
 		param.put("statue", 0);
 		}else{

@@ -129,7 +129,8 @@ public class UserOperationController extends BaseController {
             subList=this.userSubService.queryUserSubModel(userSub);
         } catch (Exception e) {
             codeMess=new CodeMess("20001","接口异常");
-            subList=new ArrayList<>();
+            subList=new ArrayList<UserSubModel>();
+            return JSONObject.toJSONString(codeMess);
         }
         if(subList.size()==0){
             //不存在 查找是否在主表
@@ -166,6 +167,7 @@ public class UserOperationController extends BaseController {
             for(UserSubModel subModel:subList){
                 //循环所有子表 手机号为空的用户更新手机号
                 if(StringUtils.isEmpty(subModel.getPhone())){
+                    subModel.setPhone(userSubModel.getPhone());
                     this.userSubService.updateUserSubModel(subModel);
                 }
             }

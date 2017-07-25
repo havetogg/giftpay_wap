@@ -35,6 +35,7 @@
 		<include refid="wherecause"/>
 		order by create_time
 	</select>
+
 	<insert id="addFamilyModel" parameterType="org.jumutang.giftpay.model.liftPaytment.FamilyModel">
 		insert into t_family
 		<trim prefix="(" suffix=")" suffixOverrides=",">

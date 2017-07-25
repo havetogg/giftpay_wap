@@ -56,7 +56,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("/isBuildPhone")
 	public String isBildPhone(HttpServletRequest request){
-		Map<String,Object> param = new HashMap<>();
+		Map<String,Object> param = new HashMap<String,Object>();
 		HttpSession session = request.getSession();
 		UserModel  userModel = (UserModel)session.getAttribute("wxUser");
 		if(userModel == null){
@@ -110,7 +110,7 @@ public class MemberController {
 		String wechatNikeName =userModel.getWechatNikeName();
 		String wechatUnionID = userModel.getWechatUnionID();
 		String headImgUrl = userModel.getHeadImgUrl();
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("loginMobile", phone);
 		map.put("loginPassword", password);
 		map.put("wechatNikeName", wechatNikeName);

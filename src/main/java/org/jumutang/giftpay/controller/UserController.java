@@ -45,7 +45,7 @@ public class UserController {
 		String userId = (String)session.getAttribute("id");
 		userInfoModel.setUserId(userId);
 		List<UserInfoModel> list = userInfoServiceI.queryUserInfo(userInfoModel); 
-		Map<String,Object> result = new HashMap<>();
+		Map<String,Object> result = new HashMap<String,Object>();
 		if(list.size()==0){
 			result.put("message", "无数据");
 		}else{
@@ -67,7 +67,7 @@ public class UserController {
 		String id = (String)session.getAttribute("id");
 		userInfoModel.setUserId(id);
 		int result = userInfoServiceI.updateUserInfo(userInfoModel);
-		Map<String,Object> result1 = new HashMap<>();
+		Map<String,Object> result1 = new HashMap<String,Object>();
 		if(result>0){
 			result1.put("success", true);
 		}else{
@@ -86,7 +86,7 @@ public class UserController {
 	public String insertUserInfo(UserInfoModel userInfoModel,HttpServletRequest request){
 		userInfoModel.setOpenId("1");
 		int result = userInfoServiceI.insertUserInfo(userInfoModel);
-		Map<String,Object> param = new HashMap<>();
+		Map<String,Object> param = new HashMap<String,Object>();
 		if(result>0){
 			param.put("success", true);
 		}else{

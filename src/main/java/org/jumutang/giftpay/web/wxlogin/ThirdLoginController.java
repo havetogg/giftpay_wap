@@ -211,7 +211,7 @@ public class ThirdLoginController extends BaseController {
             subList = this.userSubService.queryUserSubModel(userSubModel);
         } catch (Exception e) {
             logger.info("未获取到数据");
-            subList = new ArrayList<>();
+            subList = new ArrayList<UserSubModel>();
         }
         String userId = "";
         if (subList.size() == 0) {

@@ -1,3 +1,4 @@
+/*
 package org.jumutang.giftpay.controller;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 
+*/
 /**
  * 交易记录控制层
  * 
@@ -34,7 +36,8 @@ import com.alibaba.fastjson.JSON;
  * 
  * copyright Luyu(18994139782@163.com)
  *
- */
+ *//*
+
 @Controller
 @Transactional
 public class PayInfoController {
@@ -45,11 +48,13 @@ public class PayInfoController {
 	@Autowired
 	private BalanceServiceI balanceServiceI;
 	
-	/**
+	*/
+/**
 	 * 查询交易信息
 	 * @param payInfoModel
 	 * @return
-	 */
+	 *//*
+
 	@ResponseBody
 	@RequestMapping("/queryPayInfo")
 	public String queryPayInfo(PayInfoModel payInfoModel,HttpServletRequest request){
@@ -60,7 +65,7 @@ public class PayInfoController {
 		userId = (String)session.getAttribute("userId");
 	}
 	
-	Map<String,Object> map = new HashMap<>();
+	Map<String,Object> map = new HashMap<String, Object>();
 	if(userId==null){
 		map.put("state", 1);
 	}
@@ -80,17 +85,19 @@ public class PayInfoController {
 	
 	}
 	
-	/**
+	*/
+/**
 	 * 生成交易
 	 * @param payInfoModel
 	 * @return
-	 */
+	 *//*
+
 	@ResponseBody
-	@RequestMapping("/savePayInfo")
+		@RequestMapping("/savePayInfo")
 	public String insertPayInfo(PayInfoModel payInfoModel,HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		String userId = request.getParameter("userId");
 		if(userId==null){
 			userId= (String)session.getAttribute("userId");
@@ -181,11 +188,13 @@ public class PayInfoController {
 		return JSON.toJSONString(map);
 	}
 
-	/**
+	*/
+/**
 	 * 保存订单信息
 	 * @param payInfoModel
 	 * @return
-	 */
+	 *//*
+
 	@ResponseBody
 	@RequestMapping(value = "/saveOrderInfo",method =RequestMethod.POST)
 	public String saveOrderInfo(PayInfoModel payInfoModel,String dealMoney,String dealRealMoney,String sign,HttpServletRequest request){
@@ -208,7 +217,7 @@ public class PayInfoController {
 		_LOGGER.info("-------------"+payInfoModel.getDealState());
 		_LOGGER.info("-------------"+payInfoModel.getAccountId());
 		_LOGGER.info("-------------"+payInfoModel.getOrderNo());
-		Map<String,Object> result = new HashMap<>();
+		Map<String,Object> result = new HashMap<String,Object>();
 		String param  = MD5X.getLowerCaseMD5For32(str);
 		_LOGGER.info("获取签名信息---------------------"+param);
 		if(!sign.equals(param)){
@@ -234,3 +243,4 @@ public class PayInfoController {
 		
 	}
 }
+*/

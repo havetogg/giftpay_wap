@@ -35,7 +35,7 @@
 			<list>
 			<!-- 生产 -->
 <!-- 				<value>classpath*:org/jumutang/caranswer/conf/properties/produ/*.properties</value> -->
-				
+
 				<!-- 开发 -->
 				<value>classpath*:org/jumutang/giftpay/conf/properties/produ/*.properties</value>
 			</list>
