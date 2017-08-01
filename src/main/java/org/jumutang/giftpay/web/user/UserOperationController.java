@@ -101,7 +101,10 @@ public class UserOperationController extends BaseController {
             List<UserMainModel> mainList=this.userMainService.queryUserMainModel(userMainModel);
             codeMess=new CodeMess("10000","存在该数据");
             object= (JSONObject) JSONObject.toJSON(codeMess);
-            object.put("mainUser",JSONObject.toJSON(mainList.get(0)));
+            //判断数组的数量 如果数量为0get会空指针
+            if(mainList.size()>0){
+                object.put("mainUser",JSONObject.toJSON(mainList.get(0)));
+            }
             object.put("subUser",JSONObject.toJSON(subList.get(0)));
         }
         return object.toJSONString();
@@ -166,11 +169,16 @@ public class UserOperationController extends BaseController {
             codeMess=new CodeMess("10002","已存在相关联表");
             for(UserSubModel subModel:subList){
                 //循环所有子表 手机号为空的用户更新手机号
-                if(StringUtils.isEmpty(subModel.getPhone())){
+                //if(StringUtils.isEmpty(subModel.getPhone())){
                     subModel.setPhone(userSubModel.getPhone());
+                    logger.info("-------手机号为："+userSubModel.getPhone());
                     this.userSubService.updateUserSubModel(subModel);
-                }
+                //}
             }
+            UserMainModel userMainModel=new UserMainModel();
+            userMainModel.setPhone(userSubModel.getPhone());
+            userMainModel.setId(subList.get(0).getUserId());
+            this.userMainService.updateUserMainModel(userMainModel);
         }
         //判断用户是否有钱包 没有添加钱包模块
         BalanceModel balanceModel = new BalanceModel();

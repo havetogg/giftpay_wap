@@ -23,7 +23,7 @@
 </head>
 <script>
 	$(function() {
-		ad_tip('show');
+		ad_tip2('show');
 		var timestamp = $("#timestamp").val();
 		var redAmount = $("#redAmount").val();
 		var realAmount = new Number($("#realAmount").val());

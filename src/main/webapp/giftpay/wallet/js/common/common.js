@@ -82,13 +82,30 @@ var html1= "  <div  id=\"ad_id1\" class=\"advertisement_bg\">"
     + "        <a class=\"ad_toBTN\" href=\"http://www.linkgift.cn/giftpay_wap//giftpay/giftUserCount/index.jsp?third_name=zfwcy\">我要办卡</a>"
     + "            <div class=\"ad_little_img\"><img src=\"img/closebtn.png\" alt=\"\" onclick=\"closeAd('ad_id1')\"></div>"
     + "        </div>"
-    + "  </div>"
+    + "  </div>";
 function ad_tip1(state) {
     if(state == 'show'){
         document.body.style.position='fixed';
         $('.zoomer').prepend(html1);
     }else if(state=='hide'){
         $('#ad_id1').remove();
+        document.body.style.position='absolute';
+    }
+}
+//t弹框页面
+var html2= "  <div  id=\"ad_id2\" class=\"advertisement_bg\">"
+    + "        <div class=\"tip-cont11-\">"
+    + "            <img src=\"img/ad_bg2.png\" alt=\"\">"
+    + "        <a class=\"ad_toBTN\" href=\"https://prodone.juxinbox.com/sinopecGameCt/weixinMng/ManageC/userIn.htm\">去游戏中心</a>"
+    + "            <div class=\"ad_little_img\"><img src=\"img/closebtn.png\" alt=\"\" onclick=\"closeAd('ad_id2')\"></div>"
+    + "        </div>"
+    + "  </div>";
+function ad_tip2(state) {
+    if(state == 'show'){
+        document.body.style.position='fixed';
+        $('.zoomer').prepend(html2);
+    }else if(state=='hide'){
+        $('#ad_id2').remove();
         document.body.style.position='absolute';
     }
 }

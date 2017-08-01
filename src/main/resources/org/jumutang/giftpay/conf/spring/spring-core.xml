@@ -35,17 +35,24 @@
 			<list>
 			<!-- 生产 -->
 <!-- 				<value>classpath*:org/jumutang/caranswer/conf/properties/produ/*.properties</value> -->
-
 				<!-- 开发 -->
 				<value>classpath*:org/jumutang/giftpay/conf/properties/produ/*.properties</value>
 			</list>
 		</property>
 	</bean>
 
+	<!-- properties配置文件进行解密 2017.07.26 修改扩展 properties属性值加密工具类：tools/AESUtil类 -->
+	<bean id="propertyConfigurer" class="org.jumutang.giftpay.plugin.EncryptConfigurer">
+		<property name="properties" ref="propertyFactoryBean" />
+	</bean>
+
+	<!-- 原有的配置 2017.07.26 注释代码-->
+    <!--
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
 		<property name="properties" ref="propertyFactoryBean" />
 	</bean>
+	-->
 
 	<!-- 配置数据源 -->
 	<bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
