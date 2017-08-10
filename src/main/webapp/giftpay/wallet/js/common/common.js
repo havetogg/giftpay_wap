@@ -90,6 +90,11 @@ function ad_tip1(state) {
     }else if(state=='hide'){
         $('#ad_id1').remove();
         document.body.style.position='absolute';
+
+
+
+
+        
     }
 }
 //t弹框页面
@@ -106,6 +111,27 @@ function ad_tip2(state) {
         $('.zoomer').prepend(html2);
     }else if(state=='hide'){
         $('#ad_id2').remove();
+        document.body.style.position='absolute';
+    }
+}
+//t3弹框页面
+var html3= "    <div  id=\"ad_id3\" class=\"advertisement_bg\">"
+    + "        <div class=\"tip-cont22-\">"
+    + "            <img src=\"img/ad_bg3.png\" alt=\"\">"
+    + "            <img src=\"img/codeGo.png\" alt=\"\" class=\"fingerCode\">"
+    + "            <div class=\"finger\">"
+    + "                <img src=\"img/line_yellw.png\" alt=\"\" class=\"line_yellow\">"
+    + "                <div></div>"
+    + "            </div>"
+    + "            <div class=\"finger_bottom_close\"><img src=\"img/closebtn.png\" alt=\"\" onclick=\"closeAd('ad_id3')\"></div>\""
+    + "        </div>"
+    + "    </div>"
+function ad_tip3(state) {
+    if(state == 'show'){
+        document.body.style.position='fixed';
+        $('.zoomer').prepend(html3);
+    }else if(state=='hide'){
+        $('#ad_id3').remove();
         document.body.style.position='absolute';
     }
 }

@@ -47,6 +47,8 @@ public class CountController extends BaseController {
 
     private final static String QUERYZSHBASEINFO="http://pay-wx.jspec.cn/zshwx_task/api/v1/day/report.do";
 
+    private final static String GAMEUSERPRICEURL="https://prodone.juxinbox.com/sinopecGameCt/weixinMng/api/getAllUser.htm";
+
 
     /**
      * 统计平台登录
@@ -470,6 +472,15 @@ public class CountController extends BaseController {
         return JSONArray.toJSONString(recordModels);
     }
 
+
+    @RequestMapping(value = "/countGameUserPrice")
+    @ResponseBody
+    public String countGameUserPrice(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        String result=HttpClientUtil.doHttpPost(GAMEUSERPRICEURL,paramMap);
+        logger.error("result");
+        return result;
+    }
     public List<CountModel> regexCountTime(List<CountModel> newCount,List<String> ss) {
         List<String> dateList=new ArrayList<>();
         dateList.addAll(ss);

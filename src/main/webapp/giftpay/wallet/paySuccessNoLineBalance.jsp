@@ -113,7 +113,7 @@
 			<a class="timeBg"></a>
 			<img src="img/dottedO.png" alt="">
 		</div>
-        <div class="gunOilBox_returnBack" onclick="BalanceGoBack()">返回</div>
+        <%--<div class="gunOilBox_returnBack" onclick="BalanceGoBack()">返回</div>--%>
 	</div>
 	<!--<div class="index_content4 flex">
 		<div>

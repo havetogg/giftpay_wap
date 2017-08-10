@@ -24,7 +24,7 @@
 				and advertise_name = #{advertiseName}
 			</if>
 			<if test="status !=null">
-				and status = #{status}
+				and status = '1'
 			</if>
 		</where>
 	</sql>
