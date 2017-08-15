@@ -504,6 +504,61 @@ public class CountController extends BaseController {
         return newCount;
     }
 
+    /**
+     * 查询油礼付信息统计
+     * @param request
+     * @param session
+     * @param response
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/oilUserStatistics")
+    @ResponseBody
+    public String oilUserStatistics(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException {
+        String result=HttpClientUtil.doHttpsGet("https://sms.linkgift.cn/giftpay_socket/interface/oilUserStatistics.htm",null);
+        return result;
+    }
+    /**
+     * 支付完成页统计
+     * @param request
+     * @param session
+     * @param response
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/paySuccessStatistics")
+    @ResponseBody
+    public String paySuccessStatistics(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException {
+        //注册人数接口
+        JSONObject object=new JSONObject();
+        String result=HttpClientUtil.doHttpGet("http://www.linkgift.cn/gd_register/getRegisterInfo.do",null);
+        object.put("registerInfo",result);
+        //授权人数接口
+        result=HttpClientUtil.doHttpGet("http://www.linkgift.cn/gd_register/getAuthInfo.do",null);
+        object.put("authInfo",result);
+        return object.toJSONString();
+    }
+    /**
+     * 挪车码用户信息统计
+     * @param request
+     * @param session
+     * @param response
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    @RequestMapping(value = "/carCodeStatis")
+    @ResponseBody
+    public String carCodeStatis(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException {
+        String all=HttpClientUtil.doHttpGet("http://www.linkgift.cn/noahcar_yards/getAuthInfo.do",null);
+        String bind=HttpClientUtil.doHttpGet("http://www.linkgift.cn/noahcar_yards/bingInfoCount.do",null);
+        JSONObject object=new JSONObject();
+        object.put("all",all);
+        object.put("bind",bind);
+        return object.toJSONString();
+    }
     private static void ListSort(List<CountModel> list) {
         Collections.sort(list, new Comparator<CountModel>() {
             @Override
@@ -528,13 +583,7 @@ public class CountController extends BaseController {
     }
 
     public static void main(String[] args) throws Exception {
-        String startTime=DateFormatUtil.queryDaysObject(30);//查询前一天的数据
-        String endTime=DateFormatUtil.queryDaysObject(0);
-        Map<String,String> params=new HashMap<>();
-        params.put("startTime",startTime);
-        params.put("endTime",endTime);
-        System.out.println(JSONArray.toJSONString(params));
-        String name="http://pay-wx.jspec.cn/zshwx_task/api/v1/report/list.do";
-        String result= HttpClientUtil.doHttpPost(name,params);
+       String result=HttpClientUtil.doHttpsGet("https://prodone.juxinbox.com/sinopecGameCt/weixinMng/api/getAllUser.htm",null);
+        System.out.println(result);
     }
 }

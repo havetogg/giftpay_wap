@@ -66,8 +66,8 @@
 				<if test="name !=null">
 					name  = #{name },
 				</if>
-				<if test="third_name  !=null">
-					third_name  = #{third_name },
+				<if test="thirdName  !=null">
+					third_name  = #{thirdName },
 				</if>
 			</set>
 			<where>

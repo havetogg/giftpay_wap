@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.jumutang.caranswer.wechat.CodeMess;
 import org.jumutang.giftpay.base.web.controller.BaseController;
+import org.jumutang.giftpay.entity.ThirdUserModel;
 import org.jumutang.giftpay.model.BalanceModel;
 import org.jumutang.giftpay.model.UserMainModel;
 import org.jumutang.giftpay.model.UserSubModel;
@@ -232,6 +233,52 @@ public class UserOperationController extends BaseController {
         String operation=request.getParameter("operation");//操作：添加 查询 修改
 
     }*/
+
+
+
+    @RequestMapping(value = "/giftpayThirdRedPkg")
+    @ResponseBody
+    public String giftpayThirdRedPkg(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+        synchronized (UserOperationController.class){
+            CodeMess codeMess;
+            String phone=request.getParameter("phone");
+            if(StringUtils.isEmpty(phone)||phone==null){
+                codeMess=new CodeMess("20000","参数不正确");
+                return JSONObject.toJSONString(codeMess);
+            }
+            String openId=request.getParameter("openId");
+            if(StringUtils.isEmpty(openId)||openId==null){
+                codeMess=new CodeMess("20000","参数不正确");
+                return JSONObject.toJSONString(codeMess);
+            }
+            String thirdName=request.getParameter("thirdName");
+            if(StringUtils.isEmpty(thirdName)||thirdName==null){
+                codeMess=new CodeMess("20000","参数不正确");
+                return JSONObject.toJSONString(codeMess);
+            }
+            String redPkgType=request.getParameter("redPkgType");
+            if(StringUtils.isEmpty(redPkgType)||redPkgType==null){
+                codeMess=new CodeMess("20000","参数不正确");
+                return JSONObject.toJSONString(codeMess);
+            }
+            ThirdUserModel thirdUserModel=new ThirdUserModel();
+            thirdUserModel.setPhone(phone);
+            thirdUserModel.setName(openId);
+            thirdUserModel.setThirdName(thirdName);
+            thirdUserModel.setStatus(redPkgType);//1 50  2 10元
+            thirdUserModel.settId(UUIDUtil.getUUID());
+            logger.error("添加第三方可使用红包用户信息:"+JSONObject.toJSONString(thirdUserModel));
+            int result=this.thirdUserService.addThirdUserModel(thirdUserModel);
+            if(result>0){
+                codeMess=new CodeMess("10000","添加成功");
+                return JSONObject.toJSONString(codeMess);
+            }else{
+                codeMess=new CodeMess("20001","内部错误");
+                return JSONObject.toJSONString(codeMess);
+            }
+        }
+    }
+
     public String getRandomUUUID(String uuuid,UserMainService service){
         UserMainModel mainModel=new UserMainModel();
         mainModel.setId(uuuid);

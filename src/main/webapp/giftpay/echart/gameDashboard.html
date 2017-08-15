@@ -185,7 +185,7 @@
         <li>
             <ul id="top-nav">
                 <li class="nav-item">
-                    <a href="#"><img src="img/nav/dash.png" alt=""/>
+                    <a href="dashboard.html"><img src="img/nav/dash.png" alt=""/>
                         <p>用户数据</p></a>
                 </li>
                 <li class="nav-item">
@@ -209,8 +209,8 @@
                         <p>游戏中心</p></a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard.html"><img src="img/nav/tb.png" alt=""/>
-                        <p>缴费充值</p></a>
+                    <a href="carCodeDashboard.html"><img src="img/nav/tb.png" alt=""/>
+                        <p>挪车码</p></a>
                 </li>
                 <li class="nav-item">
                     <a href="dashboard.html"> <img src="img/nav/cal.png" alt=""/>
@@ -242,24 +242,46 @@
 </div>
 <div class="content container_12">
 	<div class="box grid_2">
-        <div class="box-head"><h2>未开放</h2></div>
+        <div class="box-head"><h2>油礼付统计</h2></div>
         <div class="box-content ad-stats">
-        	 <ul id="allCount" >
+        	 <ul id="oilpay" >
+                 <li><h3>总用户数</h3>
+                     <span class="add" id="allUserNum">0</span></li>
+                 <li><h3>总油滴数</h3>
+                     <span class="register" id="allOilNum">0</span></li>
+                 <li><h3>总充值金额</h3>
+                     <span class="zsh" id="allPayNum">0</span></li>
             </ul>
         </div>
     </div>
     <div class="box grid_2">
-        <div class="box-head"><h2>未开放</h2></div>
+        <div class="box-head"><h2>游戏中心总计</h2></div>
         <div class="box-content ad-stats">
             <ul id="todayForm" >
+                <li><h3>总用户数</h3>
+                    <span class="add" id="totalUser">0</span></li>
+                <li><h3>总活跃人数</h3>
+                    <span class="register" id="totalPlay">0</span></li>
+                <li><h3>总注册人数</h3>
+                    <span class="zsh" id="totalRegister">0</span></li>
+                <li><h3>总充值数</h3>
+                    <span class="zsh" id="totalPrize">0</span></li>
             </ul>
         </div>
     </div>
     <div class="box grid_2">
         <div class="box-head"><span class="fugue-24 counter"></span>
-            <h2>未开放</h2></div>
+            <h2>游戏中心今日统计</h2></div>
         <div class="box-content ad-stats">
             <ul id="totalForm">
+                <li><h3>今日用户数</h3>
+                    <span class="add" id="todayUser">0</span></li>
+                <li><h3>今日活跃人数</h3>
+                    <span class="register" id="todayPlay">0</span></li>
+                <li><h3>今日注册人数</h3>
+                    <span class="zsh" id="todayRegister">0</span></li>
+                <li><h3>今日充值数</h3>
+                    <span class="zsh" id="todayPrize">0</span></li>
             </ul>
         </div>
     </div>

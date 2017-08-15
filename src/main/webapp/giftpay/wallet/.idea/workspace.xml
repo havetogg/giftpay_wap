@@ -329,7 +329,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../../学习在线/njs_declaimer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../游戏中心" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunDashboard">
@@ -421,12 +421,12 @@
       <option name="presentableId" value="Default" />
       <updated>1495101177584</updated>
       <workItem from="1495101178901" duration="11000" />
-      <workItem from="1502260014772" duration="8739000" />
+      <workItem from="1502260014772" duration="9023000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8750000" />
+    <option name="totallyTimeSpent" value="9034000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />

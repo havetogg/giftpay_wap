@@ -16,6 +16,21 @@ function initCountInfo() {
         }
     });
 }
+function initPayPageInfo() {
+    $.ajax({
+        type: "GET",
+        url: getRootPath() + "/count/paySuccessStatistics.htm",
+        dataType: "json",
+        success: function (data) {
+            console.log("paySuccessStatistics"+data);
+            $("#payUser").text();
+            $("#payRegisterUser").text();
+        },
+        error: function (res) {
+            console.log(res)
+        }
+    });
+}
 function initAllData(data) {
     $("#todayForm .add").text(data.dataB);//今日新增
     $("#totalForm .add").text(data.dataA);//累计新增
@@ -70,6 +85,25 @@ function initDataGridInfo() {
         }
     });
 }
+function initPaySuccessStatistics(){
+    $.ajax({
+        type: "GET",
+        url: getRootPath() + "/count/paySuccessStatistics.htm",
+        dataType: "json",
+        success: function (data) {
+            console.log("paySuccessStatistics:"+data);
+            var authInfo=data.authInfo;
+            var registerInfo=data.registerInfo;
+            authInfo=JSON.parse(authInfo);
+            registerInfo=JSON.parse(registerInfo);
+            $(".payUser").text(authInfo.total);
+            $(".payRegisterUser").text(registerInfo.total);
+            $(".todaypayUser").text(authInfo.today);
+            $(".todaypayRegisterUser").text(registerInfo.today);
+        }
+    });
+}
+
 function initAdvertiseList(){
     $.ajax({
         type: "GET",
@@ -78,8 +112,8 @@ function initAdvertiseList(){
         success: function (data) {
             console.log(data);
             $(".advertise1").text(data[0].clickNum);
-            $(".advertise2").text(data[1].clickNum);
-            $(".advertise3").text(data[2].clickNum);
+           /* $(".advertise2").text(data[1].clickNum);
+            $(".advertise3").text(data[2].clickNum);*/
         }
     });
 }
@@ -139,10 +173,12 @@ function initEchart(){
 }
 $(function () {
     initCountInfo();
+    initPayPageInfo();
     thirdUserInfo();
     initDataGridInfo();
     initEchart();
     initAdvertiseList();
+    initPaySuccessStatistics();
     $('#frequency1').bind('input propertychange', function() {
         if($('#frequency1').val()>100){
             $('#frequency1').val('');

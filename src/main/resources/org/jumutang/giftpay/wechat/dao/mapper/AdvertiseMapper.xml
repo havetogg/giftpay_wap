@@ -23,16 +23,16 @@
 			<if test="advertiseName !=null">
 				and advertise_name = #{advertiseName}
 			</if>
-			<if test="status !=null">
 				and status = '1'
-			</if>
 		</where>
 	</sql>
 
 	<!-- 查询账户信息 -->
 	<select id="queryAdvertiseList" parameterType="org.jumutang.giftpay.model.AdvertiseModel" resultMap="baseResult">
 		select advertise_id,advertise_name,advertise_img_url,advertise_desc,advertise_href,create_time,status,click_num,rate from t_advertise
-		<include refid="wherecause"/>
+		<!--<include refid="wherecause"/>-->
+		where status = '1'
+		order by  create_time desc
 	</select>
 
 	<update id="updateAdverClickNum" parameterType="org.jumutang.giftpay.model.AdvertiseModel">

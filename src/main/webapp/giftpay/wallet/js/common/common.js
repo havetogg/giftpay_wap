@@ -135,3 +135,20 @@ function ad_tip3(state) {
         document.body.style.position='absolute';
     }
 }
+//t3 弹框页面
+var html4= "<div  id=\"ad_id4\" class=\"advertisement_bg\">"
+    + "        <div class=\"tip-cont22-\">"
+    + "            <img src=\"img/ad_bg4.png\" alt=\"\">"
+    + "            <a class=\"ad_toBTN_new\" href=\"https://xyk.cebbank.com/cebmms/apply/ps/card-list.htm?level=124&pro_code=FHTG200000SJ01NJJM\">去办卡</a>"
+    + "            <div class=\"finger_bottom_close_\"><img src=\"img/closebtn.png\" alt=\"\" onclick=\"closeAd('ad_id4')\"></div>\""
+    + "        </div>"
+    + "    </div>";
+function ad_tip4(state) {
+    if(state == 'show'){
+        document.body.style.position='fixed';
+        $('.zoomer').prepend(html4);
+    }else if(state=='hide'){
+        $('#ad_id4').remove();
+        document.body.style.position='absolute';
+    }
+}

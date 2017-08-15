@@ -1008,16 +1008,35 @@ body {min-height: 100%; height: auto;}
     left: 48px;
     top: 100px;
     position: fixed;
-    /*animation: rotate2D 400ms 2.5;*/
-    /*-moz-animation: rotate2D 400ms 2.5;*/
-    /*-webkit-animation: rotate2D 400ms 2.5;*/
-    /*-o-animation: rotate2D 400ms 2.5;*/
+    animation: rotate3d 400ms 2.5;
+    -moz-animation: rotate3d 400ms 2.5;
+    -webkit-animation: rotate3d 400ms 2.5;
+    -o-animation: rotate3d 400ms 2.5;
 }
 .tip-cont22- img{
     display: inherit;
     margin: 0 auto;
 }
-
+@-webkit-keyframes rotate3d {
+    0% {
+        -webkit-transform: translateY(-20px);
+    }
+    25% {
+        -webkit-transform: translateY(0px);
+    }
+    50% {
+        -webkit-transform: translateY(20px);
+    }
+    75% {
+        -webkit-transform: translateY(0px);
+    }
+    100%{
+        -webkit-transform: translateY(-20px);
+    }
+    125%{
+        -webkit-transform: translateY(0px);
+    }
+}
 @-webkit-keyframes rotate2D {
     0% {
         -webkit-transform: translateY(-20px);
@@ -1081,6 +1100,22 @@ body {min-height: 100%; height: auto;}
     font-family: 'Microsoft YaHei';
     text-align: center;
     text-decoration: none;
+}
+.ad_toBTN_new{
+    width: 430px;
+    height: 90px;
+    color: #fff;
+    position: relative;
+    top: -2px;
+    left: 63px;
+    background-color: #fd4521;
+    display: inline-block;
+    font-size: 28px;
+    border-radius: 0 0 10px 10px;
+    font-family: 'Microsoft YaHei';
+    text-align: center;
+    text-decoration: none;
+    line-height: 90px;
 }
 .orderDetails_btn_p{
     text-align: center;
@@ -1210,4 +1245,8 @@ body {min-height: 100%; height: auto;}
 .finger_bottom_close{
     position: relative;
     bottom: 150px;
+}
+.finger_bottom_close_{
+    position: relative;
+    bottom: -30px;
 }

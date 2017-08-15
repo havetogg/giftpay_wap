@@ -13,7 +13,7 @@ public final class MD5X {
 	private MD5X(){
 	}
 	
-	private static final String getMD5(String sourceStr){
+	public static final String getMD5(String sourceStr){
 		String result = "";
 		try {
             MessageDigest md = MessageDigest.getInstance("MD5");

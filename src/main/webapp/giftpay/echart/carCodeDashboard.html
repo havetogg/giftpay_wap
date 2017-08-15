@@ -22,7 +22,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
     <script src="js/filterUser.js"></script>
-    <script src="js/count.js"></script>
+    <script src="js/carCodeCount.js"></script>
     <script src="../../js/common/m.tool.juxinbox.com.js"></script>
     <script src="js/addAdvert.js"></script>
     <script src="js/recoGoods.js"></script>
@@ -173,64 +173,6 @@
     @-webkit-keyframes bounceInDown{0%{opacity:0;-webkit-transform:translateY(-2000px);transform:translateY(-2000px)}60%{opacity:1;-webkit-transform:translateY(30px);transform:translateY(30px)}80%{-webkit-transform:translateY(-10px);transform:translateY(-10px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes bounceInDown{0%{opacity:0;-webkit-transform:translateY(-2000px);-ms-transform:translateY(-2000px);transform:translateY(-2000px)}60%{opacity:1;-webkit-transform:translateY(30px);-ms-transform:translateY(30px);transform:translateY(30px)}80%{-webkit-transform:translateY(-10px);-ms-transform:translateY(-10px);transform:translateY(-10px)}100%{-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}}.bounceInDown{-webkit-animation-name:bounceInDown;animation-name:bounceInDown}</style>
 <body>
 <div class="top-bar">
-    <div id="ad_tip" class="block_nav">
-        <div class="ad_content">
-            <img src="img/close.png" alt="" class="add_close" onclick="closeAd('ad_tip')">
-           <div class="ad_title">底部广告位管理</div>
-            <ul class="uls">
-                <li><a>广告位1名称</a><input type="text" id="name1"></li>
-                <li><a>广告位1图片</a>
-                    <!-- <button onclick="open_dialog1()">上传图片</button> -->
-                    <label>
-                        <input type="file" name="file0" id="file0" multiple="multiple" />
-                         <input id="img1" value=""  style="display:none"/>
-                    </label>
-                     <a>570*140</a></li>
-                <li><a>广告位1链接</a><input type="text" id="link1"></li>
-                <li><a>广告位1概率</a><input id="frequency1" type="number" onkeydown="onlyNum();" value="100"> <a>%</a></li>
-            </ul>
-            <div class="add_ad2_btn" onclick="add_adBtn()">
-                增加广告位
-            </div>
-            <ul class="uls2">
-                <li><a>广告位2名称</a><input type="text" id="name2"></li>
-                <li><a>广告位2图片</a>
-                    <!-- <button onclick="open_dialog2()">上传图片</button> -->
-                    <label>
-                        <input type="file" name="file1" id="file1" multiple="multiple" />
-                        <input id="img2" value=""  style="display:none"/>
-                    </label>
-                    <a>570*140</a></li>
-                </li>
-                <li><a>广告位2链接</a><input type="text" id="link2"></li>
-                <li><a>广告位2概率</a><input id="frequency2" type="number" onkeydown="onlyNum();" value="0"><a>%</a></li>
-            </ul>
-            <div class="ad_btn" onclick="addAdvert()">确定</div>
-        </div>
-    </div>
-
-    <!--商品管理-->
-    <div id="goods_tip" class="block_nav1">
-        <div class="ad_content">
-            <img src="img/close.png" alt="" class="add_close" onclick="closeAd('goods_tip')">
-            <div class="ad_title">新增商品</div>
-            <ul class="uls">
-                <li><a>商品名称</a><input type="text" id="goodsName"></li>
-                <li><a>商品图片</a>
-                    <!-- <button onclick="open_dialog1()">上传图片</button> -->
-                    <label>
-                        <input type="file" name="file0" id="file2" multiple="multiple" />
-                        <input id="goodsImg" value=""  style="display:none"/>
-                    </label>
-                    <a>293*223</a></li>
-                <li><a>商品链接</a><input type="text" id="goodsLink"></li>
-                <li><a>商品价格</a><input type="text" id="goodsPrice"></li>
-                <li><a>商品原价</a><input type="text" id="goodsOldPrice"></li>
-               <!--  <li><a>商品折扣</a><input type="text" id="goodsSale"></li> -->
-            </ul>
-            <div class="ad_btn" onclick="addGoods()">确定</div>
-        </div>
-    </div>
     <ul id="nav">
         <li id="user-panel">
             <img src="img/giftLogo.png" id="usr-avatar" alt=""/>
@@ -243,7 +185,7 @@
         <li>
             <ul id="top-nav">
                 <li class="nav-item">
-                    <a href="dashboard.html"><img src="img/nav/dash-active.png" alt=""/>
+                    <a href="dashboard.html"><img src="img/nav/dash.png" alt=""/>
                         <p>用户数据</p></a>
                 </li>
                 <li class="nav-item">
@@ -267,7 +209,7 @@
                         <p>游戏中心</p></a>
                 </li>
                 <li class="nav-item">
-                    <a href="carCodeDashboard.html"><img src="img/nav/tb.png" alt=""/>
+                    <a href="carCodeDashboard.html"><img src="img/nav/tb-active.png" alt=""/>
                         <p>挪车码</p></a>
                 </li>
                 <li class="nav-item">
@@ -291,10 +233,6 @@
                         <p>福利中心</p></a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard.html"><img src="img/nav/err.png" alt=""/>
-                        <p>游戏中心</p></a>
-                </li>
-                <li class="nav-item">
                     <a href="dashboard.html"><img src="img/nav/typ.png" alt=""/>
                         <p>活动中心</p></a>
                 </li>
@@ -302,88 +240,56 @@
         </li>
     </ul>
 </div>
-
 <div class="content container_12">
 	<div class="box grid_2">
-        <div class="box-head"><h2>&nbsp;</h2></div>
+        <div class="box-head"><h2>挪车码统计</h2></div>
         <div class="box-content ad-stats">
-        	 <ul id="allCount" >
-                <li><h3>总用户</h3>
-                    <span class="allusercount">0</span></li>
-                    <li><h3>广告位点击量</h3>
-                    <span class="advertise1">0</span></li>
-                 <li><h3>光大总数</h3>
-                     <span class="payUser">0</span></li>
-                 <li><h3>光大总注册数</h3>
-                     <span class="payRegisterUser">0</span></li>
-                 <li><h3>光大今日总数</h3>
-                     <span class="todaypayUser">0</span></li>
-                 <li><h3>光大今日注册</h3>
-                     <span class="todaypayRegisterUser">0</span></li>
+        	 <ul id="oilpay" >
+                 <li><h3>总用户数</h3>
+                     <span class="add" id="totalCarNum">0</span></li>
+                 <li><h3>今日总用户数</h3>
+                     <span class="register" id="todayCarNum">0</span></li>
+                 <li><h3>总新增用户</h3>
+                     <span class="add" id="totalAddNum">0</span></li>
+                 <li><h3>今日新增用户</h3>
+                     <span class="register" id="todayAddNum">0</span></li>
             </ul>
         </div>
-        <div class="add_ad" onclick="showAd()">支付完成页广告配置</div>
-        <div class="add_ad" onclick="showGoods()">支付完成页商品配置</div>
     </div>
     <div class="box grid_2">
-        <div class="box-head"><h2>当日新增</h2></div>
+        <div class="box-head"><h2>未开放</h2></div>
         <div class="box-content ad-stats">
             <ul id="todayForm" >
-                <li><h3>新增用户</h3>
-                    <span class="add">0</span></li>
-                <li><h3>登记用户</h3>
-                    <span class="register">0</span></li>
-                <li><h3>中石化登记用户</h3>
-                    <span class="zsh">0</span></li>
-                <li><h3>福利中心登记用户</h3>
-                    <span class="fuli">0</span></li>
-                <li><h3>游戏中心登记用户</h3>
-                    <span class="game">0</span></li>
-                <li><h3>渠道登记用户</h3>
-                    <span class="other">0</span></li>
             </ul>
         </div>
     </div>
     <div class="box grid_2">
         <div class="box-head"><span class="fugue-24 counter"></span>
-            <h2>累计新增</h2></div>
+            <h2>未开放</h2></div>
         <div class="box-content ad-stats">
             <ul id="totalForm">
-                <li><h3>新增用户</h3>
-                    <span class="add">0</span></li>
-                <li><h3>登记用户</h3>
-                    <span class="register">0</span></li>
-                <li><h3>中石化登记用户</h3>
-                    <span class="zsh">0</span></li>
-                <li><h3>福利中心登记用户</h3>
-                    <span class="fuli">0</span></li>
-                <li><h3>游戏中心登记用户</h3>
-                    <span class="game">0</span></li>
-                <li><h3>渠道登记用户</h3>
-                    <span class="other">0</span></li>
             </ul>
         </div>
     </div>
     <div class="box grid_6">
         <div class="box-head"><span class=" fugue-24 system-monitor"></span>
-            <h2>折线图</h2></div>
+            <h2>折线图(未开放)</h2></div>
         <div class="box-content">
             <div id="flot-demo"></div>
         </div>
     </div>
     <div class="box grid_12">
-        <div class="box-head"><h2>用户表</h2></div>
+        <div class="box-head"><h2>未开放</h2></div>
         <div class="box-content no-pad">
             <table class="display" id="example">
             <thead>
-             <tr>
+            <!-- <tr>
                <th>注册时间</th>
                <th>用户编号</th>
                <th>手机号</th>
-                 <th>归属地</th>
-               <th>零钱余额</th>
-               <th>乐途点</th>
-           </tr>
+               <th>中奖金额</th>
+                 <th>充值金额</th>
+           </tr>-->
            </thead>
            <tbody>
            </tbody>

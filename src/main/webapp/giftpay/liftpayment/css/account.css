@@ -74,6 +74,7 @@ a.recharge { width: 600px; height: 70px; line-height: 70px; text-align: center; 
 .orderPay ul.pay li{ font-size: 24px; color: #000; padding-left: 75px; height: 100px; line-height: 100px; border-bottom: 1px solid #e8e7e8;}
 .orderPay ul.pay li.wx{ background: url(../img/wx.png) no-repeat 15px center;}
 .orderPay ul.pay li.qb{ background: url(../img/qb.png) no-repeat 15px center;}
+.orderPay ul.pay li.jf{ background: url(../img/jf.png) no-repeat 15px center;}
 .orderPay ul.pay li.qb.no{ background: #ebebee url(../img/qb.png) no-repeat 15px center;}
 .orderPay ul.pay li.qb.no label{ display: none;}
 .orderPay ul.pay li input{ display: none;}

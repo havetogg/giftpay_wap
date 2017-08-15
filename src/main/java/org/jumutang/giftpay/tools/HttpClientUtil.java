@@ -1,5 +1,7 @@
 package org.jumutang.giftpay.tools;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -31,10 +33,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -45,7 +44,7 @@ import java.util.Map.Entry;
 public class HttpClientUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
-    private static final int timeout = 5000;
+    private static final int timeout =10000;
 
     /**
      * http GET请求
@@ -322,13 +321,40 @@ public class HttpClientUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        Map<String, String> paramMap = new HashMap<String, String>();
+        /*Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("startPage","1");
         paramMap.put("count","10");
         //成功
-        String resul=HttpClientUtil.doHttpsPost("https://prod1.juxinbox.com/njvote_spring/workList.do", paramMap);
+        String resul=HttpClientUtil.doHttpsPost("https://prod1.juxinbox.com/njvote_spring/workList.do", paramMap);*/
         //失败
-        //HttpClientUtil.doHttpPost("https://prod1.juxinbox.com/njvote_spring/workList.do", paramMap);
-
+        //HttpClientUtil.doHttpPost("https://prod1.juxinbox.com/njvote_spring/workList.do", paramMap);\
+        String s=String.valueOf(System.currentTimeMillis());
+        logger.error("时间戳为:"+s);
+        String timeStamp = AESUtil.AESEncode("hymxzhinkdfypbb",s);
+        logger.error("加密时间戳为:"+timeStamp);
+        String currUrl = AESUtil.AESEncode("hymxzhinkdfypbb","https://prodone.juxinbox.com/sinopecGameCt/weixinMng/ManageC/userIn.htm");
+        logger.error("加密网址为:"+currUrl);
+        Map<String,String> sortedMap = new TreeMap<>();
+        sortedMap.put("timeStamp",timeStamp);
+        sortedMap.put("currUrl",currUrl);
+        StringBuffer stringBuffer = new StringBuffer();
+        for(String key:sortedMap.keySet()){
+            if(!"sign".equals(key)){
+                stringBuffer.append("&"+key+"="+sortedMap.get(key));
+            }
+        }
+        stringBuffer.append("&key=hymxzhinkdfypbb");
+        stringBuffer.deleteCharAt(0);
+        logger.error(stringBuffer.toString());
+        String computeSign = MD5Util.getMD5(stringBuffer.toString());
+        logger.error(computeSign);
+        Map<String,String> param = new HashMap<String,String>();
+        param.put("currUrl",currUrl);
+        param.put("timeStamp",timeStamp);
+        param.put("sign", computeSign);
+        String result = HttpClientUtil.doHttpsPost("http://localhost:8080/giftpay_share/weChatJSConfigC/getWeChatJSConfig",param);
+        logger.info(result);
+        Object jsonObject = JSON.parse(result);
+        logger.info(JSON.toJSONString(jsonObject));
     }
 }

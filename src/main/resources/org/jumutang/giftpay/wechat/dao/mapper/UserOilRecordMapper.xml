@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.jumutang.giftpay.dao.IUserOilRecord">
+
+	<resultMap type="org.jumutang.giftpay.entity.UserOilRecord" id="baseResult">
+		<result column="id" property="id" />
+		<result column="open_id" property="openId" />
+		<result column="user_id" property="userId" />
+		<result column="oil_type" property="oilType" />
+		<result column="create_time" property="createTime" />
+		<result column="oil_num" property="oilNum" />
+	</resultMap>
+
+	<sql id="wherecause">
+		<where>
+			<if test="openId !=null">
+				and open_id = #{openId}
+			</if>
+			<if test="oilType !=null">
+				and oil_type = #{oilType}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 查询账户信息 -->
+	<select id="queryUserOilRecordList" parameterType="org.jumutang.giftpay.entity.UserOilRecord" resultMap="baseResult">
+		select id,open_id,user_id,oil_type,create_time,oil_num from t_user_oil_record
+		<include refid="wherecause"/>
+	</select>
+
+    
+    <insert id="addUserOilRecord"  parameterType="org.jumutang.giftpay.entity.UserOilRecord" >
+    insert into t_user_oil_record(open_id,user_id,oil_type,create_time,oil_num)
+    value(#{openId},#{userId},#{oilType},now(),#{oilNum});
+    </insert>
+	
+</mapper>

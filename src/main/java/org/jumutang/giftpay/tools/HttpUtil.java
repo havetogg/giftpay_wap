@@ -151,11 +151,11 @@ public class HttpUtil {
 		}
 	}
 	public static void main(String[] args) {
-		Map<String,String> param = new HashMap<String,String>();
+		/*Map<String,String> param = new HashMap<String,String>();
 		param.put("accountId","1");
 		param.put("rechargeMoney","500.00");
 		param.put("changeTime", "2017-02-04 15:15:09");
-		param.put("sign",MD5X.getLowerCaseMD5For32("1500.002017-02-04 15:15:09"));
+		param.put("sign",MD5X.getLowerCaseMD5For32("1500.002017-02-04 15:15:09"));*/
 //		param.put("businessInfo", "有礼付充值");
 //		param.put("dealInfo", "油卡充值1元中石化");
 //		param.put("dealMoney", "1.00");
@@ -166,8 +166,29 @@ public class HttpUtil {
 //		param.put("accountId", "oNNFDw9WvjyBq4wNxGku2Wro4F4c33");
 //		param.put("orderNo", "Jxch_fuel201612142148381742248");
 //		param.put("sign", "c4d326ff50675b58884f7dc8dce446d4");
-		String result = HttpUtil.sendPost("http://tdev.juxinbox.com/caranswer/updateSave.htm",HttpUtil.UTF8,param);
-		System.out.println(result);
+		/*String result = HttpUtil.sendPost("http://tdev.juxinbox.com/caranswer/updateSave.htm",HttpUtil.UTF8,param);
+		System.out.println(result);*/
 //		String result = HttpUtil.sendPost("http://localhost:8080/saveOrderInfo.htm", "utf-8", str, null);
+
+		String timeStamp = AESUtil.AESEncode("hymxzhinkdfypbb",String.valueOf(System.currentTimeMillis()));
+		String currUrl = AESUtil.AESEncode("hymxzhinkdfypbb","www.baidu.com");
+		Map<String,String> sortedMap = new TreeMap<>();
+		sortedMap.put("timeStamp",timeStamp);
+		sortedMap.put("currUrl",currUrl);
+		StringBuffer stringBuffer = new StringBuffer();
+		for(String key:sortedMap.keySet()){
+			if(!"sign".equals(key)){
+				stringBuffer.append("&"+key+"="+sortedMap.get(key));
+			}
+		}
+		stringBuffer.append("&key=hymxzhinkdfypbb");
+		stringBuffer.deleteCharAt(0);
+		String computeSign = MD5Util.getMD5(stringBuffer.toString());
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("currUrl",currUrl);
+		param.put("timeStamp",timeStamp);
+		param.put("sign", computeSign);
+		String result = HttpUtil.sendPost("http://localhost:8080/giftpay_share/weChatJSConfigC/getWeChatJSConfig",HttpUtil.UTF8,param);
+		System.out.println(result);
 	}
 }

@@ -23,7 +23,7 @@
 </head>
 <script>
 	$(function() {
-		ad_tip2('show');
+		ad_tip4('show');
 		var timestamp = $("#timestamp").val();
 		var redAmount = $("#redAmount").val();
 		var realAmount = new Number($("#realAmount").val());
@@ -58,32 +58,32 @@
 	})
 
 	function initAdvertise(){
-		$.ajax({
-			url: getRootPath() + "/giftpay/commonSetting/queryRandomAdvertise.htm",
-			type: "post",
-			dataType: "json",
-			success: function(data) {
-				console.log(data);
-				$(".index_content6").attr("itemHref",data[0].advertiseHref);
-				$(".index_content6").attr("itemId",data[0].advertiseId);
-				$(".index_content6").html('<img src="'+data[0].advertiseImgUrl+'" alt="" width="100%">');
-				$(".index_content6").on("click",function(){
-					$.ajax({
-						url: getRootPath() + "/giftpay/commonSetting/updateAdverClickNum.htm",
-						type: "post",
-						data: {"id": $(".index_content6").attr("itemId"),"empno":$("#empno").val()},
-						dataType: "json",
-						success: function (res) {
-							console.log(res);
-							if(res.code=='1'){
-								location.href=$(".index_content6").attr("itemHref");
+			$.ajax({
+				url: getRootPath() + "/giftpay/commonSetting/queryRandomAdvertise.htm",
+				type: "post",
+				dataType: "json",
+				success: function(data) {
+					console.log(data);
+					$(".index_content6").attr("itemHref",data[0].advertiseHref);
+					$(".index_content6").attr("itemId",data[0].advertiseId);
+					$(".index_content6").html('<img src="'+data[0].advertiseImgUrl+'" alt="" width="100%">');
+					$(".index_content6").on("click",function(){
+						$.ajax({
+							url: getRootPath() + "/giftpay/commonSetting/updateAdverClickNum.htm",
+							type: "post",
+							data: {"id": $(".index_content6").attr("itemId")},
+							dataType: "json",
+							success: function (res) {
+								console.log(res);
+								if(res.code=='1'){
+									location.href=$(".index_content6").attr("itemHref");
+								}
 							}
-						}
+						});
 					});
-				});
-			}
-		});
-	}
+				}
+			});
+		}
 </script>
 <body >
 
@@ -143,57 +143,45 @@
 
 	<script src="js/Scratch.js"></script>
 	<script type="text/javascript">
+				var scratch = new Scratch({
+					canvasId: 'js-scratch-canvas',
+					imageBackground: './demopay/img/ggbg_prize.png',
+					imageBackgroundNone: './demopay/img/ggbg_none.png',
+					pictureOver: './demopay/img/ggbg.png',
+					cursor: {
+						//                png: './images/piece.png',
+						//                cur: './images/piece.cur',
+						x: '20',
+						y: '17'
+					},
+					radius: 30,
+					nPoints: 100,
+					percent: 30,
+					callback: function() {},
+					pointSize: { x: 3, y: 3 }
+				});
+			</script>
+			<div class="index_content12">
+				<ul class="flex">
+					<li class="flex-1 tuijian_line"></li>
+					<li class="tuiguang_">推广</li>
+					<li class="flex-1 tuijian_line"></li>
+				</ul>
+			</div>
 
-		var scratch = new Scratch({
-			canvasId: 'js-scratch-canvas',
-			imageBackground: './img/ggbg_prize.png',
-			imageBackgroundNone: './img/ggbg_none.png',
-			pictureOver: './img/ggbg.png',
-			cursor: {
-//                png: './images/piece.png',
-//                cur: './images/piece.cur',
-				x: '20',
-				y: '17'
-			},
-			radius: 30,
-			nPoints: 100,
-			percent: 30,
-			callback: function () {
-			},
-			pointSize: { x: 3, y: 3}
-		});
-	</script>
-	 <div class="index_content12">
-        <ul class="flex">
-            <li class="flex-1 tuijian_line"></li>
-            <a class="tuiguang_" href="tel:4000808065">推广 / 400-080-8065</a>
-            <li class="flex-1 tuijian_line"></li>
-        </ul>
-    </div>
-
-    <a class="index_content6" >
-    </a>
-    <!--<a class="index_content5">-->
-        <!--<img src="img/banner5.png" alt="" width="572px">-->
-    <!--</a>-->
-    <!--<div class="jmt_center pay_bottom_tel">-->
-        <!--<a  href="tel:4000808065">推广合作</a>-->
-    <!--</div>-->
-	 <ul class="goodsLists">
-        <li>
-            <div onclick="javascript:window.location.href='http://www.baidu.com'">
-                <img src="img/goodsImg.png" alt="">
-            </div>
-            <div class="goodsLists_info">
-                <div class="goodsLists_name">大创药用美白精华液大创药用美白精华液大创药用美白精华液大创药用美白精华液</div>
-                <div class="goodsLists_price"><a class="price">￥30</a><label>原价48</label><a class="sale_bg">68折</a></div>
-            </div>
-        </li>
-        
-    </ul>
-    	<div style="height:30px">
-    </div>
-</div>
+			<a class="index_content6">
+			</a>
+			
+		<a class="index_content5" style="margin: 20px 0;" href="https://prodone.juxinbox.com/sinopecGameCt/weixinMng/activity/getOilDropReward.htm">
+			<img src="img/ad_oil.png" alt="" width="572px">
+		</a>
+			<!--<a class="index_content5">-->
+			<!--<img src="img/banner5.png" alt="" width="572px">-->
+			<!--</a>-->
+			<div class="jmt_center pay_bottom_tel">
+				<a href="tel:4000808065">推广合作</a>
+			</div>
+		</div>
 </body>
 	<script src="https://s22.cnzz.com/z_stat.php?id=1261960521&web_id=1261960521
 
